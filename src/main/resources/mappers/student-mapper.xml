@@ -3,7 +3,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="studentMapper">
  
- 	<resultMap type="HomeworkSubmit" id="HomeworkSubmitResultSet">
+ 	<resultMap type="HmSubmit" id="HomeworkSubmitResultSet">
  		<result column="STU_ID" property="stuId" />
  		<result column="BO_NO" property="boNo" />
  		<result column="HM_TITLE" property="hmTitle" />
@@ -33,13 +33,73 @@
 		AND HS.STU_ID = #{stuId}
 		WHERE H.CLASS_CODE = #{classCode}
 	</select>
- 	<!-- 
- 	<select id="searchSchoolsByName" parameterType="School" resultMap="SchoolResultSet">
-	    SELECT *
-	      FROM SCHOOL_LIST
-	     WHERE SC_NAME
-	      LIKE '%' || #{scName} || '%'
+ 	
+	<!-- 학생 숙제 리스트 갯수 조회 -->
+ 	<select id="selectListCount" resultType="_int">
+ 		SELECT COUNT(*)
+ 		FROM HOMEWORK
+ 		WHERE CLASS_CODE = #{classCode}
+ 	</select>
+	
+	<!-- 학생 숙제 리스트 가져오기 -->
+	<select id="selectStudentHomeworkList" resultMap="HomeworkResultSet">
+		SELECT h.BO_NO,
+			   h.SUBJECT,
+			   h.HM_TITLE,
+			   TO_CHAR(h.DEADLINE, 'YYYY-MM-DD') AS "DEADLINE",
+			   hm.STATUS,
+			   hm.SCORE
+		  FROM HOMEWORK h
+		  LEFT JOIN HM_SUBMIT hm ON h.BO_NO = hm.BO_NO
+		 WHERE h.CLASS_CODE = #{classCode}
+	  ORDER BY h.BO_NO DESC
 	</select>
-	-->
+	
+	<!-- 학생 숙제 번호에 맞는 게시글 조회 -->
+	<select id="selectNowHomework" resultMap="HomeworkResultSet">
+		SELECT h.BO_NO,
+			   h.HM_TITLE,
+			   h.SUBJECT,
+			   TO_CHAR(h.DEADLINE, 'YYYY-MM-DD') AS "DEADLINE",
+			   h.HM_CONTENT
+		 FROM HOMEWORK h
+		 LEFT JOIN HM_SUBMIT hm ON h.BO_NO = hm.BO_NO
+		 WHERE h.BO_NO = #{boNo}
+	</select>
+	
+	<select id="selectHomeworkByBoNo" resultMap="HomeworkSubmitResultSet">
+		SELECT BO_NO,
+			   TC_ID,
+			   CLASS_CODE,
+			   HM_TITLE,
+			   DEADLINE,
+			   HM_CONTENT,
+			   TO_CHAR(CREAT_DATE, 'YYYY-MM-DD') AS "createDate",
+			   SUBJECT,
+			   STATUS,
+			   SCORE
+		  FROM HOMEWORK
+		 WHERE BO_NO = #{boNO}
+	</select>
+	
+	<!-- 학생 숙제 제출 -->
+	<insert id="insertHomeworkSubmission">
+		INSERT INTO HM_SUBMIT( STU_ID,
+							   CLASS_CODE,
+							   BO_NO,
+							   HM_CONTENT, FILE_PATH,
+							   ORIGIN_NAME,
+							   TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "createDate",
+							   STATUS
+							  ) VALUES( #{stuId},
+							  			#{classCode},
+							  			#{boNo},
+							  			#{hmContent},
+							  			#{filePath},
+							  			#{originName},
+							  			SYSDATE,
+							  			#{status}
+							  			)
+	</insert>
 	
  </mapper>

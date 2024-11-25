@@ -22,10 +22,10 @@
     </style>
     <div id="content_border">
     	<form action="modifyImgBoard" method="POST">
-    		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title }" name="boTitle"></div>
+    		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title }" name="title"></div>
 	        <div id="enroll_content" >
 	        	<input type="hidden" name = "boNo" value = "${npage.boNo}">
-	            <textarea id="en_content" name="contents">${npage.boContent }</textarea>
+	            <textarea id="en_content" name="boContent">${npage.boContent }</textarea>
 	        </div>
 	        <button type="submit" class="create_button" id="modify_button">수정하기</button>
 	        <button type="button" class="create_button" id="delete_button" onclick = "location.href='deleteImgBoard?boNo=${npage.boNo}'">삭제하기</button>  

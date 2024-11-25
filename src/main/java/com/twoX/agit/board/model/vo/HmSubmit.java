@@ -1,5 +1,7 @@
 package com.twoX.agit.board.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,4 +24,8 @@ public class HmSubmit {
 	private String tcComment;
 	private String createDate;
 	private String status;
+	
+	private String filePath;
+	private String originName;
+	private String changeName;
 }
