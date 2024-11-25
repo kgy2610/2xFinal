@@ -306,4 +306,36 @@
 		WHERE BO_NO=#{boNo}
 	</update>
 	
+	<!--  우리반 숙제 제출 리스트로 이동  -->
+	<select id="selectSubject" resultMap="HmSubmitResultSet"> 
+		SELECT hs.STU_ID, hs.BO_NO, hs.HM_CONTENT AS STUDENT_CONTENT, hs.SCORE, hs.TC_COMMENT, TO_CHAR(hs.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, hs.STATUS, h.HM_TITLE, h.HM_CONTENT AS HOMEWORK_CONTENT 
+		FROM HM_SUBMIT hs LEFT JOIN STUDENT s ON hs.STU_ID = s.STU_ID LEFT JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO 
+		WHERE s.CLASS_CODE = #{classCode}
+	</select>
+	 
+	<!-- 숙제 조회 -->
+	<select id="selectsubmitHomework" resultMap="HmSubmitResultSet"> 
+	    SELECT 
+	        hs.STU_ID,
+	        hs.BO_NO,
+	        hs.HM_CONTENT,         -- 학생이 제출한 내용
+	        hs.SCORE,              -- 점수
+	        hs.TC_COMMENT,         -- 선생님 코멘트
+	        TO_CHAR(hs.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, -- 제출일
+	        hs.STATUS,             -- 상태
+	        h.HM_TITLE          -- 과제 제목
+	    FROM HM_SUBMIT hs
+	    JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO
+	    WHERE hs.STU_ID = #{studentId} 
+	      AND h.HM_TITLE = #{title}
+	</select>
+
+	<!-- 숙제 점수 및 말씀 부여 -->
+	<update id="updateSubject" parameterType="map">
+	    UPDATE HM_SUBMIT
+	    SET TC_COMMENT = #{teacherComment}, SCORE = #{score}
+	    WHERE STU_ID = #{stuId}
+	</update>
+
+	
  </mapper>

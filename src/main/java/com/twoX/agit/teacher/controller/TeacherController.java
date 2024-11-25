@@ -1,6 +1,8 @@
 package com.twoX.agit.teacher.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
@@ -124,11 +128,16 @@ public class TeacherController {
 	
 	// 숙제 리스트로 이동
 	@RequestMapping("homeworkList")
-	public String Teacherhomework(@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model) {
+	public String Teacherhomework(@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model, HttpSession session) {
+		Teacher teacher = (Teacher) session.getAttribute("loginUser");
+		
+		String tcId = teacher.getTcId();
+		
 		int listCount = teacherService.getListCount(); // 총 게시글 수를 구하는 메서드 호출
 		System.out.println(listCount);
+		
 
-		ArrayList<Homework> homeworkList = teacherService.getAllHomework();
+		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		System.out.println(homeworkList);
 
 		model.addAttribute("homeworkList", homeworkList);
@@ -164,7 +173,7 @@ public class TeacherController {
 
 		int result = teacherService.enrollHomework(tcId, classCode, title, subject, content, dueDate);
 		
-		ArrayList<Homework> homeworkList = teacherService.getAllHomework();
+		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
 
 		return "teacher/homeworkList";
@@ -196,10 +205,13 @@ public class TeacherController {
 		
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		System.out.println(hmTitle);
+		
+		Teacher teacher = (Teacher) session.getAttribute("loginUser");	
+		String tcId = teacher.getTcId();
 
 		int result = teacherService.deleteHomework(hmTitle);
 		
-		ArrayList<Homework> homeworkList = teacherService.getAllHomework();
+		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
 
 		return "teacher/homeworkList";
@@ -214,6 +226,9 @@ public class TeacherController {
 	    }
 		
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		Teacher teacher = (Teacher) session.getAttribute("loginUser");
+		
+		String tcId = teacher.getTcId();
 		
 		System.out.println(hmTitle);
 		System.out.println(subject);
@@ -222,10 +237,115 @@ public class TeacherController {
 
 		int result = teacherService.updateHomework(hmTitle, subject, deadLine, hmContent);
 		
-		ArrayList<Homework> homeworkList = teacherService.getAllHomework();
-		
+		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
 
 		return "teacher/homeworkList";
+	}
+	
+	//우리 학생 숙제 페이지로 이동
+	@RequestMapping("gosubject")
+	public String goSubject( Model model, HttpSession session) {
+		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		String classCode = loginUser.getClassCode();
+		
+		
+		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
+		System.out.println(subjectHomeworkList);
+		model.addAttribute("subjectHomeworkList", subjectHomeworkList);
+		
+		return "teacher/teacherhomeworkList";
+	}
+	
+	// 숙제의 대한 상세페이지
+	@RequestMapping("homeworkDetail")
+	public String homeworkDetail(String title, String studentId, Model model) {
+		System.out.println(title);
+		System.out.println(studentId);
+		
+		ArrayList<HmSubmit> submitHomework = teacherService.gosubmitHomework(title, studentId);
+		System.out.println(submitHomework);
+
+	    if (!submitHomework.isEmpty()) {
+	        // 첫 번째 데이터를 사용하여 필요한 정보 추출
+	        HmSubmit homework = submitHomework.get(0);
+
+	        model.addAttribute("hmTitle", homework.getHmTitle());       // 숙제 제목
+	        model.addAttribute("hmContent", homework.getHmContent()); // 학생이 제출한 답
+	        model.addAttribute("score", homework.getScore());         // 점수
+	        model.addAttribute("tcComment", homework.getTcComment()); // 교사 코멘트
+	        model.addAttribute("stuId", studentId);
+	    } else {
+	        // 데이터가 없는 경우
+	        model.addAttribute("hmTitle", title);
+	        model.addAttribute("hmContent", "제출된 답변이 없습니다.");
+	        model.addAttribute("score", 0);
+	        model.addAttribute("tcComment", "코멘트 없음");
+	    }
+		
+	
+		return "teacher/teacherhomeworkDetail";
+	}
+	
+	//숙제 점수 및 말씀 부여
+	@RequestMapping("updateSubmitHomework")
+	public String updateSubmitHomework(String teacherComment, int score, String stuId, Model model, HttpSession session) {
+		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		String classCode = loginUser.getClassCode();
+		System.out.println(teacherComment);
+		System.out.println(score);
+		System.out.println(stuId);
+		
+		int result = teacherService.updateSubmitHomework(teacherComment,score,stuId);
+		
+		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
+		model.addAttribute("subjectHomeworkList", subjectHomeworkList);
+		
+		
+		return "teacher/teacherhomeworkList";
+	}
+	
+	
+	// 출석 리스트로 이동
+	@RequestMapping("teacherAttendance")
+	public String teacherAttendance(HttpSession session, Model model) {
+		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		String classCode = loginUser.getClassCode();
+		
+		ArrayList<Attendance> attendanceList = teacherService.selectAttendance(classCode);
+		System.out.println(attendanceList);
+		
+		model.addAttribute("attendanceList", attendanceList);
+		
+		return "teacher/teacherAttendance";
+	}
+	
+	// 지각 출석 결석 제출
+	@RequestMapping("submitAttendance")
+	public String submitAttendance(String aDate, @RequestParam Map<String, String> attendanceData, Model model) {
+		System.out.println(aDate);
+		
+        // 출결 리스트 생성
+        List<Attendance> attendanceList = new ArrayList<>();
+
+        attendanceData.forEach((key, value) -> {
+            if (key.startsWith("attendance_")) { // 출결 데이터 필터링
+                String STU_ID = key.replace("attendance_", "");
+                String LA = value;
+
+                // Attendance 객체 생성 및 리스트에 추가
+                Attendance attendance = new Attendance();
+                attendance.setADate(aDate);
+                attendance.setSTU_ID(STU_ID);
+                attendance.setLA(LA);
+                attendanceList.add(attendance);
+            }
+        });
+        
+        System.out.println(attendanceList);
+	
+	    int result = teacherService.insertAttendance(attendanceList);
+	  
+		return "teacher/myPage";
 	}
 }

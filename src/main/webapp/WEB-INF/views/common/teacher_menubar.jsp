@@ -16,7 +16,7 @@
         <div class="menu">
             <label for="mypage"><a href="teacher.myPage">마이페이지</a></label>
             <label for="homework"><a href="homeworkList">숙제</a></label>
-            <label for="attendance"><a href="#">출결</a></label>
+            <label for="attendance"><a href="teacherAttendance">출결</a></label>
             <label for="advicePlan"><a href="#">상담일정</a></label>
             <label for="community"><a href="#">방과후 반</a></label>
             <label for="photo"><a href="teacher_eventImgList">행사사진</a></label>
