@@ -69,6 +69,7 @@ public class BoardController {
 	  @GetMapping(value="BoMealService", produces="application/json; charset=UTF-8")
 	  public String getMealInfo(HttpSession session) throws IOException {
 		 Teacher t = (Teacher)session.getAttribute("teacher");
+		 System.out.println(t);
 		 String schoolCode = t.getClassCode().substring(0,7);
 		 String oecode = boardService.selectOeCode(schoolCode);
 	     String url = "https://open.neis.go.kr/hub/mealServiceDietInfo";
@@ -504,7 +505,7 @@ public class BoardController {
 		}else {
 			session.setAttribute("alertMsg", "삭제실패하였습니다..");
 		}
-		return "teacher/teacher_eventImgList";
+		return "redirect:/teacher_eventImgList";
 	}
 	
 	//선생님 행사사진 작성
