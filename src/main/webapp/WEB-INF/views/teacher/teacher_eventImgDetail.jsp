@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="../common/teacher_menubar.jsp" />
-    <div class="wrap">
+    <div class="Imgwrap">
          <div class="header">
             <h4>${eib.title}</h4>
         </div>
