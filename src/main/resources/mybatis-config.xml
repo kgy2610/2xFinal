@@ -42,6 +42,7 @@
 		<mapper resource="mappers/student-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml" />
 		<mapper resource="mappers/afterBoard-mapper.xml" />
+		<mapper resource="mappers/afterschool-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/memo-mapper.xml" />
 		<mapper resource="mappers/homework-mapper.xml" />

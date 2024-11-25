@@ -20,4 +20,6 @@ public class AfterSchoolBoard {
 	private String title;
 	private String boContent;
 	private Date createDate;
+	private String originName;
+	private String changeName;
 }
