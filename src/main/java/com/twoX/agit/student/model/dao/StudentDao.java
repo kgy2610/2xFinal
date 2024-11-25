@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Homework;
 
@@ -38,4 +39,15 @@ public class StudentDao {
 	public Homework selectNowHomework(SqlSessionTemplate sqlSession, int boNo) {
 		return sqlSession.selectOne("studentMapper.selectNowHomework", boNo);
 	}
+
+	// 게시글 번호로 숙제 조회
+	public Homework selectHomeworkByBoNo(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.selectOne("studentMapper.selectHomeworkByBoNo", boNo);
+	}
+
+	// 숙제 제출
+	public int insertHomeworkSubmission(SqlSessionTemplate sqlSession, HmSubmit hm) {
+		return sqlSession.selectOne("studentMapper.insertHomeworkSubmission", hm);
+	}
+	
 }

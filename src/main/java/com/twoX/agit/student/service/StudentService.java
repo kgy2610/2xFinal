@@ -2,6 +2,7 @@ package com.twoX.agit.student.service;
 
 import java.util.ArrayList;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Homework;
 
@@ -14,4 +15,10 @@ public interface StudentService {
 		
 	// 학생 숙제 번호에 맞는 게시물 조회
 	Homework selectNowHomework(int boNo);
+	
+	// 게시글 번호로 HOMEWORK 정보를 가져오는 메서드
+    Homework getHomeworkByBoNo(int boNo);
+
+    // 학생이 숙제를 제출하는 메서드
+    int submitHomework(HmSubmit hm);
 }

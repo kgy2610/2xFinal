@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.student.model.dao.StudentDao;
@@ -35,4 +36,16 @@ public class StudentServiceImpl implements StudentService{
 	public Homework selectNowHomework(int boNo) {
 		return studentDao.selectNowHomework(sqlSession, boNo);
 	}
+	
+	// 게시글 번호로 숙제 조회
+	@Override
+    public Homework getHomeworkByBoNo(int boNo) {
+        return studentDao.selectHomeworkByBoNo(sqlSession, boNo);
+    }
+
+	// 숙제 제출
+    @Override
+    public int submitHomework(HmSubmit hm) {
+        return studentDao.insertHomeworkSubmission(sqlSession, hm);
+    }
 }
