@@ -59,6 +59,8 @@
     function confirmDelete() {
         const deleteCode = document.getElementById('deleteCode').value;
 
+		//서버에 요청
+		
         // 반 삭제 로직 추가
         alert(`반 ${deleteCode}가 삭제되었습니다.`);
         closeDeleteModal();

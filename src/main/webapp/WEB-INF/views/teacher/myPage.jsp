@@ -6,11 +6,11 @@
 	Teacher s = (Teacher) session.getAttribute("loginUser");
 	
 	
-	String classCode = s.getClassCode(); //클래스 코드가 빈값이면 0000이 아니라 null로 바꾸어야한다.
+	String classCode = s.getClassCode();//클래스 코드가 빈값이면 0000이 아니라 null로 바꾸어야한다.
 	String grade = classCode.substring(9, 10);
 	String teacher_class = classCode.substring(10, 12);	
-	
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,21 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
-	<jsp:include page="../common/teacher_menubar.jsp" />
+	<div class="nav">
+		<img src="<c:url value='/resources/img/logo.png'/>">
+		<div class="menu">
+			<label for="mypage" id="mypage"><a href="#">마이페이지</a></label> <label
+				for="homework"><a href="#">숙제</a></label> <label for="attendance"><a
+				href="#">출결</a></label> <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
+			<label for="advicePlan"><a href="#">상담일정</a></label> <label
+				for="photo"><a href="eventPhotos.af">행사사진</a></label> <label for="studentManage"><a
+				href="#">학생관리</a></label>
+		</div>
+		<div class="undermenu">
+			<label for="info"> <a href="#" onclick="openInfoModal()">정보수정</a>
+			</label> <label for="logout"><a href="#">로그아웃</a></label>
+		</div>
+	</div>
 
 	<div class="whole_body">
 		<h1><%=grade%>학년
@@ -151,16 +165,16 @@
 				<span class="close" onclick="closeDeleteModal()">&times;</span>
 				<h3>반 삭제</h3>
 				<form id="classdeleteForm" action="classdelete.me">
-				<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
-				<div class="input-group">
-					<p id="deleteClassMessage">
-						코드: <input type="text" id="deleteCode" name="deleteCode" required>
-					</p>
-				</div>
-				<div class="button-group">
-					<button class="confirm-delete-button" type="button"
-						onclick="confirmDelete('<%=s.getClassCode()%>')">삭제하기</button>
-				</div>
+					<input type="hidden" value="<%=s.getClassCode()%>">
+					<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
+					<div class="input-group">
+						<p id="deleteClassMessage">
+							코드: <input type="text" id="deleteCode" name="deleteCode" required>
+						</p>
+					</div>
+					<div class="button-group">
+						<button class="confirm-delete-button" type="submit">삭제하기</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -175,6 +189,7 @@
 
 				<!-- 비밀번호 수정 폼 -->
 				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
+				<input type="hidden" value="<%=s.getTcPwd() %>">
 					<label for="currentPassword">현재 비밀번호</label> <input type="password"
 						id="currentPassword" name="currentPassword" required> <label
 						for="newPassword">수정 비밀번호</label> <input type="password"
@@ -183,8 +198,7 @@
 						id="confirmPassword" name="confirmPassword" required>
 
 					<div class="button-group">
-						<button class="confirm-password-button" type="button"
-							onclick="confirmPasswordUpdate('<%=s.getTcPwd() %>')">비밀번호 수정하기</button>
+						<button class="confirm-password-button" type="submit">비밀번호 수정하기</button>
 					</div>
 				</form>
 			</div>

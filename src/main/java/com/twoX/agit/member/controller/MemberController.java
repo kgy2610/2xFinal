@@ -577,58 +577,58 @@ public class MemberController {
 	}
 	
 	// 교사 비번 수정
-	@RequestMapping("updatePassword.me")
-	public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
-		// 로그인 한 교사정보 가져오기
-		Teacher teacher = (Teacher) session.getAttribute("loginUser");
+		@RequestMapping("updatePassword.me")
+		public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
+			// 로그인 한 교사정보 가져오기
+			Teacher teacher = (Teacher) session.getAttribute("loginUser");
+			System.out.println(teacher);
+			if (teacher == null) {
+				session.setAttribute("alertMsg", "로그인정보가 없습니다.");
+				return "teacher/myPage";
+			}
 
-		if (teacher == null) {
-			session.setAttribute("alertMsg", "로그인정보가 없습니다.");
-			return "teacher/myPage";
+			t.setTcId(teacher.getTcId());
+			t.setTcPwd(newPassword);
+
+			int result = memberService.updatePassword(t);
+			System.out.println("수정된 비밀번호: " + t.getTcPwd());
+
+			if (result > 0) {
+				session.setAttribute("loginUser", memberService.loginTeacher(t));
+				session.setAttribute("alertMsg", "비밀번호 수정 성공");
+				return "teacher/myPage";
+			} else {
+				session.setAttribute("alertMsg", "비밀번호 수정 실패");
+				return "teacher/myPage";
+			}
 		}
+		
+		// 선생님 반 개설
+		@RequestMapping("teacher.classCode")
+		public String updateClassCode(Teacher t, HttpSession session, Model model) {
+			t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
+			System.out.println(t.getClassCode());
 
-		t.setTcId(teacher.getTcId());
-		t.setTcPwd(newPassword);
+			if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
+				model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
+				return "redirect:/"; // 적절한 메시지로 안내
+			}
 
-		int result = memberService.updatePassword(t);
-		System.out.println("수정된 비밀번호: " + t.getTcPwd());
+			int result = memberService.updateClassCode(t);
 
-		if (result > 0) {
-			session.setAttribute("loginUser", memberService.loginTeacher(t));
-			session.setAttribute("alertMsg", "비밀번호 수정 성공");
-			return "teacher/myPage";
-		} else {
-			session.setAttribute("alertMsg", "비밀번호 수정 실패");
-			return "teacher/myPage";
+			if (result > 0) {
+				session.setAttribute("loginUser", memberService.loginTeacher(t));
+				session.setAttribute("alertMsg", "반 개설 성공");
+				System.out.println(result);
+				System.out.println(memberService.loginTeacher(t));
+				
+				return "teacher/myPage";
+			} else {
+				model.addAttribute("alertMsg", "반 개설 실패");
+				return "teacher/myPageStart";
+			}
 		}
-	}
-	
-	// 선생님 반 개설
-	@RequestMapping("teacher.classCode")
-	public String updateClassCode(Teacher t, HttpSession session, Model model) {
-		t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
-		System.out.println(t.getClassCode());
-
-		if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
-			model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
-			return "redirect:/"; // 적절한 메시지로 안내
-		}
-
-		int result = memberService.updateClassCode(t);
-
-		if (result > 0) {
-			session.setAttribute("loginUser", memberService.loginTeacher(t));
-			session.setAttribute("alertMsg", "반 개설 성공");
-			System.out.println(result);
-			System.out.println(memberService.loginTeacher(t));
-			
-			return "teacher/myPage";
-		} else {
-			model.addAttribute("alertMsg", "반 개설 실패");
-			return "teacher/myPageStart";
-		}
-	}
-	
+		
 	// 선생님 마이페이지 이동
 	@RequestMapping("teacher.myPage")
 	public String teacherMyPage() {
