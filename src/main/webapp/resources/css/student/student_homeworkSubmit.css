@@ -1,3 +1,4 @@
+
 *{
     overflow: visible;
 }
@@ -5,7 +6,7 @@
     position:absolute; 
     border: 3px solid #A98467; 
     border-radius: 30px; 
-    bottom: 47px; 
+    bottom: 15px; 
     right: 228px; 
     width: 1089px; 
     height: 880px;
@@ -23,7 +24,7 @@
     width: 150px;
     height: 50px;
     left: 450px;
-    top: 1110px;
+    top: 780px;
     border-radius: 40px; 
     background-color: #F4DABF;
     color:#A98467;
@@ -77,12 +78,13 @@
     left: 47px;
     border: 3px solid #A98467; 
     width: 989px;
-    height: 400px;
+    height: 350px;
 }
 #en_content{
     overflow: auto;
-    height: 260px;
+    height: 210px;
     border-bottom: 3px solid #A98467;
+    padding: 15px;
 }
 #enroll_file{
     position:absolute;
@@ -125,7 +127,7 @@
 #homework_area{
     position: absolute;
     top: 20px;
-    height: 825px;
+    height: 840px;
     width: 100%;
     overflow: auto;
     padding-right: 1000px;
@@ -152,8 +154,8 @@
     position: absolute;
     background-color: #DDE5B6;
     left: 47px;
-    top: 500px;
-    height: 600px;
+    top: 450px;
+    height: 320px;
     width: 989px;
     border-radius: 30px;
     
@@ -161,10 +163,10 @@
 #submit_homework{
     position: absolute;
     background-color: white;
-    top: 40px;
-    left: 40px;
+    top: 30px;
+    left: 30px;
     width: 820px;
-    height: 520px;
+    height: 260px;
 }
 .note-editor .note-editable {
     overflow-y: auto; /* 수직 스크롤바를 사용 가능하게 */
@@ -237,10 +239,10 @@
     background-color: white;
     color: #A98467;
     width: 100px;
-    height: 50px;
+    height: 260px;
     font-size: 30px;
     right: 20px;
-    top: 260px;
+    top: 30px;
     border: none;
     cursor: pointer;
     border-radius: 30px;

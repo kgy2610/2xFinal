@@ -1,6 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.twoX.agit.board.model.vo.HmSubmit,com.twoX.agit.member.model.vo.Homework,com.twoX.agit.common.vo.PageInfo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	ArrayList<Homework> homeworkList = (ArrayList)session.getAttribute("homeworkList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,32 +34,63 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="homework" items="${homeworkList}" varStatus="status">
-					<tr class="homework-list-detail">
-						<td class="BNo">${homework.boNo}</td>
-						<td class="sjt">${homework.subject}</td>
-						<td class="Title">${homework.hmTitle}</td>
-						<td class="deadLine">${homework.deadLine}</td>
-						<td class="status"><c:choose>
-								<c:when test="${homework.status == NULL}">미제출</c:when>
-								<c:otherwise>제출</c:otherwise>
-							</c:choose></td>
-						<td class="score">${homework.score}</td>
-					</tr>
-				</c:forEach>
+			    <c:forEach var="homework" items="${homeworkList}">
+			        <tr class="homework-list-detail" onclick="location.href='homework_detail?boNo=${homework.boNo}&capge=${pi.currentPage}'">
+			            <td>${homework.boNo}</td>
+			            <td>${homework.subject}</td>
+			            <td>${homework.hmTitle}</td>
+			            <td>${homework.deadLine}</td>
+						<td>
+				            <c:choose>
+				                <c:when test="${homework.status == null}">미제출</c:when>
+				                <c:otherwise>제출</c:otherwise>
+				            </c:choose>
+				        </td>
+				        <td>
+				            <c:choose>
+				                <c:when test="${homework.score == 0}">-</c:when>
+				                <c:otherwise>${homework.score}</c:otherwise>
+				            </c:choose>
+				        </td>
+			       </tr>
+			    </c:forEach>
 			</tbody>
 		</table>
 		<br>
 		<br>
 		<div id="arrow_button">
-			<button id="left_arrow"></button>
-			<button style="background-color: #DDE5B6; border-radius: 40px;">1</button>
-			<button>2</button>
-			<button>3</button>
-			<button>4</button>
-			<button>5</button>
-			<button id="right_arrow"></button>
-		</div>
+            <button id="right_arrow"></button>            
+            	<c:choose>
+            		<c:when test="${ pi.currentPage eq 1 }">
+            			<button onclick="location.href='homework?cpage=${pi.currentPage - 1}'" disabled><img src="<c:url value='/resources/img/parents/left_arrow.png'/>"></button>
+            		</c:when>
+            		<c:otherwise>
+            			<button onclick="location.href='homework?cpage=${pi.currentPage - 1}'"><img src="<c:url value='/resources/img/parents/left_arrow.png'/>"></button>
+            		</c:otherwise>
+            	</c:choose>
+
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:choose>
+						<c:when test="${ pi.currentPage eq p }">
+							<button style="background-color: #DDE5B6; border-radius: 40px;" onclick="location.href='homework?cpage=${p}'">${p}</button>
+						</c:when>
+						<c:otherwise>
+							<button onclick="location.href='homework?cpage=${p}'">${p}</button>
+						</c:otherwise>
+					</c:choose>
+					
+				</c:forEach>
+                
+            	<c:choose>
+            		<c:when test="${ pi.currentPage eq pi.maxPage }">
+            			<button onclick="location.href='homework?cpage=${pi.currentPage + 1}'" disabled><img src="<c:url value='/resources/img/parents/right_arrow.png'/>"></button>
+            		</c:when>
+            		<c:otherwise>
+            			<button onclick="location.href='homework?cpage=${pi.currentPage + 1}'"><img src="<c:url value='/resources/img/parents/right_arrow.png'/>"></button>
+            		</c:otherwise>
+            	</c:choose>
+            
+        </div>
 	</div>
 	<div id="graph_content">
 		<div class="graphBox">
