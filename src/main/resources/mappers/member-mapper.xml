@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<!-- 학생 -->
+	<resultMap type="Student" id="studentResultSet">
+		<result column="STU_ID" property="stuId" />
+		<result column="STU_PWD" property="stuPwd" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="STU_NAME" property="stuName" />
+		<result column="PHONE" property="phone" />
+		<result column="STU_NUM" property="stuNum" />
+		<result column="STATUS" property="status" />
+		<result column="PIC_NO" property="picNo" />
+		<result column="STU_QUESTION" property="stuQuestion" />
+		<result column="STU_ANSWER" property="stuAnswer" />
+	</resultMap>
+
+	<!-- 학생 로그인 -->
+	<select id="loginStudent" parameterType="Student"
+		resultMap="studentResultSet">
+		SELECT STU_ID,
+		STU_PWD,
+		CLASS_CODE,
+		STU_NAME,
+		PHONE,
+		STU_NUM,
+		STATUS,
+		PIC_NO,
+		STU_QUESTION,
+		STU_ANSWER
+		FROM STUDENT
+		WHERE STU_ID =
+		#{stuId}
+		AND STU_PWD = #{stuPwd}
+	</select>
+
+	<!-- 학생 회원가입 -->
+	<insert id="insertStudent">
+		INSERT INTO STUDENT(
+		STU_ID,
+		STU_PWD,
+		STU_NAME,
+		PHONE,
+		STU_QUESTION,
+		STU_ANSWER
+		)VALUES(
+		#{stuId},
+		#{stuPwd},
+		#{stuName},
+		#{phone},
+		#{stuQuestion},
+		#{stuAnswer}
+		)
+	</insert>
+	
+	<!-- 학생 반 참가 -->
+	<update id="studentUpdateClassCode">
+		UPDATE STUDENT
+		SET CLASS_CODE = #{classCode}
+		WHERE STU_ID = #{stuId}
+	</update>
+
+	<!-- 학생 정보수정 -->
+	<update id="studentUpdate">
+		UPDATE STUDENT
+		SET STU_NUM = #{updateNum}
+		WHERE STU_ID = #{stuId}
+	</update>
+	
+	<!-- 학생 비번 수정 -->
+	<update id="studentPwdUpdate">
+		UPDATE STUDENT
+		SET STU_PWD = #{updatePwd}
+		WHERE STU_ID = #{stuId}
+	</update>
+	
+	<!-- 학생 프로필 변경 -->
+	<update id="studentSelectImg">
+		UPDATE STUDENT
+		SET PIC_NO = #{picNo}
+		WHERE STU_ID = #{stuId}
+	</update>
+
+
+	<!-- id 확인 -->
+	<select id="selectInfo" resultMap="studentResultSet">
+		SELECT *
+		FROM STUDENT
+		WHERE STU_ID = #{id}
+	</select>
+
+	<!-- classCode로 schoolName 조회 -->
+	<select id="selectSchoolNameByClassCode" parameterType="String"
+		resultType="String">
+		SELECT sl.SC_NAME
+		FROM SCHOOL_LIST sl
+		WHERE sl.SC_CODE = SUBSTR(#{classCode}, 1, 7)
+	</select>
+
+	<!-- classCode로 선생님 이름 조회 -->
+	<select id="teacherName" parameterType="String"
+		resultType="String">
+		SELECT TC_NAME
+		FROM TEACHER
+		WHERE CLASS_CODE = #{classCode}
+	</select>
+	
+
+	<!-- 학부모 -->
+	<resultMap type="Parents" id="parentsResult">
+		<result column="PR_ID" property="prId" />
+		<result column="PR_PWD" property="prPwd" />
+		<result column="PR_NAME" property="prName" />
+		<result column="PHONE" property="phone" />
+		<result column="NICKNAME" property="nickname" />
+		<result column="PR_QUESTION" property="prQuestion" />
+		<result column="PR_ANSWER" property="prAnswer" />
+	</resultMap>
+
+	<!-- 학부모 로그인 -->
+	<select id="loginParents" parameterType="Parents"
+		resultMap="parentsResult">
+		SELECT PR_ID,
+		PR_PWD,
+		PR_NAME,
+		PHONE,
+		NICKNAME,
+		PR_QUESTION,
+		PR_ANSWER
+		FROM PARENTS
+		WHERE PR_ID = #{prId}
+		AND PR_PWD = #{prPwd}
+	</select>
+
+	<!-- 학부모 회원가입 -->
+	<insert id="insertParents">
+		INSERT INTO
+		PARENTS(PR_ID,PR_PWD,PR_NAME,PHONE,NICKNAME,PR_QUESTION,PR_ANSWER)
+		VALUES(#{prId},#{prPwd},#{prName},#{phone},#{nickname},#{prQuestion},#{prAnswer})
+	</insert>
+
+	<!-- 학부모 회원가입시 학생아이디 가져오기 -->
+	<select id="selectStudentList" parameterType="Student"
+		resultMap="studentResultSet">
+		SELECT STU_ID,
+		STU_NAME,
+		STU_NUM,
+		CLASS_CODE
+		FROM STUDENT
+		WHERE STU_NAME = #{stuName}
+		AND PHONE = #{phone}
+	</select>
+	
+	<!-- 부모님 아이디로 학생찾기 -->
+	<select id="selectStudent" resultMap="studentResultSet">
+		SELECT  STU_ID,
+				STU_PWD,
+				CLASS_CODE,
+				STU_NAME,
+				PHONE,
+				STU_NUM,
+				PIC_NO
+		   FROM STUDENT
+		  WHERE STU_ID = #{prId}
+	</select>
+	
+	<!-- 반코드로 선생님찾기 -->
+	<select id="selectTeacher" resultMap="teacherResultSet">
+		SELECT  TC_ID,
+				SC_CODE,
+				TC_NAME,
+				CLASS_CODE,
+				PHONE
+		   FROM TEACHER
+		  WHERE CLASS_CODE = #{classCode}
+	</select>
+	
+	<!-- 부모님 정보수정 -->
+	 <update id="updateParentsInfo">
+	 	UPDATE Parents
+	 	SET NICKNAME=#{nickname},
+	 		PHONE=#{phone}
+	 	WHERE PR_ID=#{prId}
+	 </update>
+
+
+	<!-- 선생님 -->
+	<resultMap type="Teacher" id="teacherResultSet">
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="TC_PWD" property="tcPwd" />
+		<result column="SC_CODE" property="scCode" />
+		<result column="TC_NAME" property="tcName" />
+		<result column="PHONE" property="phone" />
+		<result column="STATUS" property="status" />
+		<result column="TC_QUESTION" property="tcQuestion" />
+		<result column="TC_ANSWER" property="tcAnswer" />
+	</resultMap>
+
+	<!-- 선생님 로그인 -->
+	<select id="loginTeacher" parameterType="Teacher" resultMap="teacherResultSet">
+		SELECT TC_ID,
+		CLASS_CODE,
+		TC_PWD,
+		SC_CODE,
+		TC_NAME,
+		PHONE,
+		STATUS,
+		TC_QUESTION,
+		TC_ANSWER
+		FROM TEACHER
+		WHERE TC_ID = #{tcId}
+		AND TC_PWD = #{tcPwd}
+	</select>
+
+	<!-- 선생님 및 회원가입 회원가입 -->
+	<insert id="insertTeacher">
+		INSERT INTO teacher( TC_ID,
+							 TC_PWD,
+							 SC_CODE,
+							 TC_NAME,
+							 PHONE,
+							 STATUS,
+							 TC_QUESTION,
+							 TC_ANSWER
+							 ) VALUES( #{tcId},
+							 		   #{tcPwd},
+							 		   #{scCode},
+							 		   #{tcName},
+							 		   #{phone},
+							 		   #{status},
+							 		   #{tcQuestion},
+							 		   #{tcAnswer}
+							 		   )
+	</insert>
+	
+	
+	
+	<!-- 전체 교직원 수 구하기 -->
+	<select id="getTeacherCount" resultType="int">
+        SELECT COUNT(*)
+          FROM TEACHER
+         WHERE STATUS IN ('N', 'Y')  <!-- 교직원 상태가 N 또는 Y인 교직원 수 -->
+    </select>
+    
+	<!-- 현재 학생 수 구하기 -->
+	<select id="getStudentCountBySchoolCode" resultType="int">
+	    SELECT COUNT(*)
+	      FROM STUDENT
+	     WHERE CLASS_CODE
+	      LIKE CONCAT(#{scCode}, '%')
+	</select>
+	
+	<!-- 관리자 페이지에서 선생님 리스트 조회 -->
+	<select id="getActiveTeachersByScCode" parameterType="Teacher" resultMap="teacherResultSet">
+	    SELECT TC_ID, TC_NAME, CLASS_CODE, STATUS
+		  FROM TEACHER
+		 WHERE SC_CODE = #{scCode}
+		   AND STATUS = 'Y'
+	</select>
+	
+	<!-- 관리자 페이지에서 선생님 승인 리스트 조회 -->
+	<select id="acceptTeacherListbyScCode" parameterType="String" resultMap="teacherResultSet">
+	    SELECT TC_ID, TC_NAME, PHONE, STATUS
+		  FROM TEACHER
+		 WHERE SC_CODE = #{scCode}
+		   AND STATUS = 'N'
+	</select>
+	
+	<!-- 관리자 페이지에서 선생님 학교코드 삭제 -->
+	<update id="deleteTeacherByTcIdAndScCode">
+		UPDATE TEACHER
+		   SET CLASS_CODE = '0000'
+		 WHERE TC_ID = #{tcId}
+		   AND SC_CODE = #{scCode}
+	</update>
+	
+	<!-- 관리자 페이지에서  선생님 승인-->
+	<update id="RequestTeacherByTcIdAndStatus">
+		UPDATE TEACHER
+		   SET STATUS = 'Y'
+		 WHERE TC_ID = #{tcId}
+		   AND SC_CODE = #{scCode}
+	</update>
+
+	<!-- 반 개설 -->
+	<update id="updateClassCode">
+		UPDATE TEACHER
+		SET CLASS_CODE = #{classCode}
+		WHERE
+		TC_ID = #{tcId}
+	</update>
+
+	<!-- 선생님 정보 수정 -->
+	<update id="updateInfo">
+		UPDATE TEACHER
+		SET CLASS_CODE = #{classCode}
+		WHERE
+		TC_ID = #{tcId}
+	</update>
+
+	<!-- 교사 비밀번호 수정 -->
+	<update id="updatePassword">
+		UPDATE TEACHER
+		SET TC_PWD = #{tcPwd}
+		WHERE TC_ID = #{tcId}
+	</update>
+
+	<!-- 반 삭제 -->
+	<update id="classDelete">
+		UPDATE TEACHER
+		SET CLASS_CODE = '0000'
+		WHERE TC_ID =
+		#{tcId} AND CLASS_CODE = #{classCode}
+	</update>
+	
+	<resultMap id="TeacherNotice" type="TeacherNotice">
+		<result property="tcId" column="TC_ID" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="ntContent" column="NT_CONTENT" />
+		<result property="createDate" column="CREATE_DATE" />
+	</resultMap>	
+	
+	<!-- 공지사항 가져오기 -->
+	<select id="getTeacherNotices" resultMap="TeacherNotice">
+	    SELECT TC_ID, CLASS_CODE, NT_CONTENT, CREATE_DATE
+	    FROM NOTICE
+	    WHERE CLASS_CODE = #{classCode}
+	    ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<!-- 방과후 반 개설 -->
+	<insert id="updateAfterClass">
+		INSERT INTO AFTERSCHOOL(
+		CODE,
+		CLASS_NAME,
+		EXPLANATION,
+		TC_ID
+		) VALUES(
+		#{code},
+		#{className},
+		#{explanation},
+		#{tcId}
+		)
+	</insert>
+	
+	<!-- 방과후 -->
+	<resultMap type="AfterSchool" id="AfterSchoolResultSet">
+		<result column="CODE" property="code" />
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_NAME" property="className" />
+		<result column="EXPLANATION" property="explanation" />
+	</resultMap>
+	
+	<select id="getAfterClassByTeacherId" parameterType="String" resultType="AfterSchool">
+        SELECT CODE AS code, TC_ID AS tcId, CLASS_NAME AS className, EXPLANATION AS explanation
+        FROM AfterSchool
+        WHERE TC_ID = #{tcId}
+	</select>
+	
+
+	<!-- 아이디 중복 체크(통합) -->
+	<select id="idCheck" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ( SELECT STU_ID
+		  		   FROM STUDENT WHERE STU_ID = #{checkId}
+				  
+				  UNION ALL
+				 SELECT PR_ID
+				   FROM PARENTS WHERE PR_ID = #{checkId}
+		
+				  UNION ALL
+				 SELECT TC_ID
+				   FROM TEACHER
+				  WHERE TC_ID = #{checkId}
+				)
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="Parents" resultMap="parentsResult">
+		SELECT ID AS PR_ID,
+			   NAME AS PR_NAME,
+			   PHONE
+		  FROM (SELECT TC_NAME AS NAME,
+					   TC_ID AS ID,
+					   PHONE
+				  FROM TEACHER
+		
+				 UNION SELECT STU_NAME AS NAME,
+							  STU_ID AS ID,
+							  PHONE
+					     FROM STUDENT
+			
+				 UNION SELECT PR_NAME AS NAME,
+							  PR_ID AS ID,
+							  PHONE
+						 FROM PARENTS
+					   )
+				 WHERE NAME = #{prName}
+				   AND PHONE = #{phone}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" parameterType="Parents"
+		resultMap="parentsResult">
+		SELECT ID AS PR_ID,
+			   QUESTION AS PR_QUESTION,
+			   ANSWER AS PR_ANSWER
+		  FROM ( SELECT TC_ID AS ID,
+					    TC_QUESTION AS QUESTION,
+						TC_ANSWER AS ANSWER
+				   FROM TEACHER
+
+				  UNION
+				  SELECT STU_ID AS ID,
+				  	     STU_QUESTION AS QUESTION,
+					     STU_ANSWER AS ANSWER
+				    FROM STUDENT
+		
+				  UNION
+				  SELECT PR_ID AS ID,
+					     PR_QUESTION AS QUESTION,
+					     PR_ANSWER AS ANSWER
+				    FROM PARENTS
+				  )
+		 WHERE ID = #{prId}
+		   AND QUESTION = #{prQuestion}
+		   AND ANSWER = #{prAnswer}
+	</select>
+
+	<!-- 학생테이블 비번변경 -->
+	<update id="updateStudentPwd">
+		UPDATE STUDENT
+		   SET STU_PWD=#{prPwd}
+		 WHERE STU_ID=#{prId}
+		   AND STU_QUESTION=#{prQuestion}
+	</update>
+	
+	<!-- 학부모테이블 비번변경 -->
+	<update id="updateParentsPwd">
+		UPDATE PARENTS
+		   SET PR_PWD=#{prPwd}
+		 WHERE PR_ID=#{prId}
+		   AND PR_QUESTION=#{prQuestion}
+	</update>
+	
+	<!-- 선생님테이블 비번변경 -->
+	<update id="updateTeacherPwd">
+		UPDATE TEACHER
+		   SET TC_PWD=#{prPwd}
+		 WHERE TC_ID=#{prId}
+		   AND TC_QUESTION=#{prQuestion}
+	</update>
+	
+</mapper>

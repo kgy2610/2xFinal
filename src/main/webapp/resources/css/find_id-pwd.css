@@ -1,0 +1,317 @@
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    /* width: 100%; height: 100%; */
+    font-family: 'NanumSquareRound';
+    /* box-sizing: border-box; */
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 아이디/비밀번호 찾기 폼을 감싸는 div */
+#find-box{
+    /* width: 100%; height: fit-content; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+/* 로고 css */
+#find-info > #find-logo{
+    height: fit-content;
+}
+#find-info > #find-logo > img{
+    width: 240px; height: 106px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+/* 로고 하단 글씨 css */
+#find-info > #find-memo{
+    width: 320px; height: 56px;
+    border: none;
+    border-radius: 30px;
+    color: #6C584C;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 56px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.tab_content {
+    width: fit-content; height: fit-content;
+    position:absolute;
+    top:55%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:12px;
+}
+
+input[type="radio"] {
+    display:none;
+    margin-top: 20px;
+}
+input[type="radio"] + label {
+    width: 243px; height: 10px;
+	display:inline-block;
+	background:#fff;
+	color:#6C584C;
+	font-size:20px;
+    font-weight: 800;
+    text-align: center;
+    border: #A98467 solid 5px;
+	border-radius: 20px 20px 0 0;
+    cursor:pointer;
+    padding: 15px 20px 30px 20px;
+    z-index: 1px;
+}
+input[type="radio"]:checked + label {
+    width: 243px; height: 15px;
+    border-bottom: none;
+}
+
+.conbox {
+    width:580px; height:350px;
+	background:#fff;
+    text-align: center;
+    border: #A98467 solid 5px;
+    border-radius: 0 0 30px 30px;
+	margin:0 auto;
+	display:none;
+    margin-top: -9px;
+    padding-top: 50px;
+}
+input[id="findId"]:checked ~ .con1 {
+    display:block;
+}
+input[id="findPwd"]:checked ~ .con2 {
+    display:block;
+}
+
+/* 아이디 찾기 */
+#findId-form{
+    width: 580px; height: 580px;
+    margin-top: 20px;
+}
+/* 이름 */
+#findId-name{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-left: 70px;
+}
+#findId-name > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#findId-name > input[type="text"]{
+    width: 350px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 전화번호 */
+#findId-phone{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#findId-phone > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-right: 35px;
+}
+#findId-phone > input[type="text"]{
+    width: 350px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 아이디찾기 버튼 */
+#findId-btn{
+    width: fit-content; height: fit-content;
+    margin: 0 auto;
+}
+#findId-btn > input[type="button"]{
+    width: 340px; height: 70px;
+    border: 3px solid #A98467;
+    border-radius: 20px;
+    background-color: #A98467;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 65px;
+}
+#findId-btn > input[type="button"]:hover{
+    color: #A98467;
+    background-color: #F4DABF;
+}
+
+/* 비밀번호 찾기 */
+/* 아이디 */
+#findPwd-form{
+    margin-top: 20px;
+}
+#findPwd-id{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-left: 70px;
+}
+#findPwd-id > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#findPwd-id > input[type="password"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+#findPwd-id > input[type="text"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 보안질문 */
+#findPwd-question{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 45px;
+}
+#findPwd-question > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#findPwd-question > input[type="text"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+#findPwd-question > input[type="password"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+#findPwd-question > select{
+    width: 326px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+/* 답변 */
+#findPwd-answer{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 90px;
+}
+#findPwd-answer > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#findPwd-answer > input[type="text"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+#findPwd-answer > input[type="password"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 비밀번호 찾기 버튼 */
+#findPwd-btn{
+    width: fit-content; height: fit-content;
+    margin: 0 auto;
+}
+#findPwd-btn > input[type="button"]{
+    width: 340px; height: 70px;
+    border: 3px solid #A98467;
+    border-radius: 20px;
+    background-color: #A98467;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 25px;
+}
+#findPwd-btn > input[type="button"]:hover{
+    color: #A98467;
+    background-color: #F4DABF;
+}
+#findPwd-btn > input[type="submit"]{
+    width: 340px; height: 70px;
+    border: 3px solid #A98467;
+    border-radius: 20px;
+    background-color: #A98467;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 25px;
+}
+#findPwd-btn > input[type="submit"]:hover{
+    color: #A98467;
+    background-color: #F4DABF;
+}

@@ -1,0 +1,222 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: auto;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+}
+a{
+    text-decoration: none;
+}
+.nav{
+    width: 306px; height: 919px;
+    background-color: #F4DABF;
+    position: fixed;
+    margin: 0;
+    margin-left: 227px;
+    display: flex;
+    flex-direction: column;
+}
+.nav > img{
+    width: 182px; height: 80px;
+    margin: 46px auto;
+}
+.nav > .menu{
+    width: 182px; height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+.menu > label{
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 37px;
+    margin-right: 0px;
+}
+.menu > label > a{
+    color: #A98467;
+}
+.menu > label > a:hover{
+    color: #7C604B;
+    font-weight: 800;
+}
+.undermenu{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 80px;
+}
+.undermenu > label{
+    padding-top: 10px;
+}
+.undermenu > label > a{
+    color: #A98467;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.undermenu > label > a:hover{
+    color: #7C604B;
+    font-weight: 500;
+}
+
+#homework a {
+    color: #7C604B;
+}
+
+
+.homework-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+}
+
+.homework-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #4f4f4f;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.homework-content {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #4f4f4f;
+    width: 80%;
+    height: 350px;
+    overflow-y: auto; /* 스크롤 가능하게 수정 */
+}
+
+.homework-photo {
+    width: 60%;
+    height: 100px;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 100px;
+    border-radius: 12px;
+    color: #7f7f7f;
+    margin-top: 130px;
+    
+}
+
+.answer-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.answer-list {
+    width: 600px;
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    height: 300px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.answer-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.answer-list ul li {
+    padding: 5px 0;
+    color: #4f4f4f;
+}
+
+.submit-button {
+    padding: 10px 15px;
+    background-color: #a5d6a7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #81c784;
+}
+
+.teacher-comments {
+    margin-bottom: 15px;
+    width: 700px;
+    height: 300px;
+    margin-left: 120px;
+}
+
+.teacher-comments textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    margin-bottom: 10px;
+    color: #4f4f4f;
+}
+
+.score-save {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-save input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.save-button {
+    padding: 5px 15px;
+    background-color: #a5d6a7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+.save-button:hover {
+    background-color: #81c784;
+}
+
+/* 스크롤바 스타일 */
+.whole_body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.whole_body::-webkit-scrollbar-thumb {
+    background-color: #a5d6a7;
+    border-radius: 5px;
+}
+
+.whole_body::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.whole_body{
+    width: 1000px;
+    height: 800px; /* 높이 제한을 두어 스크롤바가 생성되도록 설정 */
+    margin-left: 620px;
+    margin-top: 50px;
+    overflow-y: auto; /* 세로 스크롤바 추가 */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}

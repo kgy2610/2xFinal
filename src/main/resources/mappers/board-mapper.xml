@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="boardMapper">
+ 
+ 	<resultMap type="Notice" id="NoticeResultSet">
+ 		<result column="TC_ID" property="tcId" />
+ 		<result column="CLASS_CODE" property="classCode" />
+ 		<result column="NT_CONTENT" property="ntContent" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="HmSubmit" id="HmSubmitResultSet">
+		<result column="STU_ID" property="stuId" />
+		<result column="BO_NO" property="boNo" />
+		<result column="HM_TITLE" property="hmTitle" />
+		<result column="HM_CONTENT" property="hmContent" />
+		<result column="SCORE" property="score" />
+		<result column="TC_COMMENT" property="tcComment" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="STATUS" property="status" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="ParentsBoard" id="ParentsBoardResultSet">
+		<result column="BO_NO" property="boNo" />
+		<result column="NICKNAME" property="prNickname" />
+		<result column="PR_ID" property="prId" />
+		<result column="TITLE" property="boTitle" />
+		<result column="BO_CONTENT" property="contents" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="BO_COUNT" property="boCount" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+ 	</resultMap>
+	
+ 	<resultMap type="Counsel" id="CounselResultSet">
+ 		<result column="CS_NO" property="csNo"/>
+		<result column="CS_DATE" property="csDate" />
+		<result column="TC_ID" property="tcId" />
+		<result column="PR_ID" property="prId" />
+		<result column="CS_LOCATION" property="scLocation" />
+		<result column="CS_CONTENT" property="csContent" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="EventImgBoard" id="EventImgBoardResultSet">
+ 		<result column="BO_NO" property="boNo"/>
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="TITLE" property="title" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="BO_CONTENT" property="boContent" />
+ 	</resultMap>
+ 	
+ 	 <resultMap type="Reply" id="ReplyResultSet">
+ 		<result column="RE_NO" property="reNo"/>
+		<result column="BO_NO" property="boNo" />
+		<result column="PR_ID" property="prId" />
+		<result column="NICKNAME" property="nickname"/>
+		<result column="RE_CONTENT" property="reContent" />
+		<result column="PREP_NO" property="prepNo" />
+ 	</resultMap>
+ 	
+	<!-- 공지사항 가져오기 -->
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		SELECT NT_CONTENT,
+			   TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE"
+		FROM NOTICE
+		WHERE TC_ID = #{tcId}
+		AND CLASS_CODE = #{classCode}
+	</select>
+	
+	<!-- 학생 점수 가져오기 -->
+	<select id="selectscore" resultType="Double">
+		SELECT AVG(SCORE) as AVG
+		FROM HM_SUBMIT
+		LEFT JOIN HOMEWORK USING(BO_NO)
+		WHERE STU_ID = #{stuId}
+		GROUP BY SUBJECT
+		ORDER BY CASE HOMEWORK.SUBJECT
+		    WHEN '국어' THEN 1
+		    WHEN '수학' THEN 2
+		    WHEN '영어' THEN 3
+		    WHEN '과학' THEN 4
+		    WHEN '사회' THEN 5
+		    WHEN '미술' THEN 6
+		    WHEN '체육' THEN 7
+		    ELSE 8
+		END
+	</select>
+	
+	<!-- 학급 평균 점수 가져오기  -->
+	<select id="selectAVGscore" resultType="Double">
+		SELECT AVG(SCORE) as AVG
+		FROM HM_SUBMIT
+		LEFT JOIN HOMEWORK USING(BO_NO)
+		WHERE CLASS_CODE = #{classCode}
+		GROUP BY SUBJECT
+		ORDER BY CASE HOMEWORK.SUBJECT
+		    WHEN '국어' THEN 1
+		    WHEN '수학' THEN 2
+		    WHEN '영어' THEN 3
+		    WHEN '과학' THEN 4
+		    WHEN '사회' THEN 5
+		    WHEN '미술' THEN 6
+		    WHEN '체육' THEN 7
+		    ELSE 8
+		END
+	</select>
+	
+	<!-- 출석률 -->
+	<select id="selectRate" resultType="map">
+	    SELECT  COUNT(*) AS total_count,
+    			SUM(CASE WHEN LA = 'AT' THEN 1 ELSE 0 END) AS la_at_count
+	    FROM ATTENDANCE
+	    WHERE STU_ID = #{stuId} 
+	</select>
+	
+	<!-- 출석상태 -->
+	<select id="selectNowStatus" resultType="string">
+	    SELECT LA
+	    FROM ATTENDANCE
+	    WHERE STU_ID = #{stuId} 
+	      AND TO_CHAR(SYSDATE, 'YYYY-MM-DD') = TO_CHAR(ADATE, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 학생 과목별 점수 가져오기 -->
+	<select id="selectStudentScoreList" resultMap="HmSubmitResultSet">
+		SELECT H.HM_TITLE,SCORE
+		FROM HM_SUBMIT HS
+		LEFT JOIN HOMEWORK H USING(BO_NO)
+		WHERE STU_ID = #{prId}
+		  AND SUBJECT = #{subject}
+		  AND STATUS = 'Y'
+		ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<!-- 부모님 상담가능 시간 가져오기 -->
+	<select id="selectSameMonthCounsel" resultMap="CounselResultSet">
+		SELECT CS_NO, TO_CHAR(CS_DATE, 'MM-DD HH24:MI') AS CS_DATE, TC_ID, PR_ID, CS_LOCATION, CS_CONTENT
+		FROM COUNSEL 
+		WHERE TC_ID = #{tcId}
+		  AND TO_CHAR(CS_DATE, 'MM') = #{month}
+	</select>
+	
+	<!-- 부모님 상담 신청 -->
+	<update id="updateCounsel">
+		UPDATE COUNSEL 
+		SET CS_CONTENT = #{csContent}, 
+			PR_ID = #{prId}
+		WHERE CS_NO = #{csNo}
+	</update>
+	
+	<!-- 부모님 커뮤니티 게시물 갯수 조회 -->
+	<select id="selectListCount" resultType="_int">
+   		SELECT COUNT(*)
+   	    FROM PARENTS_BOARD
+   	    WHERE CLASS_CODE = #{classCode}
+    </select>
+	
+	<!-- 부모님 커뮤니티 게시물 전체 조회 -->
+	<select id="selectParentsBoardList" resultMap="ParentsBoardResultSet">
+		SELECT BO_NO,NICKNAME,TITLE,BO_CONTENT,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",BO_COUNT,ORIGIN_NAME,CHANGE_NAME
+		FROM PARENTS_BOARD
+		LEFT JOIN PARENTS USING(PR_ID)
+		WHERE CLASS_CODE = #{classCode}
+		ORDER BY BO_NO DESC
+	</select>
+	
+	<!-- 부모님 커뮤니티 게시물 작성 -->
+	<insert id="insertParentBoard">
+		INSERT INTO PARENTS_BOARD(CLASS_CODE,PR_ID,TITLE,BO_CONTENT,ORIGIN_NAME,CHANGE_NAME)
+		VALUES(#{classCode},#{prNickname},#{boTitle},#{contents},#{originName},#{changeName})
+	</insert>
+	
+	<!-- 부모님 커뮤니티 게시물 수정 -->
+	<update id="updateParentBoard">
+		UPDATE PARENTS_BOARD
+		SET BO_CONTENT = #{contents},
+			TITLE = #{boTitle},
+			ORIGIN_NAME = #{originName},
+			CHANGE_NAME = #{changeName}
+		WHERE BO_NO = #{boNo}
+	</update>
+	
+	<!-- 부모님 커뮤니티 게시물 삭제 -->
+	<delete id="deleteParentBoard">
+		DELETE 
+		FROM PARENTS_BOARD
+		WHERE BO_NO = #{boNo}
+	</delete>
+	
+	<!-- 부모님 커뮤니티 게시물 조회수 증가 -->
+	<update id="updateCount">
+		UPDATE PARENTS_BOARD
+		SET BO_COUNT=BO_COUNT + 1
+		WHERE BO_NO = #{boNo}
+	</update>
+	
+	<!-- 부모님 커뮤니티 번호에 맞는 게시물 조회 -->
+	<select id="selectNowBoard" resultType="ParentsBoard">
+		SELECT  BO_NO AS boNo,
+				NICKNAME AS prNickname,
+				TITLE AS boTitle,
+				BO_CONTENT AS contents,
+				TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "createDate",
+				BO_COUNT AS boCount,
+				PR_ID AS prId,
+				ORIGIN_NAME AS originName,
+				CHANGE_NAME AS changeName
+		FROM PARENTS_BOARD
+		LEFT JOIN PARENTS USING(PR_ID)
+		WHERE BO_NO = #{boNo}
+	</select>
+	
+		<!-- 부모님 커뮤니티 번호에 맞는 댓글 리스트 조회 -->
+	<select id="selectReplyList" resultMap="ReplyResultSet">
+		SELECT  pbr.RE_NO,
+				pbr.BO_NO,
+				p.NICKNAME,
+				pbr.RE_CONTENT,
+				pbr.PR_ID,
+				pbr.PREP_NO
+		FROM PARENTS_BOARD_REPLY pbr
+		LEFT JOIN PARENTS p ON(pbr.PR_ID = p.PR_ID)
+		WHERE BO_NO = #{boNo}
+		ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertReply">
+		INSERT INTO PARENTS_BOARD_REPLY(BO_NO,PR_ID,RE_CONTENT,PREP_NO)
+		VALUES(#{boNo},#{prId},#{reContent},#{prepNo})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE 
+		FROM PARENTS_BOARD_REPLY 
+		WHERE RE_NO = #{reNo}
+	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="modifyReply">
+		UPDATE PARENTS_BOARD_REPLY
+		SET RE_CONTENT = #{reContent}
+		WHERE RE_NO = #{reNo}
+	</update>
+	
+	<!-- 댓글 수 -->
+	<select id="selectReCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM PARENTS_BOARD_REPLY
+		WHERE BO_NO = #{boNo}
+	</select>
+	
+	<!-- 부모님 커뮤니티 메인화면 게시물 조회 -->
+	<select id="selectHotBoardList" resultMap="ParentsBoardResultSet">
+		SELECT BO_NO,NICKNAME,TITLE,BO_CONTENT,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",BO_COUNT,ORIGIN_NAME,CHANGE_NAME
+		FROM (SELECT *
+			FROM PARENTS_BOARD
+			LEFT JOIN PARENTS USING(PR_ID)
+			WHERE CLASS_CODE = #{classCode}
+			ORDER BY BO_COUNT DESC)
+		WHERE ROWNUM &lt;=4
+	</select>
+	
+	<!-- 부모님 행사사진 게시물 전체 조회 -->
+	<select id="selectEventImgList" resultMap="EventImgBoardResultSet">
+		SELECT BO_NO,TITLE,BO_CONTENT,TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",TC_ID,CLASS_CODE
+		FROM PITURE_BOARD
+		WHERE TC_ID = #{tcId}
+		  AND CLASS_CODE = #{classCode}
+	</select>
+	
+	<!-- 부모님 행사사진 조회 -->
+	<select id="selectDetailImg" resultType="EventImgBoard">
+		SELECT  pb.BO_NO AS boNo,
+				pb.TITLE AS title,
+				pb.BO_CONTENT as boContent,
+				TO_CHAR(pb.CREATE_DATE, 'YYYY-MM-DD') AS "createDate",
+				t.TC_NAME AS tcId,
+				pb.CLASS_CODE as classCode
+		FROM PITURE_BOARD pb
+		LEFT JOIN TEACHER t USING(TC_ID)
+		WHERE BO_NO = #{boNo}
+	</select>
+	
+	
+	
+	<delete id="deleteImgBoard">
+		DELETE
+		FROM PITURE_BOARD
+		WHERE BO_NO = #{boNo}
+	</delete>
+	
+	<insert id="insertIMGBoard">
+		INSERT INTO PITURE_BOARD(TC_ID,CLASS_CODE,TITLE,BO_CONTENT)
+		VALUES(#{tcId},#{classCode},#{title},#{boContent})
+	</insert>
+	
+	<update id="updateImgBoard">
+		UPDATE PITURE_BOARD
+		SET TITLE=#{title},
+			BO_CONTENT=#{boContent}
+		WHERE BO_NO=#{boNo}
+	</update>
+	
+ </mapper>

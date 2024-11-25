@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="schoolMapper">
+ 
+ 	<resultMap type="School" id="SchoolResultSet">
+ 		<result column="SC_CODE" property="scCode" />
+ 		<result column="SC_NAME" property="scName" />
+ 		<result column="SC_ADDRESS" property="scAddress" />
+ 	</resultMap>
+ 	
+ 	<select id="searchSchoolsByName" parameterType="School" resultMap="SchoolResultSet">
+	    SELECT *
+	      FROM SCHOOL_LIST
+	     WHERE SC_NAME
+	      LIKE '%' || #{scName} || '%'
+	</select>
+	
+	<select id="getSchoolNamebyScCode" parameterType="School" resultMap="SchoolResultSet">
+		SELECT SC_NAME
+		  FROM SCHOOL_LIST
+		 WHERE SC_CODE = #{scCode}
+	</select>
+	
+	<!-- 교육청 코드 가져오기 -->
+	<select id="selectOeCode" resultType="string">
+		SELECT OE_CODE
+		FROM SCHOOL_LIST
+		WHERE SC_CODE = #{schoolCode}
+	</select>
+ </mapper>

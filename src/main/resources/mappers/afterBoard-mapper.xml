@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="afterMapper">
+<!-- 방과후 -->
+<resultMap type="AfterSchool" id="AfterSchoolResultSet">
+		<result column="CODE" property="code" />
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_NAME" property="className" />
+		<result column="EXPLANATION" property="explanation" />
+	</resultMap>
+
+<!-- 방과후 게시판 -->
+	<resultMap type="AfterSchoolBoard" id="afterSchoolBoardResultSet">
+		<result column="BO_NO" property="boNo" />
+		<result column="STU_ID" property="stuId" />
+		<result column="CODE" property="code" />
+		<result column="TITLE" property="title" />
+		<result column="BO_CONTENT" property="boContent" />
+		<result column="CREATE_DATE" property="createDate" />
+	</resultMap>
+
+
+
+
+<!-- 방과후게시판 파일 -->
+<resultMap type="AfterSchoolBoardFile" id="afterSchoolBoardFileResultSet">
+		<result column="BO_NO" property="boNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+	</resultMap>
+
+
+
+
+<!-- 방과후게시판 사진 -->	
+	<resultMap type="AfterSchoolBoardPicture" id="afterSchoolBoardPictureResultSet">
+		<result column="BO_NO" property="boNo" />
+		<result column="PIC_AD" property="picAd" />
+	</resultMap>
+	
+	
+	
+	
+<!-- 방과후게시판 학생 -->
+	<resultMap type="AfterSchoolStudent" id="afterSchoolStudentResultSet">
+		<result column="STU_ID" property="stuId" />
+		<result column="CODE" property="code" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+</mapper>

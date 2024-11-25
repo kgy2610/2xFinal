@@ -1,0 +1,308 @@
+*{
+    overflow: visible;
+}
+#content_border{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    bottom: 47px; 
+    right: 228px; 
+    width: 1089px; 
+    height: 880px;
+}
+
+
+#community_title{
+    position:absolute; 
+    left:30px;
+    top: 20px;
+    color: #A98467;
+}
+.create_button{
+    position:absolute; 
+    width: 150px;
+    height: 50px;
+    left: 450px;
+    top: 1400px;
+    border-radius: 40px; 
+    background-color: #F4DABF;
+    color:#A98467;
+    font-size: 20px;
+    border: 0px;
+}
+.create_button:hover{
+    background-color: #A98467;
+    color: white;
+    cursor: pointer;
+}
+#enroll_title{
+    position:absolute;
+    top: 0px;
+    left: 47px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 689px;
+    height: 60px;
+    text-align: center;
+    color: #A98467;
+    font-size: 30px;
+    padding-top: 10px;
+}
+#subject_info{
+    position:absolute;
+    top: 0px;
+    right: 50px;
+    width: 280px;
+    height: 60px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    text-align: center;
+    color: #A98467;
+    font-size: 30px;
+    padding-top: 10px;
+}
+#enroll_info{
+    width: 100%;
+    height: 50px;
+    border-bottom: 3px solid #A98467;
+    text-align: right;
+    color: #A98467;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+#enroll_content{
+    position:absolute;
+    top: 80px;
+    left: 47px;
+    border: 3px solid #A98467; 
+    width: 989px;
+    height: 400px;
+}
+#en_content{
+    overflow: auto;
+    height: 260px;
+    border-bottom: 3px solid #A98467;
+}
+#enroll_file{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    bottom: 11px;
+    left: 20px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 950px;
+    height: 60px;
+}
+.custom-file-upload {
+    position:absolute;
+    left: 20px;
+    padding: 10px 20px;
+    color: #A98467;
+    background-color: white; /* 버튼 색상 */
+    border: 0px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #A98467;
+    color: white;
+}
+.file-name {
+    position: absolute;
+    left: 130px;
+    width: 200px;
+    font-size: 16px;
+    color: #333;
+}
+.note-resizebar {
+    display: none;
+}
+#homework_area{
+    position: absolute;
+    top: 20px;
+    height: 825px;
+    width: 100%;
+    overflow: auto;
+    padding-right: 1000px;
+}
+/* 댓글 섹션 스크롤바 스타일 */
+#homework_area::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+#homework_area::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+    border-radius: 10px; 
+}
+
+#homework_area::-webkit-scrollbar-thumb {
+    background: #A98467; /* 스크롤바 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+#homework_area::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+#submit_area{
+    position: absolute;
+    background-color: #DDE5B6;
+    left: 47px;
+    top: 500px;
+    height: 600px;
+    width: 989px;
+    border-radius: 30px;
+    
+}
+#submit_homework{
+    position: absolute;
+    background-color: white;
+    top: 40px;
+    left: 40px;
+    width: 820px;
+    height: 520px;
+}
+.note-editor .note-editable {
+    overflow-y: auto; /* 수직 스크롤바를 사용 가능하게 */
+}
+
+/* 스크롤바 스타일 */
+.note-editor .note-editable::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-thumb {
+    background-color: #A98467; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥글게 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-thumb:hover {
+    background-color: #81644e; /* 마우스 오버 시 색상 변경 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 색상 */
+}
+
+/* 댓글 섹션 스크롤바 스타일 */
+#submit_area::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+#submit_area::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+    border-radius: 10px;
+}
+
+#submit_area::-webkit-scrollbar-thumb {
+    background: #A98467; /* 스크롤바 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+#submit_area::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+#enroll_reply{
+    position: absolute;
+    left: 87px;
+    bottom: 67px;
+
+}
+#enroll_reply tr td:nth-child(3) div{
+    padding-top: 10px;
+}
+#enroll_reply tr td:nth-child(3) div input{
+    border-radius: 10px;
+    color:#A98467;
+    background: white;
+    font-size: 15px;
+    border: 0px;
+    width: 580px;
+    height: 30px;
+    padding-left: 10px;
+}
+#enroll_reply tr td:nth-child(3) div input:focus {
+    outline: none;
+}
+#enroll_reply tr td:nth-child(3) div input::placeholder {
+    color: #A98467; /* 원하는 색상 코드로 변경 */
+    opacity: 1; /* 투명도 설정 (1이 불투명, 0이 완전 투명) */
+}
+#submit_button{
+    position: absolute;
+    background-color: white;
+    color: #A98467;
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    right: 20px;
+    top: 260px;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+}
+#submit_button:hover{
+    background-color: #A98467;
+    color: white;
+}
+#teacher_confirm{
+    position: absolute;
+    width: 989px;
+    height: 200px;
+    top: 1120px;
+    left: 47px;
+    border: 3px solid #A98467; 
+    border-radius: 30px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+#homework_score{
+    position:absolute;
+    top: 1330px;
+    left: 47px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 989px;
+    height: 60px;
+    font-size: 20px;
+    color: #A98467;
+}
+#homework_score div:nth-child(1){
+    position:absolute;
+    top: 18px;
+    left: 50px;
+    
+}
+#homework_score div:nth-child(2){
+    position:absolute;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    top: 15px;
+    left: 120px;
+    background-color: white;
+    border-radius: 40px;
+    padding-top: 5px;
+}
+#homework_score div:nth-child(3){
+    position:absolute;
+    top: 18px;
+    left: 250px;
+}
+#chat_button{
+    position: absolute;
+    right: 47px;
+    bottom: 40px;
+    height: 100px;
+    width: 100px;
+    background-color: #DDE5B6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

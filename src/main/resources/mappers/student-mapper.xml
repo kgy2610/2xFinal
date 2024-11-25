@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="studentMapper">
+ 
+ 	<resultMap type="HomeworkSubmit" id="HomeworkSubmitResultSet">
+ 		<result column="STU_ID" property="stuId" />
+ 		<result column="BO_NO" property="boNo" />
+ 		<result column="HM_TITLE" property="hmTitle" />
+ 		<result column="HM_CONTENT" property="hmContent" />
+ 		<result column="SCORE" property="score" />
+ 		<result column="TC_COMMENT" property="tcComment" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 		<result column="STATUS" property="status" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="Homework" id="HomeworkResultSet">
+ 		<result column="BO_NO" property="boNo" />
+ 		<result column="TC_ID" property="tcId" />
+ 		<result column="CLASS_CODE" property="classCode" />
+ 		<result column="HM_TITLE" property="hmTitle" />
+ 		<result column="DEADLINE" property="deadLine" />
+ 		<result column="HM_CONTENT" property="hmContent" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 		<result column="SUBJECT" property="subject" />
+ 	</resultMap>
+ 	 
+ 	<select id="showHomeworkList" parameterType="map" resultMap="HomeworkSubmitResultSet">
+		SELECT H.BO_NO, H.SUBJECT, H.HM_TITLE, H.DEADLINE, HS.STATUS, HS.SCORE
+		FROM HOMEWORK H
+		LEFT JOIN HM_SUBMIT HS
+		ON H.BO_NO = HS.BO_NO
+		AND HS.STU_ID = #{stuId}
+		WHERE H.CLASS_CODE = #{classCode}
+	</select>
+ 	<!-- 
+ 	<select id="searchSchoolsByName" parameterType="School" resultMap="SchoolResultSet">
+	    SELECT *
+	      FROM SCHOOL_LIST
+	     WHERE SC_NAME
+	      LIKE '%' || #{scName} || '%'
+	</select>
+	-->
+	
+ </mapper>

@@ -1,0 +1,139 @@
+@font-face {
+   font-family: 'NanumSquareRound';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+*{
+   margin: 0 auto;
+   padding: 0;
+   font-family: 'NanumSquareRound';
+   overflow: hidden;
+   box-sizing: border-box;
+   letter-spacing: -1px;
+}
+a{
+   text-decoration: none;
+}
+.nav{
+   width: 306px; height: 100%;
+   background-color: #F4DABF;
+   position: fixed;
+   margin: 0;
+   margin-left: 227px;
+   display: flex;
+   flex-direction: column;
+}
+.nav > img{
+   width: 182px; height: 80px;
+   margin: 46px auto;
+}
+.nav > .menu{
+   width: 182px; height: 560px;
+   display: flex;
+   flex-direction: column;
+}
+.menu > label{
+   font-weight: 700;
+   font-size: 40px;
+   margin-top: 37px;
+   margin-right: 0px;
+}
+.menu > label > a{
+   color: #A98467;
+}
+.menu > label > a:hover{
+   color: #7C604B;
+   font-weight: 800;
+}
+.undermenu{
+   display: flex;
+   flex-direction: column;
+   margin-right: 20px;
+   margin-top: 80px;
+}
+.undermenu > label{
+   padding-top: 10px;
+}
+.undermenu > label > a{
+   color: #A98467;
+   font-size: 30px;
+   font-weight: 300;
+   text-decoration: underline;
+}
+.undermenu > label > a:hover{
+   color: #7C604B;
+   font-weight: 500;
+}
+
+/* 방과후 메인 */
+.wrap {
+   width: 1040px;
+   height: 790px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   font-size: 25px;
+   color: #A98467;
+   border:none;
+   border-radius: 30px;
+   padding: 10px;   
+}
+
+.header_left{
+   border: #A98467 solid 2px;
+   border-radius: 40px;
+   width: 70%; height: 230px;
+   float: left;
+   padding: 30px;
+   line-height: 50px;
+}
+
+.header img{
+   width:225px;
+   margin-left: 40px;
+}
+
+.list{
+   border: #A98467 solid 2px;
+   border-radius: 40px;
+   padding: 40px;
+   margin-top: 20px;
+}
+
+.list button{
+   float: right;
+   width: 150px;
+   height: 40px;
+   padding: 10px;
+   font-size: 18px;
+   border-radius: 20px;
+   border: none;
+   background-color: #DDE5B6;
+   color: #A98467;
+   margin-top:-30px;
+}
+
+.list table {
+   margin-top: 30px;
+   width: 100%;
+   text-align: center;
+   table-layout: fixed;
+   border-collapse: collapse;
+  
+}
+
+.list tr th{
+   border-bottom: #7C604B solid 3px;
+   padding: 10px;
+}
+
+.list tr td{
+   border-bottom: #7C604B solid 2px;
+   padding: 5px;
+}
+
+.list tr:last-child td{
+   border: none;
+   padding: 5px;
+}

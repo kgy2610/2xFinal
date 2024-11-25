@@ -1,0 +1,263 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: auto;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+}
+a{
+    text-decoration: none;
+}
+.nav{
+    width: 306px; height: 919px;
+    background-color: #F4DABF;
+    position: fixed;
+    margin: 0;
+    margin-left: 227px;
+    display: flex;
+    flex-direction: column;
+}
+.nav > img{
+    width: 182px; height: 80px;
+    margin: 46px auto;
+}
+.nav > .menu{
+    width: 182px; height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+.menu > label{
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 37px;
+    margin-right: 0px;
+}
+.menu > label > a{
+    color: #A98467;
+}
+.menu > label > a:hover{
+    color: #7C604B;
+    font-weight: 800;
+}
+.undermenu{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 80px;
+}
+.undermenu > label{
+    padding-top: 10px;
+}
+.undermenu > label > a{
+    color: #A98467;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.undermenu > label > a:hover{
+    color: #7C604B;
+    font-weight: 500;
+}
+
+.whole_body {
+    width: 870px;
+    height: 820px;
+    margin: 50px auto; /* 화면 중앙 정렬 */
+    border: solid #A98467 3px;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center; /* 내부 요소 중앙 정렬 */
+}
+
+.menu > label > .homework{
+    color: #7C604B;
+}
+
+.use-body{
+    display: flex;
+    margin-top: 10px;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.subject-select{
+    font-size: 25px;
+    border-radius: 30px;
+    width: 200px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 60px;
+    border: solid #DDE5B6 0px;
+    background-color: #DDE5B6;
+    margin-left: 0px;
+    color: #A98467;
+}
+
+.subject-name{
+    font-size: 25px;
+    border-radius: 30px;
+    width: 550px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid #DDE5B6 0px;
+    background-color: #DDE5B6;
+    margin-left: 20px;
+    color: #A98467;
+}
+
+.real-body{
+    border-radius: 30px;
+    width: 760px;
+    height: 600px;
+    border: solid #A98467 3px;
+    margin-bottom: 17px;
+}
+
+.real-head{
+    display: flex;
+    padding-bottom: 12px;
+    align-items: center;
+    height: 55px;
+}
+
+
+.real-head > hr{
+    height: 25px;
+    border: solid #A98467 1px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.real-head > div{
+    height: 25px;
+    margin-top: 10px;
+    color: #A98467;
+    font-size: 25px;
+}
+
+.head-date{
+    margin-left: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-real-date{
+    margin-left: 500px;
+    margin-bottom: 5px;
+}
+
+.line1{
+    border: solid #A98467 0.2px;
+    margin-bottom: 40px;
+}
+
+.real-content{
+    font-size: 25px;
+    color: #A98467;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 700px;
+    height: 400px;
+    border: solid #A98467  0px;
+    margin-bottom: 20px;
+}
+
+.file-attachment{
+    display: flex;
+    
+    width: 700px;
+    height: 60px;
+    background-color: #DDE5B6;
+    border-radius: 30px;
+    padding-left: 20px;
+    padding: 17px;
+    color: #A98467;
+}
+
+#file-upload {
+    display: none;
+}
+
+/* 커스텀 파일 선택 버튼 스타일 */
+.custom-file-upload {
+    display: flex;
+    padding: 10px 20px;
+    background-color: white;
+    color: #A98467;
+    border: 2px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+/* 파일명 표시 스타일 */
+.file-name {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #A98467;
+    margin-left: -420px;
+}
+
+/* 파일 선택 버튼의 hover 효과 */
+.custom-file-upload:hover {
+    background-color: white;
+    border-color: white;
+}
+
+.real-foot {
+    width: 100%; /* 전체 너비 사용 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-top: 20px;
+}
+
+.real-foot > .foot-first {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    border-radius: 40px;
+    background-color: #F4DABF;
+    color: #A98467;
+    font-size: 20px;
+    border: 0px;
+    text-align: center;
+    line-height: 50px; /* 텍스트가 버튼 안에서 세로 중앙 정렬 */
+    cursor: pointer;
+    margin-right: 300px;
+}
+
+/*채팅버튼*/
+#chat_button{
+    position: absolute;
+    right: 47px;
+    bottom: 40px;
+    height: 100px;
+    width: 100px;
+    background-color: #DDE5B6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.img-calendar{
+    margin-top: 7px;
+}
+

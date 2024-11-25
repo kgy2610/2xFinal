@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+
+	<resultMap type="TeacherNotice" id="NoticeResultSet">
+		<result column="NOTICE_NO" property="NTno" />
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="NT_CONTENT" property="ntContent" />
+		<result column="CREATE_DATE" property="createDate" />
+	</resultMap>
+	
+	<!-- 공지사항 조회 -->
+	<select id="selectNotice" resultMap="NoticeResultSet">
+		SELECT  
+				NOTICE_NO,
+				TC_ID,
+				CLASS_CODE,
+				NT_CONTENT,
+				CREATE_DATE
+		 FROM NOTICE
+		 WHERE CLASS_CODE = #{classCode}
+	     ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<!-- 공지사항 추가 -->
+	<insert id="insertNotice" parameterType="map">
+	    INSERT INTO NOTICE
+	    (TC_ID, CLASS_CODE, NT_CONTENT, CREATE_DATE)
+	    VALUES
+	    (#{tcId}, #{classCode}, #{noticeTitle}, SYSDATE)
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice">
+	    UPDATE NOTICE
+	    SET NT_CONTENT = #{noticeTitle}
+	    WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="String">
+	    DELETE FROM NOTICE
+	     WHERE NT_CONTENT = #{noticeTitle}
+	</delete>
+	
+	
+</mapper>

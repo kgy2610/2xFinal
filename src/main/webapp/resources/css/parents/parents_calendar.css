@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+}
+a{
+    text-decoration: none;
+}
+.nav{
+    width: 306px; height: 100%;
+    background-color: #F4DABF;
+    position: fixed;
+    margin: 0;
+    margin-left: 227px;
+    display: flex;
+    flex-direction: column;
+}
+.nav > img{
+    width: 182px; height: 80px;
+    margin: 46px auto;
+}
+.nav > .menu{
+    width: 182px; height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+.menu > label{
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 37px;
+    margin-right: 0px;
+}
+.menu > label > a{
+    color: #A98467;
+}
+.menu > label > a:hover{
+    color: #7C604B;
+    font-weight: 800;
+}
+.undermenu{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 80px;
+}
+.undermenu > label{
+    padding-top: 10px;
+}
+.undermenu > label > a{
+    color: #A98467;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.undermenu > label > a:hover{
+    color: #7C604B;
+    font-weight: 500;
+}
+
+/* 달력 */
+.wrap {
+   width: 1040px;
+   height: 784px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   font-size: 25px;
+   color: #A98467;
+   border:none;
+   background-color: #DDE5B6;
+   border-radius: 30px;
+   padding: 30px;
+   overflow-y: auto;
+   display: flex;
+   flex-wrap: wrap; /* 한 줄에 요소가 꽉 차면 다음 줄로 넘어가게 설정 */
+   
+}
+
+/* 스크롤바 전체 스타일 */
+.wrap::-webkit-scrollbar {
+    width: 13px;
+ }
+ 
+ /* 스크롤바 트랙(배경) 스타일 */
+ .wrap::-webkit-scrollbar-track {
+    background: #F2CEB2; 
+    border-radius: 10px;
+ }
+ 
+ /* 스크롤바 핸들 스타일 */
+ .wrap::-webkit-scrollbar-thumb {
+    background: #A98467; /* 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+ }
+                
+ /* 스크롤바 핸들에 호버했을 때 스타일 */
+ .wrap::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 호버 시 핸들 색상 */
+ }
+
+#calendar{
+    width: 100%;
+}
+
+.header{
+    background-color: #A98467;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    width: 50%;
+    padding: 5px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+#monthSelect{
+    border:none;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100px; height: 100%;
+    font-size: 20px;
+    margin-top: -50px;
+    background-color: #70584500;
+    color: white;
+    font-size: 40px;
+    padding: 0;
+}
+
+#calendar td {
+    width: 150px;
+    height: 100px;
+    color: #7C604B;
+    border: #7C604B solid 2px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: 900;
+}
+
+
+#calendar tbody td{
+    padding:0;
+}
+
+/*
+#cal tr td button:hover{
+    background-color: rgb(217, 215, 215);
+}
+*/
+.cs_button{
+	border: 0px;
+	color: #7C604B;
+	background-color: #DDE5B6; 
+	border-radius: 20px; 
+	padding: 5px 20px; 
+	margin-top: 5px; 
+	font-size:15px; 
+	width:90%;
+	cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.cs_nubutton{
+	border: 0px;
+	color: white;
+	background-color: #bfc59e; 
+	border-radius: 20px; 
+	padding: 5px 20px; 
+	margin-top: 5px; 
+	font-size:15px; 
+	width:90%;
+	cursor: auto;
+    margin-bottom: 5px;
+}
+
+.cs_button:hover{
+	background-color: #bfc59e;
+	color: white;
+}
+
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    font-size: 20px;
+    color: #A98467;
+ }
+ 
+ .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    left: 40%;
+    top: 35%;
+    max-height: 35%; /*스크롤제한높이*/
+    overflow-y: auto;/*스크롤활성화*/
+ }
+
+ .modal-content td{
+    text-align: center;
+    margin: 10px;
+ }
+ 
+ 
+ .close {
+    width: 40px; height: 40px;
+    line-height: 38px;
+    color: #A98467;
+    float: right;
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #DDE5B6;
+    border-radius: 10px;
+    padding: 5px;
+ }
+ 
+ .close:hover,
+ .close:focus {
+    color: #705845;
+    text-decoration: none;
+    cursor: pointer;
+ }
+
+ .modal-content input{
+    border: #7C604B solid 2px;
+    border-radius: 20px;
+    padding: 10px;
+    color: #705845;
+    font-size: 15px;
+    margin: 5px;
+    height: 100px;
+    width: 300px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+ }
+
+ .modal-content button{
+    width: 30%;
+    height: 35px;
+    display: block;
+    background-color: #705845;
+    color: white;
+    border:none;
+    border-radius: 30px;
+    margin-top: 30px;
+    font-size: 20px;
+ }

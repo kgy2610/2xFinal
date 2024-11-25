@@ -1,0 +1,127 @@
+/* 학생 로그인 */
+#login-student{
+    width: 200px; height: 60px;
+    color: #6C584C;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 30px;
+}
+/* 부모님 로그인 */
+#login-parents{
+    width: 240px; height: 60px;
+    color: #6C584C;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 30px;
+}
+/* 선생님 로그인 */
+#login-teacher{
+    width: 240px; height: 60px;
+    color: #6C584C;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 30px;
+}
+
+#login-form{
+    width: 660px; height: 440px;
+    border: 5px solid #A98467;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+#login-form > form{
+    width: 550px; height: 280px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+/* 아이디 입력 */
+#login-form > form > #login-id{
+    width: 100%; height: 80px;
+    padding-left: 30px;
+}
+#login-form > form > #login-id > p{
+    width: 130px; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-right: 30px;
+}
+#login-form > form > #login-id > input[type="text"]{
+    width: 340px; height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 3px solid #6C584C;
+    padding: 20px;
+}
+
+/* 비밀번호 입력 */
+#login-form > form > #login-pwd{
+    width: 100%; height: 80px;
+    
+}
+#login-form > form > #login-pwd > p{
+    width: 160px; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-right: 30px;
+}
+#login-form > form > #login-pwd > input[type="password"]{
+    width: 340px; height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 3px solid #6C584C;
+    padding: 20px;
+}
+
+/* 로그인 버튼 */
+#login-btn{
+    width: 400px; height: 100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+#login-btn > input[type="submit"]{
+    width: 340px; height: 50px;
+    background-color: #A98467;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    border: 3px solid #A98467;
+    border-radius: 20px;
+}
+#login-btn > input[type="submit"]:hover{
+    background-color: #F4DABF;
+    color: #A98467;
+    border: 3px solid #A98467;
+}
+
+/* 회원가입 | 아이디/비밀번호찾기 */
+#join-find{
+    width: 300px; height: 50px;
+    display: flex;
+    align-items: center;
+}
+#join-find > p{
+    width: fit-content; height: fit-content;
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 50px;
+}
+#join-find > p > a{
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+}
+#join-find > p > a:hover{
+    font-weight: 800;
+}

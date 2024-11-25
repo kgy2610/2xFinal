@@ -1,0 +1,116 @@
+#content_border{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    top: 15px; 
+    right: 228px; 
+    width: 1089px; 
+    height: 480px;
+}
+#community_title{
+    position:absolute; 
+    left:30px;
+    top: 20px;
+    color: #A98467;
+}
+#community_table{
+    position:absolute; 
+    top:100px; 
+    width:1000px; 
+    height: 200px; 
+    left:40px; 
+    text-align: center; 
+    color:#A98467; 
+    border-collapse: collapse;
+}
+#community_table tbody tr{
+    border-bottom: 1px solid #A98467;
+    cursor: pointer;
+}
+#community_table thead{
+    font-size: 30px; 
+    border-bottom: 2px solid #A98467;
+}
+#community_table thead tr th{
+    padding-bottom: 10px;    
+}
+#community_table tbody{
+    font-size: 22px; 
+}
+#community_table tbody tr td p{
+    background-color: #DDE5B6; 
+    border-radius: 40px; 
+    width: 80px; 
+    padding: 5px 0px 5px 0px; 
+    margin: 10px auto 10px auto;
+}
+#community_table tbody tr:hover{
+    background-color: #FAEDCD;
+    cursor: pointer;
+}
+#arrow_button{
+    position:absolute;
+    display: flex;
+    bottom: 20px;
+    left: 355px;
+}
+#arrow_button button{
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    font-size: 20px;
+    font-weight: bolder;
+    color:#A98467; 
+    background-color:transparent;
+    cursor: pointer;
+}
+#left_arrow{
+    background-image: url(img/left_arrow.png) ;
+    background-repeat : no-repeat; 
+    background-position : center;   
+}
+#right_arrow{
+    background-image: url(img/right_arrow.png) ;
+    background-repeat : no-repeat; 
+    background-position : center;   
+}
+#graph_content{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px;
+    left: 600px;
+    bottom: 40px;
+    width: 710px; 
+    height: 370px;
+}
+.graphBox{
+    position:absolute; 
+    top: 40px; 
+    left: 30px
+}
+#monkey_img {
+    position: absolute;
+    right: 228px;
+    bottom: 40px;
+    height: 350px;
+    width: 350px;
+    background-color: #DDE5B6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+}
+#chat_button{
+    position: absolute;
+    right: 47px;
+    bottom: 40px;
+    height: 100px;
+    width: 100px;
+    background-color: #DDE5B6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

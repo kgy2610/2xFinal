@@ -1,0 +1,221 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: auto;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+}
+a{
+    text-decoration: none;
+}
+.nav{
+    width: 306px; height: 919px;
+    background-color: #F4DABF;
+    position: fixed;
+    margin: 0;
+    margin-left: 227px;
+    display: flex;
+    flex-direction: column;
+}
+.nav > img{
+    width: 182px; height: 80px;
+    margin: 46px auto;
+}
+.nav > .menu{
+    width: 182px; height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+.menu > label{
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 37px;
+    margin-right: 0px;
+}
+.menu > label > a{
+    color: #A98467;
+}
+.menu > label > a:hover{
+    color: #7C604B;
+    font-weight: 800;
+}
+.undermenu{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 80px;
+}
+.undermenu > label{
+    padding-top: 10px;
+}
+.undermenu > label > a{
+    color: #A98467;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.undermenu > label > a:hover{
+    color: #7C604B;
+    font-weight: 500;
+}
+
+.whole_body{
+    width: 1000px;
+    height: 825px;
+    margin-left: 620px;
+    border: #A98467 solid 2px;
+    border-radius: 15px;
+    margin-top: 50px;
+}
+
+#attendance a {
+    color: #7C604B;
+}
+
+.whole_body > h1 {
+    color: #A98467;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+
+.attendance-container {
+    width: 1000px;
+    height: 800px;
+    margin: 80px auto;
+    margin-left: 603px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 800px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 수직 스크롤 추가 */
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: -5px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #8b6e4e;
+}
+
+.date-picker {
+    background-color: #f4e3d1;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 5px;
+    color: #8b6e4e;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.attendance-table th, .attendance-table td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    color: #8b6e4e;
+}
+
+.attendance-table th {
+    font-weight: 600;
+    color: #8b6e4e;
+}
+
+.attendance-table td {
+    font-size: 14px;
+}
+
+.save-button {
+    width: 20%;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 40%;
+    background-color: #a98467;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #8b6e4e;
+}
+
+.radio-label > label {
+    font-size: 18px;
+    line-height: 2rem;
+    padding: 0.2em 0.4em;
+    margin-left: 0px;
+}
+
+[type="radio"], span {
+    vertical-align: middle;
+}
+
+[type="radio"] {
+    appearance: none;
+    border: 2px solid #A98467; /* 체크하기 전 테두리 색 */
+    border-radius: 50%;
+    width: 1.5em; /* 크기 조절 */
+    height: 1.5em;
+    transition: background-color 0.3s ease; /* 색상 변화만 부드럽게 */
+}
+
+[type="radio"]:checked {
+    background-color: #A98467; /* 체크 시 채워질 색상 */
+    border: 2px solid #A98467; /* 체크된 상태에서도 같은 테두리 */
+}
+
+[type="radio"]:focus-visible {
+    outline-offset: max(2px, 0.1em);
+    outline: max(2px, 0.1em) dotted #A98467;
+}
+
+[type="radio"]:hover {
+    box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+    cursor: pointer;
+}
+
+[type="radio"]:hover + span {
+    cursor: pointer;
+}
+
+[type="radio"]:disabled {
+    background-color: lightgray;
+    box-shadow: none;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+[type="radio"]:disabled + span {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+
+

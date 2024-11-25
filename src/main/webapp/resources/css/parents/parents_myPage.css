@@ -1,0 +1,395 @@
+@font-face {
+   font-family: 'NanumSquareRound';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+*{
+   margin: 0 auto;
+   padding: 0;
+   font-family: 'NanumSquareRound';
+   overflow: hidden;
+   box-sizing: border-box;
+   letter-spacing: -1px;
+}
+a{
+   text-decoration: none;
+}
+.nav{
+   width: 306px; height: 100%;
+   background-color: #F4DABF;
+   position: fixed;
+   margin: 0;
+   margin-left: 227px;
+   display: flex;
+   flex-direction: column;
+}
+.nav > img{
+   width: 182px; height: 80px;
+   margin: 46px auto;
+}
+.nav > .menu{
+   width: 182px; height: 560px;
+   display: flex;
+   flex-direction: column;
+}
+.menu > label{
+   font-weight: 700;
+   font-size: 40px;
+   margin-top: 37px;
+   margin-right: 0px;
+}
+.menu > label > a{
+   color: #A98467;
+}
+.menu > label > a:hover{
+   color: #7C604B;
+   font-weight: 800;
+}
+.undermenu{
+   display: flex;
+   flex-direction: column;
+   margin-right: 20px;
+   margin-top: 80px;
+}
+.undermenu > label{
+   padding-top: 10px;
+}
+.undermenu > label > a{
+   color: #A98467;
+   font-size: 30px;
+   font-weight: 300;
+   text-decoration: underline;
+}
+.undermenu > label > a:hover{
+   color: #7C604B;
+   font-weight: 500;
+}
+
+/* 마이페이지 */
+.wrap{
+   width: 1040px; 
+   height: 784px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   display: flex;
+   font-size: 25px;
+   color:#A98467;
+}
+.contents-left{
+   display: flex; /* flex 설정 */
+   flex-direction: column; 
+   gap: 20px;
+   float: left;
+}
+
+.mypage {
+   width: 550px; height: 300px;
+   border-radius: 30px;
+   padding: 20px;
+}
+
+.mypage p{
+   height: 50px;
+   line-height: 50px;
+}
+
+.mypage .present{
+   width: 100%;
+   margin-top: 25px;
+   display: flex;
+}
+
+.mypage .present div:nth-child(1){
+   width: 40%;
+}
+
+.mypage .present div{
+   width: 55%; height: 100px;
+   line-height: 100px;
+   background-color: #DDE5B6;
+   font-weight: 900;
+   border-radius: 20px;
+   padding: 10px;
+   display: flex;
+   text-align: center;
+   
+}
+
+.mypage .present div p{
+   height: 100%;
+   line-height: 80px;
+}
+
+.mypage .present div p:nth-child(2){
+   width: 75px; height: 75px;
+   line-height: 70px;
+   background-color: #A98467;
+   padding: 5px;
+   border-radius: 500px;
+   color: white;
+}
+
+.notice{
+   width: 550px; height: 454px;
+   border:  #A98467 solid 3px;
+   padding: 25px;
+   border-radius: 30px;
+   margin-top: 25px;
+   max-height: 454px; /*스크롤제한높이*/
+   overflow-y: auto;/*스크롤활성화*/
+   
+}
+
+/* 스크롤바 전체 스타일 */
+.notice::-webkit-scrollbar {
+   width: 13px;
+}
+
+/* 스크롤바 트랙(배경) 스타일 */
+.notice::-webkit-scrollbar-track {
+   background: #F2CEB2; 
+   border-radius: 10px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+/* 스크롤바 핸들 스타일 */
+.notice::-webkit-scrollbar-thumb {
+   background: #A98467; /* 핸들 색상 */
+   border-radius: 10px; /* 둥근 모서리 */
+}
+
+/* 스크롤바 핸들에 호버했을 때 스타일 */
+.notice::-webkit-scrollbar-thumb:hover {
+   background: #81644e; /* 호버 시 핸들 색상 */
+}
+
+.notice p{
+   padding-left: 35px;
+   font-weight: 900;
+   margin-bottom: 15px;
+   font-size: 30px;
+}
+
+
+.notice hr{
+   border:#A98467 solid 2px;
+   border-radius: 20px;
+}
+
+.notice table {
+   width: 100%;
+   border-collapse: collapse;
+   text-align: left;
+}
+
+.notice table tr{
+   height: 50px;
+   line-height: 50px;
+}
+
+.notice table tr:hover{
+    background-color: #FAEDCD;
+    cursor: pointer;
+}
+
+.text-limit {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   max-width: 200px; /* 셀 너비 제한 */
+   display: inline-block;
+}
+
+.notice tr{
+   border-bottom: #A98467 solid 2px;
+   display: flex;
+   justify-content: space-between;
+   cursor: pointer;
+}
+
+.contents-right{
+   width: 400px; height: 784px;
+   border:  #A98467 solid 3px;
+   padding: 30px;
+   border-radius: 30px;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   line-height: 40px;
+   gap: 50px;
+   font-size: 20px;
+   line-height: 1.7;
+}
+
+.contents-right div p:nth-child(1){
+   background-color: #DDE5B6;
+   padding: 5px;
+   border-radius: 50px;
+   font-weight: 900;
+   margin-bottom: 10px;
+   width: 300px;
+   font-size: 25px;
+}
+
+ /* 모달 스타일 */
+ .modal {
+   display: none; /* 기본적으로 숨김 */
+   position: fixed;
+   z-index: 1;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgb(0,0,0);
+   background-color: rgba(0,0,0,0.4);
+   padding-top: 60px;
+   font-size: 20px;
+   color: #A98467;
+}
+
+.modal-content {
+   background-color: #fefefe;
+   margin: auto;
+   padding: 40px;
+   border: 3px solid #A98467;
+   border-radius: 30px;
+   width: 30%;
+   height: 30%;
+   position: absolute;
+    left: 40%;
+    top: 35%;
+   max-height: 35%; /*스크롤제한높이*/
+   overflow-y: auto;/*스크롤활성화*/
+}
+
+.modal-content #modalDate{
+   margin-top: 120px;
+   margin-left: 350px;
+}
+
+.close {
+   width: 40px; height: 40px;
+   line-height: 38px;
+   color: #A98467;
+   float: right;
+   font-size: 45px;
+   font-weight: bold;
+   text-align: center;
+   background-color: #DDE5B6;
+   border-radius: 10px;
+   padding: 5px;
+}
+
+.close:hover,
+.close:focus {
+   color: #705845;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+/* 스크롤바 전체 스타일 */
+.modal-content::-webkit-scrollbar {
+   width: 10px;
+}
+
+/* 스크롤바 트랙(배경) 스타일 */
+.modal-content::-webkit-scrollbar-track {
+   background: #F2CEB2; 
+   border-radius: 10px;
+   margin-top: 30px;
+   margin-bottom: 30px;
+}
+
+/* 스크롤바 핸들 스타일 */
+.modal-content::-webkit-scrollbar-thumb {
+   background: #A98467; /* 핸들 색상 */
+   border-radius: 10px; /* 둥근 모서리 */
+}
+
+/* 스크롤바 핸들에 호버했을 때 스타일 */
+.modal-content::-webkit-scrollbar-thumb:hover {
+   background: #81644e; /* 호버 시 핸들 색상 */
+}
+
+
+ /* 정보수정 모달 스타일 */
+ .modal2 {
+    display: none; 
+    position: fixed;
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+}
+
+.modal-content2 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    width: 25%;
+    position: absolute;
+    left: 40%;
+    top: 35%;
+    color: #A98467;
+    font-size: 20px;
+}
+
+.modal2 h2 {
+    width: 80%;
+    text-align: left;
+    color: #A98467;
+    font-size: 25px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.modal2 form{
+   text-align: center;
+}
+
+.modal2 .close {
+    position: absolute; 
+    top: 20px;
+    right: 20px; 
+    cursor: pointer;
+}
+
+.modal2 input {
+    width: 250px;
+    height: 40px;
+    color: #A98467;
+    border-radius: 20px;
+    border: #A98467 solid 2px;
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.modal2 button{
+   background-color: #DDE5B6;
+   padding: 10px;
+   border-radius: 10px;
+   width: 150px;
+   border:none;
+   font-size: 15px;
+   color: #A98467;
+}
+
+.modal2 button:hover{
+   background-color: #bfc59e;
+   padding: 10px;
+   border-radius: 10px;
+   width: 150px;
+   border:none;
+   font-size: 15px;
+   color: white;
+}
+

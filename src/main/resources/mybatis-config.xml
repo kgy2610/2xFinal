@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+
+	<typeAliases>
+		<!-- <typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/> -->
+		<typeAlias type="com.twoX.agit.member.model.vo.Student" alias="Student" />
+		<typeAlias type="com.twoX.agit.member.model.vo.Parents" alias="Parents" />
+		<typeAlias type="com.twoX.agit.member.model.vo.Teacher" alias="Teacher" />
+		<typeAlias type="com.twoX.agit.member.model.vo.School" alias="School" />
+		<typeAlias type="com.twoX.agit.member.model.vo.Homework" alias="Homework" />
+		<typeAlias type="com.twoX.agit.student.model.vo.HomeworkSubmit" alias="HomeworkSubmit"/>
+		<typeAlias type="com.twoX.agit.board.model.vo.Notice" alias="Notice" />
+		<typeAlias type="com.twoX.agit.board.model.vo.HmSubmit" alias="HmSubmit" />
+		<typeAlias type="com.twoX.agit.board.model.vo.ParentsBoard" alias="ParentsBoard" />
+		<typeAlias type="com.twoX.agit.board.model.vo.Counsel" alias="Counsel" />
+		<typeAlias type="com.twoX.agit.board.model.vo.Reply" alias="Reply" />
+		<typeAlias type="com.twoX.agit.board.model.vo.EventImgBoard" alias="EventImgBoard" />
+		<typeAlias type="com.twoX.agit.member.model.vo.AfterSchool" alias="AfterSchool" />
+		<typeAlias type="com.twoX.agit.after.vo.AfterSchoolBoard" alias="AfterSchoolBoard" />
+		<typeAlias type="com.twoX.agit.after.vo.AfterSchoolBoardFile" alias="AfterSchoolBoardFile" />
+		<typeAlias type="com.twoX.agit.after.vo.AfterSchoolBoardPicture" alias="AfterSchoolBoardPicture" />
+		<typeAlias type="com.twoX.agit.after.vo.AfterSchoolStudent"	alias="AfterSchoolStudent" />
+		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherNotice" alias="TeacherNotice"/>
+		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherMemo" alias="TeacherMemo" />
+		
+	</typeAliases>
+
+
+	<mappers>
+		<!-- <mapper resource="mappers/member-mapper.xml"/> -->
+		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/school-mapper.xml" />
+		<mapper resource="mappers/student-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml" />
+		<mapper resource="mappers/afterBoard-mapper.xml" />
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/memo-mapper.xml" />
+		<mapper resource="mappers/homework-mapper.xml" />
+	</mappers>
+
+</configuration>

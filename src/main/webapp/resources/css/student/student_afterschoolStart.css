@@ -1,0 +1,116 @@
+@font-face {
+   font-family: 'NanumSquareRound';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+*{
+   margin: 0 auto;
+   padding: 0;
+   font-family: 'NanumSquareRound';
+   overflow: hidden;
+   box-sizing: border-box;
+   letter-spacing: -1px;
+}
+a{
+   text-decoration: none;
+}
+.nav{
+   width: 306px; height: 100%;
+   background-color: #F4DABF;
+   position: fixed;
+   margin: 0;
+   margin-left: 227px;
+   display: flex;
+   flex-direction: column;
+}
+.nav > img{
+   width: 182px; height: 80px;
+   margin: 46px auto;
+}
+.nav > .menu{
+   width: 182px; height: 560px;
+   display: flex;
+   flex-direction: column;
+}
+.menu > label{
+   font-weight: 700;
+   font-size: 40px;
+   margin-top: 37px;
+   margin-right: 0px;
+}
+.menu > label > a{
+   color: #A98467;
+}
+.menu > label > a:hover{
+   color: #7C604B;
+   font-weight: 800;
+}
+.undermenu{
+   display: flex;
+   flex-direction: column;
+   margin-right: 20px;
+   margin-top: 80px;
+}
+.undermenu > label{
+   padding-top: 10px;
+}
+.undermenu > label > a{
+   color: #A98467;
+   font-size: 30px;
+   font-weight: 300;
+   text-decoration: underline;
+}
+.undermenu > label > a:hover{
+   color: #7C604B;
+   font-weight: 500;
+}
+
+/* 방과후 참여 */
+.wrap {
+   width: 1040px;
+   height: 790px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   font-size: 25px;
+   color: #A98467;
+   border:none;
+   border-radius: 30px;
+   padding: 10px;
+}
+
+.wrap img:nth-child(1){
+   display: block;
+   margin-top: 150px;
+}
+
+.wrap h4{
+   font-size: 40px;
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.center{
+   width: 769px; height: 143px;
+   background-color: #F4DABF;
+   border-radius: 60px;
+   padding: 19px;
+}
+
+.center input{
+   border:none;
+   border-radius: 50px;
+   width: 566px; height: 99px;
+   font-size: 30px;
+   padding: 20px;
+   float: left;
+}
+
+.center img{
+   background-color: white;
+   padding: 20px 40px;
+   border-radius: 50px;
+   float: right;
+}
+

@@ -1,0 +1,637 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: auto;
+    padding: 0;
+    font-family: 'NanumSquareRound';
+    overflow: hidden;
+    box-sizing: border-box;
+    letter-spacing: -1px;
+}
+a{
+    text-decoration: none;
+}
+.nav{
+    width: 306px; height: 919px;
+    background-color: #F4DABF;
+    position: fixed;
+    margin: 0;
+    margin-left: 227px;
+    display: flex;
+    flex-direction: column;
+}
+.nav > img{
+    width: 182px; height: 80px;
+    margin: 46px auto;
+}
+.nav > .menu{
+    width: 182px; height: 560px;
+    display: flex;
+    flex-direction: column;
+}
+.menu > label{
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 37px;
+    margin-right: 0px;
+}
+.menu > label > a{
+    color: #A98467;
+}
+.menu > label > a:hover{
+    color: #7C604B;
+    font-weight: 800;
+}
+.undermenu{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 80px;
+}
+.undermenu > label{
+    padding-top: 10px;
+}
+.undermenu > label > a{
+    color: #A98467;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+}
+.undermenu > label > a:hover{
+    color: #7C604B;
+    font-weight: 500;
+}
+
+.whole_body{
+    width: 870px;
+    height: 820px;
+    margin-left: 603px;
+    margin-top: 50px;
+    border: solid #A98467 3px;
+    border-radius: 20px;
+    padding: 30px
+}
+
+.menu > label > .homework{
+    color: #7C604B;
+}
+
+.use-body{
+    display: flex;
+    margin-top: 10px;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.subject-select{
+    font-size: 25px;
+    border-radius: 30px;
+    width: 200px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 60px;
+    border: solid #DDE5B6 0px;
+    background-color: #DDE5B6;
+    margin-left: 0px;
+    color: #A98467;
+}
+
+.subject-name{
+    font-size: 25px;
+    border-radius: 30px;
+    width: 550px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid #DDE5B6 0px;
+    background-color: #DDE5B6;
+    margin-left: 20px;
+    color: #A98467;
+}
+
+.real-body{
+    border-radius: 30px;
+    width: 760px;
+    height: 600px;
+    border: solid #A98467 3px;
+    margin-bottom: 17px;
+}
+
+.real-head{
+    display: flex;
+    padding-bottom: 12px;
+    align-items: center;
+    height: 55px;
+}
+
+
+.real-head > hr{
+    height: 25px;
+    border: solid #A98467 1px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.real-head > div{
+    height: 25px;
+    margin-top: 10px;
+    color: #A98467;
+    font-size: 25px;
+}
+
+.head-date{
+    margin-left: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-real-date{
+    margin-left: 500px;
+    margin-bottom: 5px;
+}
+
+.line1{
+    border: solid #A98467 0.2px;
+    margin-bottom: 40px;
+}
+
+.real-content{
+    font-size: 25px;
+    color: #A98467;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 700px;
+    height: 400px;
+    border: solid #A98467  0px;
+    margin-bottom: 20px;
+}
+
+.file-attachment{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 11px;
+    left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: #DDE5B6;
+    border-radius: 40px;
+    width: 770px;
+    height: 60px;
+}
+
+#file-upload {
+    display: none;
+}
+
+/* 커스텀 파일 선택 버튼 스타일 */
+.custom-file-upload {
+    display: flex;
+    padding: 10px 20px;
+    background-color: white;
+    color: #A98467;
+    border: 2px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 0px;
+    margin-top: -10px;
+}
+
+/* 파일명 표시 스타일 */
+.file-name {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #A98467!important;
+    margin-top: -10px;
+    margin-left: 10px;
+}
+
+/* 파일 선택 버튼의 hover 효과 */
+.custom-file-upload:hover {
+    background-color: white;
+    border-color: white;
+}
+
+.real-foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* 필요에 따라 높이 설정 */
+   
+}
+
+.real-foot > .foot-first {
+    background-color: #DDE5B6;
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 50px;
+    border: solid black 0px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #A98467;
+    margin-top: 0px;
+}
+
+
+/*채팅버튼*/
+#chat_button{
+    position: absolute;
+    right: 47px;
+    bottom: 40px;
+    height: 100px;
+    width: 100px;
+    background-color: #DDE5B6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.img-calendar{
+    margin-top: 7px;
+}
+
+.foot-first{
+    background-color: #DDE5B6;
+    margin-left: 50px;
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 50px;
+    border: solid black 0px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #A98467;
+}
+
+.foot-second{
+    background-color: #DDE5B6;
+    margin-left: 170px;
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 50px;
+    border: solid black 0px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #A98467;
+    margin-top: 0px;
+}
+
+.foot-third{
+    background-color: #E9AAAA;
+    margin-right: 30px;
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 50px;
+    border: solid black 0px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #A98467;
+    margin-top: 0px;
+}
+
+*{
+            overflow: visible;
+        }
+        #content_border{
+            position: absolute; 
+            border: 3px solid #A98467; 
+            border-radius: 30px; 
+            bottom: 47px; 
+            right: 228px; 
+            width: 1089px; 
+            height: 880px;
+        }
+        #community_title{
+            position: absolute; 
+            left: 30px;
+            top: 20px;
+            color: #A98467;
+        }
+        #create_button{
+            position: absolute; 
+            width: 150px;
+            height: 50px;
+            left: 450px;
+            bottom: 30px;
+            border-radius: 40px; 
+            background-color: #F4DABF;
+            color: #A98467;
+            font-size: 20px;
+            border: 0px;
+        }
+        #create_button:hover{
+            background-color: #A98467;
+            color: white;
+            cursor: pointer;
+        }
+        #enroll_title{
+            position: absolute;
+            top: 30px;
+            left: 47px;
+            background-color: #DDE5B6; 
+            border-radius: 40px;
+            width: 989px;
+            height: 60px;
+        }
+        #en_title{
+            position: absolute;
+            text-align: center;
+            top: 10px;
+            left: 50px;
+            width: 889px;
+            height: 40px;
+            color: #A98467;
+            background: none;
+            font-size: 30px;
+            border: 0px;
+        }
+        #en_title::placeholder {
+            color: #A98467;
+            opacity: 1;
+        }
+        #en_title:focus {
+            outline: none;
+        }
+        .note-editor .note-editable {
+            overflow-y: auto;
+        }
+
+        /* 스크롤바 스타일 */
+        .note-editor .note-editable::-webkit-scrollbar {
+            width: 8px;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-thumb {
+            background-color: #A98467;
+            border-radius: 10px;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-thumb:hover {
+            background-color: #81644e;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-track {
+            background: #F2CEB2;
+        }
+
+        #enroll_file{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            bottom: 11px;
+            left: 20px;
+            background-color: #DDE5B6; 
+            border-radius: 40px;
+            width: 950px;
+            height: 60px;
+        }
+
+        .custom-file-upload {
+            position: absolute;
+            left: 20px;
+            padding: 10px 20px;
+            color: #A98467;
+            background-color: white;
+            border: 0px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .custom-file-upload:hover {
+            background-color: #A98467;
+            color: white;
+        }
+        .file-name {
+            position: absolute;
+            left: 130px;
+            width: 200px;
+            font-size: 16px;
+            color: #333;
+        }
+        .note-resizebar {
+            display: none;
+        }
+        #chat_button{
+            position: absolute;
+            right: 47px;
+            bottom: 40px;
+            height: 100px;
+            width: 100px;
+            background-color: #DDE5B6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .real-body {
+            position: relative;
+            padding: 20px;
+            border: 3px solid #A98467;
+            border-radius: 30px;
+            width: 810px;
+            margin: 20px auto;
+        }
+
+        #enroll_content {
+            margin-top: 20px;
+            border: 3px solid #A98467;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        #en_content {
+            width: 100%;
+            height: 300px;
+        }
+        
+        *{
+            overflow: visible;
+        }
+        #content_border{
+            position: absolute; 
+            border: 3px solid #A98467; 
+            border-radius: 30px; 
+            bottom: 47px; 
+            right: 228px; 
+            width: 1089px; 
+            height: 880px;
+        }
+        #community_title{
+            position: absolute; 
+            left: 30px;
+            top: 20px;
+            color: #A98467;
+        }
+        #create_button{
+            position: absolute; 
+            width: 150px;
+            height: 50px;
+            left: 450px;
+            bottom: 30px;
+            border-radius: 40px; 
+            background-color: #F4DABF;
+            color: #A98467;
+            font-size: 20px;
+            border: 0px;
+        }
+        #create_button:hover{
+            background-color: #A98467;
+            color: white;
+            cursor: pointer;
+        }
+        #enroll_title{
+            position: absolute;
+            top: 30px;
+            left: 47px;
+            background-color: #DDE5B6; 
+            border-radius: 40px;
+            width: 989px;
+            height: 60px;
+        }
+        #en_title{
+            position: absolute;
+            text-align: center;
+            top: 10px;
+            left: 50px;
+            width: 889px;
+            height: 40px;
+            color: #A98467;
+            background: none;
+            font-size: 30px;
+            border: 0px;
+        }
+        #en_title::placeholder {
+            color: #A98467;
+            opacity: 1;
+        }
+        #en_title:focus {
+            outline: none;
+        }
+        .note-editor .note-editable {
+            overflow-y: auto;
+        }
+
+        /* 스크롤바 스타일 */
+        .note-editor .note-editable::-webkit-scrollbar {
+            width: 8px;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-thumb {
+            background-color: #A98467;
+            border-radius: 10px;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-thumb:hover {
+            background-color: #81644e;
+        }
+        .note-editor .note-editable::-webkit-scrollbar-track {
+            background: #F2CEB2;
+        }
+
+        #enroll_file{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            bottom: 11px;
+            left: 20px;
+            background-color: #DDE5B6; 
+            border-radius: 40px;
+            width: 950px;
+            height: 60px;
+        }
+
+        .custom-file-upload {
+            position: absolute;
+            left: 20px;
+            padding: 10px 20px;
+            color: #A98467;
+            background-color: white;
+            border: 0px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .custom-file-upload:hover {
+            background-color: #A98467;
+            color: white;
+        }
+        .file-name {
+            position: absolute;
+            left: 130px;
+            width: 200px;
+            font-size: 16px;
+            color: #333;
+        }
+        .note-resizebar {
+            display: none;
+        }
+        #chat_button{
+            position: absolute;
+            right: 47px;
+            bottom: 40px;
+            height: 100px;
+            width: 100px;
+            background-color: #DDE5B6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .real-body {
+            position: relative;
+            padding: 20px;
+            border: 3px solid #A98467;
+            border-radius: 30px;
+            width: 810px;
+            margin: 20px auto;
+        }
+
+        #enroll_content {
+            margin-top: 20px;
+            border: 3px solid #A98467;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        #en_content {
+            width: 100%;
+            height: 300px;
+        }

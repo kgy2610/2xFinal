@@ -1,0 +1,317 @@
+#content_border{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    bottom: 47px; 
+    right: 228px; 
+    width: 1089px; 
+    height: 880px;
+}
+#community_title{
+    position:absolute; 
+    left:30px;
+    top: 20px;
+    color: #A98467;
+}
+.create_button{
+    position:absolute; 
+    width: 150px;
+    height: 50px;
+    left: 47px;
+    bottom: 10px;
+    border-radius: 40px; 
+    background-color: #F4DABF;
+    color:#A98467;
+    font-size: 20px;
+    border: 0px;
+}
+.create_button:hover{
+    background-color: #A98467;
+    color: white;
+    cursor: pointer;
+}
+#modify_button{
+    left: auto;
+    right: 47px;
+}
+#enroll_title{
+    position:absolute;
+    top: 30px;
+    left: 47px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 989px;
+    height: 60px;
+    text-align: center;
+    color: #A98467;
+    font-size: 30px;
+    padding-top: 10px;
+}
+#enroll_info{
+    width: 989px;
+    height: 50px;
+    border-bottom: 3px solid #A98467;
+    text-align: right;
+    color: #A98467;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+#enroll_content{
+    position:absolute;
+    top: 100px;
+    left: 47px;
+    border: 3px solid #A98467; 
+    width: 989px;
+    height: 400px;
+}
+#en_content{
+    overflow: auto;
+    height: 265px;
+    border-bottom: 3px solid #A98467;
+}
+#enroll_file{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    bottom: 11px;
+    left: 20px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 950px;
+    height: 60px;
+}
+#enroll_file span{
+	position:absolute;
+	left:30px;
+	margin-left:20px;
+}
+#downloadLink{
+	position:absolute;
+	left:150px;
+	color:#A98467;
+	text-decoration: underline;
+}
+.custom-file-upload {
+    position:absolute;
+    left: 20px;
+    padding: 10px 20px;
+    color: #A98467;
+    background-color: white; /* 버튼 색상 */
+    border: 0px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #A98467;
+    color: white;
+}
+.file-name {
+    position: absolute;
+    left: 130px;
+    width: 200px;
+    font-size: 16px;
+    color: #333;
+}
+#reply_area{
+    position: absolute;
+    left: 47px;
+    bottom: 132px;
+    height: 235px;
+    width: 989px;
+    overflow: auto;
+}
+/* 댓글 섹션 스크롤바 스타일 */
+#reply_area::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+#reply_area::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+    border-radius: 10px;
+}
+
+#reply_area::-webkit-scrollbar-thumb {
+    background: #A98467; /* 스크롤바 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+#reply_area::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+
+#en_content::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+#en_content::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+    border-radius: 10px;
+}
+
+#en_content::-webkit-scrollbar-thumb {
+    background: #A98467; /* 스크롤바 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+#en_content::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+.parents_reply{
+    float: left;
+    color:#A98467;
+    border-collapse: collapse;
+    width: 889px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.parents_reply tr td:nth-child(1){
+    width: 7px;
+}
+.parents_reply tr td:nth-child(1) div{
+    background-color: #DDE5B6; 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 40px;
+}
+.parents_reply tr td:nth-child(2){
+    width: 8%; 
+    text-align: center;
+}
+.parents_reply tr td:nth-child(3){
+    width: 70%; 
+    text-align: left;
+}
+.parents_reply tr td:nth-child(3) div{
+	display:flex;
+	align-items: center;
+    height: 100%; 
+    background-color: #DDE5B6;
+    padding-left: 8px;
+    border-top-left-radius: 15px;
+    border-end-start-radius: 15px;
+}
+.parents_reply tr td:nth-child(4){
+    width: 7%;
+}
+.parents_reply tr td:nth-child(4) div{
+    width: 100%; 
+    height: 100%; 
+    padding-top:10px; 
+    background-color: #DDE5B6;
+}
+.parents_reply tr td:nth-child(4) button{
+    width: 80%; 
+    height: 30px; 
+    background-color: white; 
+    border: none; 
+    border-radius: 40px;
+    cursor: pointer;
+    color:#A98467;
+}
+.parents_reply tr td:nth-child(4) button:hover{
+    background-color: #A98467;
+    color: white;
+}
+.parents_reply tr td:nth-child(5) button:hover{
+    background-color: #A98467;
+    color: white;
+}
+.parents_reply tr td:nth-child(5){
+    width: 7%;
+}
+.parents_reply tr td:nth-child(5) div{
+    width: 100%; 
+    height: 100%; 
+    padding-top:10px; 
+    border-top-right-radius: 15px; 
+    border-end-end-radius: 15px; 
+    background-color: #DDE5B6;
+}
+.parents_reply tr td:nth-child(5) button{
+    width: 80%; 
+    height: 30px; 
+    background-color: white; 
+    border: none; 
+    border-radius: 40px;
+    color:#A98467;
+    cursor: pointer;
+}
+#vector{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+}
+.child_reply{
+    margin-left: 40px;
+}
+.child_reply tr td:nth-child(1) div{
+    background-color: #F4DABF; 
+}
+.child_reply tr td:nth-child(3) div{
+    background-color: #F4DABF; 
+}
+.child_reply tr td:nth-child(4) div{
+    background-color: #F4DABF;
+}
+.child_reply tr td:nth-child(5) div{
+    background-color: #F4DABF;
+}
+#enroll_reply{
+    position: absolute;
+    left: 87px;
+    bottom: 60px;
+	height: 60px;
+}
+#enroll_reply tr td:nth-child(3) div input{
+	display:flex;
+	align-items: center;
+    border-radius: 10px;
+    color:#A98467;
+    background: white;
+    font-size: 15px;
+    border: 0px;
+    width: 700px;
+    height: 40px;
+    padding-left: 10px;
+    overflow-y: auto;
+}
+#enroll_reply tr td:nth-child(3) div input:focus {
+    outline: none;
+}
+#enroll_reply tr td:nth-child(3) div input::placeholder {
+    color: #A98467;
+    opacity: 1;
+}
+#enroll_reply tr td:nth-child(4){
+	width:10px;
+}
+#enroll_reply button{
+	height: 40px;
+}
+.reply_icon{
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.modify_reply_input{
+	border-radius: 10px;
+    color:#A98467;
+    background: white;
+    font-size: 15px;
+    border: 0px;
+    width: 600px;
+    height: 30px;
+    padding-left: 10px;
+    overflow-y: auto;
+}
+.modify_reply_input:focus{
+	outline: none;
+}

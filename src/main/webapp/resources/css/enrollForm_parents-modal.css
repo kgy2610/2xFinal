@@ -1,0 +1,198 @@
+
+/* 모달 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    font-size: 20px;
+    color: #A98467;
+ }
+ 
+ .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    /* padding: 50px; */
+    border: 3px solid #A98467;
+    width: 40%;
+    height: 70%;
+    max-height: 100%; /*스크롤제한높이*/
+    overflow-y: auto;/*스크롤활성화*/
+ }
+ 
+ .modal-content #modalDate{
+    margin-top: 120px;
+    margin-left: 350px;
+ }
+ 
+ .close {
+    width: 100%; height: 40px;
+    line-height: 38px;
+    display: block;
+    color: #fff;
+    background-color: #A98467;
+    float: right;
+    font-size: 45px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+ }
+
+ #kid-search{
+    width: 660px; height: 180px;
+    background-color: #F4DABF;
+    border: none;
+    border-radius: 30px;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+ }
+ #kid-info{
+    width: fit-content; height: 160px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    margin-left: 30px;
+ }
+ #kid-name{
+    width: fit-content; height: fit-content;
+    margin-top: 20px;
+ }
+ #kid-name > p{
+    width: fit-content; height: fit-content;
+    margin: 0;
+    float: left;
+    line-height: 50px;
+    padding-right: 30px;
+ }
+ #kid-name > input[type="text"]{
+    width: 340px; height: 50px;
+    border: #6C584C solid 2px;
+    border-radius: 10px;
+    padding-left: 10px;
+    color: #6C584C;
+    font-size: 20px;
+ }
+
+ #kid-phone{
+    width: fit-content; height: fit-content;
+    margin-top: 20px;
+ }
+ #kid-phone > p{
+    width: fit-content; height: fit-content;
+    margin: 0;
+    float: left;
+    line-height: 50px;
+    padding-right: 36px;
+ }
+ #kid-phone > input[type="text"]{
+    width: 340px; height: 50px;
+    border: #6C584C solid 2px;
+    border-radius: 10px;
+    padding-left: 10px;
+    color: #6C584C;
+    font-size: 20px;
+ } 
+
+ #kidSearch-btn{
+    width: fit-content; height: fit-content;
+    margin-left: 0px;
+
+ }
+ #kidSearch-btn > input[type="button"]{
+    width: 110px; height: 50px;
+    background-color: #6C584C;
+    border: #6C584C 2px solid;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+ }
+
+ #kid-list{
+    width: 660px; height: 270px;
+    border: 1px solid #6C584C;
+    margin-top: 30px;
+ }
+
+ /* 자녀 리스트 테이블 */
+ #kid-list table{
+   width: 100%; height: fit-content;
+   text-align: center;
+   table-layout: fixed;
+   border: none;
+   border-bottom: 1px #6C584C solid;
+   border-collapse: collapse;
+ }
+ #kid-list table tr{
+   border-bottom: 1px solid #6C584C;
+ }
+ #kid-list table tr th{
+   width: 100%; height: 40px;
+   border-bottom: 1px solid #6C584C;
+   border-left: 1px solid #6C584C;
+   padding: 10px;
+
+ }
+ #kid-list table tr th:nth-child(1){
+    width: 20%; height: 30px;
+    border-left: none;
+ }
+ #kid-list table tr th:nth-child(2){
+   width: 45%; height: 30px;
+ }
+ #kid-list table tr th:nth-child(3){
+   width: 20%; height: 30px;
+ }
+ #kid-list table tr td{
+   border-left: #6C584C 1px solid;
+   padding: 10px;
+ }
+ #kid-list table tr td:first-child{
+   border-left: none;
+ }
+ #kid-list table tr td a{
+   color: #6C584C;
+   font-weight: 800;
+   text-decoration: underline;
+   cursor:pointer;
+ }
+
+ .close:hover,
+ .close:focus {
+    color: #705845;
+    text-decoration: none;
+    cursor: pointer;
+ }
+ 
+ /* 스크롤바 전체 스타일 */
+ .modal-content::-webkit-scrollbar {
+    width: 10px;
+ }
+ 
+ /* 스크롤바 트랙(배경) 스타일 */
+ .modal-content::-webkit-scrollbar-track {
+    background: #F2CEB2; 
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+ }
+ 
+ /* 스크롤바 핸들 스타일 */
+ .modal-content::-webkit-scrollbar-thumb {
+    background: #A98467; /* 핸들 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+ }
+ 
+ /* 스크롤바 핸들에 호버했을 때 스타일 */
+ .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #81644e; /* 호버 시 핸들 색상 */
+ }

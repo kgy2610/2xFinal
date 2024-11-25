@@ -1,0 +1,113 @@
+#content_border{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    bottom: 22px; 
+    right: 228px; 
+    width: 1089px; 
+    height: 880px;
+}
+#content_border div h2{
+    position:absolute; 
+    top: 600px; 
+    left: 400px; 
+    font-size: 25px;
+    color:#A98467;
+}
+#community_title{
+    position:absolute; 
+    left:30px;
+    top: 20px;
+    color: #A98467;
+}
+#create_button{
+    position:absolute; 
+    width: 150px;
+    height: 50px;
+    right: 35px;
+    top: 20px;
+    border-radius: 40px; 
+    background-color: #F4DABF;
+    color:#A98467;
+    font-size: 20px;
+    border: 0px;
+}
+#create_button:hover{
+    background-color: #A98467;
+    color: white;
+    cursor: pointer;
+}
+#table_area{
+	position:absolute; 
+    top:100px; 
+    width:1000px; 
+    height: 655px; 
+    left:40px; 
+}
+#community_table{
+    height: auto;
+    width: 100%;
+    text-align: center; 
+    color:#A98467; 
+    border-collapse: collapse;
+}
+#community_table tbody tr{
+    border-bottom: 1px solid #A98467;
+    cursor: pointer;
+    height: 67px;
+}
+#community_table thead{
+    font-size: 30px; 
+    border-bottom: 2px solid #A98467;
+}
+#community_table thead tr th{
+    padding-bottom: 10px;    
+}
+#community_table tbody{
+    font-size: 22px; 
+}
+#community_table tbody tr td p{
+    background-color: #DDE5B6; 
+    border-radius: 40px; 
+    width: 80px; 
+    padding: 5px 0px 5px 0px; 
+    margin: 10px auto 10px auto;
+}
+#community_table tbody tr:hover{
+    background-color: #FAEDCD;
+    cursor: pointer;
+}
+
+.clip-icon{
+	width:15px;
+	font-size: 16px;
+}
+#arrow_button{
+    position:absolute;
+    display: flex;
+    bottom: 60px;
+    left: 345px;
+}
+#arrow_button button{
+    width: 50px;
+    height: 50px;
+    border: 0px;
+    font-size: 20px;
+    font-weight: bolder;
+    color:#A98467; 
+    background-color:transparent;
+    cursor: pointer;
+}
+.title-limit{
+	width: 300px;
+}
+#left_arrow{
+    background-image: url(/resources/img/left_arrow.png) ;
+    background-repeat : no-repeat; 
+    background-position : center;   
+}
+#right_arrow{
+    background-image: url(/resources/img/left_arrow.png) ;
+    background-repeat : no-repeat; 
+    background-position : center;   
+}

@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    width: 100%; height: 100%;
+    font-family: 'NanumSquareRound';
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 관리자 메인페이지 레이아웃 css */
+#manager-con{
+    width: 1200px; height: 500px;
+    display: flex;
+    align-items: center;
+    margin-top: 180px;
+}
+#manager-con > #manager_schoolInfo{
+    width: 380px; height: 365px;
+}
+#manager-con > #manager-btn{
+    width: 500px; height: 500px;
+}
+
+/* 관리자 메인페이지 로고/학교정보 css */
+/* 로고 */
+#manager-con > #manager_schoolInfo > #manager_mainLogo{
+    width: fit-content; height: fit-content;
+    display: flex;
+}
+#manager-con > #manager_schoolInfo > #manager_mainLogo > img{
+    width: 346px; height: 152px;
+    margin: 0 auto;
+}
+
+/* 학교 정보 */
+#school-info > p:first-child{
+    width: fit-content; height: 60px;
+    color: #6C584C;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 20px;
+}
+#school-info > p:not(:first-child){
+    width: fit-content; height: 40px;
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* 교직원 조회/등록 버튼 */
+#manager-btn{
+    width: 400px; height: 400px;
+    background-color: #fff;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    color: #6C584C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#manager-btn:hover{
+    background-color: #F4DABF;
+}
+#manager-btn > #manager-btnBox > img{
+    width: 250px; height: 250px;
+    margin: 0 auto;
+    margin-top: 70px;
+    display: flex;
+}
+#manager-btn > #manager-btnBox > p{
+    width: fit-content; height: fit-content;
+    font-size: 40px;
+    font-weight: 800;
+    padding-top: 40px;
+}

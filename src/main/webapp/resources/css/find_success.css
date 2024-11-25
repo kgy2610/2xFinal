@@ -1,0 +1,144 @@
+/* 아이디 찾기 성공 */
+#findId-result{
+    font-size: 35px;
+    line-height: 100px;
+    color: #6C584C;
+}
+#successbtn-area{
+    width: fit-content; height: 80px;
+    margin: 0 auto;
+}
+#successbtn-area > input[type="button"]{
+    width: 340px; height: 50px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    border: 3px solid #A98467;
+    background-color: #A98467;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#successbtn-area > input[type="button"]:hover{
+    color: #A98467;
+    background-color: #F4DABF;
+}
+
+/* 비밀번호 찾기 성공 -> 수정 */
+#findPwd-success-form{
+    margin-top: 30px;
+}
+#new-pwd{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-left: 40px;
+}
+#new-pwd > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#new-pwd > input[type="text"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 비밀번호 확인 */
+#check-pwd{
+    width: fit-content; height: 60px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 18px;
+}
+#check-pwd > p{
+    width: fit-content; height: 50px;
+    float: left;
+    color: #6C584C;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 40px;
+}
+#check-pwd > input[type="text"]{
+    width: 300px; height: 50px;
+    font-size: 20px;
+    border: 3px solid #6C584C;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+/* 비밀번호 수정 버튼 */
+#rePwd-btn{
+    width: fit-content; height: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#rePwd-btn > input[type="button"]{
+    width: 340px; height: 70px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    border: 3px solid #A98467;
+    background-color: #A98467;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#rePwd-btn > input[type="button"]:hover{
+    color: #A98467;
+    background-color: #F4DABF;
+}
+
+/* 비밀번호 수정 완료 메세지 */
+#rename-message{
+    color: #6C584C;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    padding-top: 40px;
+}
+
+/* 아이디 찾기 실패 */
+#findId-result-fail{
+    font-size: 30px;
+    line-height: 60px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    color: #6C584C;
+}
+
+/* 비밀번호 찾기 실패 */
+#notFound-pwd{
+    color: #6C584C;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 120px;
+}
+#reFind-id{
+    width: 400px; height: 80px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#reFind-id > input[type="button"]{
+    width: 340px; height: 60px;
+    background-color: #A98467;
+    border: 2px solid #A98467;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+}
+#reFind-id > input[type="button"]:hover{
+    background-color: #F4DABF;
+    color: #A98467;
+}

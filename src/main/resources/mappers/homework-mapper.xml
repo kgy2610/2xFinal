@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="homeworkMapper">
+	<resultMap type="Homework" id="HomeworkResultSet">
+		<result column="BO_NO" property="bNO" />
+		<result column="TC_ID" property="tcId" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="HM_TITLE" property="hmTitle" />
+		<result column="DEADLINE" property="deadLine" />
+		<result column="HM_CONTENT" property="hmContent" />
+		<result column="CREAT_DATE" property="createDate" />
+		<result column="SUBJECT" property="subject" />
+	</resultMap>
+	
+	<!-- 게시글 총 갯수 조회 -->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM HOMEWORK
+	</select>
+	
+	<!-- 숙제 리스트 조회 -->
+	<select id="selectAllList" resultType="Homework">
+		SELECT  BO_NO bNO,
+				TC_ID tcId,
+				CLASS_CODE classCode,
+				HM_TITLE hmTitle,
+				DEADLINE deadLine,
+				HM_CONTENT hmContent,
+				CREAT_DATE createDate,
+				SUBJECT subject
+		FROM HOMEWORK
+		ORDER BY BO_NO ASC
+	</select>
+	
+	<!-- 숙제 등록 -->
+	<insert id="insertHomework" parameterType="map">
+		INSERT INTO HOMEWORK
+		(BO_NO, TC_ID, CLASS_CODE, HM_TITLE, DEADLINE, HM_CONTENT, CREAT_DATE,
+		SUBJECT)
+		VALUES
+		(SEQ_HOMEWORK_BOARD.NEXTVAL, #{tcId}, #{classCode}, #{hmTitle}, #{deadLine}, #{hmContent}, SYSDATE,
+		#{subject})
+	</insert>
+
+	<!-- 숙제 전체 조회 -->
+	<select id="selectHomework" resultMap="HomeworkResultSet">
+		SELECT BO_NO,
+		TC_ID,
+		CLASS_CODE,
+		HM_TITLE,
+		DEADLINE,
+		HM_CONTENT,
+		CREATE_DATE,
+		SUBJECT
+		FROM HOMEWORK
+		WHERE BO_NO = #{bno}
+	</select>
+
+	<!-- 숙제 삭제 -->
+	<delete id="deleteHomework" parameterType="String">
+		DELETE FROM HOMEWORK
+		WHERE HM_TITLE = #{hmTitle}
+	</delete>
+
+	<!-- 숙제 수정 -->
+	<update id="updateHomework" parameterType="map">
+		UPDATE HOMEWORK
+		SET SUBJECT = #{subject},
+		DEADLINE = #{deadLine},
+		HM_CONTENT = #{hmContent}
+		WHERE HM_TITLE = #{hmTitle}
+	</update>
+</mapper>

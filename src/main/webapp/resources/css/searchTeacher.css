@@ -1,0 +1,150 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    width: 100%; height: 100%;
+    font-family: 'NanumSquareRound';
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 교직원 등록/조회 전체 레이아웃 css */
+#searchTeacher-con{
+    width: 750px; height: 900px;
+}
+
+/* 검색 및 조회 메뉴바 */
+#top-bar{
+    width: 750px; height: 80px;
+    display: flex;
+    padding-top: 10px;
+}
+.bar-con{
+    width: 240px; height: 60px;
+    line-height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-left: 0;
+}
+
+/* 검색 */
+
+.searchName > input[type="text"]{
+    width: 180px; /* 원하는 크기로 설정 */
+    margin: 0;
+    margin-top: 0px;
+    padding-right: 30px; /* 아이콘 공간 확보 */
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+}
+.searchName > img{
+    width: 34px; height: 34px;
+    align-items: center;
+}
+
+/* 승인요청 목록 */
+.btn-con{
+    background-color: #F4DABF;
+    margin-right: 0;
+}
+.requestList > input[type="button"]{
+    width: 180px; height: 60px;
+    color: #6C584C;
+    font-size: 23px;
+    font-weight: 800;
+    border: none;
+    background-color: #F4DABF;
+    margin: 0;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.requestList > img{
+    width: 26px; height: 18px;
+    margin-left: 0;
+}
+.logoutBtn{
+    width: 180px;
+    margin-left: 20px;
+}
+.logoutBtn > a > input[type="button"]{
+    width: 100%; height: 60px;
+    color: #6C584C;
+    font-size: 23px;
+    font-weight: 800;
+    border: none;
+    background-color: #F4DABF;
+    margin: 0 auto;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+/* 교직원 조회 리스트 */
+#teacher-list{
+    width: 100%; height: fit-content;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    margin-top: 10px;
+    padding: 20px;
+    padding-bottom: 5px;
+}
+#teacher-list > table{
+    table-layout: fixed;
+    text-align: center;
+    /* border-radius: 20px; */
+    border-collapse: collapse;
+    
+}
+#teacher-list table tr:first-child th{
+    border-bottom: 3px solid #6C584C;
+}
+#teacher-list table tr:not(:first-child) td{
+    border-bottom: 2px solid #6C584C;
+}
+#teacher-list table tr:last-child td{
+    border: none;
+}
+#teacher-list table tr th{
+    width: 100%; height: 60px;
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 800;
+    
+}
+#teacher-list table tr th:first-child{
+    width: 20%;
+}
+#teacher-list table tr th:nth-child(2){
+    width: 60%;
+}
+#teacher-list table tr th:last-child{
+    width: 20%;
+}
+
+#teacher-list table tr td{
+    width: 100%; height: 60px;
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 800;
+}
+#teacher-list table tr td input[type="button"]{
+    width: 100px; height: 40px;
+    background-color: #E9AAAA;
+    color: #6C584C;
+    font-size: 20px;
+    font-weight: 800;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}

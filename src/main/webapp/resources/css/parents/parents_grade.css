@@ -1,0 +1,108 @@
+#gradeTitle{
+    position:absolute; 
+    background-color: #DDE5B6; 
+    width: 295px; 
+    height: 70px; 
+    border-radius: 40px; 
+    text-align: center; 
+    top: 15px; 
+    left: 1000px;
+}
+#gradeTitle h1{
+        margin-top: 12px; 
+        color:#A98467;
+}
+#content_border{
+    position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    bottom: 47px; 
+    right: 228px; 
+    width: 1089px; 
+    height: 773px;
+}
+#grade_table{
+    position:absolute; 
+    bottom:40px; 
+    width:900px; 
+    height: 400px; 
+    left:95px; 
+    text-align: center; 
+    color:#A98467; 
+    border-collapse: collapse;
+}
+#grade_table tr{
+    border-bottom: 1px solid #A98467;
+}
+#grade_table thead{
+    font-size: 25px; 
+    border-bottom: 2px solid #A98467;
+}
+
+#grade_table thead tr th:nth-child(1){
+	width:50%; 
+    padding-bottom: 10px;
+}
+
+#grade_table thead tr th:nth-child(2){
+	width:25%; 
+    padding-bottom: 10px;
+}
+
+#grade_table thead tr th:nth-child(3){
+	width:25%; 
+    padding-bottom: 10px;
+}
+
+#grade_table tbody{
+    font-size: 20px; 
+}
+
+#grade_table tbody tr td{
+	text-align:center;
+}
+
+#modaltable{
+	text-align:center;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#modaltableunderbar {
+	border-bottom: 2px solid #A98467;
+}
+
+#modaltable  tr  td{
+	width: 60%;
+}
+#modaltitle{
+	font-weight: bold;
+	font-size: 25px;
+	
+}
+#scoretable{
+	width: 100%;
+	border-collapse: collapse;
+}
+#scoretable tr{
+	border-bottom: 1px solid #A98467;
+}
+#scoretable  tr  td{
+	width: 60%;
+	padding: 10px;
+}
+.stu_score{
+	background-color: #DDE5B6; 
+    border-radius: 40px; 
+    width: 70px; 
+    padding: 5px 0px 5px 0px; 
+}
+#grade_table tbody tr:hover{
+    background-color: #FAEDCD;
+    cursor: pointer;
+}
+.graphBox{
+    position:absolute; 
+    top: 40px; 
+    left: 85px
+}
