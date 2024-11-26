@@ -100,8 +100,6 @@
 	<div id="monkey_img">
 		<img src="<c:url value='/resources/img/student/homework_monkey.png'/>">
 	</div>
-	<div id="chat_button">
-		<img src="<c:url value='/resources/img/student/message.png'/>">
-	</div>
+
 </body>
 </html>

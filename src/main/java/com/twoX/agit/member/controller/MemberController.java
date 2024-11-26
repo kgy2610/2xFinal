@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
 import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
-import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
 import com.twoX.agit.teacher.model.vo.TeacherMemo;
 import com.twoX.agit.teacher.model.vo.TeacherNotice;
@@ -100,7 +100,7 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("logout.me")
 	public String logoutSt(HttpSession session) {
-		session.removeAttribute("loginUser");
+		session.invalidate();
 
 		return "redirect:/";
 	}
@@ -122,16 +122,18 @@ public class MemberController {
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
 			System.out.println("classCode : " + classCode);
-
+			ArrayList<Chat> clist = memberService.selectChatList(loginUser);
+			System.out.println("clist : "+clist);
 			// 학교명 조회
 			String schoolName = memberService.getSchoolNameByClassCode(classCode);
-			String teacherName = memberService.teacherName(classCode);
+			Teacher teacher = memberService.selectTeacher(loginUser);
 			session.setAttribute("schoolName", schoolName);
 			model.addAttribute("schoolName", schoolName);
 			model.addAttribute("loginUser", loginUser);
-			model.addAttribute("teacherName", teacherName);
+			session.setAttribute("clist",clist);
+			session.setAttribute("teacherName", teacher);
 			System.out.println("학교명 : " + schoolName);
-			System.out.println("선생님 : " + teacherName);
+			System.out.println("선생님 : " + teacher);
 		}
 		return "student/myPage";
 	}
@@ -203,7 +205,7 @@ public class MemberController {
 			session.setAttribute("loginUser", student);
 			session.setAttribute("alertMsg", "반 참가 성공");
 
-			return "student/myPage";
+			return "redirect:/studentMyPage";
 		} else {
 			model.addAttribute("alertMsg", "반 참가 실패");
 			return "redirect:/";

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.dao.MemberDao;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
@@ -109,6 +110,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String selectOeCode(String schoolCode) {
 		return memberDao.selectOeCode(sqlSession,schoolCode);
+	}
+	
+	// 학생 - 채팅 조회
+	@Override
+	public ArrayList<Chat> selectChatList(Student s) {
+		return memberDao.selectChatList(sqlSession,s);
 	}
 	
 	// ------------------------------- 부모님 -------------------------------
@@ -262,4 +269,6 @@ public class MemberServiceImpl implements MemberService{
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return memberDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
 	}
+
+
 }

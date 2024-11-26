@@ -29,6 +29,8 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
+   <jsp:include page="../common/teacher_menubar.jsp" />
+   <!--  
 	<div class="nav">
 		<img src="<c:url value='/resources/img/logo.png'/>">
 		<div class="menu">
@@ -36,7 +38,7 @@
 				for="homework"><a href="#">숙제</a></label> <label for="attendance"><a
 				href="#">출결</a></label> <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
 			<label for="advicePlan"><a href="#">상담일정</a></label> <label
-				for="photo"><a href="eventPhotos.af">행사사진</a></label> <label for="studentManage"><a
+				for="photo"><a href="teacher_eventImgList">행사사진</a></label> <label for="studentManage"><a
 				href="#">학생관리</a></label>
 		</div>
 		<div class="undermenu">
@@ -44,7 +46,7 @@
 			</label> <label for="logout"><a href="#">로그아웃</a></label>
 		</div>
 	</div>
-
+	-->
 	<div class="whole_body">
 		<h1><%=grade%>학년
 			<%=teacher_class%>반(<%=classCode%>)
@@ -107,7 +109,6 @@
 		    <!-- 메모 추가 버튼 -->
 		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.JPG'/>">
 		</div>
-
 
 
 
@@ -249,5 +250,6 @@
 	</div>
 
 	<script src="<c:url value='/resources/js/teacher/myPage.js'/>"></script>
+
 </body>
 </html>

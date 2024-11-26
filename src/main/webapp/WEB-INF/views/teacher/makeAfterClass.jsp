@@ -46,10 +46,6 @@
                     <input type="text" id="class-code" name="code" class="input-field" placeholder="참여코드를 입력하세요." required>
                     <button class="add-button" type="submit">+</button>
                 </div>
-                <div id="chat_button">
-                    <img src="<c:url value='/resources/img/teacher/message.png'/>">
-                    
-                </div>
             </div>
         </form>
     </div>

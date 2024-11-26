@@ -18,7 +18,7 @@
             <label for="homework"><a href="homeworkList">숙제</a></label>
             <label for="attendance"><a href="teacherAttendance">출결</a></label>
             <label for="advicePlan"><a href="#">상담일정</a></label>
-            <label for="community"><a href="#">방과후 반</a></label>
+            <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
             <label for="photo"><a href="teacher_eventImgList">행사사진</a></label>
             <label for="studentManage"><a href="#">학생관리</a></label>
         </div>
@@ -27,5 +27,8 @@
             <label for="logout"><a href="logout.me">로그아웃</a></label>
         </div>
     </div>
+   	<div id="chat_button">
+		<img src="<c:url value='/resources/img/teacher/message.png'/>">
+	</div>
 </body>
 </html>

@@ -107,6 +107,23 @@
 		WHERE CLASS_CODE = #{classCode}
 	</select>
 	
+	<!-- 채팅 -->
+	<resultMap type="Chat" id="ChatResultSet">
+		<result column="TC_ID" property="tcId" />
+		<result column="STU_ID" property="stuId" />
+		<result column="CH_DATE" property="chDate" />
+		<result column="CH_TIME" property="chTime" />
+		<result column="CH_CONTENT" property="chContent" />
+		<result column="CLASS_CODE" property="classCode" />
+	</resultMap>
+	<!-- 채팅 조회 -->
+	<select id="selectChatList" resultMap="ChatResultSet">
+		SELECT TC_ID,STU_ID,TO_CHAR(CH_DATE, 'YYYY / MM / DD') AS CH_DATE,TO_CHAR(CH_DATE,'HH24:MI'),CH_CONTENT,CLASS_CODE
+		FROM CHAT
+		WHERE STU_ID = #{stuId}
+		AND CLASS_CODE = #{classCode}
+		ORDER BY CH_DATE
+	</select>
 
 	<!-- 학부모 -->
 	<resultMap type="Parents" id="parentsResult">
