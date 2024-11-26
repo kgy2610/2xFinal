@@ -7,40 +7,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Summernote CSS/JS CDN -->
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+    <title>parents_modifycommunity</title>
+    <link rel="stylesheet" href="<c:url value='/resources/css/student/student_updateAfterschool.css'/>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
-
-    <title>AGIT</title>
-    <link rel="stylesheet" href="<c:url value='/resources/css/student/student_enrollafterschool.css'/>">
+    <script src="<c:url value='/resources/js/student/student_afterschool.js'/>"></script>
 </head>
 <body>
     <jsp:include page="../common/student_menubar.jsp" />
-    <style>
+        <style>
     	*{
-    		overflow:visible;
+    		overflow: visible;
     	}
     </style>
     <div id="content_border">
-    	<form action="enroll_afterschool" method="POST" enctype="multipart/form-data">
-        <div id="enroll_title" ><input type="text" id="en_title" name="title" placeholder="제목을 입력해주세요" required></div>
-        <div id="enroll_content">
-            <textarea id="en_content" name="boContent" id="sub_content"></textarea>
-            <div id="enroll_file">
-                <input type="file" id="fileInput" name="upfile" style="display: none;" onchange="showFileName()">
-                <label for="fileInput" class="custom-file-upload">
-                    파일 선택
-                </label>
-                <span id="fileName" class="file-name">선택된 파일이 없습니다</span>
-            </div>
-        </div>
-        <button type = "submit" id="create_button" onclick="enroll_afterschool()">등록하기</button>
-        </form>
+    	<form action="update.afterSt" method="POST" enctype="multipart/form-data">
+    		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title }" name="title"></div>
+	        <div id="enroll_content" >
+	        	<input type="hidden" name = "boNo" value = "${npage.boNo}">
+	            <textarea id="en_content" name="boContent">${npage.boContent }</textarea>
+	            <div id="enroll_file">
+	                <input type="file" id="fileInput" name = "reupfile" style="display: none;" onchange="showFileName()">
+	                <label for="fileInput" class="custom-file-upload">
+	                    파일 선택
+	                </label>
+	             <c:choose>
+						<c:when test="${not empty npage.originName }">
+                       		<span id="fileName" class="file-name">${npage.originName}</span>
+                       	</c:when>
+                       	<c:otherwise>
+							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+						</c:otherwise>
+                </c:choose>
+	            </div>
+	        </div>
+	        <button type="submit" class="create_button" id="modify_button">수정하기</button>
+	        <button class="create_button" id="delete_button" onclick="openDeleteModal(event)">삭제하기</button>
+    	</form>
+    	
     </div>
-
+    
+    <!-- 글 삭제 모달 -->
+    <div id="deleteModal" class="modal">
+    <form method="post" action="delete.afterSt">
+    <div class="modal-content">
+    <input type="hidden" name="boNo" value="${npage.boNo}" />
+    <h2>" ${npage.title} "</h2><br>
+    <h2>글을 삭제하시겠습니까?</h2>
+    <br><br>
+    <span class="close" onclick="closeDeleteModal()">&times;</span>
+    <button type="submit">삭제하기</button>
+    </div>
+    </form>
+    </div>
     <script>
         document.querySelectorAll(".text-limit").forEach(function (element) {
             const text = element.innerText;
@@ -55,8 +75,7 @@
                 element.innerText = text.substring(0, 12) + "...";
             }
         });
-		
-        
+
         function showFileName() {
             const fileInput = document.getElementById("fileInput");
             const fileName = document.getElementById("fileName");
@@ -70,13 +89,13 @@
         
         $(function(){
             $('#en_content').summernote({
-            height: 580,                 // 에디터 높이
+            height: 535,                 // 에디터 높이
             minHeight: null,
             maxHeight: null,
             lang: "ko-KR",
             resizable: false,
             toolbar: [
-            	['style', ['style']],
+                ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
@@ -104,7 +123,8 @@
 
             insertFile(fd,function(nameList){
                 for(let name of nameList){
-                	$("#en_content").summernote("insertImage","/agit/resources/img/after/"+name)
+                	
+                    $("#en_content").summernote("insertImage","/agit/resources/img/board/"+name)
                 }
             })
         }
@@ -136,8 +156,6 @@
         enTitleInput.addEventListener("blur", function() {
             enTitleInput.setAttribute("placeholder", enTitleInput.getAttribute("data-placeholder"));
         });
-
-
     </script>
 </body>
 </html>

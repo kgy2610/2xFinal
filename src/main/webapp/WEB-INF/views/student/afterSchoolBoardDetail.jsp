@@ -28,25 +28,27 @@
     		overflow:visible;
     	}
     </style>
-    <form action="update.afterSt" method="post">
     	 <div id="content_border">
       <input type="hidden" name="boNo" value="${npage.boNo}" />
         <div id="enroll_title" ><input type="text" id="en_title" value="${npage.title}" name="title"></div>
         <div id="enroll_content" >
             <textarea id="en_content" name="boContent">${npage.boContent}</textarea>
             <div id="enroll_file">
-                <input type="file" id="fileInput" style="display: none;" onchange="showFileName()">
-                <label for="fileInput" class="custom-file-upload">
-                    파일 선택
-                </label>
-                <span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+            	<c:choose>
+            		<c:when test="${not empty npage.originName }">
+            		<span>첨부된 파일 : </span><a id="downloadLink" href="<c:url value='${npage.changeName}'/>" download="${npage.originName }">${npage.originName }</a>
+            		</c:when>
+            		<c:otherwise>
+							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+						</c:otherwise>
+            	</c:choose>
+              
             </div>
         </div>
-        <button class="create_button" id="re_button" onclick="location.href='afterschool?cpage=${cpage}'">목록으로</button>
-        <button type="submit" class="create_button" id="modify_button">수정하기</button>
+        <button class="create_button" id="re_button" onclick="location.href='afterSchool?cpage=${cpage}'">목록으로</button>
+        <button class="create_button" id="modify_button"  onclick="location.href='after_modify?boNo=${npage.boNo}&cpage=${cpage}'">수정하기</button>
         <button class="create_button" id="delete_button" onclick="openDeleteModal(event)">삭제하기</button>
     </div>
-    </form>
     
     <!-- 글 삭제 모달 -->
     <div id="deleteModal" class="modal">

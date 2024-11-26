@@ -24,11 +24,14 @@ import com.twoX.agit.after.service.AfterSchoolBoardService;
 import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.after.vo.AfterSchoolStudent;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.board.model.vo.ParentsBoard;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Student;
+import com.twoX.agit.member.model.vo.Teacher;
+import com.twoX.agit.student.model.vo.HomeworkSubmit;
 import com.twoX.agit.student.service.StudentService;
 
 @CrossOrigin
@@ -73,68 +76,83 @@ public class StudentController {
 
 	// 학생 숙제 조회
 	@RequestMapping("homework_detail")
-	public String studentHomeworkDetail(@RequestParam(value = "boNo") int boNo, @RequestParam(value = "cpage", defaultValue = "1") int currentPage, HttpSession session, Model model) {
+	public String studentHomeworkDetail(@RequestParam("boNo") int boNo,
+										@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+										HttpSession session,
+										Model model) {
+		// 로그인 한 학생 정보
+		Student s = (Student) session.getAttribute("loginUser");
+		
+		// 클릭한 숙제 정보 불러오기
 		Homework npage = studentService.selectNowHomework(boNo);
 		
+		// 현재 학생이 제출한 숙제 상태를 가져옴
+	    HomeworkSubmit hm = studentService.selectHomeworkSubmit(boNo, s.getStuId());
+	    System.out.println(hm);
+	    
+	    // 모델에 데이터 추가
 		model.addAttribute("npage", npage);
 		model.addAttribute("cpage", currentPage);
-		System.out.println(npage);
-		return "student/homeworkSubmit";
+		
+		String st = hm.getStatus();
+		
+		// 숙제 상태에 따라 페이지 이동
+	    if (hm != null && "Y".equals(hm.getStatus())) {
+	        return "student/homeworkConfirm";
+	    } else {
+	        return "student/homeworkSubmit";
+	    }
 	}
 	
 	// 학생 숙제 제출
 	@RequestMapping("enroll.homework_student")
-	public String enrollHomeworkStu(@ModelAttribute Homework h, @ModelAttribute HmSubmit hm, @RequestParam MultipartFile upfile, HttpSession session, Model model) {
+	public String enrollHomeworkStu(@RequestParam("boNo") int boNo,
+									@RequestParam("hmStuContent") String hmStuContent,
+									@ModelAttribute Homework h,
+									@ModelAttribute HomeworkSubmit hm,
+									@RequestParam("upfile") MultipartFile upfile,
+									HttpSession session) {
 		// 로그인 정보 확인
 		Student s = (Student) session.getAttribute("loginUser");
-		if(s == null) {
-			model.addAttribute("message", "로그인이 필요합니다.");
-			return "redirect:/login_student";
+		Teacher t = (Teacher) session.getAttribute("loginTeacher");
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = Template.saveFile(upfile, session, "/resources/file/homework_files/");
+			
+			hm.setChangeName("/resources/file/homework_files/" + changeName);
+			hm.setOriginName(upfile.getOriginalFilename());
 		}
-		
-		h.setClassCode(s.getClassCode());
-		System.out.println("로그인한 유저의 클래스 코드 : " + s.getClassCode());
-		
-		// HOMEWORK 테이블에서 해당 게시글의 정보 가져오기
-		Homework homework = studentService.getHomeworkByBoNo(h.getBoNo());
-		
-		System.out.println("선택한 게시글 번호 : " + h.getBoNo());
-		System.out.println("homework : " + homework);
-		
-		if(homework == null) {
-			model.addAttribute("message", "유효하지 않은 게시글입니다.");
-			return "errorPage";
-		}
-
-		// 로그인된 학생의 클래스 코드와 글을 올린 선생님의 클래스 코드 비교
-		if(!s.getClassCode().equals(homework.getClassCode())) {
-			model.addAttribute("message", "권한이 없습니다.");
-			return "errorPage";
-		}
-		
-		// 파일 업로드
-		if (!upfile.getOriginalFilename().equals("")) {
-		    // 파일 저장 및 변경된 파일명 생성
-		    String changeName = Template.saveFile(upfile, session, "/resources/homework_files/");
-		    
-		    // HmSubmit 객체에 파일 정보 설정
-		    hm.setChangeName(changeName); // 변경된 파일명 (DB에는 저장되지 않음)
-		    hm.setFilePath("/resources/file/homework_files/" + changeName); // 저장 경로
-		    hm.setOriginName(upfile.getOriginalFilename()); // 원본 파일명
-		}
-		
 		hm.setStuId(s.getStuId());
+		hm.setBoNo(boNo);
+		hm.setHmStuContent(hmStuContent);
 		hm.setStatus("Y");
 		
-		int result = studentService.submitHomework(hm);
+		int result = studentService.insertStudentHomework(hm);
 		
 		if(result > 0) {
-			model.addAttribute("message", "숙제가 제출 되었습니다!");
+			return "student/homeworkConfirm";
 		}else {
-			model.addAttribute("message", "숙제가 제출되지 않았습니다. 다시 시도해주세요.");
+			session.setAttribute("alertMsg", "숙제 업로드 실패");
+			return "redirect:/homework";
 		}
+	}
+	
+	// 학생 숙제 제출 완료 후 제출한 숙제 조회
+	@RequestMapping("homework.check")
+	public String homeworkCheck(@RequestParam("boNo") int boNo,
+								@RequestParam("hmStuContent") String hmStuContent,
+								@ModelAttribute HomeworkSubmit hm,
+								@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+								@RequestParam("upfile") MultipartFile upfile,
+								HttpSession session,
+								Model model) {
+		Student s = (Student) session.getAttribute("loginUser");
 		
-		return "redirect:/homework_detail?boNo=" + hm.getBoNo();
+		HomeworkSubmit npage = studentService.selectNowAnswer(boNo);
+		
+		model.addAttribute("npage", npage);
+		model.addAttribute("cpage", currentPage);
+		
+		return "student/homeworkConfirm";
 	}
 	
 	//방과후 반 참가
@@ -250,6 +268,7 @@ public class StudentController {
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		String code =  studentService.afterschoolCode(loginUser.getStuId());
 		
+		System.out.println(upfile);
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = Template.saveFile(upfile, session, "/resources/file/");
 			
@@ -270,18 +289,19 @@ public class StudentController {
 		
 	}
 	
+	//글 수정하기 페이지로 이동
+	@RequestMapping("after_modify")
+	public String board_modify(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
+		session.setAttribute("npage",npage);
+		session.setAttribute("cupage",currentPage);
+		return "student/modifyAfterschool";
+	}
+	
 	//글 수정하기
 	@RequestMapping("update.afterSt")
-	public String update_afterschoolStu(String title, String boContent,AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session) {
+	public String update_afterschoolStu(AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session) {
 		Student loginUser = (Student)session.getAttribute("loginUser");
-		
-		
-		String code = studentService.afterschoolCode(loginUser.getStuId());
-		asb.setStuId(loginUser.getStuId());
-		asb.setCode(code);
-		asb.setTitle(title);
-		asb.setBoContent(boContent);
-		
 		if(!reupfile.getOriginalFilename().equals("")) {
 			//기존 첨부파일이 있다 -> 기존파일을 삭제
 			if(asb.getOriginName() != null) {
@@ -298,7 +318,6 @@ public class StudentController {
 			asb.setOriginName(opb.getOriginName());
 			asb.setChangeName(opb.getChangeName());
 		}
-		
 		
 		int result = afterschoolService.updateAfterschoolBoard(asb);
 		if(result > 0) {

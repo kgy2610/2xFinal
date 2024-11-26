@@ -1,0 +1,62 @@
+
+/* 방과후 참여 */
+.wrap {
+   width: 1040px;
+   height: 790px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   font-size: 25px;
+   color: #A98467;
+   border:none;
+   border-radius: 30px;
+   padding: 10px;
+}
+
+.wrap img:nth-child(1){
+   display: block;
+   margin-top: 150px;
+}
+
+.wrap h4{
+   font-size: 40px;
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.center{
+   width: 769px; height: 143px;
+   background-color: #F4DABF;
+   border-radius: 60px;
+   padding: 19px;
+}
+
+.center input{
+   border:none;
+   border-radius: 50px;
+   width: 566px; height: 99px;
+   font-size: 30px;
+   padding: 20px;
+   float: left;
+}
+
+.center img{
+   background-color: white;
+   padding: 20px 40px;
+   border-radius: 50px;
+   float: right;
+}
+
+button{
+	width: 150px;
+    height: 99px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50px;
+    float: right;
+    border: none;
+    font-size: 50px;
+    text-align: center;
+    color: #A98467;
+}
+

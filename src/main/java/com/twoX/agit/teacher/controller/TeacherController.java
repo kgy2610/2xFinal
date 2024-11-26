@@ -252,7 +252,7 @@ public class TeacherController {
 	        HmSubmit homework = submitHomework.get(0);
 
 	        model.addAttribute("hmTitle", homework.getHmTitle());       // 숙제 제목
-	        model.addAttribute("hmContent", homework.getHmContent()); // 학생이 제출한 답
+	        model.addAttribute("hmContent", homework.getHmStuContent()); // 학생이 제출한 답
 	        model.addAttribute("score", homework.getScore());         // 점수
 	        model.addAttribute("tcComment", homework.getTcComment()); // 교사 코멘트
 	        model.addAttribute("stuId", studentId);
