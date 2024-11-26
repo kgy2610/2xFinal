@@ -169,8 +169,18 @@
 	
 	<!-- 부모님 커뮤니티 게시물 작성 -->
 	<insert id="insertParentBoard">
-		INSERT INTO PARENTS_BOARD(CLASS_CODE,PR_ID,TITLE,BO_CONTENT,ORIGIN_NAME,CHANGE_NAME)
-		VALUES(#{classCode},#{prNickname},#{boTitle},#{contents},#{originName},#{changeName})
+		INSERT INTO PARENTS_BOARD( CLASS_CODE,
+								   PR_ID,
+								   TITLE,
+								   BO_CONTENT,
+								   ORIGIN_NAME,
+								   CHANGE_NAME)
+							VALUES(#{classCode},
+								   #{prNickname},
+								   #{boTitle},
+								   #{contents},
+								   #{originName},
+								   #{changeName})
 	</insert>
 	
 	<!-- 부모님 커뮤니티 게시물 수정 -->

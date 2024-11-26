@@ -18,10 +18,13 @@ import lombok.ToString;
 public class HomeworkSubmit {
 	private String stuId;
 	private int boNo;
-	private String hmTitle;
-	private String hmComment;
+	private String hmStuContent;
 	private int score;
 	private String tcComment;
 	private Date createDate;
 	private String status;
+	
+	private String filePath;
+	private String originName;
+	private String changeName;
 }

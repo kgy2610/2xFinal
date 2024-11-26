@@ -2,12 +2,12 @@
     overflow:visible;
 }
 #content_border{
-    position:absolute; 
-    border: 3px solid #A98467; 
-    border-radius: 30px; 
-    bottom: 47px; 
-    right: 228px; 
-    width: 1089px; 
+    position: absolute;
+    border: 3px solid #A98467;
+    border-radius: 30px;
+    bottom: 47px;
+    right: 228px;
+    width: 1089px;
     height: 830px;
 }
 #community_title{
@@ -20,41 +20,33 @@
     position:absolute; 
     width: 150px;
     height: 50px;
-    left: 450px;
-    bottom: 20px;
-    border-radius: 40px; 
-    background-color: #F4DABF;
+    border-radius: 40px;
+    bottom: 30px;
     color:#A98467;
     font-size: 20px;
     border: 0px;
 }
+#downloadLink{
+	position:absolute;
+	left:20px;
+	color:#A98467;
+	text-decoration: underline;
+}
 .create_button:hover{
-    background-color: #A98467;
     color: white;
     cursor: pointer;
 }
 #modify_button{
-    left: 730px;
+    left: 350px;
 }
-
-#re_button{
-	left:50px;
-}
-
 #delete_button{
-    left: 890px;
-    background: #E9AAAA;
-    color: white;
-}
-
-#delete_button:hover{
-	background:#D28383;
+    left: 570px;
 }
 #enroll_title{
-    position:absolute;
+    position: absolute;
     top: 25px;
     left: 47px;
-    background-color: #DDE5B6; 
+    background-color: #DDE5B6;
     border-radius: 40px;
     width: 989px;
     height: 60px;
@@ -71,10 +63,6 @@
     font-size: 30px;
     border: 0px;
 }
-#en_title::placeholder {
-    color: #A98467; /* 원하는 색상 코드로 변경 */
-    opacity: 1; /* 투명도 설정 (1이 불투명, 0이 완전 투명) */
-}
 #en_title:focus {
     outline: none;
 }
@@ -85,7 +73,23 @@
     border: 3px solid #A98467;
     width: 989px;
     height: 630px;
-    
+}
+#enroll_file{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 20px;
+    left: 20px;
+    background-color: #DDE5B6;
+    border-radius: 40px;
+    width: 950px;
+    height: 60px;
+    font-size: 20px;
+    color: #b08467;
+}
+#en_title::placeholder {
+    color: #A98467; /* 원하는 색상 코드로 변경 */
+    opacity: 1; /* 투명도 설정 (1이 불투명, 0이 완전 투명) */
 }
 .note-editor .note-editable {
     overflow-y: auto; /* 수직 스크롤바를 사용 가능하게 */
@@ -108,26 +112,6 @@
 .note-editor .note-editable::-webkit-scrollbar-track {
     background: #F2CEB2; /* 스크롤바 트랙 색상 */
 }
-
-#enroll_file{
-    position:absolute;
-    display: flex;
-    align-items: center;
-    bottom: 20px;
-    left: 20px;
-    background-color: #DDE5B6; 
-    border-radius: 40px;
-    width: 950px;
-    height: 60px;
-    font-size: 20px;
-    color: #b08467;
-}
-
-#enroll_file a{
-	text-decoration: underline;
-    color: #b08467;
-}
-
 .custom-file-upload {
     position:absolute;
     left: 20px;
@@ -147,26 +131,23 @@
 }
 .file-name {
     position: absolute;
-    left: 380px;
+    left: 130px;
     width: 200px;
-    font-size: 20px;
-    color: #b08467;
+    font-size: 16px;
+    color: #333;
+}
+
+#modify_button{
+	bottom:20px;
+	background-color: #DDE5B6;
+}
+
+#delete_button{
+	bottom:20px;
+	background-color: #E9AAAA;
 }
 .note-resizebar {
     display: none;
-}
-#chat_button{
-    position: absolute;
-    right: 47px;
-    bottom: 40px;
-    height: 100px;
-    width: 100px;
-    background-color: #DDE5B6;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
 }
 
 .note-frame {
@@ -177,7 +158,6 @@
 }
 
 /* 모달 */
- /* 정보수정 모달 스타일 */
  .modal {
    display: none; 
    position: fixed;
@@ -269,11 +249,3 @@
   color: white;
 }
 
-
-
-.close:hover,
-.close:focus {
-   color: #705845;
-   text-decoration: none;
-   cursor: pointer;
-}
