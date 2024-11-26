@@ -27,3 +27,4 @@ function addHomeworkPage() {
   // 페이지 이동 (서버에서 처리)
   window.location.href = 'addHomeworkPage';
 }
+

@@ -1,12 +1,15 @@
 package com.twoX.agit.teacher.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.teacher.model.dao.TeacherDao;
@@ -49,8 +52,8 @@ public class TeacherServiceImpl  implements TeacherService{
 
 	// 숙제 전체조회
 	@Override
-	public ArrayList<Homework> getAllHomework() {
-		return teacherDao.selectHomeworkList(sqlSession);
+	public ArrayList<Homework> getAllHomework(String tcId) {
+		return teacherDao.selectHomeworkList(sqlSession, tcId);
 	}
 
 	// 숙제 등록
@@ -76,6 +79,36 @@ public class TeacherServiceImpl  implements TeacherService{
 	@Override
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return teacherDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
+	}
+
+	// 해당 숙제 페이지로 이동
+	@Override
+	public ArrayList<Homework> selectSubject( String classCode) {
+		return (ArrayList)teacherDao.selectSubject(sqlSession,classCode);
+	}
+	
+	// 숙제 상세 페이지
+	@Override
+	public ArrayList<HmSubmit> gosubmitHomework(String title, String studentId) {
+		return (ArrayList)teacherDao.selectsubmitHomework(sqlSession, title, studentId);
+	}
+	
+	// 숙제 점수 및 말씀 부여
+	@Override
+	public int updateSubmitHomework(String teacherComment, int score, String stuId) {
+		return teacherDao.updateSubmitHomework(sqlSession, teacherComment, score, stuId);
+	}
+
+	// 출결 
+	@Override
+	public ArrayList<Attendance> selectAttendance(String classCode) {
+		return teacherDao.selectAttendance(sqlSession, classCode);
+	}
+
+	// 출결 저장
+	@Override
+	public int insertAttendance(List<Attendance> attandanceList) {
+		return teacherDao.insertAttendance(sqlSession, attandanceList);
 	}
 
 }

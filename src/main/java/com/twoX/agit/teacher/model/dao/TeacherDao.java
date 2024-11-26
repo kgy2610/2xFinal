@@ -2,12 +2,15 @@ package com.twoX.agit.teacher.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Teacher;
 
@@ -39,8 +42,8 @@ public class TeacherDao {
 	}
 
 	// 숙제 전체 조회
-	public ArrayList<Homework> selectHomeworkList(SqlSessionTemplate sqlSession) {
-		return (ArrayList) sqlSession.selectList("homeworkMapper.selectAllList");
+	public ArrayList<Homework> selectHomeworkList(SqlSessionTemplate sqlSession, String tcId) {
+		return (ArrayList) sqlSession.selectList("homeworkMapper.selectAllList", tcId);
 	}
 
 	// 숙제 등록
@@ -77,5 +80,40 @@ public class TeacherDao {
 		params.put("hmContent", hmContent);
 
 		return sqlSession.update("homeworkMapper.updateHomework", params);
+	}
+
+	// 해당 숙제 페이지로 이동
+	public ArrayList<Homework> selectSubject(SqlSessionTemplate sqlSession, String classCode) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("classCode", classCode);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSubject", params);
+	}
+	
+	// 숙제 점수 및 말씀 부여
+	public int updateSubmitHomework(SqlSessionTemplate sqlSession, String teacherComment, int score, String stuId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("teacherComment", teacherComment);
+		params.put("score", score);
+		params.put("stuId", stuId);
+		
+		return sqlSession.update("boardMapper.updateSubject", params);
+	}
+	
+	public ArrayList<HmSubmit> selectsubmitHomework(SqlSessionTemplate sqlSession, String title, String studentId){
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("title", title);
+		params.put("studentId", studentId);
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectsubmitHomework", params);
+	}
+	
+	public ArrayList<Attendance> selectAttendance(SqlSessionTemplate sqlSession, String classCode) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("classCode", classCode);
+		return (ArrayList)sqlSession.selectList("attendanceMapper.selectAttendance", params);
+	}
+	
+	public int insertAttendance(SqlSessionTemplate sqlSession, List<Attendance> attendanceList) {
+		return sqlSession.insert("attendanceMapper.insertAttendance", attendanceList);
 	}
 }

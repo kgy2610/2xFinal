@@ -31,6 +31,7 @@
 		<typeAlias type="com.twoX.agit.after.vo.AfterSchoolStudent"	alias="AfterSchoolStudent" />
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherNotice" alias="TeacherNotice"/>
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherMemo" alias="TeacherMemo" />
+		<typeAlias type="com.twoX.agit.member.model.vo.Attendance" alias="Attendance"/>
 		
 	</typeAliases>
 
@@ -45,6 +46,7 @@
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/memo-mapper.xml" />
 		<mapper resource="mappers/homework-mapper.xml" />
+		<mapper resource="mappers/attendance-mapper.xml"/>
 	</mappers>
 
 </configuration>

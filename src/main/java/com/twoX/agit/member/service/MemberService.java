@@ -92,14 +92,17 @@ public interface MemberService {
 	// 반 개설
 	int updateClassCode(Teacher t);
 	
+	//공지사항 총 갯수
+	int getNoticeCount();
+	
 	//공지사항 리스트
-	ArrayList<TeacherNotice> getTeacherNotices(String classCode);
+	ArrayList<TeacherNotice> getTeacherNotices(int NoticeCount, String tcId);
 	
 	// 공지사항 추가
 	int insertNotice(String tcId, String classCode, String noticeTitle);
 
 	// 공지사항 수정
-	int updateNotice(String noticeTitle);
+	int updateNotice(String noticeTitle, int noticeNo);
 
 	// 공지사항 삭제
 	int deleteNotice(String noticeTitle);
