@@ -157,9 +157,17 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateClassCode", t);
 	}
 	
+	// 선생님 - 공지사항 총 갯수
+	public int selectNoticeList(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("noticeMapper.selectNoticeList");
+	}
+	
 	// 선생님 - 공지사항 조회
-	public ArrayList<TeacherNotice> selectNoticeList(SqlSessionTemplate sqlSession, String classCode) {
-		return (ArrayList) sqlSession.selectList("noticeMapper.selectNotice", classCode);
+	public ArrayList<TeacherNotice> selectNoticeList(SqlSessionTemplate sqlSession, int NoticeCount, String tcId){
+		Map<String, Object> params = new HashMap<>();
+		params.put("NoticeCount", NoticeCount);
+		params.put("tcId", tcId);
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectNotice", params);
 	}
 	
 	// 선생님 - 공지사항 추가
@@ -174,9 +182,13 @@ public class MemberDao {
 		return sqlSession.insert("noticeMapper.insertNotice", params);
 	}
 
-	// 선생님 - 공지사항 수정
-	public int updateNotice(SqlSessionTemplate sqlSession, String noticeTitle) {
-		return sqlSession.update("noticeMapper.updateNotice", noticeTitle);
+	//공지사항 수정
+	public int updateNotice(SqlSessionTemplate sqlSession, String noticeTitle, int noticeNo) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("noticeTitle", noticeTitle);
+		params.put("noticeNo", noticeNo);
+		
+		return sqlSession.update("noticeMapper.updateNotice", params);
 	}
 
 	// 선생님 - 공지사항 삭제

@@ -3,16 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="afterMapper">
-<!-- 방과후 -->
-<resultMap type="AfterSchool" id="AfterSchoolResultSet">
+	<!-- 방과후 -->
+	<resultMap type="AfterSchool" id="AfterSchoolResultSet">
 		<result column="CODE" property="code" />
 		<result column="TC_ID" property="tcId" />
 		<result column="CLASS_NAME" property="className" />
 		<result column="EXPLANATION" property="explanation" />
 	</resultMap>
 
-<!-- 방과후 게시판 -->
-	<resultMap type="AfterSchoolBoard" id="afterSchoolBoardResultSet">
+
+
+
+	<!-- 방과후 게시판 -->
+	<resultMap type="AfterSchoolBoard"
+		id="afterSchoolBoardResultSet">
 		<result column="BO_NO" property="boNo" />
 		<result column="STU_ID" property="stuId" />
 		<result column="CODE" property="code" />
@@ -24,10 +28,29 @@
 	</resultMap>
 
 
+	<!-- 게시글 총 갯수 조회 -->
+	<select id="afterBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		AFTERSCHOOL_BOARD
+		WHERE CODE = #{code}
+	</select>
+
+	<!-- 게시글 조회 -->
+	<select id="selectAfterBoard"
+		resultMap="afterSchoolBoardResultSet">
+		SELECT BO_NO, STU_ID, CODE, TITLE, BO_CONTENT, CREATE_DATE
+		FROM AFTERSCHOOL_BOARD
+		WHERE CODE = #{code}
+		ORDER BY BO_NO ASC
+	</select>
 
 
-<!-- 방과후게시판 파일 -->
-<resultMap type="AfterSchoolBoardFile" id="afterSchoolBoardFileResultSet">
+
+
+	<!-- 방과후게시판 파일 -->
+	<resultMap type="AfterSchoolBoardFile"
+		id="afterSchoolBoardFileResultSet">
 		<result column="BO_NO" property="boNo" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
@@ -36,21 +59,26 @@
 
 
 
-<!-- 방과후게시판 사진 -->	
-	<resultMap type="AfterSchoolBoardPicture" id="afterSchoolBoardPictureResultSet">
+	<!-- 방과후게시판 사진 -->
+	<resultMap type="AfterSchoolBoardPicture"
+		id="afterSchoolBoardPictureResultSet">
 		<result column="BO_NO" property="boNo" />
 		<result column="PIC_AD" property="picAd" />
 	</resultMap>
-	
-	
-	
-	
-<!-- 방과후게시판 학생 -->
-	<resultMap type="AfterSchoolStudent" id="afterSchoolStudentResultSet">
+
+
+
+
+	<!-- 방과후게시판 학생 -->
+	<resultMap type="AfterSchoolStudent"
+		id="afterSchoolStudentResultSet">
 		<result column="STU_ID" property="stuId" />
 		<result column="CODE" property="code" />
 		<result column="STATUS" property="status" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="stuName" column="STU_NAME" />
 	</resultMap>
+<<<<<<< HEAD
 	
 	<!-- 방과후 글 갯수 조회 -->
 	<select id="selectListcount" resultType="_int">
@@ -97,4 +125,66 @@
 	</delete>
 	
 	
+=======
+
+
+	<!-- 학생 승인 리스트 조회 -->
+	<select id="acceptTeacherListbyScCode" parameterType="String"
+		resultMap="afterSchoolStudentResultSet">
+		SELECT
+		a.STU_ID,
+		a.CODE,
+		a.STATUS,
+		s.CLASS_CODE,
+		s.STU_NAME
+		FROM
+		AFTERSCHOOL_STUDENT a
+		JOIN
+		STUDENT s ON a.STU_ID = s.STU_ID
+		WHERE
+		a.CODE = #{scCode}
+		AND
+		a.STATUS = 'N'
+	</select>
+
+
+	<!-- 학생 승인 -->
+	<update id="RequestTeacherByTcIdAndStatus">
+		UPDATE AFTERSCHOOL_STUDENT
+		SET STATUS = 'Y'
+		WHERE STU_ID = #{stuId}
+		AND CODE = #{scCode}
+	</update>
+
+
+
+	<!-- 학생 정보 -->
+	<resultMap type="Student" id="studentResultSet">
+		<result column="STU_ID" property="stuId" />
+		<result column="STU_PWD" property="stuPwd" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="STU_NAME" property="stuName" />
+		<result column="PHONE" property="phone" />
+		<result column="STU_NUM" property="stuNum" />
+		<result column="STATUS" property="status" />
+		<result column="PIC_NO" property="picNo" />
+		<result column="STU_QUESTION" property="stuQuestion" />
+		<result column="STU_ANSWER" property="stuAnswer" />
+	</resultMap>
+
+	<select id="asCodeStudent" resultMap="studentResultSet">
+		SELECT CLASS_CODE,STU_NAME
+		FROM STUDENT
+		LEFT JOIN AFTERSCHOOL_STUDENT AFS USING(STU_ID)
+		WHERE CODE
+		= #{code}
+		AND
+		AFS.STATUS = 'Y'
+	</select>
+
+
+
+
+
+>>>>>>> e3d0cc382d5d5780c014b4e5e86c845b30af5f4d
 </mapper>

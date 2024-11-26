@@ -10,28 +10,24 @@
 		<result column="MM_CONTENT" property="mmContent" />
 	</resultMap>
 	
-	<!-- 메모 조회 -->
-	<select id="selectMemo" resultMap="MemoResultSet">
-		SELECT  
-				MEMO_NO,
-				TC_ID,
-				CLASS_CODE,
-				MM_CONTENT
-		 FROM MEMO
-		 WHERE CLASS_CODE = #{classCode}
+	<!--  메모 조회  -->
+	<select id="selectMemo" resultMap="MemoResultSet"> 
+		SELECT MEMO_NO, TC_ID, CLASS_CODE, MM_CONTENT 
+		FROM MEMO WHERE CLASS_CODE = #{classCode} 
 	</select>
 	
-	<!-- 메모 추가 -->
-	<insert id="insertMemo" parameterType="map">
-		INSERT INTO MEMO
-		(TC_ID, CLASS_CODE, MM_CONTENT)
-		VALUES
-		(#{tcId}, #{classCode}, #{mmContent})
+	<!--  메모 추가  -->
+	<insert id="insertMemo" parameterType="map"> 
+		INSERT INTO MEMO 
+		(TC_ID, CLASS_CODE, MM_CONTENT) 
+		VALUES 
+		(#{tcId}, #{classCode}, #{mmContent}) 
 	</insert>
 	
-	<!-- 메모 삭제 -->
-	<delete id="deleteMemo" parameterType="String">
-    DELETE FROM MEMO WHERE MM_CONTENT = #{mmContent}
+	<!--  메모 삭제  -->
+	<delete id="deleteMemo" parameterType="String"> 
+		DELETE FROM MEMO 
+		WHERE MM_CONTENT = #{mmContent} 
 	</delete>
 
 </mapper>

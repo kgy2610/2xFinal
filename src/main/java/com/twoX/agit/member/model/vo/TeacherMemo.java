@@ -1,6 +1,9 @@
-package com.twoX.agit.after.vo;
+package com.twoX.agit.member.model.vo;
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +14,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AfterSchoolStudent {
-	private String stuId;
-	private String code;
-	private String status;
+@EqualsAndHashCode
+public class TeacherMemo {
+	private String MMno;
+	private String tcId;
 	private String classCode;
-	private String stuName; 
+	private String mmContent;
 }

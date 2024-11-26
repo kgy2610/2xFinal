@@ -6,11 +6,11 @@
 	Teacher s = (Teacher) session.getAttribute("loginUser");
 	
 	
-	String classCode = s.getClassCode(); //클래스 코드가 빈값이면 0000이 아니라 null로 바꾸어야한다.
+	String classCode = s.getClassCode();//클래스 코드가 빈값이면 0000이 아니라 null로 바꾸어야한다.
 	String grade = classCode.substring(9, 10);
 	String teacher_class = classCode.substring(10, 12);	
-	
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,21 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
-	<jsp:include page="../common/teacher_menubar.jsp" />
+	<div class="nav">
+		<img src="<c:url value='/resources/img/logo.png'/>">
+		<div class="menu">
+			<label for="mypage" id="mypage"><a href="#">마이페이지</a></label> <label
+				for="homework"><a href="#">숙제</a></label> <label for="attendance"><a
+				href="#">출결</a></label> <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
+			<label for="advicePlan"><a href="#">상담일정</a></label> <label
+				for="photo"><a href="eventPhotos.af">행사사진</a></label> <label for="studentManage"><a
+				href="#">학생관리</a></label>
+		</div>
+		<div class="undermenu">
+			<label for="info"> <a href="#" onclick="openInfoModal()">정보수정</a>
+			</label> <label for="logout"><a href="#">로그아웃</a></label>
+		</div>
+	</div>
 
 	<div class="whole_body">
 		<h1><%=grade%>학년
@@ -48,66 +62,52 @@
 
 		<div class="textbox2">
 			<h1>공지사항</h1>
-			<hr class="body_line">
-			<div class="bottom_container">
-				<div class="body_content">
-					<div class="body_title" onclick="openDeleteNoticeModal()">오늘
-						학교 끝나고 보강있...</div>
-					<div class="body_writer">2024-10-20</div>
-				</div>
-				<hr class="body_line">
-				<div class="body_content">
-					<div class="body_title">오늘 학교 끝나고 보강있...</div>
-					<div class="body_writer">2024-10-20</div>
-				</div>
-				<hr class="body_line">
-				<div class="body_content">
-					<div class="body_title">오늘 학교 끝나고 보강있...</div>
-					<div class="body_writer">2024-10-20</div>
-				</div>
-				<hr class="body_line">
-				<div class="body_content">
-					<div class="body_title">오늘 학교 끝나고 보강있...</div>
-					<div class="body_writer">2024-10-20</div>
-				</div>
-				<hr class="body_line">
-			</div>
-
+			    <hr class="body_line">
+			    	<div class="bottom_container">
+			        	<c:forEach var="notice" items="${teacherNotice}">
+			            	<div class="body_content">
+			            		<input type="hidden" id="noticeNo" name="noticeNo" value="${notice.NTno}">
+			                	<div class="body_title" onclick="openDeleteNoticeModal('${notice.ntContent}', '${notice.NTno}')">
+			                    	${notice.ntContent} <!-- 공지사항 제목 표시 -->
+			               		</div>
+			                
+			                	<div class="body_writer">
+			                    	${notice.createDate} <!-- 공지사항 작성일 표시 -->
+			                	</div>
+			            	</div>
+			            <hr class="body_line">
+			        	</c:forEach>
+			    	</div>
 			<!-- 이미지 클릭 시 공지사항 작성 모달 열기 -->
-			<img class="body_plus" onclick="openAddNoticeModal()"
-				src="<c:url value='/resources/img/teacher/plus.JPG'/>">
-		</div>
+	        <img class="body_plus" onclick="openAddNoticeModal()" src="<c:url value='/resources/img/teacher/plus.JPG'/>">  
+		</div> 
 
 
 
 		<div class="memo_content">
-			<h1>메모장</h1>
-			<div class="memo_box">
-				<div class="memo_text">241021국어 숙제</div>
-				<button>x</button>
-			</div>
-			<div class="memo_box">
-				<div class="memo_text" onclick="openModifyMemoModal()">241021국어
-					숙제</div>
-				<button>x</button>
-			</div>
-			<div class="memo_box">
-				<div class="memo_text">241021국어 숙제</div>
-				<button>x</button>
-			</div>
-			<div class="memo_box">
-				<div class="memo_text">241021국어 숙제</div>
-				<button class="memo_button">x</button>
-			</div>
-			<div class="memo_box">
-				<div class="memo_text">
-					<input type="text" placeholder="메모 작성...">
-				</div>
-			</div>
-
-			<img class="memo_plus" onclick="openAddMemoModal()"
-				src="<c:url value='/resources/img/teacher/plus2.JPG'/>">
+		    <h1>메모장</h1>
+		    
+		    <!-- 메모 항목 반복 시작 -->
+		    <c:forEach var="memo" items="${teacherMemo}">
+		        <div class="memo_box">
+		            <!-- 각 메모 항목 표시 -->
+		            <div class="memo_text" onclick="openModifyMemoModal('${memo.mmContent}')">
+		                ${memo.mmContent}
+		                
+		            </div>
+		            
+					<!-- 삭제 버튼 -->
+		        <form method="POST" action="deleteMemo")">
+		            <input type="hidden" name="memoContent" value="${memo.mmContent}">
+		            <button type="submit">x</button>
+		        </form>
+		        </div>
+		    </c:forEach>
+		
+		    <!-- 메모 추가 버튼 -->
+		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.JPG'/>">
 		</div>
+
 
 
 
@@ -151,16 +151,16 @@
 				<span class="close" onclick="closeDeleteModal()">&times;</span>
 				<h3>반 삭제</h3>
 				<form id="classdeleteForm" action="classdelete.me">
-				<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
-				<div class="input-group">
-					<p id="deleteClassMessage">
-						코드: <input type="text" id="deleteCode" name="deleteCode" required>
-					</p>
-				</div>
-				<div class="button-group">
-					<button class="confirm-delete-button" type="button"
-						onclick="confirmDelete('<%=s.getClassCode()%>')">삭제하기</button>
-				</div>
+					<input type="hidden" value="<%=s.getClassCode()%>">
+					<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
+					<div class="input-group">
+						<p id="deleteClassMessage">
+							코드: <input type="text" id="deleteCode" name="deleteCode" required>
+						</p>
+					</div>
+					<div class="button-group">
+						<button class="confirm-delete-button" type="submit">삭제하기</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -175,6 +175,7 @@
 
 				<!-- 비밀번호 수정 폼 -->
 				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
+				<input type="hidden" value="<%=s.getTcPwd() %>">
 					<label for="currentPassword">현재 비밀번호</label> <input type="password"
 						id="currentPassword" name="currentPassword" required> <label
 						for="newPassword">수정 비밀번호</label> <input type="password"
@@ -183,8 +184,7 @@
 						id="confirmPassword" name="confirmPassword" required>
 
 					<div class="button-group">
-						<button class="confirm-password-button" type="button"
-							onclick="confirmPasswordUpdate('<%=s.getTcPwd() %>')">비밀번호 수정하기</button>
+						<button class="confirm-password-button" type="submit">비밀번호 수정하기</button>
 					</div>
 				</form>
 			</div>
@@ -194,61 +194,57 @@
 
 		<!-- 공지사항 추가 모달 -->
 		<div id="addNoticeModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeAddNoticeModal()">&times;</span>
-				<h3>공지사항을 작성하세요.</h3>
-				<form id="addNoticeForm">
-					<input type="text" id="noticeAddTitle" name="noticeTitle"
-						class="announcementTextField" required>
-					<button type="button" class="postAnnouncementButton"
-						onclick="submitNotice()">등록</button>
-				</form>
-			</div>
+		    <div class="modal-content">
+		        <span class="close" onclick="closeAddNoticeModal()">&times;</span>
+		        <h3>공지사항을 작성하세요.</h3>
+		        <form id="addNoticeForm" action="addNoticeForm" method="POST">
+		            <input type="text" id="noticeAddTitle" name="noticeTitle" class="announcementTextField" required>
+		            <button type="submit" class="postAnnouncementButton">등록</button>
+		        </form>
+		    </div>
 		</div>
 
 
-		<!-- 공지사항 수정/삭제 모달 -->
-		<div id="deleteNoticeModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeDeleteNoticeModal()">&times;</span>
+        <!-- 공지사항 수정/삭제 모달 -->
+        <div id="deleteNoticeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDeleteNoticeModal()">&times;</span>        
+				<!-- 공지사항 제목 입력 -->
 				<input type="text" id="noticeTitle" name="noticeTitle" required>
-				<form id="deleteNoticeForm">
-					<button type="button" class="confirm-button"
-						onclick="confirmNoticeEdit()">수정</button>
-					<button type="button" class="delete-button"
-						onclick="confirmNoticeDelete()">삭제</button>
-				</form>
-			</div>
-		</div>
-
+				<!-- 공지사항 번호 (hidden 필드) -->
+			    <input type="hidden" id="noticeNo" value="${notice.NTno}">
+	         	<!-- 수정 버튼 -->
+	         	<button type="button" class="confirm-button" onclick="confirmNoticeEdit()">수정</button>
+	          	<!-- 삭제 버튼 -->
+	          	<button type="button" class="delete-button" onclick="confirmNoticeDelete()">삭제</button>
+		 	</div>
+         </div>
 
 
 		<!-- 메모 추가 모달 -->
 		<div id="addMemoModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeAddMemoModal()">&times;</span>
-				<h3>메모 작성</h3>
-				<form id="addMemoForm">
-					<input type="text" id="memoText" placeholder="메모 작성..." required>
-					<button type="button" onclick="submitMemo()">등록</button>
-				</form>
-			</div>
+		    <div class="modal-content">
+		        <span class="close" onclick="closeAddMemoModal()">&times;</span>
+		        <h3>메모 작성</h3>
+		        <form id="addMemoForm" action="addMemo" method="POST">
+		            <input type="text" id="memoText" name="memoContent" placeholder="메모 작성..." required>
+		            <button type="submit">등록</button>
+		        </form>
+		    </div>
 		</div>
 
 
-
-		<!-- 메모 수정 모달 -->
-		<div id="modifyMemoModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeModifyMemoModal()">&times;</span>
-				<h3>메모 수정</h3>
-				<form id="modifyMemoForm">
-					<input type="text" id="modifyMemoText"
-						placeholder="메모 내용을 수정하세요..." required>
-					<button type="button" onclick="submitModifiedMemo()">저장</button>
-				</form>
-			</div>
-		</div>
+        <!-- 메모 수정 모달 -->
+        <div id="modifyMemoModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModifyMemoModal()">&times;</span>
+                <h3>메모 수정</h3>
+                <form id="modifyMemoForm">
+                    <input type="text" id="modifyMemoText" placeholder="메모 내용을 수정하세요..." required>
+                    <button type="button" onclick="submitModifiedMemo()">저장</button>
+                </form>
+            </div>
+        </div>
 
 	</div>
 

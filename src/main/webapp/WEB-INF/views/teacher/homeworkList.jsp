@@ -24,7 +24,9 @@
                 <option value="과학">과학</option>
                 <option value="사회">사회</option>
             </select>
-            <button class="navigate-button" onclick="navigateToSubject()">이동</button>
+            <a href="gosubject">
+    			<button class="navigate-button">우리반 숙제 이동</button>
+			</a>
 
             <br><br>
             <table class="attendance-table">

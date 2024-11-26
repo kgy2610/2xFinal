@@ -179,10 +179,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updateClassCode(sqlSession,t);
 	}
 	
-	// 선생님 - 공지사항 가져오기
+	// 선생님 - 공지사항 총 갯수
 	@Override
-	public ArrayList<TeacherNotice> getTeacherNotices(String classCode) {
-		return memberDao.selectNoticeList(sqlSession, classCode);
+	public int getNoticeCount() {
+		return memberDao.selectNoticeList(sqlSession);
+	}
+	
+	//공지사항 
+	@Override
+	public ArrayList<TeacherNotice> getTeacherNotices(int NoticeCount, String tcId) {
+		return memberDao.selectNoticeList(sqlSession, NoticeCount, tcId);
 	}
 	
 	// 선생님 - 공지사항 추가
@@ -192,8 +198,8 @@ public class MemberServiceImpl implements MemberService{
 
 	// 선생님 - 공지사항 수정
 	@Override
-	public int updateNotice(String noticeTitle) {
-		return memberDao.updateNotice(sqlSession, noticeTitle);
+	public int updateNotice(String noticeTitle, int noticeNo) {
+		return memberDao.updateNotice(sqlSession, noticeTitle, noticeNo);
 	}
 
 	// 선생님 - 공지사항 삭제

@@ -12,38 +12,39 @@
 		<result column="CREATE_DATE" property="createDate" />
 	</resultMap>
 	
-	<!-- 공지사항 조회 -->
-	<select id="selectNotice" resultMap="NoticeResultSet">
-		SELECT  
-				NOTICE_NO,
-				TC_ID,
-				CLASS_CODE,
-				NT_CONTENT,
-				CREATE_DATE
-		 FROM NOTICE
-		 WHERE CLASS_CODE = #{classCode}
-	     ORDER BY CREATE_DATE DESC
+	<!--  공지사항 총 갯수  -->
+	<select id="selectNoticeList" resultType="_int"> 
+		SELECT COUNT(*) 
+		FROM NOTICE 
 	</select>
 	
-	<!-- 공지사항 추가 -->
-	<insert id="insertNotice" parameterType="map">
-	    INSERT INTO NOTICE
-	    (TC_ID, CLASS_CODE, NT_CONTENT, CREATE_DATE)
-	    VALUES
-	    (#{tcId}, #{classCode}, #{noticeTitle}, SYSDATE)
+	<!--  공지사항 리스트 조회  -->
+	<select id="selectNotice" resultMap="NoticeResultSet" parameterType="map">
+		SELECT NOTICE_NO, TC_ID , CLASS_CODE , NT_CONTENT , CREATE_DATE 
+		FROM NOTICE WHERE TC_ID = #{tcId} 
+		ORDER BY CREATE_DATE ASC 
+	</select>
+	
+	<!--  공지사항 추가  -->
+	<insert id="insertNotice" parameterType="map"> 
+		INSERT INTO NOTICE 
+		(TC_ID, CLASS_CODE, NT_CONTENT, CREATE_DATE) 
+		VALUES 
+		(#{tcId}, #{classCode}, #{noticeTitle}, SYSDATE) 
 	</insert>
 	
-	<!-- 공지사항 수정 -->
-	<update id="updateNotice">
-	    UPDATE NOTICE
-	    SET NT_CONTENT = #{noticeTitle}
-	    WHERE NOTICE_NO = #{noticeNo}
+	<!--  공지사항 수정  -->
+	<update id="updateNotice" parameterType="map"> 
+		UPDATE NOTICE 
+		SET NT_CONTENT = #{noticeTitle}, CREATE_DATE = SYSDATE 
+		WHERE NOTICE_NO = #{noticeNo}
 	</update>
 	
-	<!-- 공지사항 삭제 -->
+	<!--  공지사항 삭제  -->
 	<delete id="deleteNotice" parameterType="String">
-	    DELETE FROM NOTICE
-	     WHERE NT_CONTENT = #{noticeTitle}
+		DELETE 
+		FROM NOTICE
+		WHERE NT_CONTENT = #{noticeTitle}
 	</delete>
 	
 	

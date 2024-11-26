@@ -59,71 +59,75 @@
     function confirmDelete() {
         const deleteCode = document.getElementById('deleteCode').value;
 
+		//서버에 요청
+		
         // 반 삭제 로직 추가
         alert(`반 ${deleteCode}가 삭제되었습니다.`);
         closeDeleteModal();
         closeInfoModal();
     }
 
-	// 공지사항 추가 모달 열기
-	function openAddNoticeModal() {
-	    document.getElementById('addNoticeModal').style.display = 'block';
-	}
-	
-	// 공지사항 추가 모달 닫기
-	function closeAddNoticeModal() {
-	    document.getElementById('addNoticeModal').style.display = 'none';
-	    clearNoticeForm();  // 입력값 초기화 (선택 사항)
-	}
-    
-    
-
-    // 공지사항 입력 폼 초기화
-    function clearNoticeForm() {
-        document.getElementById('noticeAddTitle').value = '';
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-
-    // 공지사항 수정/삭제 모달 열기
-    function openDeleteNoticeModal(noticeTitle) {
-        document.getElementById("deleteNoticeModal").style.display = "block";
-        
-            // 공지사항 제목을 모달의 입력 필드에 설정
-    document.getElementById("noticeTitle").value = noticeTitle;
-    }
+// 공지사항 추가 모달 열기
+function openAddNoticeModal() {
+    document.getElementById('addNoticeModal').style.display = 'block';
+}
 
 
-    function closeDeleteNoticeModal() {
-        document.getElementById("deleteNoticeModal").style.display = "none";
-    }
+// 공지사항 추가 모달 닫기
+function closeAddNoticeModal() {
+    document.getElementById('addNoticeModal').style.display = 'none';
+    clearNoticeForm();  // 입력값 초기화 (선택 사항)
+}
+
+
+// 공지사항 입력 폼 초기화
+function clearNoticeForm() {
+    document.getElementById('noticeAddTitle').value = '';
+}   
+    
+
+// 공지사항 수정/삭제 모달 열기
+function openDeleteNoticeModal(noticeTitle, ntNo) {
+    document.getElementById("deleteNoticeModal").style.display = "block";
+    
+// 공지사항 제목을 모달의 입력 필드에 설정
+document.getElementById("noticeTitle").value = noticeTitle;
+    // 공지사항 번호 (NTno) 설정
+    document.getElementById('noticeNo').value = ntNo;
+
+}
+
+// 공지사항 모달 닫기
+function closeDeleteNoticeModal() {
+    document.getElementById("deleteNoticeModal").style.display = "none";
+}
     
     
     
     
-    
-// 공지사항 수정
+// 공지사항 수정    
 function confirmNoticeEdit() {
-    const noticeTitle = document.getElementById('noticeTitle').value;  // 수정된 공지사항 제목
+    const noticeNo = document.getElementById('noticeNo').value; // 모달에서 noticeNo 가져오기
+    const noticeTitle = document.getElementById('noticeTitle').value; // 수정된 공지사항 제목
 
-    // form 엘리먼트를 찾음
+    // form 엘리먼트를 생성
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'updateNotice'; // 수정 요청 URL
 
-    // 수정된 제목과 공지사항 번호를 폼에 추가
+    // 공지사항 번호를 폼에 추가
+    const noInput = document.createElement('input');
+    noInput.type = 'hidden';
+    noInput.name = 'noticeNo';
+    noInput.value = noticeNo;
+
+    // 수정된 제목을 폼에 추가
     const titleInput = document.createElement('input');
     titleInput.type = 'hidden';
     titleInput.name = 'noticeTitle';
     titleInput.value = noticeTitle;
 
-
+    form.appendChild(noInput);
     form.appendChild(titleInput);
 
     // form을 문서에 추가하고 제출
@@ -133,6 +137,7 @@ function confirmNoticeEdit() {
     // 모달 닫기
     closeDeleteNoticeModal();
 }
+
 
 
 
@@ -257,7 +262,6 @@ function closeAddMemoModal() {
         alert(`메모 수정 완료:\n내용: ${modifiedMemoText}`);
         closeModifyMemoModal();
     }
-
 
 
     // 페이지 클릭 시 모달 닫기

@@ -504,19 +504,22 @@ public class MemberController {
 
 	        // 로그인 된 유저 정보의 status 값
 	        String status = loginTeacher.getStatus();
+	        
+	        // 총 공지사항 수를 구하는 메서드 호출
+	     	int NoticeCount = memberService.getNoticeCount();
+	     	String tcId = loginTeacher.getTcId();
+	        
+	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
+	        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(NoticeCount, tcId);
+	        // 공지사항 리스트를 세션에 추가
+	        session.setAttribute("teacherNotice", teacherNotices);
+	        
 	        String classCode = loginTeacher.getClassCode();
 	        
-			// classCode를 이용해 공지사항 리스트 가져오기
-			ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(classCode);
-			System.out.println(teacherNotices);
-			// 공지사항 리스트를 세션에 추가
-			session.setAttribute("teacherNotice", teacherNotices);
-
-			// classCode를 이용해 공지사항 리스트 가져오기
-			ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-			System.out.println(teacherMemo);
-			// 메모 리스트를 세션에 추가
-			session.setAttribute("teacherMemo", teacherMemo);
+	        // classCode를 이용해 메모 리스트 가져오기
+	        ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
+	        //메모 리스트를 세션에 추가
+	        session.setAttribute("teacherMemo", teacherMemo);
 
 	        // 로그인 된 유저 정보의 status 값이 'A'일 경우
 	        if ("A".equals(status)) {
@@ -577,58 +580,58 @@ public class MemberController {
 	}
 	
 	// 교사 비번 수정
-	@RequestMapping("updatePassword.me")
-	public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
-		// 로그인 한 교사정보 가져오기
-		Teacher teacher = (Teacher) session.getAttribute("loginUser");
+		@RequestMapping("updatePassword.me")
+		public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
+			// 로그인 한 교사정보 가져오기
+			Teacher teacher = (Teacher) session.getAttribute("loginUser");
+			System.out.println(teacher);
+			if (teacher == null) {
+				session.setAttribute("alertMsg", "로그인정보가 없습니다.");
+				return "teacher/myPage";
+			}
 
-		if (teacher == null) {
-			session.setAttribute("alertMsg", "로그인정보가 없습니다.");
-			return "teacher/myPage";
+			t.setTcId(teacher.getTcId());
+			t.setTcPwd(newPassword);
+
+			int result = memberService.updatePassword(t);
+			System.out.println("수정된 비밀번호: " + t.getTcPwd());
+
+			if (result > 0) {
+				session.setAttribute("loginUser", memberService.loginTeacher(t));
+				session.setAttribute("alertMsg", "비밀번호 수정 성공");
+				return "teacher/myPage";
+			} else {
+				session.setAttribute("alertMsg", "비밀번호 수정 실패");
+				return "teacher/myPage";
+			}
 		}
+		
+		// 선생님 반 개설
+		@RequestMapping("teacher.classCode")
+		public String updateClassCode(Teacher t, HttpSession session, Model model) {
+			t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
+			System.out.println(t.getClassCode());
 
-		t.setTcId(teacher.getTcId());
-		t.setTcPwd(newPassword);
+			if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
+				model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
+				return "redirect:/"; // 적절한 메시지로 안내
+			}
 
-		int result = memberService.updatePassword(t);
-		System.out.println("수정된 비밀번호: " + t.getTcPwd());
+			int result = memberService.updateClassCode(t);
 
-		if (result > 0) {
-			session.setAttribute("loginUser", memberService.loginTeacher(t));
-			session.setAttribute("alertMsg", "비밀번호 수정 성공");
-			return "teacher/myPage";
-		} else {
-			session.setAttribute("alertMsg", "비밀번호 수정 실패");
-			return "teacher/myPage";
+			if (result > 0) {
+				session.setAttribute("loginUser", memberService.loginTeacher(t));
+				session.setAttribute("alertMsg", "반 개설 성공");
+				System.out.println(result);
+				System.out.println(memberService.loginTeacher(t));
+				
+				return "teacher/myPage";
+			} else {
+				model.addAttribute("alertMsg", "반 개설 실패");
+				return "teacher/myPageStart";
+			}
 		}
-	}
-	
-	// 선생님 반 개설
-	@RequestMapping("teacher.classCode")
-	public String updateClassCode(Teacher t, HttpSession session, Model model) {
-		t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
-		System.out.println(t.getClassCode());
-
-		if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
-			model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
-			return "redirect:/"; // 적절한 메시지로 안내
-		}
-
-		int result = memberService.updateClassCode(t);
-
-		if (result > 0) {
-			session.setAttribute("loginUser", memberService.loginTeacher(t));
-			session.setAttribute("alertMsg", "반 개설 성공");
-			System.out.println(result);
-			System.out.println(memberService.loginTeacher(t));
-			
-			return "teacher/myPage";
-		} else {
-			model.addAttribute("alertMsg", "반 개설 실패");
-			return "teacher/myPageStart";
-		}
-	}
-	
+		
 	// 선생님 마이페이지 이동
 	@RequestMapping("teacher.myPage")
 	public String teacherMyPage() {
@@ -638,44 +641,55 @@ public class MemberController {
 	// 선생님 공지사항 추가
 	@RequestMapping("addNoticeForm")
 	public String addNoticeForm(String noticeTitle, HttpSession session, Model model) {
-		System.out.println("잘 가져와짐!");
-		System.out.println(noticeTitle);
-
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
 		String classCode = loginTeacher.getClassCode();
 
-		int result = memberService.insertNotice(tcId, classCode, noticeTitle);
+		int result = memberService.insertNotice(tcId, classCode, noticeTitle);		
+		
+		int noticeCount = memberService.getNoticeCount();
+        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
+        model.addAttribute("teacherNotice", teacherNotices);
 
-		return "redirect:/";
+		return "teacher/myPage";
 	}
 
-	// 선생님 공지사항 수정
+	//공지사항 수정
 	@RequestMapping("updateNotice")
-	public String updateNotice(String noticeTitle, HttpSession session, Model model) {
-		System.out.println("수정됨~");
-		System.out.println(noticeTitle);
+	public String updateNotice(String noticeTitle, int noticeNo, HttpSession session, Model model) {
+		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
-		int result = memberService.updateNotice(noticeTitle);
-
-		return "redirect:/";
+		String tcId = loginTeacher.getTcId();
+		
+		int result = memberService.updateNotice(noticeTitle, noticeNo);
+		
+		int noticeCount = memberService.getNoticeCount();
+        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
+        model.addAttribute("teacherNotice", teacherNotices);
+		
+		return "teacher/myPage";
 	}
 
 	// 선생님 공지사항 삭제
 	@RequestMapping("deleteNotice")
-	public String deleteNotice(String noticeTitle, HttpSession session) {
-		System.out.println(noticeTitle);
+	public String deleteNotice(String noticeTitle, HttpSession session, Model model) {
+		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
+
+		String tcId = loginTeacher.getTcId();
 
 		int result = memberService.deleteNotice(noticeTitle);
+		
+		int noticeCount = memberService.getNoticeCount();
+        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
+        model.addAttribute("teacherNotice", teacherNotices);
 
-		return "redirect:/";
+		return "teacher/myPage";
 	}
 
 	// 선생님 메모 추가
 	@RequestMapping("addMemo")
-	public String AddMemo(String memoContent, HttpSession session) {
-		System.out.println(memoContent);
+	public String AddMemo(String memoContent, HttpSession session, Model model) {
 
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
@@ -683,18 +697,25 @@ public class MemberController {
 		String classCode = loginTeacher.getClassCode();
 
 		int result = memberService.insertMemo(tcId, classCode, memoContent);
+		
+		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
+		model.addAttribute("teacherMemo", teacherMemo);
 
-		return "redirect:/";
+		return "teacher/myPage";
 	}
 
 	// 선생님 메모 삭제
 	@RequestMapping("deleteMemo")
-	public String deleteMemo(String memoContent) {
-		System.out.println(memoContent);
-
+	public String deleteMemo(String memoContent, HttpSession session, Model model) {
+		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
+		String classCode = loginTeacher.getClassCode();
+		
 		int result = memberService.deleteMemo(memoContent);
+		
+		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
+		model.addAttribute("teacherMemo", teacherMemo);
 
-		return "redirect:/";
+		return "teacher/myPage";
 	}
 	
 }
