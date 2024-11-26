@@ -23,6 +23,36 @@ public class AfterSchoolBoardServiceImpl implements AfterSchoolBoardService {
 	private AfterSchoolBoardDao afterSchoolBoardDao;
 
 	@Override
+	public int selectListCount(String stuId) {
+		return afterSchoolBoardDao.selectListCount(sqlSession,stuId);
+	}
+
+	@Override
+	public ArrayList<AfterSchoolBoard> selectStudentBoardList(String stuId, PageInfo pi) {
+		return afterSchoolBoardDao.selectStudentBoardList(sqlSession,stuId,pi);
+	}
+
+	@Override
+	public AfterSchoolBoard selectNowBoard(int boNo) {
+		return afterSchoolBoardDao.selectNowBoard(sqlSession,boNo);
+	}
+
+	@Override
+	public int insertAfterschoolBoard(AfterSchoolBoard asb) {
+		return afterSchoolBoardDao.insertAfterschoolBoard(sqlSession,asb);
+	}
+
+	@Override
+	public int updateAfterschoolBoard(AfterSchoolBoard asb) {
+		return afterSchoolBoardDao.updateAfterschoolBoard(sqlSession,asb);
+	}
+
+	@Override
+	public int deleteAfterschoolBoard(AfterSchoolBoard asb) {
+		return afterSchoolBoardDao.deleteAfterschoolBoard(sqlSession,asb);
+	}
+
+	@Override
 	public int afterSchoolListCount(String code) {
 		return afterSchoolBoardDao.afterSchoolListCount(sqlSession, code);
 	}
@@ -36,8 +66,8 @@ public class AfterSchoolBoardServiceImpl implements AfterSchoolBoardService {
 	@Override
 	public ArrayList<Student> asCodeStudent(String code) {
 		return afterSchoolBoardDao.asCodeStudent(sqlSession, code);
+
 	}
-	
 
 
 	@Override

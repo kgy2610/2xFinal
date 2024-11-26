@@ -8,7 +8,7 @@
     bottom: 47px; 
     right: 228px; 
     width: 1089px; 
-    height: 880px;
+    height: 830px;
 }
 #community_title{
     position:absolute; 
@@ -21,7 +21,7 @@
     width: 150px;
     height: 50px;
     left: 450px;
-    bottom: 30px;
+    bottom: 20px;
     border-radius: 40px; 
     background-color: #F4DABF;
     color:#A98467;
@@ -34,14 +34,25 @@
     cursor: pointer;
 }
 #modify_button{
-    left: 350px;
+    left: 730px;
 }
+
+#re_button{
+	left:50px;
+}
+
 #delete_button{
-    left: 570px;
+    left: 890px;
+    background: #E9AAAA;
+    color: white;
+}
+
+#delete_button:hover{
+	background:#D28383;
 }
 #enroll_title{
     position:absolute;
-    top: 30px;
+    top: 25px;
     left: 47px;
     background-color: #DDE5B6; 
     border-radius: 40px;
@@ -68,12 +79,13 @@
     outline: none;
 }
 #enroll_content{
-    position:absolute;
-    bottom: 100px;
+    position: absolute;
+    bottom: 90px;
     left: 47px;
-    border: 3px solid #A98467; 
+    border: 3px solid #A98467;
     width: 989px;
-    height: 670px;
+    height: 630px;
+    
 }
 .note-editor .note-editable {
     overflow-y: auto; /* 수직 스크롤바를 사용 가능하게 */
@@ -101,7 +113,7 @@
     position:absolute;
     display: flex;
     align-items: center;
-    bottom: 11px;
+    bottom: 20px;
     left: 20px;
     background-color: #DDE5B6; 
     border-radius: 40px;
@@ -148,4 +160,113 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+.note-frame {
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #000;
+	font-size:25px;
+}
+
+/* 모달 */
+ /* 정보수정 모달 스타일 */
+ .modal {
+   display: none; 
+   position: fixed;
+   z-index: 1000; 
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+}
+
+.modal-content {
+   background-color: #fefefe;
+   margin: auto;
+   padding: 40px;
+   border: 3px solid #A98467;
+   border-radius: 30px;
+   width: 25%;
+   position: absolute;
+   left: 40%;
+   top: 20%;
+   color: #A98467;
+   font-size: 20px;
+}
+
+.modal h2 {
+   width: 80%;
+   text-align: left;
+   color: #A98467;
+   font-size: 25px;
+   margin-left: -10px;
+   margin-top: -10px;
+}
+
+.modal form{
+  text-align: center;
+}
+
+.modal .close {
+   position: absolute; 
+   top: 20px;
+   right: 20px; 
+   cursor: pointer;
+    width: 40px; height: 40px;
+   line-height: 38px;
+   color: #A98467;
+   float: right;
+   font-size: 45px;
+   font-weight: bold;
+   text-align: center;
+   background-color: #DDE5B6;
+   border-radius: 10px;
+   padding: 5px;
+   opacity: 1 !important; /* 우선순위 높이기 */
+}
+
+.modal input {
+   width: 250px;
+   height: 40px;
+   color: #A98467;
+   border-radius: 20px;
+   border: #A98467 solid 2px;
+   margin: 10px 0px;
+   text-align: center;
+   font-size: 15px;
+}
+
+.modal tr td div input{
+   width: 80px;
+}
+
+.modal button{
+  background-color: #DDE5B6;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+  border:none;
+  font-size: 15px;
+  color: #A98467;
+}
+
+.modal button:hover{
+  background-color: #bfc59e;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+  border:none;
+  font-size: 15px;
+  color: white;
+}
+
+
+
+.close:hover,
+.close:focus {
+   color: #705845;
+   text-decoration: none;
+   cursor: pointer;
 }

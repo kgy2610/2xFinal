@@ -15,7 +15,7 @@
         <div class="menu">
             <label for="mypage"><a href="studentMyPage">마이페이지</a></label>
             <label for="homework"><a href="homework">숙제</a></label>
-            <label for="afterSchool"><a href="#">방과후 반</a></label>
+             <label for="afterSchool"><a href="afterschoolPage">방과후 반</a></label>
         </div>
         <div class="undermenu">
             <label for="info" onclick="openUpdateModal()"><a href="#">정보수정</a></label>

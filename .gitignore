@@ -324,3 +324,6 @@ bower_components
 psd
 thumb
 sketch
+
+src/main/webapp/resources/img/board/
+src/main/webapp/resources/file/
