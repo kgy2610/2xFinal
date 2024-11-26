@@ -99,16 +99,16 @@ public class TeacherServiceImpl  implements TeacherService{
 		return teacherDao.updateSubmitHomework(sqlSession, teacherComment, score, stuId);
 	}
 
-	// 출결 
-	@Override
-	public ArrayList<Attendance> selectAttendance(String classCode) {
-		return teacherDao.selectAttendance(sqlSession, classCode);
-	}
 
 	// 출결 저장
 	@Override
 	public int insertAttendance(List<Attendance> attandanceList) {
 		return teacherDao.insertAttendance(sqlSession, attandanceList);
+	}
+
+	@Override
+	public int updateAttendance(ArrayList<Attendance> updateAttendance) {
+		return teacherDao.updateAttendance(sqlSession, updateAttendance);
 	}
 
 }

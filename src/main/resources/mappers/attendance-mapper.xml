@@ -4,30 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="attendanceMapper">
 	<resultMap type="Attendance" id="AttendanceResultSet">
-	<result column="ADATE" property="aDate"/>
-	<result column="STU_ID" property="STU_ID"/>
-	<result column="LA" property="LA"/>
-	<result column="STU_NAME" property="stuName"/>
+		<result column="ADATE" property="aDate"/>
+		<result column="STU_ID" property="STU_ID"/>
+		<result column="LA" property="LA"/>
 	</resultMap>
-	
-	<select id="selectAttendance" resultMap="AttendanceResultSet" parameterType="map">
-		SELECT A.ADATE, A.STU_ID, A.LA, S.STU_NAME
-		<!--  학생 이름 추가  -->
-		FROM ATTENDANCE A LEFT JOIN STUDENT S ON A.STU_ID = S.STU_ID
-		WHERE S.CLASS_CODE = #{classCode}
-	</select>
-	
-	<resultMap type="Attendance" id="Attendance">
-	<result column="ADATE" property="aDate"/>
-	<result column="STU_ID" property="STU_ID"/>
-	<result column="LA" property="LA"/>
-	</resultMap>
-	
+
+	<!-- 학생 출결 상태 추가 -->
 	<insert id="insertAttendance" parameterType="list">
-		INSERT ALL
-		<foreach collection="list" item="attendance"> 
-		INTO ATTENDANCE (ADATE, STU_ID, LA) VALUES (#{attendance.aDate}, #{attendance.STU_ID}, #{attendance.LA}) 
-		</foreach>
-		SELECT * FROM dual
+	    INSERT ALL
+	    <foreach collection="list" item="item">
+	        INTO ATTENDANCE (ADATE, STU_ID, LA) VALUES (#{item.aDate}, #{item.STU_ID}, #{item.LA})
+	    </foreach>
+	    SELECT * FROM dual
 	</insert>
+	
+	<!-- 학생 출결 상태 수정 -->
+	<update id="updateAttendance" parameterType="java.util.List">
+	  <foreach collection="attendanceList" item="Attendance">
+	    UPDATE ATTENDANCE
+	    SET LA = #{Attendance.LA}
+	    WHERE STU_ID = #{Attendance.STU_ID} AND ADATE = #{Attendance.aDate}
+	  </foreach>
+	</update>
+
+
 </mapper>

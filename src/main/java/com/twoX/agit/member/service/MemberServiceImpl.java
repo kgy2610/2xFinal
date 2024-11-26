@@ -262,4 +262,10 @@ public class MemberServiceImpl implements MemberService{
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return memberDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
 	}
+	
+	// 선생님 - 출결 
+	@Override
+	public ArrayList<Teacher> selectAttendance(String classCode) {
+		return memberDao.selectAttendance(sqlSession, classCode);
+	}
 }

@@ -29,21 +29,8 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
-	<div class="nav">
-		<img src="<c:url value='/resources/img/logo.png'/>">
-		<div class="menu">
-			<label for="mypage" id="mypage"><a href="#">마이페이지</a></label> <label
-				for="homework"><a href="#">숙제</a></label> <label for="attendance"><a
-				href="#">출결</a></label> <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
-			<label for="advicePlan"><a href="#">상담일정</a></label> <label
-				for="photo"><a href="eventPhotos.af">행사사진</a></label> <label for="studentManage"><a
-				href="#">학생관리</a></label>
-		</div>
-		<div class="undermenu">
-			<label for="info"> <a href="#" onclick="openInfoModal()">정보수정</a>
-			</label> <label for="logout"><a href="#">로그아웃</a></label>
-		</div>
-	</div>
+
+<jsp:include page="../common/teacher_menubar.jsp" />
 
 	<div class="whole_body">
 		<h1><%=grade%>학년

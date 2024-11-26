@@ -18,5 +18,4 @@ public class Attendance {
 	private String aDate;
 	private String STU_ID;
 	private String LA;
-	private String stuName;
 }
