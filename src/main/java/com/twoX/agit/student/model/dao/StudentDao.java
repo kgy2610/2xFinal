@@ -8,11 +8,12 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import com.twoX.agit.after.vo.AfterSchoolStudent;
-import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.student.model.vo.HomeworkSubmit;
 
 
 @Repository
@@ -44,14 +45,23 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectNowHomework", boNo);
 	}
 
-	// 게시글 번호로 숙제 조회
-	public Homework selectHomeworkByBoNo(SqlSessionTemplate sqlSession, int boNo) {
-		return sqlSession.selectOne("studentMapper.selectHomeworkByBoNo", boNo);
+	// 학생 숙제 제출
+	public int insertStudentHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
+		return sqlSession.insert("studentMapper.insertStudentHomework", hm);
 	}
 
-	// 숙제 제출
-	public int insertHomeworkSubmission(SqlSessionTemplate sqlSession, HmSubmit hm) {
-		return sqlSession.selectOne("studentMapper.insertHomeworkSubmission", hm);
+	// 학생 숙제 답변 조회
+	public HomeworkSubmit selectNowAnswer(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.selectOne("studentMapper.selectNowAnswer", boNo);
+	}
+
+	// 학생 숙제 제출 상태 불러오기
+	public HomeworkSubmit selectHomeworkSubmit(SqlSessionTemplate sqlSession, int boNo, String stuId) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("boNo", boNo);
+		params.put("stuId", stuId);
+		
+		return sqlSession.selectOne("studentMapper.selectHomeworkSubmit", params);
 	}
 
 	// 방과후
