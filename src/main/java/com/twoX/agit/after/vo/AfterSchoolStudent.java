@@ -15,4 +15,6 @@ public class AfterSchoolStudent {
 	private String stuId;
 	private String code;
 	private String status;
+	private String classCode;
+	private String stuName; 
 }
