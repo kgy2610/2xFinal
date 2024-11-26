@@ -1,33 +1,7 @@
 package com.twoX.agit.after.service;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 
-import com.twoX.agit.after.vo.AfterSchoolBoard;
-import com.twoX.agit.common.vo.PageInfo;
-
-public interface AfterSchoolBoardService {
-
-	//학생 방과후 글 갯수 조회
-	int selectListCount(String stuId);
-
-	//학생 방과후 글 리스트 조회
-	ArrayList<AfterSchoolBoard> selectStudentBoardList(String stuId, PageInfo pi);
-
-	//학생 방과후 상세 조회
-	AfterSchoolBoard selectNowBoard(int boNo);
-
-	//방과후 글 작성
-	int insertAfterschoolBoard(AfterSchoolBoard asb);
-
-	//방과후 글 수정
-	int updateAfterschoolBoard(AfterSchoolBoard asb);
-
-	//방과후 글 삭제
-	int deleteAfterschoolBoard(AfterSchoolBoard asb);
-
-
-=======
 import java.util.List;
 
 import com.twoX.agit.after.vo.AfterSchoolBoard;
@@ -54,6 +28,22 @@ public interface AfterSchoolBoardService {
 		//교직원 승인
 		int RequestStudentByTcIdAndStatus(String stdId, String status, String scCode);
 		
-		
->>>>>>> e3d0cc382d5d5780c014b4e5e86c845b30af5f4d
+		//학생 방과후 글 갯수 조회
+		int selectListCount(String stuId);
+
+		//학생 방과후 글 리스트 조회
+		ArrayList<AfterSchoolBoard> selectStudentBoardList(String stuId, PageInfo pi);
+
+		//학생 방과후 상세 조회
+		AfterSchoolBoard selectNowBoard(int boNo);
+
+		//방과후 글 작성
+		int insertAfterschoolBoard(AfterSchoolBoard asb);
+
+		//방과후 글 수정
+		int updateAfterschoolBoard(AfterSchoolBoard asb);
+
+		//방과후 글 삭제
+		int deleteAfterschoolBoard(AfterSchoolBoard asb);
+
 }

@@ -78,7 +78,6 @@
 		<result property="classCode" column="CLASS_CODE" />
 		<result property="stuName" column="STU_NAME" />
 	</resultMap>
-<<<<<<< HEAD
 	
 	<!-- 방과후 글 갯수 조회 -->
 	<select id="selectListcount" resultType="_int">
@@ -123,9 +122,6 @@
 		DELETE FROM AFTERSCHOOL_BOARD
 		WHERE STU_ID = #{stuId} AND BO_NO = #{boNo}
 	</delete>
-	
-	
-=======
 
 
 	<!-- 학생 승인 리스트 조회 -->
@@ -183,8 +179,4 @@
 	</select>
 
 
-
-
-
->>>>>>> e3d0cc382d5d5780c014b4e5e86c845b30af5f4d
 </mapper>
