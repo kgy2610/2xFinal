@@ -115,9 +115,9 @@ public class MemberController {
 	
 	// ------------------------------ 학생 ------------------------------
 	// 학생 반 참가
-	@RequestMapping("studentMyPage")
-	public String studentMyPage(HttpSession session, Model model) {
-		Student loginUser = (Student) session.getAttribute("loginUser");
+	   @RequestMapping("studentMyPage")
+	   public String studentMyPage(HttpSession session, Model model) {
+	      Student loginUser = (Student) session.getAttribute("loginUser");
 
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
@@ -138,79 +138,91 @@ public class MemberController {
 		return "student/myPage";
 	}
 		
-	// 학생 로그인
-	@RequestMapping("login.student")
-	public String login_student(Student s, HttpSession session, Model model) {
+	     
+	   // 학생 로그인
+	   @RequestMapping("login.student")
+	   public String login_student(Student s, HttpSession session, Model model) {
 
-		System.out.println(s.getStuId());
-		System.out.println(s.getStuPwd());
+	      System.out.println(s.getStuId());
+	      System.out.println(s.getStuPwd());
 
-		Student loginStudent = memberService.loginStudent(s);
+	      Student loginStudent = memberService.loginStudent(s);
 
-		if (loginStudent == null) {
-			System.out.println("로그인 실패");
-			model.addAttribute("errorMsg", "로그인 실패");
-			return "member/login_student";
-		} else {
-			session.setAttribute("loginUser", loginStudent);
-			System.out.println("로그인 성공");
+	      if (loginStudent == null) {
+	         System.out.println("로그인 실패");
+	         model.addAttribute("errorMsg", "로그인 실패");
+	         return "member/login_student";
+	      } else {
+	         session.setAttribute("loginUser", loginStudent);
+	         System.out.println("로그인 성공");
 
-			// classNum이 null이면 myPageStart로, 그렇지 않으면 myPage로 리다이렉트
-			if (loginStudent.getClassCode() == null) {
-				return "student/myPageStart";
-			} else {
-				return "redirect:/studentMyPage";
-			}
-		}
-	}
-	
-	// 학생 회원가입 창으로 이동
-	@RequestMapping("enrollForm.stu")
-		public String enrollForm_stu() {
-			return "member/enrollForm_student";
-	}
+	         if(loginStudent.getClassCode() == null) {
+	        	 return "student/myPageStart";
+	         }else {
+	        	// classNum이 null이면 myPageStart로, 그렇지 않으면 myPage로 리다이렉트
+		         if (loginStudent.getStatus().equals("N")) {
+		            return "student/waitClassStatus";
+		         } else {
+		            return "redirect:/studentMyPage";
+		         }
+	         }
+	         
+	      }
+	   }
+	   
+	   // 학생 회원가입 창으로 이동
+	   @RequestMapping("enrollForm.stu")
+	      public String enrollForm_stu() {
+	         return "member/enrollForm_student";
+	   }
 
-	// 학생 회원가입
-	@RequestMapping("enrollForm.student")
-	public String enrollForm_student(Student s, HttpSession session, Model model) {
-		s.setPicNo("String");
+	   // 학생 회원가입
+	   @RequestMapping("enrollForm.student")
+	   public String enrollForm_student(Student s, HttpSession session, Model model) {
+	      s.setPicNo("String");
 
-		System.out.println(s);
+	      System.out.println(s);
 
-		int result = memberService.insertStudent(s);
+	      int result = memberService.insertStudent(s);
 
-		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 회원가입이 완료되었습니다.");
-			return "redirect:/login.student";
-		} else {
-			model.addAttribute("errorMsg", "회원가입 실패");
-			return "common/errorPage";
-		}
-	}
-	
-	// 반 참가
-	@RequestMapping("student.classCode")
-	public String studentUpdateClassCode(Student s, HttpSession session, Model model) {
-		System.out.println("반 참가 아이디 : " + s.getStuId());
+	      if (result > 0) {
+	         session.setAttribute("alertMsg", "성공적으로 회원가입이 완료되었습니다.");
+	         return "redirect:/login.student";
+	      } else {
+	         model.addAttribute("errorMsg", "회원가입 실패");
+	         return "common/errorPage";
+	      }
+	   }
+	   
+	   // 반 참가
+	   @RequestMapping("student.classCode")
+	   public String studentUpdateClassCode(Student s, HttpSession session, Model model) {
+		   Student loginUser = (Student) session.getAttribute("loginUser");
+	      System.out.println("반 참가 아이디 : " + s.getStuId());
 
-		if (s.getClassCode() == null || s.getClassCode().trim().isEmpty()) {
-			model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
-			return "redirect:/"; // 적절한 메시지로 안내
-		}
+	      if (s.getClassCode() == null || s.getClassCode().trim().isEmpty()) {
+	         model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
+	         return "redirect:/"; // 적절한 메시지로 안내
+	      }
 
-		int result = memberService.studentUpdateClassCode(s);
+	      int result = memberService.studentUpdateClassCode(s);
 
-		if (result > 0) {
-			Student student = memberService.selectInfo(s.getStuId());
-			session.setAttribute("loginUser", student);
-			session.setAttribute("alertMsg", "반 참가 성공");
-
-			return "redirect:/studentMyPage";
-		} else {
-			model.addAttribute("alertMsg", "반 참가 실패");
-			return "redirect:/";
-		}
-	}
+	      if (result > 0) {
+	         Student student = memberService.selectInfo(s.getStuId());
+	         session.setAttribute("loginUser", student);
+	         session.setAttribute("alertMsg", "반 참가 성공");
+	         
+	         if (loginUser.getStatus().equals("N")) {
+		            return "student/waitClassStatus";
+		         } else {
+		            return "redirect:/studentMyPage";
+		         }
+	         
+	      } else {
+	         model.addAttribute("alertMsg", "반 참가 실패");
+	         return "redirect:/";
+	      }
+	   }
 
 	@RequestMapping("student.update")
 	public String studentUpdate(String updateNum, HttpSession session, Model model) {

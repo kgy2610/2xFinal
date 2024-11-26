@@ -98,22 +98,26 @@
 	<select id="selectNowBoard" resultType="AfterSchoolBoard">
 		SELECT BO_NO AS boNo,
 			   TITLE AS title,
-			   BO_CONTENT AS boContent
+			   BO_CONTENT AS boContent,
+			   ORIGIN_NAME AS originName,
+				CHANGE_NAME AS changeName
 		FROM AFTERSCHOOL_BOARD
 		WHERE BO_NO = #{boNo}
 	</select>
 	
 	<!-- 방과후 글 작성 -->
 	<insert id="insertStudentBoard">
-		INSERT INTO AFTERSCHOOL_BOARD(TITLE,BO_CONTENT,STU_ID,CODE,ORIGIN_NAME,CHANGE_NAME)
-				VALUES(#{title},#{boContent},#{stuId},#{code},#{originName},#{changeName})
+		INSERT INTO AFTERSCHOOL_BOARD(BO_NO,TITLE,BO_CONTENT,STU_ID,CODE,ORIGIN_NAME,CHANGE_NAME)
+				VALUES(SEQ_AFTERSCHOOL_BOARD.NEXTVAL,#{title},#{boContent},#{stuId},#{code},#{originName},#{changeName})
 	</insert>
 	
 	<!-- 방과후 글 수정 -->
 	<update id="updateStudentBoard">
 		UPDATE AFTERSCHOOL_BOARD
 		SET TITLE = #{title},
-			BO_CONTENT = #{boContent}
+			BO_CONTENT = #{boContent},
+			ORIGIN_NAME = #{originName},
+			CHANGE_NAME = #{changeName}
 		WHERE BO_NO = #{boNo}
 	</update>
 	
