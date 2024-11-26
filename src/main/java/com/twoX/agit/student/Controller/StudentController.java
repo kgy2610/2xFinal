@@ -24,6 +24,7 @@ import com.twoX.agit.after.service.AfterSchoolBoardService;
 import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.after.vo.AfterSchoolStudent;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.board.model.vo.ParentsBoard;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
@@ -250,6 +251,7 @@ public class StudentController {
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		String code =  studentService.afterschoolCode(loginUser.getStuId());
 		
+		System.out.println(upfile);
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = Template.saveFile(upfile, session, "/resources/file/");
 			
@@ -270,18 +272,19 @@ public class StudentController {
 		
 	}
 	
+	//글 수정하기 페이지로 이동
+	@RequestMapping("after_modify")
+	public String board_modify(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
+		session.setAttribute("npage",npage);
+		session.setAttribute("cupage",currentPage);
+		return "student/modifyAfterschool";
+	}
+	
 	//글 수정하기
 	@RequestMapping("update.afterSt")
-	public String update_afterschoolStu(String title, String boContent,AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session) {
+	public String update_afterschoolStu(AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session) {
 		Student loginUser = (Student)session.getAttribute("loginUser");
-		
-		
-		String code = studentService.afterschoolCode(loginUser.getStuId());
-		asb.setStuId(loginUser.getStuId());
-		asb.setCode(code);
-		asb.setTitle(title);
-		asb.setBoContent(boContent);
-		
 		if(!reupfile.getOriginalFilename().equals("")) {
 			//기존 첨부파일이 있다 -> 기존파일을 삭제
 			if(asb.getOriginName() != null) {
@@ -298,7 +301,6 @@ public class StudentController {
 			asb.setOriginName(opb.getOriginName());
 			asb.setChangeName(opb.getChangeName());
 		}
-		
 		
 		int result = afterschoolService.updateAfterschoolBoard(asb);
 		if(result > 0) {
