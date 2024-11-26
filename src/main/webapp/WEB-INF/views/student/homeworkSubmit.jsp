@@ -47,9 +47,12 @@
 			</div>
 					<div id="submit_area">
 						<div id="submit_homework">
-							<textarea id="sb_homework" style="background-color: white;"></textarea>
+							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;"></textarea>
 						</div>
-						<button id="submit_button">제출</button>
+				<input type="hidden" name="boNo" value="${npage.boNo}">
+				<input type="hidden" name="classCode" value="${npage.classCode}">
+				<input type="hidden" name="hmContent" value="${napge.hmContent}">
+				<button id="submit_button">제출</button>
 					</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
