@@ -2,7 +2,6 @@ package com.twoX.agit.after.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -12,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.twoX.agit.after.vo.AfterSchoolBoard;
-import com.twoX.agit.after.vo.AfterSchoolStudent;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Student;
-import com.twoX.agit.member.model.vo.Teacher;
+
+
 
 @Repository
 public class AfterSchoolBoardDao {
@@ -49,6 +48,34 @@ public class AfterSchoolBoardDao {
 		return (ArrayList)sqlSession.selectList("afterMapper.acceptTeacherListbyScCode", scCode);
 	}
 
+	public int selectListCount(SqlSessionTemplate sqlSession, String stuId) {
+		return sqlSession.selectOne("afterMapper.selectListcount",stuId);
+	}
+
+	public ArrayList<AfterSchoolBoard> selectStudentBoardList(SqlSessionTemplate sqlSession, String stuId,
+			PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("afterMapper.selectStudentBoardList", stuId,rowBounds);
+	}
+
+	public AfterSchoolBoard selectNowBoard(SqlSessionTemplate sqlSession, int boNo) {
+		return sqlSession.selectOne("afterMapper.selectNowBoard",boNo);
+	}
+
+	public int insertAfterschoolBoard(SqlSessionTemplate sqlSession, AfterSchoolBoard asb) {
+		return sqlSession.insert("afterMapper.insertStudentBoard",asb);
+	}
+
+	public int updateAfterschoolBoard(SqlSessionTemplate sqlSession, AfterSchoolBoard asb) {
+		return sqlSession.update("afterMapper.updateStudentBoard",asb);
+	}
+
+	public int deleteAfterschoolBoard(SqlSessionTemplate sqlSession, AfterSchoolBoard asb) {
+		return sqlSession.delete("afterMapper.deleteStudentBoard",asb);
+	}
+
 
 	public int RequestTeacherByTcIdAndStatus(SqlSessionTemplate sqlSession, String stuId, String status,String scCode) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -57,6 +84,5 @@ public class AfterSchoolBoardDao {
 		params.put("scCode", scCode);
 		return sqlSession.update("afterMapper.RequestTeacherByTcIdAndStatus", params);
 	}
-   
-	
+
 }
