@@ -260,6 +260,13 @@ public class MemberDao {
 		return sqlSession.update("homeworkMapper.updateHomework", params);
 	}
 	
+	// 선생님 - 출결 리스트
+	public ArrayList<Teacher> selectAttendance(SqlSessionTemplate sqlSession, String classCode) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("classCode", classCode);
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAttendance", params);
+	}
+	
 	// 관리자 - 총 교직원 수
 	public int getTeacherCount(SqlSessionTemplate sqlSession) {
 	    return sqlSession.selectOne("memberMapper.getTeacherCount"); // sqlSession을 직접 사용

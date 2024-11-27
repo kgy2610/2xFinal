@@ -40,6 +40,7 @@
 				+ attendanceRate + '%';
 
 		fetchScores(stuId);
+		
 	}
 	
 function fetchScores(stuId) {
@@ -98,8 +99,6 @@ function fetchScores(stuId) {
     });   
     
 }
-
-
 	function chCancel(){
 		
 	}

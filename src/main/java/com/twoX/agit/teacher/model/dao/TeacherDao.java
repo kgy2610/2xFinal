@@ -108,14 +108,14 @@ public class TeacherDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectsubmitHomework", params);
 	}
 	
-	public ArrayList<Attendance> selectAttendance(SqlSessionTemplate sqlSession, String classCode) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("classCode", classCode);
-		return (ArrayList)sqlSession.selectList("attendanceMapper.selectAttendance", params);
-	}
 	
 	public int insertAttendance(SqlSessionTemplate sqlSession, List<Attendance> attendanceList) {
 		return sqlSession.insert("attendanceMapper.insertAttendance", attendanceList);
+	}
+	
+
+	public int updateAttendance(SqlSessionTemplate sqlSession, ArrayList<Attendance> updateAttendance) {
+		return sqlSession.update("attendanceMapper.updateAttendance", updateAttendance);
 	}
 	
 	public List<Map<String, Object>> smCodeStudent(SqlSessionTemplate sqlSession, String code){	
