@@ -45,11 +45,11 @@
             </div>
             <div id="submit_area">
                 <div id="submit_homework">
-                    <div style="background-color: white;">${napge.hmStuContent}</div>
+                    <div style="background-color: white;">${npage.hmStuContent}</div>
                 </div>
-                <button id="submit_button">수정</button>
+                <button class="create_button" id="modify_button"  onclick="location.href='hmAnswer_modify?boNo=${npage.boNo}&cpage=${cpage}'">수정</button>
             </div>
-            <div id="teacher_confirm"></div>
+            <div id="teacher_confirm">${npage.tcComment}</div>
             <div id="homework_score">
                 <div>점수</div>
                 <div>${npage.score}</div>

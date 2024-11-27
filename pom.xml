@@ -251,7 +251,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 				
-		</dependencies>
+	</dependencies>
 		
 		
 	

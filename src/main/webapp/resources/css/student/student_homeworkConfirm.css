@@ -233,7 +233,7 @@
     color: #A98467; /* 원하는 색상 코드로 변경 */
     opacity: 1; /* 투명도 설정 (1이 불투명, 0이 완전 투명) */
 }
-#submit_button{
+.submit_button{
     position: absolute;
     background-color: white;
     color: #A98467;
@@ -246,7 +246,7 @@
     cursor: pointer;
     border-radius: 30px;
 }
-#submit_button:hover{
+.submit_button:hover{
     background-color: #A98467;
     color: white;
 }

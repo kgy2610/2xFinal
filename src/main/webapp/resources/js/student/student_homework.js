@@ -1,4 +1,3 @@
-
         const ctx = document.getElementById('barCanvas').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'bar',  // 기본 유형을 막대그래프로 설정
@@ -58,3 +57,13 @@
                 element.innerText = text.substring(0, 12) + "...";
             }
         });
+        
+function moveHomeworkDetail(boNo, status, currentPage) {
+	if (status === 'Y') {
+	// 이미 제출된 경우 확인 페이지로 이동
+	location.href = `homework.check?boNo=${boNo}&cpage=${currentPage}`;
+	} else {
+	// 미제출인 경우 제출 페이지로 이동
+	location.href = `homework_detail?boNo=${boNo}&cpage=${currentPage}`;
+	}
+}

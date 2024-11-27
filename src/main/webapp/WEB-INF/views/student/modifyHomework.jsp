@@ -38,25 +38,34 @@
 				<div id="enroll_info">마감일 | ${npage.deadLine}</div>
 				<div id="en_content">${npage.hmContent}</div>
 
-				<form action="enroll.homework_student" method="post" enctype="multipart/form-data">
+				<form action="update.homework_student" method="post" enctype="multipart/form-data">
 					<div id="enroll_file">
 						<input type="file" name="upfile" id="fileInput" style="display: none;" onchange="showFileName()">
 							<label for="fileInput" class="custom-file-upload"> 파일 선택 </label>
-							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+							
+							<c:choose>
+									<c:when test="${not empty npage.originName }">
+			                       		<span id="fileName" class="file-name">${npage.originName}</span>
+			                       	</c:when>
+			                       	<c:otherwise>
+										<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+									</c:otherwise>
+			                </c:choose>
 					</div>
 			</div>
 					<div id="submit_area">
 						<div id="submit_homework">
-							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;">${napge.hmStuContent}</textarea>
+							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;">${npage.hmStuContent}</textarea>
 						</div>
 				<input type="hidden" name="boNo" value="${npage.boNo}">
 				<input type="hidden" name="classCode" value="${npage.classCode}">
-				<button id="submit_button">제출</button>
+				<button type="submit" class="create_button" id="modify_button">수정</button>
 					</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 
         
     </div>
+    <div id="chat_button"><img src="<c:url value='img/message.png'/>"></div>
 </body>
 </html>

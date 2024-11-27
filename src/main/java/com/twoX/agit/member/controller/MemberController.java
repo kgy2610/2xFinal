@@ -142,14 +142,10 @@ public class MemberController {
 		   ArrayList<Chat> clist = memberService.selectChatList(loginUser);
 		   return new Gson().toJson(clist);
 		}
-		
-	     
+	      
 	   // 학생 로그인
 	   @RequestMapping("login.student")
 	   public String login_student(Student s, HttpSession session, Model model) {
-
-	      System.out.println(s.getStuId());
-	      System.out.println(s.getStuPwd());
 
 	      Student loginStudent = memberService.loginStudent(s);
 
@@ -186,8 +182,6 @@ public class MemberController {
 	   public String enrollForm_student(Student s, HttpSession session, Model model) {
 	      s.setPicNo("String");
 
-	      System.out.println(s);
-
 	      int result = memberService.insertStudent(s);
 
 	      if (result > 0) {
@@ -203,7 +197,6 @@ public class MemberController {
 	   @RequestMapping("student.classCode")
 	   public String studentUpdateClassCode(Student s, HttpSession session, Model model) {
 		   Student loginUser = (Student) session.getAttribute("loginUser");
-	      System.out.println("반 참가 아이디 : " + s.getStuId());
 
 	      if (s.getClassCode() == null || s.getClassCode().trim().isEmpty()) {
 	         model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
@@ -234,13 +227,11 @@ public class MemberController {
 
 		Student s = (Student) session.getAttribute("loginUser");
 		String stuId = s.getStuId();
-		System.out.println("번호수정1 :" + updateNum);
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("stuId", stuId);
 		map.put("updateNum", updateNum);
 		int result = memberService.studentUpdate(map);
-		System.out.println("result : " + result);
 
 		if (result > 0) {
 			Student student = memberService.loginStudent(s);
@@ -258,13 +249,11 @@ public class MemberController {
 	public String updatePwdSt(String updatePwd, HttpSession session, Model model) {
 		Student s = (Student) session.getAttribute("loginUser");
 		String stuId = s.getStuId();
-		System.out.println("비번수정1 :" + updatePwd);
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("stuId", stuId);
 		map.put("updatePwd", updatePwd);
 		int result = memberService.studentPwdUpdate(map);
-		System.out.println("result : " + result);
 
 		if (result > 0) {
 			Student student = memberService.loginStudent(s);
@@ -282,13 +271,11 @@ public class MemberController {
 	public String imgselectupdate(String picNo, HttpSession session, Model model) {
 		Student s = (Student) session.getAttribute("loginUser");
 		String stuId = s.getStuId();
-		System.out.println("프로필 수정 : " + picNo);
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("stuId", stuId);
 		map.put("picNo", picNo);
 		int result = memberService.studentSelectImg(map);
-		System.out.println("result : " + result);
 
 		if (result > 0) {
 			Student student = memberService.loginStudent(s);
@@ -357,7 +344,6 @@ public class MemberController {
 		// 학교 코드 추출
 		String schoolCode = s.getClassCode().substring(0, 7);
 		String oecode = memberService.selectOeCode(schoolCode);
-		System.out.println("controller | 학교 코드: " + schoolCode);
 
 		// 현재 날짜를 기반으로 연도(year)와 학기(semester) 계산
 		LocalDate today = LocalDate.now();
@@ -375,7 +361,6 @@ public class MemberController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		String formattedDate = today.format(formatter);
 		String tomorrowString = today.plusDays(1).format(formatter);
-		System.out.println("controller | 시간표 날짜 : " + formatter);
 
 		// API URL 생성
 		String url = "https://open.neis.go.kr/hub/elsTimetable";
@@ -452,7 +437,6 @@ public class MemberController {
 	// 학부모 회원가입
 	@RequestMapping("enroll.parents")
 	public String enroll_parents(Parents p,HttpSession session, Model model) {
-		System.out.print(p);
 		int result = memberService.insertParents(p);
 		
 		if(result > 0) {
@@ -579,7 +563,6 @@ public class MemberController {
 	// 선생님 회원가입
 	@RequestMapping("enrollForm.teacher")
 	public String enrollForm_teacher(Teacher t, HttpSession session, Model model) {
-		System.out.println(t);
 
 		int result = memberService.insertTeacher(t);
 
@@ -605,7 +588,6 @@ public class MemberController {
 		public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
 			// 로그인 한 교사정보 가져오기
 			Teacher teacher = (Teacher) session.getAttribute("loginUser");
-			System.out.println(teacher);
 			if (teacher == null) {
 				session.setAttribute("alertMsg", "로그인정보가 없습니다.");
 				return "teacher/myPage";
@@ -615,7 +597,6 @@ public class MemberController {
 			t.setTcPwd(newPassword);
 
 			int result = memberService.updatePassword(t);
-			System.out.println("수정된 비밀번호: " + t.getTcPwd());
 
 			if (result > 0) {
 				session.setAttribute("loginUser", memberService.loginTeacher(t));
@@ -631,7 +612,6 @@ public class MemberController {
 		@RequestMapping("teacher.classCode")
 		public String updateClassCode(Teacher t, HttpSession session, Model model) {
 			t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
-			System.out.println(t.getClassCode());
 
 			if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
 				model.addAttribute("alertMsg", "반 코드를 입력해야 합니다.");
@@ -643,8 +623,6 @@ public class MemberController {
 			if (result > 0) {
 				session.setAttribute("loginUser", memberService.loginTeacher(t));
 				session.setAttribute("alertMsg", "반 개설 성공");
-				System.out.println(result);
-				System.out.println(memberService.loginTeacher(t));
 				
 				return "teacher/myPage";
 			} else {
