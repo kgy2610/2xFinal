@@ -49,6 +49,7 @@
 		<mapper resource="mappers/memo-mapper.xml" />
 		<mapper resource="mappers/homework-mapper.xml" />
 		<mapper resource="mappers/attendance-mapper.xml"/>
+		<mapper resource="mappers/studentmanage-mapper.xml" />
 	</mappers>
 
 </configuration>

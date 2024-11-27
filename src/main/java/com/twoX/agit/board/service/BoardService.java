@@ -95,5 +95,4 @@ public interface BoardService {
 	int insertIMGBoard(EventImgBoard eib);
 	
 	int updateImgBoard(EventImgBoard eib);
-	
 }  

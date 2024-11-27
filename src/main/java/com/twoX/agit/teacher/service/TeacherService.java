@@ -2,11 +2,13 @@ package com.twoX.agit.teacher.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 
 public interface TeacherService {
@@ -50,9 +52,13 @@ public interface TeacherService {
 	// 숙제 점수 및 말씀 부여
 	int updateSubmitHomework(String teacherComment, int score, String stuId);
 	
-	// 출결
-	ArrayList<Attendance> selectAttendance(String classCode);
-	
 	// 출결 정보 저장
 	int insertAttendance(List<Attendance> attandanceList);
+	
+	// 출결 상태 업데이트
+	int updateAttendance(ArrayList<Attendance> updateAttendance);
+
+	//code가져가서 확인
+	List<Map<String, Object>> smCodeStudent(String code);
+
 }

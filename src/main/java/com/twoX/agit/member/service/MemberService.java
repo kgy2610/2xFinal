@@ -143,4 +143,6 @@ public interface MemberService {
 	
 	// 반학생 채팅 리스트 조회
 	ArrayList<Chat> selectStuChatList(String classCode);
+	// 선생님 - 출결
+	ArrayList<Teacher> selectAttendance(String classCode);
 }

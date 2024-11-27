@@ -11,22 +11,7 @@
 	href="<c:url value='/resources/css/teacher/madeAfterSchool.css'/>">
 </head>
 <body>
-    <div class="nav">
-        <img src="<c:url value='/resources/img/logo.png'/>">
-        <div class="menu">
-            <label for="mypage"><a href="#">마이페이지</a></label>
-            <label for="homework"><a href="#">숙제</a></label>
-            <label for="attendance"><a href="#">출결</a></label>
-            <label for="community" id="mypage"><a href="#">방과후 반</a></label>
-            <label for="advicePlan"><a href="#">상담일정</a></label>
-            <label for="photo"><a href="#">행사사진</a></label>
-            <label for="studentManage"><a href="#">학생관리</a></label>
-        </div>
-        <div class="undermenu">
-            <label for="info"><a href="#">정보수정</a></label>
-            <label for="logout"><a href="#">로그아웃</a></label>
-        </div>
-    </div>
+    <jsp:include page="../common/teacher_menubar.jsp" />
 
     <div class="whole_body">
          <img src="<c:url value='/resources/img/teacher/free-sticker-keyboard-12140857.png'/>">

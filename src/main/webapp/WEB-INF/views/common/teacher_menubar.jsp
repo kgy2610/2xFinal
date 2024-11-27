@@ -20,7 +20,7 @@
             <label for="advicePlan"><a href="#">상담일정</a></label>
             <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
             <label for="photo"><a href="teacher_eventImgList">행사사진</a></label>
-            <label for="studentManage"><a href="#">학생관리</a></label>
+            <label for="studentManage"><a href="studentManage.me">학생관리</a></label>
         </div>
         <div class="undermenu">
             <label for="info" onclick="openInfoModal()"><a href="#">정보수정</a></label>

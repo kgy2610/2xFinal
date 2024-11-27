@@ -32,27 +32,23 @@
 			<tbody>
 			    <c:forEach var="attendance" items="${attendanceList}">
 			        <tr>
-			            <td>${attendance.STU_ID}</td>
+			            <td>${attendance.stuId}</td>
 			            <td>${attendance.stuName}</td>
-			            <input type="hidden" name="studentId" value="${attendance.STU_ID}">
-			            <td><input type="radio" name="attendance_${attendance.STU_ID}" value="TA"> 지각</td>
-			            <td><input type="radio" name="attendance_${attendance.STU_ID}" value="AB"> 결석</td>
-			            <td><input type="radio" name="attendance_${attendance.STU_ID}" value="AT" checked> 출석</td>
+			            <input type="hidden" name="studentId" value="${attendance.stuId}">
+			            <td><input type="radio" name="attendance_${attendance.stuId}" value="TA"> 지각</td>
+			            <td><input type="radio" name="attendance_${attendance.stuId}" value="AB"> 결석</td>
+			            <td><input type="radio" name="attendance_${attendance.stuId}" value="AT" checked> 출석</td>
 			        </tr>
 			    </c:forEach>
 			</tbody>
         </table>
         <button type="submit" class="save-button">저장</button>
     </form>
+    
+    <button type="button" class="update-button" onclick="updateAttendance()">수정</button>
    </div>
 
-<script>
-    // 현재 날짜를 yyyy-MM-dd 형식으로 구하기
-    const today = new Date().toISOString().split('T')[0];
-    
-    // date-picker input의 value를 오늘 날짜로 설정
-    document.getElementById('datePicker').value = today;
-</script>
+<script src="<c:url value='/resources/js/teacher/teacherAttendance.js'/>"></script>
 
 </body>
 </html>

@@ -20,6 +20,7 @@ public class HmSubmit {
 	private String classCode;
 	private int boNo;
 	private String hmTitle;
+	private String hmContent;
 	private String hmStuContent;
 	private int score;
 	private String tcComment;

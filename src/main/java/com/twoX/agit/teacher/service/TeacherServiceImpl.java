@@ -2,6 +2,7 @@ package com.twoX.agit.teacher.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.teacher.model.dao.TeacherDao;
 
@@ -99,16 +101,22 @@ public class TeacherServiceImpl  implements TeacherService{
 		return teacherDao.updateSubmitHomework(sqlSession, teacherComment, score, stuId);
 	}
 
-	// 출결 
-	@Override
-	public ArrayList<Attendance> selectAttendance(String classCode) {
-		return teacherDao.selectAttendance(sqlSession, classCode);
-	}
 
 	// 출결 저장
 	@Override
 	public int insertAttendance(List<Attendance> attandanceList) {
 		return teacherDao.insertAttendance(sqlSession, attandanceList);
+	}
+
+	// 출결 상태 업데이트
+	@Override
+	public int updateAttendance(ArrayList<Attendance> updateAttendance) {
+		return teacherDao.updateAttendance(sqlSession, updateAttendance);
+	}
+
+	@Override
+	public List<Map<String, Object>> smCodeStudent(String code) {
+		return teacherDao.smCodeStudent(sqlSession, code);
 	}
 
 }
