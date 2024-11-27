@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stuManageMapper">
+	<!-- 학생관리 -->
+	
+	<!-- 점수여기잇음 -->
+	<resultMap type="HmSubmit" id="HomeworkSubmitResultSet">
+ 		<result column="STU_ID" property="stuId" />
+ 		<result column="BO_NO" property="boNo" />
+ 		<result column="HM_TITLE" property="hmTitle" />
+ 		<result column="HM_CONTENT" property="hmContent" />
+ 		<result column="SCORE" property="score" />
+ 		<result column="TC_COMMENT" property="tcComment" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 		<result column="STATUS" property="status" />
+ 	</resultMap>
+ 	
+ 	<!-- 교직원 코드 여기있음 과목도 있음 -->
+ 	<resultMap type="Homework" id="HomeworkResultSet">
+ 		<result column="BO_NO" property="boNo" />
+ 		<result column="TC_ID" property="tcId" />
+ 		<result column="CLASS_CODE" property="classCode" />
+ 		<result column="HM_TITLE" property="hmTitle" />
+ 		<result column="DEADLINE" property="deadLine" />
+ 		<result column="HM_CONTENT" property="hmContent" />
+ 		<result column="CREATE_DATE" property="createDate" />
+ 		<result column="SUBJECT" property="subject" />
+ 	</resultMap>
+ 	
+ 	<!-- 학생 승인 상태 여기있음 -->
+ 	<resultMap type="Student" id="studentResultSet">
+		<result column="STU_ID" property="stuId" />
+		<result column="STU_PWD" property="stuPwd" />
+		<result column="CLASS_CODE" property="classCode" />
+		<result column="STU_NAME" property="stuName" />
+		<result column="PHONE" property="phone" />
+		<result column="STU_NUM" property="stuNum" />
+		<result column="STATUS" property="status" />
+		<result column="PIC_NO" property="picNo" />
+		<result column="STU_QUESTION" property="stuQuestion" />
+		<result column="STU_ANSWER" property="stuAnswer" />
+	</resultMap>
+	
+	<!-- 출석 상태 여기있음 -->
+	<resultMap type="Attendance" id="AttendanceResultSet">
+		<result column="ADATE" property="aDate"/>
+		<result column="STU_ID" property="STU_ID"/>
+		<result column="LA" property="LA"/>
+		<result column="STU_NAME" property="stuName"/>
+	</resultMap>
+ 	
+ 	
+ 	<select id="smCodeStudent" parameterType="String" resultType="map">
+     SELECT 
+            s.STU_ID AS stuId,
+            s.STU_NAME AS stuName,
+            s.STU_NUM AS stuNum,  
+            COUNT(CASE WHEN a.LA IN ('TA', 'AT') THEN 1 END) AS attendedDays,
+            (SELECT COUNT(*) 
+             FROM Attendance 
+             WHERE STU_ID = s.STU_ID) AS totalDays,  <!-- 학생별 출석 일수 -->
+            ROUND(
+                (COUNT(CASE WHEN a.LA IN ('TA', 'AT') THEN 1 END) * 1.0 / 
+                 (SELECT COUNT(*) FROM Attendance WHERE STU_ID = s.STU_ID)) * 100, 2
+            )|| '%' AS attendanceRate
+        FROM 
+            Student s
+        LEFT JOIN 
+            Attendance a ON s.STU_ID = a.STU_ID
+        WHERE 
+            s.CLASS_CODE = #{classCode}
+            AND s.STATUS = 'Y'
+        GROUP BY 
+            s.STU_ID, s.STU_NAME, s.STU_NUM
+</select>
+ 	
+ 	
+
+</mapper>

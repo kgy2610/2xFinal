@@ -133,4 +133,7 @@ public interface MemberService {
 
 	// 숙제 수정
 	int updateHomework(String hmTitle, String subject, String deadLine, String hmContent);
+	
+	// 선생님 - 출결
+	ArrayList<Teacher> selectAttendance(String classCode);
 }
