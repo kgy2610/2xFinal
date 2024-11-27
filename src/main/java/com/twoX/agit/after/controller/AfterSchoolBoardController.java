@@ -59,7 +59,6 @@ public class AfterSchoolBoardController {
 		int boardCount = afterSchoolBoardService.afterSchoolListCount(code);
 		System.out.println(boardCount);
 
-		//선생님코드와 학생의 코드가 같은 학생 리스트 가져오기
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 5);
 		ArrayList<AfterSchoolBoard> list = afterSchoolBoardService.afSelectList(code, pi);
 		

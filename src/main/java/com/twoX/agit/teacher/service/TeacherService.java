@@ -2,11 +2,13 @@ package com.twoX.agit.teacher.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 
 public interface TeacherService {
@@ -55,4 +57,8 @@ public interface TeacherService {
 	
 	// 출결 정보 저장
 	int insertAttendance(List<Attendance> attandanceList);
+	
+	//code가져가서 확인
+	List<Map<String, Object>> smCodeStudent(String code);
+	
 }

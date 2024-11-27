@@ -17,6 +17,7 @@ import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
@@ -348,4 +349,26 @@ public class TeacherController {
 	  
 		return "teacher/myPage";
 	}
+	
+	
+	//학생관리 페이지 이동
+	@RequestMapping("studentManage.me")
+	public String studentManage(HttpSession session, Model model) {
+	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+	    String classCode = loginUser.getClassCode();
+
+	    // 학생별 출석률 가져오기
+	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
+	    System.out.println(stuManageList);
+
+	    model.addAttribute("stuManageList", stuManageList);
+	    return "teacher/studentManage";
+	}
+	
+	
+	
+	
+	
+	
+	
 }
