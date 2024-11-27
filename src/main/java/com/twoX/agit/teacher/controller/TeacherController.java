@@ -11,13 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
-import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
@@ -360,14 +362,33 @@ public class TeacherController {
 	    // 학생별 출석률 가져오기
 	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
 	    System.out.println(stuManageList);
+	    
+	    
 
 	    model.addAttribute("stuManageList", stuManageList);
 	    return "teacher/studentManage";
 	}
 	
+	 // 한 학생의 과목별 점수 조회
+	@RequestMapping(value = "studentManage.me", produces="application/json; charset-UTF-8")
+	@ResponseBody
+	public String getStudentScores(String stuId) {
+	    System.out.println("Received stuId: " + stuId); 
+	    List<Map<String, Object>> scoresList = teacherService.getStudentScoresByStuId(stuId);
+	    System.out.println("scoresList: " + scoresList);
+	    return new Gson().toJson(scoresList);  // JSON 형식으로 반환
+	}
 	
-	
-	
+	// 한학생 승인 취소
+	@RequestMapping("studentManageCansel.me")
+	public String studentManageCansel(HttpSession session, Model model) {
+	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+	    String classCode = loginUser.getClassCode();
+
+	    
+	    
+	    return "teacher/studentManage";
+	}
 	
 	
 	

@@ -118,4 +118,9 @@ public class TeacherServiceImpl  implements TeacherService{
 		return teacherDao.smCodeStudent(sqlSession, code);
 	}
 
+	@Override
+	 public List<Map<String, Object>> getStudentScoresByStuId(String stuId) {
+        return teacherDao.getStudentScoresByStuId(sqlSession, stuId);
+    }
+
 }

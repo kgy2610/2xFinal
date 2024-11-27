@@ -61,4 +61,7 @@ public interface TeacherService {
 	//code가져가서 확인
 	List<Map<String, Object>> smCodeStudent(String code);
 	
+	//성적 과목 가져오기
+	 List<Map<String, Object>> getStudentScoresByStuId(String stuId);
+	
 }

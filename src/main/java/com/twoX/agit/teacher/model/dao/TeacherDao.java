@@ -121,4 +121,10 @@ public class TeacherDao {
 	public List<Map<String, Object>> smCodeStudent(SqlSessionTemplate sqlSession, String code){	
 		return (ArrayList)sqlSession.selectList("stuManageMapper.smCodeStudent", code);
 	}
+	
+	public List<Map<String, Object>> getStudentScoresByStuId(SqlSessionTemplate sqlSession, String stuId) {
+        return sqlSession.selectList("stuManageMapper.getStudentScoresByStuId", stuId);
+    }
+	
+	
 }
