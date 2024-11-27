@@ -47,6 +47,7 @@ public class StudentDao {
 
 	// 학생 숙제 제출
 	public int insertStudentHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
+		System.out.println(hm);
 		return sqlSession.insert("studentMapper.insertStudentHomework", hm);
 	}
 
@@ -65,23 +66,23 @@ public class StudentDao {
 	}
 
 	// 방과후
-			public int updateAfterschoolCode(SqlSessionTemplate sqlSession, Map<String, String> map) {
-				return sqlSession.insert("afterschoolmapper.insertAfterschoolCode", map);
-			}
+	public int updateAfterschoolCode(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.insert("afterschoolmapper.insertAfterschoolCode", map);
+	}
 
-			public String afterschoolCode(SqlSessionTemplate sqlSession, String stuId) {
-				return sqlSession.selectOne("afterschoolmapper.afterschoolCode", stuId);
-			}
+	public String afterschoolCode(SqlSessionTemplate sqlSession, String stuId) {
+		return sqlSession.selectOne("afterschoolmapper.afterschoolCode", stuId);
+	}
 
-			public AfterSchoolStudent afterschoolStart(SqlSessionTemplate sqlSession, String stuId) {
-				return sqlSession.selectOne("afterschoolmapper.afterschoolStart", stuId);
-			}
+	public AfterSchoolStudent afterschoolStart(SqlSessionTemplate sqlSession, String stuId) {
+		return sqlSession.selectOne("afterschoolmapper.afterschoolStart", stuId);
+	}
 
-			public AfterSchool afterschool(SqlSessionTemplate sqlSession, String code) {
-				return sqlSession.selectOne("afterschoolmapper.afterschool", code);
-			}
+	public AfterSchool afterschool(SqlSessionTemplate sqlSession, String code) {
+		return sqlSession.selectOne("afterschoolmapper.afterschool", code);
+	}
 
-			public String afterschoolTeacher(SqlSessionTemplate sqlSession, String tcId) {
-				return sqlSession.selectOne("afterschoolmapper.afterschoolTeacher", tcId);
-			}
+	public String afterschoolTeacher(SqlSessionTemplate sqlSession, String tcId) {
+		return sqlSession.selectOne("afterschoolmapper.afterschoolTeacher", tcId);
+	}
 }

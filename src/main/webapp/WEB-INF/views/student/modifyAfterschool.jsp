@@ -16,7 +16,7 @@
 </head>
 <body>
     <jsp:include page="../common/student_menubar.jsp" />
-        <style>
+    <style>
     	*{
     		overflow: visible;
     	}
