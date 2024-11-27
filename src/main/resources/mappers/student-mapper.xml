@@ -6,11 +6,18 @@
  	<resultMap type="HomeworkSubmit" id="HomeworkSubmitResultSet">
  		<result column="STU_ID" property="stuId" />
  		<result column="BO_NO" property="boNo" />
- 		<result column="HM_CONTENT" property="hmContent" />
+ 		<result column="HM_STUCONTENT" property="hmStuContent" />
  		<result column="SCORE" property="score" />
  		<result column="TC_COMMENT" property="tcComment" />
  		<result column="CREATE_DATE" property="createDate" />
  		<result column="STATUS" property="status" />
+ 		<result column="ORIGIN_NAME" property="originName"/>
+ 		<result column="CHANGE_NAME" property="changeName"/>
+ 		
+ 		<result column="HM_TITLE" property="hmTitle" />
+ 		<result column="DEADLINE" property="deadLine" />
+ 		<result column="SUBJECT" property="subject" />
+ 		<result column="HM_CONTENT" property="hmContent" />
  	</resultMap>
  	
  	<resultMap type="Homework" id="HomeworkResultSet">
@@ -67,7 +74,7 @@
 	</select>
 	
 	<!-- 학생 숙제 제출 여부 확인 -->
-	<select id="selectHomeworkSubmit" parameterType="map" resultMap="HomeworkSubmitResultSet">
+	<select id="selectHomeworkSubmit" resultMap="HomeworkSubmitResultSet">
 		SELECT * 
     	  FROM HM_SUBMIT 
     	 WHERE BO_NO = #{boNo} 
@@ -88,15 +95,15 @@
 							  ) VALUES( #{stuId},
 							  			#{boNo},
 							  			#{hmStuContent},
-							  			<if test="score != null">#{score}</if>
-							  			<if test="score == null">0</if>,
-							  			<if test="tcComment != null">#{tcComment}</if>
-							  			<if test="tcComment == null">'숙제 검사 전입니다.'</if>,
+							  			<if test="score != null">#{score},</if>
+							  			<if test="score == null">0,</if>
+							  			<if test="tcComment != null">#{tcComment},</if>
+							  			<if test="tcComment == null">'숙제 검사 전입니다.',</if>
 							  			SYSDATE,
-							  			<if test="originName != null">#{originName}</if>
-							  			<if test="originName == null">'사진미등록'</if>,
-							  			<if test="originName != null">#{changeName}</if>
-							  			<if test="originName == null">'사진미등록'</if>,
+							  			<if test="originName != null">#{originName},</if>
+							  			<if test="originName == null">'사진미등록',</if>
+							  			<if test="originName != null">#{changeName},</if>
+							  			<if test="originName == null">'사진미등록',</if>
 							  			#{status}
 							  			)
 	</insert>

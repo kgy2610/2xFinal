@@ -87,5 +87,5 @@ public class StudentServiceImpl implements StudentService{
 	public HomeworkSubmit selectHomeworkSubmit(int boNo, String stuId) {
 		return studentDao.selectHomeworkSubmit(sqlSession, boNo, stuId);
 	}
-	
+
 }
