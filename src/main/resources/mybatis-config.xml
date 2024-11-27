@@ -32,6 +32,7 @@
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherNotice" alias="TeacherNotice"/>
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherMemo" alias="TeacherMemo" />
 		<typeAlias type="com.twoX.agit.member.model.vo.Attendance" alias="Attendance"/>
+		<typeAlias type="com.twoX.agit.chat.Chat" alias="Chat"/>
 		
 	</typeAliases>
 

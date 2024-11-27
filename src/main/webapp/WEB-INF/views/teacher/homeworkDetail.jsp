@@ -63,8 +63,7 @@
 			</form>
 
             </div>
-            <div id="chat_button"><img src="img/message.png"></div>
-        	</div> 
+ 
     
         <!-- jQuery 및 기타 스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>

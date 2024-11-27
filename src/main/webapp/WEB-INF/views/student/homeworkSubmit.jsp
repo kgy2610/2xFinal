@@ -58,6 +58,5 @@
         </div> 
         
     </div>
-    <div id="chat_button"><img src="<c:url value='img/message.png'/>"></div>
 </body>
 </html>

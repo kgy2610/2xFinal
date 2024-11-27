@@ -73,7 +73,6 @@
 	                <div></div>
 	                <div></div>
 	            </div>
-            <div id="chat_button"><img src="img/message.png"></div>
         </div>
     </form>
      

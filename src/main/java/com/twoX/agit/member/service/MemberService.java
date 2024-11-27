@@ -3,6 +3,7 @@ package com.twoX.agit.member.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -55,6 +56,12 @@ public interface MemberService {
 
 	// 급식
 	String selectOeCode(String schoolCode);
+	
+	// 학생 채팅 조회
+	ArrayList<Chat> selectChatList(Student s);
+	
+	// 학생 채팅 저장
+	int insertChat(Chat c);
 	
 	// ------------------------------- 부모님 -------------------------------
 	// 부모님 로그인
@@ -134,6 +141,8 @@ public interface MemberService {
 	// 숙제 수정
 	int updateHomework(String hmTitle, String subject, String deadLine, String hmContent);
 	
+	// 반학생 채팅 리스트 조회
+	ArrayList<Chat> selectStuChatList(String classCode);
 	// 선생님 - 출결
 	ArrayList<Teacher> selectAttendance(String classCode);
 }

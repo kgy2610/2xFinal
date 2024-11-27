@@ -8,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	
     <div class="nav">
         <img src="<c:url value='/resources/img/logo.png'/>">
         <div class="menu">
@@ -22,5 +24,110 @@
             <label for="logout"> <a href="logout.me">로그아웃</a></label>
         </div>
     </div>
+    <div id="chat_button" onclick="openModal('${loginUser.status }')">
+		<img src="<c:url value='/resources/img/student/message.png'/>">
+	</div>
+	<div style="background-color:red; width:20px; height:20px; border-radius:40px; border:none; position: absolute; bottom:115px; right:50px; display:none;" id="newMsg"></div>
+	
+<div id="chatModal" class="chat_modal">
+      <div class="chat_modal-content">
+         <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
+         <input type="hidden" value="${teacherName.tcId }" id="teacherId">
+         <span class="close" onclick="closeModal()">&times;</span>
+           <hr>
+           
+           <div id="modal_talk_content">
+           </div>
+               <table>
+                  <tr>
+                     <td><input type="text" placeholder="메세지를 입력하세요" id="msg"></td>
+                     <td><button type="button" onclick="sendMsg()">전 송</button></td>
+                  </tr>
+               </table>
+         </div>
+        </div>
+    <script>
+	   function openModal(status) {
+		   if(status ==="N"){
+			   alert("반 등록 후 이용 가능합니다.")
+			   return
+		   }
+	       document.getElementById('chatModal').style.display = 'flex';
+	       document.getElementById("newMsg").style.display='none';
+	       selectChatList()
+	   }
+	
+	   // 모달 닫기
+	   function closeModal() {
+	       document.getElementById('chatModal').style.display = 'none';
+	   }
+        const socket = new WebSocket("ws://localhost:2222/agit/server");
+
+        socket.onopen = function(){
+            console.log('연결성공....')
+        }
+
+        socket.onclose = function(){
+            console.log('연결끊어짐....')
+        }
+
+        socket.onerror = function(){
+            console.log('연결실패....')
+        }
+
+        //socket연결로부터 데이터가 도착했을 때 실행하는 이벤트
+        socket.onmessage = function(ev){
+            console.log(ev)
+            const reveice = JSON.parse(ev.data);
+            if(reveice.sendMessenger === 'TC'){
+            	document.getElementById("newMsg").style.display='flex';	
+            }
+            selectChatList();
+            setTimeout(scrollToBottom, 50);
+            
+        }
+
+        function sendMsg(){
+            const msgData = {
+                message: document.querySelector("#msg").value,
+                target: document.querySelector("#teacherId").value,
+            }
+            document.querySelector("#msg").value='';
+            socket.send(JSON.stringify(msgData));
+        }
+        
+        function selectChatList(){
+        	$.ajax({
+        		url:"selectChatList",
+        		success:function(res){
+        			let str=''
+        			let todate=''
+        			for(let ch of res){
+        				if(ch.chDate !== todate){
+        					str+="<div style='text-align: center; font-size:15px;'>"+ch.chDate+"</div>"
+        	      			+"<hr style='width:90%; height:3px; margin: 20px auto;'>"
+        					todate=ch.chDate
+        				}
+        				if(ch.sendMessenger === 'ST'){
+        					str+="<div class='sendMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
+        				}else{
+        					str+="<div class='recMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
+        				}
+        			}
+        			document.getElementById("modal_talk_content").innerHTML = str;
+        			setTimeout(scrollToBottom, 50);
+        		},
+        		error:function(){
+        			console.log("이건 또 왜 안되는데")
+        		}
+        	})
+        }
+        function scrollToBottom() {
+            const chatBox = document.getElementById("modal_talk_content");
+            requestAnimationFrame(() => {
+                chatBox.scrollTop = chatBox.scrollHeight; // 스크롤을 맨 아래로 이동
+            });
+        }
+    </script>
 </body>
 </html>
