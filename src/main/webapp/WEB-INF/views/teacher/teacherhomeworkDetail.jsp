@@ -18,13 +18,13 @@
                 ${hmTitle}
             </div>
             <div class="homework-content">
-                숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용 숙제 내용
+             	${hmContent}
                 <div class="homework-photo">첨부 사진</div>
             </div>
             <div class="answer-section">
                 <div class="answer-list">
                     <ul>
-                        <li>${hmContent}</li>
+                        <li>${hmStuContent}</li>
                     </ul>
                 </div>
                 <h1></h1>

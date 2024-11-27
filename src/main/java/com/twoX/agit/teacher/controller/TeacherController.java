@@ -17,6 +17,7 @@ import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
@@ -252,10 +253,11 @@ public class TeacherController {
 	        HmSubmit homework = submitHomework.get(0);
 
 	        model.addAttribute("hmTitle", homework.getHmTitle());       // 숙제 제목
-	        model.addAttribute("hmContent", homework.getHmStuContent()); // 학생이 제출한 답
+	        model.addAttribute("hmStuContent", homework.getHmStuContent()); // 학생이 제출한 답
 	        model.addAttribute("score", homework.getScore());         // 점수
 	        model.addAttribute("tcComment", homework.getTcComment()); // 교사 코멘트
 	        model.addAttribute("stuId", studentId);
+	        model.addAttribute("hmContent", homework.getHmContent()); // 숙제 내용
 	    } else {
 	        // 데이터가 없는 경우
 	        model.addAttribute("hmTitle", title);
@@ -322,6 +324,7 @@ public class TeacherController {
 		return "teacher/myPage";
 	}
 	
+	//학생 출결 상태 업데이트
 	@RequestMapping("modifyAttendance")
 	    public String modifyAttendance(String aDate, @RequestParam("studentId") List<String> studentIds, 
 	    								@RequestParam Map<String, String> params) {
@@ -349,7 +352,7 @@ public class TeacherController {
 	        Attendance attendance = new Attendance();
 	        attendance.setADate(aDate);
 	        attendance.setSTU_ID(studentId);
-	        attendance.setLA(attendanceStatus);  // 출석 상태 (AT, TA, AB 등)
+	        attendance.setLA(attendanceStatus);
 	        
 	        // 리스트에 추가
 	        updateAttendance.add(attendance);
@@ -357,10 +360,24 @@ public class TeacherController {
 	    
 	    System.out.println("이게 나오나용:" + updateAttendance);
 	    
-	    //int result = teacherService.updateAttendance(updateAttendance);
+	    int result = teacherService.updateAttendance(updateAttendance);
 	       
 	        
-	        return "redirect:/";
+	    return "teacher/myPage";
 	}
-		
+	
+	//학생관리 페이지 이동
+	@RequestMapping("studentManage.me")
+	public String studentManage(HttpSession session, Model model) {
+	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+	    String classCode = loginUser.getClassCode();
+
+	    // 학생별 출석률 가져오기
+	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
+	    System.out.println(stuManageList);
+
+	    model.addAttribute("stuManageList", stuManageList);
+	    return "teacher/studentManage";
+	}
+	
 }

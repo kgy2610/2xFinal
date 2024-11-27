@@ -19,13 +19,19 @@
 	</insert>
 	
 	<!-- 학생 출결 상태 수정 -->
-	<update id="updateAttendance" parameterType="java.util.List">
-	  <foreach collection="attendanceList" item="Attendance">
-	    UPDATE ATTENDANCE
-	    SET LA = #{Attendance.LA}
-	    WHERE STU_ID = #{Attendance.STU_ID} AND ADATE = #{Attendance.aDate}
-	  </foreach>
+	<update id="updateAttendance" parameterType="list">
+	  UPDATE ATTENDANCE
+	  SET LA = CASE 
+	    <foreach collection="list" item="Attendance" index="index">
+	      WHEN STU_ID = #{Attendance.STU_ID} AND ADATE = #{Attendance.aDate} THEN #{Attendance.LA}
+	    </foreach>
+	    ELSE LA
+	  END
+	  WHERE (STU_ID, ADATE) IN (
+	    <foreach collection="list" item="Attendance" separator="," open="" close="">
+	      (#{Attendance.STU_ID}, #{Attendance.aDate})
+	    </foreach>
+	  )
 	</update>
-
 
 </mapper>

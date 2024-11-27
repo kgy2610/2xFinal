@@ -12,6 +12,7 @@ import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 
 @Repository
@@ -112,7 +113,12 @@ public class TeacherDao {
 		return sqlSession.insert("attendanceMapper.insertAttendance", attendanceList);
 	}
 	
+
 	public int updateAttendance(SqlSessionTemplate sqlSession, ArrayList<Attendance> updateAttendance) {
 		return sqlSession.update("attendanceMapper.updateAttendance", updateAttendance);
+	}
+	
+	public List<Map<String, Object>> smCodeStudent(SqlSessionTemplate sqlSession, String code){	
+		return (ArrayList)sqlSession.selectList("stuManageMapper.smCodeStudent", code);
 	}
 }
