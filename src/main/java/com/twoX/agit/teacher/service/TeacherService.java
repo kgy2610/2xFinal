@@ -52,13 +52,13 @@ public interface TeacherService {
 	// 숙제 점수 및 말씀 부여
 	int updateSubmitHomework(String teacherComment, int score, String stuId);
 	
-	// 출결
-	ArrayList<Attendance> selectAttendance(String classCode);
-	
 	// 출결 정보 저장
 	int insertAttendance(List<Attendance> attandanceList);
 	
+	// 출결 상태 업데이트
+	int updateAttendance(ArrayList<Attendance> updateAttendance);
+
 	//code가져가서 확인
 	List<Map<String, Object>> smCodeStudent(String code);
-	
+
 }
