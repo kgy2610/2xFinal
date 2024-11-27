@@ -12,7 +12,6 @@
 <title>숙제</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
-<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 </head>
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
@@ -35,7 +34,8 @@
 			</thead>
 			<tbody>
 			    <c:forEach var="homework" items="${homeworkList}">
-			        <tr class="homework-list-detail" onclick="location.href='homework_detail?boNo=${homework.boNo}&capge=${pi.currentPage}'">
+			        <tr class="homework-list-detail"
+			        onclick="moveHomeworkDetail('${homework.boNo}', '${homework.status}', '${pi.currentPage}')">
 			            <td>${homework.boNo}</td>
 			            <td>${homework.subject}</td>
 			            <td>${homework.hmTitle}</td>
@@ -103,5 +103,7 @@
 	<div id="chat_button">
 		<img src="<c:url value='/resources/img/student/message.png'/>">
 	</div>
+	
+	<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 </body>
 </html>

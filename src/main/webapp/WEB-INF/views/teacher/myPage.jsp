@@ -29,8 +29,7 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
-
-<jsp:include page="../common/teacher_menubar.jsp" />
+	<jsp:include page="../common/teacher_menubar.jsp" />
 
 	<div class="whole_body">
 		<h1><%=grade%>학년

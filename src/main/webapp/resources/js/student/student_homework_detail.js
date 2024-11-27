@@ -23,7 +23,7 @@ $(function(){
             });
             $('#create_button').click(function() {
                     var markup = $('#en_content').summernote('code'); // HTML 형식의 내용 가져오기
-                    console.log(markup); // 콘솔에 출력
+                    console.log("Original HTML: ", markup); // 원본 HTML 출력
             });
         })
         function fileUpload(files){
@@ -61,6 +61,7 @@ $(function(){
                 }
             })
         }
+
         document.querySelectorAll(".text-limit").forEach(function (element) {
             const text = element.innerText;
             if (text.length > 3) {
