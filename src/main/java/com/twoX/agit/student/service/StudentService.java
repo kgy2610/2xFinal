@@ -14,20 +14,22 @@ public interface StudentService {
 	// 학생 숙제 리스트 갯수 조회
 	int selectListCount(String classCode, String stuId);
 
-
 	// 학생 숙제 리스트 가져오기
 	ArrayList<Homework> selectStudentHomeworkList(String classCode, String stuId, PageInfo pi);
 
 	// 학생 숙제 번호에 맞는 게시물 조회
 	Homework selectNowHomework(int boNo);
 
-	// 게시글 번호로 HOMEWORK 정보를 가져오는 메서드
-	Homework getHomeworkByBoNo(int boNo);
+	// 학생 숙제 업로드
+	int insertStudentHomework(HomeworkSubmit hm);
 
-	// 학생이 숙제를 제출하는 메서드
-	int submitHomework(HmSubmit hm);
+	// 학생 숙제 답변 조회
+	HomeworkSubmit selectNowAnswer(int boNo);
 
-//방과후
+	// 숙제 제출 상태 불러오기
+	HomeworkSubmit selectHomeworkSubmit(int boNo, String stuId);
+
+	//방과후
 	int updateAfterschoolCode(Map<String, String> map);
 
 	String afterschoolCode(String stuId);

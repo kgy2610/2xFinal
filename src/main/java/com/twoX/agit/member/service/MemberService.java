@@ -57,8 +57,11 @@ public interface MemberService {
 	// 급식
 	String selectOeCode(String schoolCode);
 	
-	//채팅
+	// 학생 채팅 조회
 	ArrayList<Chat> selectChatList(Student s);
+	
+	// 학생 채팅 저장
+	int insertChat(Chat c);
 	
 	// ------------------------------- 부모님 -------------------------------
 	// 부모님 로그인
@@ -137,4 +140,7 @@ public interface MemberService {
 
 	// 숙제 수정
 	int updateHomework(String hmTitle, String subject, String deadLine, String hmContent);
+	
+	// 반학생 채팅 리스트 조회
+	ArrayList<Chat> selectStuChatList(String classCode);
 }

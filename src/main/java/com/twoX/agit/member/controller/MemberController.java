@@ -122,21 +122,26 @@ public class MemberController {
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
 			System.out.println("classCode : " + classCode);
-			ArrayList<Chat> clist = memberService.selectChatList(loginUser);
-			System.out.println("clist : "+clist);
 			// 학교명 조회
 			String schoolName = memberService.getSchoolNameByClassCode(classCode);
 			Teacher teacher = memberService.selectTeacher(loginUser);
 			session.setAttribute("schoolName", schoolName);
 			model.addAttribute("schoolName", schoolName);
 			model.addAttribute("loginUser", loginUser);
-			session.setAttribute("clist",clist);
 			session.setAttribute("teacherName", teacher);
 			System.out.println("학교명 : " + schoolName);
 			System.out.println("선생님 : " + teacher);
 		}
 		return "student/myPage";
 	}
+	   
+	   @ResponseBody
+		@RequestMapping(value="selectChatList", produces="application/json; charset-UTF-8")
+		public String ajaxSelectChatList(HttpSession session) {
+		   Student loginUser = (Student) session.getAttribute("loginUser");
+		   ArrayList<Chat> clist = memberService.selectChatList(loginUser);
+		   return new Gson().toJson(clist);
+		}
 		
 	     
 	   // 학생 로그인
@@ -553,7 +558,9 @@ public class MemberController {
 	        } else if(!"0000".equals(classCode)) { // classCode 값이 0000이 아닐 경우(반 개설 후 선생님)
 	        	
 	        	System.out.println("반 개설 후 선생님 로그인 성공");
-	        	
+	        	ArrayList<Chat> slist = memberService.selectStuChatList(classCode);
+	        	System.out.println(slist);
+	        	session.setAttribute("slist", slist);
 	            return "teacher/myPage";
 	        } else {
 	            // 오류 처리

@@ -13,6 +13,7 @@ import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.student.model.dao.StudentDao;
+import com.twoX.agit.student.model.vo.HomeworkSubmit;
 
 
 
@@ -69,15 +70,22 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.selectNowHomework(sqlSession, boNo);
 	}
 	
-	// 게시글 번호로 숙제 조회
+	// 학생 숙제 업로드
 	@Override
-    public Homework getHomeworkByBoNo(int boNo) {
-        return studentDao.selectHomeworkByBoNo(sqlSession, boNo);
-    }
+	public int insertStudentHomework(HomeworkSubmit hm) {
+		return studentDao.insertStudentHomework(sqlSession, hm);
+	}
 
-	// 숙제 제출
-    @Override
-    public int submitHomework(HmSubmit hm) {
-        return studentDao.insertHomeworkSubmission(sqlSession, hm);
-    }
+	// 학생 숙제 답변 조회
+	@Override
+	public HomeworkSubmit selectNowAnswer(int boNo) {
+		return studentDao.selectNowAnswer(sqlSession, boNo);
+	}
+
+	// 숙제 제출 여부 가져오기
+	@Override
+	public HomeworkSubmit selectHomeworkSubmit(int boNo, String stuId) {
+		return studentDao.selectHomeworkSubmit(sqlSession, boNo, stuId);
+	}
+	
 }

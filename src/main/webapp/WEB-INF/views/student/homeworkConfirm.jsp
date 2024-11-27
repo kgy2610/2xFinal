@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList,com.twoX.agit.board.model.vo.HmSubmit,com.twoX.agit.member.model.vo.Homework,com.twoX.agit.common.vo.PageInfo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,16 +10,16 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-    <title>student_homeworkSubmit</title>
+    <title>student_homeworkCheck</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- Summernote CSS/JS CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homeworkConfirm.css'/>"/>
-	<script src="<c:url value='/resources/js/student/student_homework_confirm.js'/>"></script>
+    <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
+	<script src="<c:url value='/resources/js/student/student_homeworkconfirm.js'/>"></script>
 </head>
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
@@ -46,18 +45,22 @@
             </div>
             <div id="submit_area">
                 <div id="submit_homework">
-                    <textarea id="sb_homework" style="background-color: white;"></textarea>
+                    <div style="background-color: white;">${napge.hmStuContent}</div>
                 </div>
                 <button id="submit_button">수정</button>
             </div>
-            <div id="teacher_confirm">선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀선생님 말씀</div>
+            <div id="teacher_confirm"></div>
             <div id="homework_score">
                 <div>점수</div>
-                <div>100</div>
+                <div>${npage.score}</div>
                 <div>점</div>
             </div>
             <button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 
     </div>
+<<<<<<< HEAD
+=======
+    <div id="chat_button"><img src="<c:url value='/resource/img/student/message.png'/>"/></div>
+>>>>>>> b9c84974e567a72753a35f56e2080b5f89622b08
 </body>
 </html>

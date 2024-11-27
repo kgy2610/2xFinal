@@ -118,6 +118,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectChatList(sqlSession,s);
 	}
 	
+	// 학생 - 채팅 저장
+	@Override
+	public int insertChat(Chat c) {
+		return memberDao.insertChat(sqlSession,c);
+	}
+	
 	// ------------------------------- 부모님 -------------------------------
 	// 부모님 - 회원가입
 	@Override
@@ -269,6 +275,14 @@ public class MemberServiceImpl implements MemberService{
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return memberDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
 	}
+
+	//반 학생 채팅 리스트 조회
+	@Override
+	public ArrayList<Chat> selectStuChatList(String classCode) {
+		return memberDao.selectStuChatList(sqlSession, classCode);
+	}
+
+
 
 
 }

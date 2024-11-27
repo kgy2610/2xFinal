@@ -106,6 +106,11 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectChatList", s);
 	}
 	
+	// 학생 - 채팅 저장
+	public int insertChat(SqlSessionTemplate sqlSession, Chat c) {
+		return sqlSession.insert("memberMapper.insertChat", c);
+	}
+	
 	// ------------------------------- 부모님 -------------------------------
 	//부모님 - 로그인
 	public Parents loginParents(SqlSessionTemplate sqlSession, Parents p) {
@@ -274,5 +279,10 @@ public class MemberDao {
 	// 관리자 - 총 학생 수
 	public int getStudentCount(SqlSessionTemplate sqlSession, String scCode) {
 		return sqlSession.selectOne("memberMapper.getStudentCountBySchoolCode", scCode);
+	}
+	
+	// 반 학생 채팅리스트 조회
+	public ArrayList<Chat> selectStuChatList(SqlSessionTemplate sqlSession, String classCode){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectStuChatList",classCode);
 	}
 }

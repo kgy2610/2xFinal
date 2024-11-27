@@ -111,18 +111,32 @@
 	<resultMap type="Chat" id="ChatResultSet">
 		<result column="TC_ID" property="tcId" />
 		<result column="STU_ID" property="stuId" />
-		<result column="CH_DATE" property="chDate" />
+		<result column="CH_DAY" property="chDate" />
 		<result column="CH_TIME" property="chTime" />
 		<result column="CH_CONTENT" property="chContent" />
 		<result column="CLASS_CODE" property="classCode" />
+		<result column="SEND_MESSENGER" property="sendMessenger" />
 	</resultMap>
-	<!-- 채팅 조회 -->
+	<!-- 학생 채팅 조회 -->
 	<select id="selectChatList" resultMap="ChatResultSet">
-		SELECT TC_ID,STU_ID,TO_CHAR(CH_DATE, 'YYYY / MM / DD') AS CH_DATE,TO_CHAR(CH_DATE,'HH24:MI'),CH_CONTENT,CLASS_CODE
+		SELECT TC_ID,STU_ID,TO_CHAR(CH_DATE, 'YYYY / MM / DD') AS CH_DAY,TO_CHAR(CH_DATE,'HH24:MI') AS CH_TIME,CH_CONTENT,CLASS_CODE,SEND_MESSENGER
 		FROM CHAT
 		WHERE STU_ID = #{stuId}
 		AND CLASS_CODE = #{classCode}
 		ORDER BY CH_DATE
+	</select>
+	<!-- 채팅 저장 -->
+	<insert id="insertChat">
+		INSERT INTO CHAT(STU_ID,TC_ID,CH_CONTENT,CLASS_CODE,SEND_MESSENGER)
+		VALUES(#{stuId},#{tcId},#{chContent},#{classCode},#{sendMessenger})
+	</insert>
+	<!-- 반학생 채팅 조회 -->
+	<select id="selectStuChatList" resultMap="ChatResultSet">
+			SELECT S.STU_NAME AS "STU_ID",MAX(C.CH_CONTENT) KEEP (DENSE_RANK LAST ORDER BY CH_DATE) AS CH_CONTENT
+			FROM CHAT C
+			LEFT JOIN STUDENT S ON C.STU_ID=S.STU_ID 
+			WHERE C.CLASS_CODE = #{classCode}
+			GROUP BY S.STU_NAME
 	</select>
 
 	<!-- 학부모 -->

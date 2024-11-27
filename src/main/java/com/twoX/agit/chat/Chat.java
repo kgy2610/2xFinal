@@ -24,4 +24,5 @@ public class Chat {
 	private String chTime;
 	private String chContent;
 	private String classCode;
+	private String sendMessenger;
 }
