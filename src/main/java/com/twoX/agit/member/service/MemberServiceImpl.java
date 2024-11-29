@@ -96,8 +96,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 학생 - 비밀번호 수정
 	@Override
-	public int studentPwdUpdate(Map<String, String> map) {
-		return memberDao.studentPwdUpdate(sqlSession, map);
+	public int studentPwdUpdate(Student s) {
+		return memberDao.studentPwdUpdate(sqlSession, s);
 	}
 	
 	// 학생 - 프로필 사진 변경

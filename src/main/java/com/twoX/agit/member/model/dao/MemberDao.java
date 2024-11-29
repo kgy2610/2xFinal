@@ -87,8 +87,8 @@ public class MemberDao {
 	}
 
 	// 학생 - 비번수정
-	public int studentPwdUpdate(SqlSessionTemplate sqlSession, Map<String, String> map) {
-		return sqlSession.update("memberMapper.studentPwdUpdate", map);
+	public int studentPwdUpdate(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("memberMapper.studentPwdUpdate", s);
 	}
 
 	// 학생 - 프로필 변경

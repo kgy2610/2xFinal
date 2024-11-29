@@ -72,7 +72,7 @@
 	<!-- 학생 비번 수정 -->
 	<update id="studentPwdUpdate">
 		UPDATE STUDENT
-		SET STU_PWD = #{updatePwd}
+		SET STU_PWD = #{stuPwd}
 		WHERE STU_ID = #{stuId}
 	</update>
 	

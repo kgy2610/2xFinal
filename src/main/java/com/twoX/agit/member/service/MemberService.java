@@ -49,7 +49,7 @@ public interface MemberService {
 	int studentUpdate(Map<String, String> map);
 
 	// 비밀번호 수정
-	int studentPwdUpdate(Map<String, String> map);
+	int studentPwdUpdate(Student s);
 
 	// 프로필 사진 변경
 	int studentSelectImg(Map<String, String> map);
