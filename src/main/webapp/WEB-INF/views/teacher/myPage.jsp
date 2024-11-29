@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.twoX.agit.member.model.vo.Teacher"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String alertMsg = (String) session.getAttribute("alertMsg");
 	Teacher s = (Teacher) session.getAttribute("loginUser");
@@ -36,13 +37,15 @@
 		</h1>
 
 		<div class="textbox1">
+		<c:forEach var="counsel" items="${teacherCounsel}">
 			<div class="text1">
-				<span class="date">10.21(10시)</span> 누구 어머니 상담
+				<span class="date">${counsel.csDate}</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;학부모 이름 : ${counsel.prName}
+				&nbsp;&nbsp;&nbsp;&nbsp;상담 장소 : ${counsel.scLocation}
+				&nbsp;&nbsp;&nbsp;&nbsp;상담 내용 : ${counsel.csContent}
 			</div>
 			<hr class="body_line">
-			<div class="text1">
-				<span class="date">10.21(10시)</span> 누구 어머니 상담
-			</div>
+			</c:forEach>
 		</div>
 
 		<div class="textbox2">
@@ -84,7 +87,7 @@
 					<!-- 삭제 버튼 -->
 		        <form method="POST" action="deleteMemo")">
 		            <input type="hidden" name="memoContent" value="${memo.mmContent}">
-		            <button type="submit">x</button>
+		            <button type="submit" class="memo-delete-btn">x</button>
 		        </form>
 		        </div>
 		    </c:forEach>

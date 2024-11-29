@@ -21,7 +21,7 @@
    
         <div class="whole_body">
        
-            <form action="enrollHomework" method="POST">
+            <form action="enrollHomework" method="POST" enctype="multipart/form-data">
 	            <div class="use-body">
 	                <div class="subject-name"><input type="text" name="title"></div>
 		                <select class="subject-select" name="subject">
@@ -49,7 +49,7 @@
 	                <div class="file-attachment">
 	                    <label for="file-upload" class="custom-file-upload">파일 첨부</label>
 	                    <span class="file-name" id="file-name">선택된 파일 없음</span>
-	                    <input type="file" id="file-upload" class="file-upload">
+	                    <input type="file" id="file-upload" class="file-upload" name="upfile">
 	                </div>
 	            </div>
 	            

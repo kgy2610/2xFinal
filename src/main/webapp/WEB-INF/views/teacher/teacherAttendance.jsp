@@ -45,7 +45,7 @@
         <button type="submit" class="save-button">저장</button>
     </form>
     
-    <button type="button" class="update-button" onclick="updateAttendance()">수정</button>
+    <button type="button" class="update_button" onclick="updateAttendance()">수정</button>
    </div>
 
 <script src="<c:url value='/resources/js/teacher/teacherAttendance.js'/>"></script>
