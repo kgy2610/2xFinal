@@ -33,7 +33,7 @@
       <div class="chat_modal-content">
          <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
            
            <div class="modal_talk_content">

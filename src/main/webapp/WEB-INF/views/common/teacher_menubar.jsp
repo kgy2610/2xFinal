@@ -35,7 +35,7 @@
 		<div class="chat_modal-content">
          <h2 class="modalTitle" id="classGrade"></h2>
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
            
            <div id="modal_Stu_content">
@@ -56,7 +56,7 @@
         	<div id="chatModal${st.stuId}" class="chat_modal">
       			<div class="chat_modal-content">
          			<h2 class="modalTitle">${st.stuName}</h2>
-         			<span class="close" onclick="backModal('${st.stuId}')">&lt;</span>
+         			<span class="closeModal" onclick="backModal('${st.stuId}')">&lt;</span>
           			<hr>
           			<input type="hidden" value="${st.stuId}" class="ChatStuId">
            			<div class="modal_talk_content" id="${st.stuId}talk_content">
