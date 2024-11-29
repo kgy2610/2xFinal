@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- Summernote CSS/JS CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homeworkConfirm.css'/>"/>
@@ -47,7 +47,7 @@
                 <div id="submit_homework">
                     <div style="background-color: white;">${npage.hmStuContent}</div>
                 </div>
-                <button class="create_button" id="modify_button"  onclick="location.href='hmAnswer_modify?boNo=${npage.boNo}&cpage=${cpage}'">수정</button>
+                <button class="submit_button" id="modify_button"  onclick="location.href='hmAnswer_modify?boNo=${npage.boNo}&cpage=${cpage}'">수정</button>
             </div>
             <div id="teacher_confirm">${npage.tcComment}</div>
             <div id="homework_score">
@@ -58,9 +58,8 @@
             <button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 
     </div>
-<<<<<<< HEAD
-=======
+
     <div id="chat_button"><img src="<c:url value='/resource/img/student/message.png'/>"/></div>
->>>>>>> b9c84974e567a72753a35f56e2080b5f89622b08
+
 </body>
 </html>

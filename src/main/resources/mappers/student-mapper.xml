@@ -100,10 +100,8 @@
 							  			<if test="tcComment != null">#{tcComment},</if>
 							  			<if test="tcComment == null">'숙제 검사 전입니다.',</if>
 							  			SYSDATE,
-							  			<if test="originName != null">#{originName},</if>
-							  			<if test="originName == null">'사진미등록',</if>
-							  			<if test="originName != null">#{changeName},</if>
-							  			<if test="originName == null">'사진미등록',</if>
+							  			#{originName},
+							  			#{changeName},
 							  			#{status}
 							  			)
 	</insert>
@@ -127,4 +125,13 @@
 		  LEFT JOIN HOMEWORK h ON hm.BO_NO = h.BO_NO
 		 WHERE hm.BO_NO = #{boNo}
 	</select>
+	
+	<!-- 학생 숙제 수정 -->
+	<update id="updateStuHomework">
+		UPDATE HM_SUBMIT
+		   SET HM_STUCONTENT = #{hmStuContent},
+		   	   ORIGIN_NAME = #{originName},
+		   	   CHANGE_NAME = #{changeName}
+		 WHERE BO_NO = #{boNo}
+	</update> 
  </mapper>

@@ -169,34 +169,36 @@ public class StudentController {
 	}
 	
 	// 글 수정하기
-//	@RequestMapping("update.afterSt")
-//	public String updateStuAnswer(HomeworkSubmit hm, MultipartFile reupfile, HttpSession session) {
-//		Student loginUser = (Student) session.getAttribute("loginUser");
-//		if (!reupfile.getOriginalFilename().equals("")) {
-//			// 기존 첨부파일이 있다 -> 기존파일을 삭제
-//			if (asb.getOriginName() != null) {
-//				new File(session.getServletContext().getRealPath(asb.getChangeName())).delete();
-//			}
-//
-//			// 새로운 첨부파일을 서버에 업로드하기
-//			String changeName = Template.saveFile(reupfile, session, "/resources/file/");
-//
-//			asb.setOriginName(reupfile.getOriginalFilename());
-//			asb.setChangeName("/resources/file/" + changeName);
-//		} else {
-//			AfterSchoolBoard opb = (AfterSchoolBoard) session.getAttribute("npage");
-//			asb.setOriginName(opb.getOriginName());
-//			asb.setChangeName(opb.getChangeName());
-//		}
-//
-//		int result = afterschoolService.updateAfterschoolBoard(asb);
-//		if (result > 0) {
-//			session.setAttribute("alertMsg", "수정에 성공하였습니다.");
-//			return "redirect:/afterSchool";
-//		} else {
-//			session.setAttribute("alertMsg", "수정실패");
-//			return "student/myPage";
-//		}
+	@RequestMapping("update.homework_student")
+	public String updateStuAnswer(HomeworkSubmit hm, MultipartFile reupfile, HttpSession session) {
+		Student loginUser = (Student)session.getAttribute("loginUser");
+		System.out.println("hm : " + hm);
+		if(!reupfile.getOriginalFilename().equals("")) {
+			//기존 첨부파일이 있다 -> 기존파일을 삭제
+			if(hm.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(hm.getChangeName())).delete();
+			}
+			
+			//새로운 첨부파일을 서버에 업로드하기
+			String changeName = Template.saveFile(reupfile, session, "/resources/file/homework_files/");
+			
+			hm.setOriginName(reupfile.getOriginalFilename());
+			hm.setChangeName( "/resources/file/homework_files/" + changeName);
+		}else {
+			HomeworkSubmit hms = (HomeworkSubmit)session.getAttribute("npage");
+			System.out.println("hms : " + hms);
+			hm.setOriginName(hms.getOriginName());
+			hm.setChangeName(hms.getChangeName());
+		}
+		
+		int result = studentService.updateHomework(hm);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "수정에 성공하였습니다.");
+			return "redirect:/homework";
+		}else {
+			session.setAttribute("alertMsg", "수정실패");
+			return "student/myPage";
+		}
 
 	}
 	
@@ -335,6 +337,18 @@ public class StudentController {
 			return "student/myPage";
 		}
 		
+	}
+	
+	// 학생 숙제 사진올릴때
+	@ResponseBody
+	@PostMapping("StuUpload")
+	public String StuUpload(List<MultipartFile> fileList, HttpSession session) {
+
+		List<String> changeNameList = new ArrayList();
+		for (MultipartFile f : fileList) {
+			changeNameList.add(Template.saveFile(f, session, "/resources/img/homework/"));
+		}
+		return new Gson().toJson(changeNameList);
 	}
 	
 	//글 수정하기 페이지로 이동

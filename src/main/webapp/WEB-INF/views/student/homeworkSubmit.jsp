@@ -51,7 +51,7 @@
 						</div>
 				<input type="hidden" name="boNo" value="${npage.boNo}">
 				<input type="hidden" name="classCode" value="${npage.classCode}">
-				<button id="submit_button">제출</button>
+				<button class="submit_button">제출</button>
 					</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
