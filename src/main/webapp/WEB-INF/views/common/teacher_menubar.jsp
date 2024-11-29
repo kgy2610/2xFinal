@@ -41,7 +41,7 @@
            
            <div id="modal_Stu_content">
            		<c:forEach var="sl" items="${slist}">
-           			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;">
+           			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;" onclick="openChatModal('${sl.stuId}')">
 	           			<tr>
 	           				<td class="modal_stuName" style="width:20%">${sl.stuId}</td>
 	           				<td class="modal_lastChat" style="width:60%">${sl.chContent}</td>
@@ -53,25 +53,25 @@
            </div>
          </div>
         </div>
-        
-	<div id="chatModal" class="chat_modal">
-      <div class="chat_modal-content">
-         <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
-         <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
-           <hr>
-           
-           <div id="modal_talk_content">
+        <c:forEach var="st" items="${slist}">
+        	<div id="chatModal" class="chat_modal">
+      			<div class="chat_modal-content">
+         			<h2 class="modalTitle">${st.stuId}</h2>
+         			<span class="close" onclick="closeModal()">&times;</span>
+          			<hr>
+          			<input type="hidden" value="${st.stuId}" class="ChatStuId">
+           			<div class="modal_talk_content">
            		
-           </div>
-               <table>
-                  <tr>
-                     <td><input type="text" placeholder="메세지를 입력하세요" id="msg"></td>
-                     <td><button type="button" onclick="sendMsg()">전 송</button></td>
-                  </tr>
-               </table>
-         </div>
-        </div>
+           			</div>
+               		<table>
+	                  	<tr>
+	                    	<td><input type="text" placeholder="메세지를 입력하세요" id="msg"></td>
+	                    	<td><button type="button" onclick="sendMsg()">전 송</button></td>
+	                  	</tr>
+               		</table>
+        		</div>
+        	</div>
+        </c:forEach>
 	<script>
 	   function openStuModal(classCode) {
 		   console.log(classCode)
@@ -82,9 +82,13 @@
 		   document.getElementById('classGrade').innerText = classCode.slice(9,10) + "학년 " + classCode.slice(10,12) + "반"
 	       document.getElementById('stuModal').style.display = 'flex';
 	       document.getElementById("newMsg").style.display='none';
-	       selectChatList()
 	   }
 	
+	   function openChatModal(stuId){
+		   document.getElementById('stuModal').style.display = 'none';
+		   document.getElementById('chatModal').style.display = 'flex';
+		   selectChatList(stuId)
+	   }
 	   // 모달 닫기
 	   function closeModal() {
 	       document.getElementById('stuModal').style.display = 'none';
@@ -122,7 +126,7 @@
             socket.send(JSON.stringify(msgData));
         }
         
-        function selectChatList(){
+        function selectChatList(stuId){
         	$.ajax({
         		url:"selectChatList",
         		success:function(res){

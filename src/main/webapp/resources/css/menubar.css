@@ -190,7 +190,7 @@ a{
 		height:480px;
 		overflow:auto;
 	}
-	#modal_talk_content{
+	.modal_talk_content{
 		width:100%;
 		height:430px;
 		overflow:auto;
