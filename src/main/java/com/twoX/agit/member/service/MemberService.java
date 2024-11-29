@@ -145,4 +145,7 @@ public interface MemberService {
 	ArrayList<Chat> selectStuChatList(String classCode);
 	// 선생님 - 출결
 	ArrayList<Teacher> selectAttendance(String classCode);
+	
+	//반학생 조회
+	ArrayList<Student> selectStuList(String classCode);
 }
