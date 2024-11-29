@@ -139,9 +139,17 @@ public class MemberController {
 	   
 	   @ResponseBody
 		@RequestMapping(value="selectChatList", produces="application/json; charset-UTF-8")
-		public String ajaxSelectChatList(HttpSession session) {
-		   Student loginUser = (Student) session.getAttribute("loginUser");
-		   ArrayList<Chat> clist = memberService.selectChatList(loginUser);
+		public String ajaxSelectChatList(String stuId,String classCode,HttpSession session) {
+		   ArrayList<Chat> clist =new ArrayList();
+		   if(stuId==null) {
+			   Student loginUser = (Student) session.getAttribute("loginUser");
+			   clist = memberService.selectChatList(loginUser);
+		   }else {
+			   Student s = new Student();
+			   s.setStuId(stuId);
+			   s.setClassCode(classCode);
+			   clist = memberService.selectChatList(s);
+		   }
 		   return new Gson().toJson(clist);
 		}
 	      
@@ -548,7 +556,7 @@ public class MemberController {
 	        } else if(!"0000".equals(classCode)) { // classCode 값이 0000이 아닐 경우(반 개설 후 선생님)
 	        	
 	        	System.out.println("반 개설 후 선생님 로그인 성공");
-	        	ArrayList<Chat> slist = memberService.selectStuChatList(classCode);
+	        	ArrayList<Student> slist = memberService.selectStuList(classCode);
 	        	System.out.println(slist);
 	        	session.setAttribute("slist", slist);
 	            return "teacher/myPage";

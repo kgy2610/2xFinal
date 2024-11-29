@@ -294,8 +294,13 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuChatList",classCode);
 	}
 	
+
 	// 선생님 상담 리스트
 	public ArrayList<Counsel> selectTeacherCounsel(SqlSessionTemplate sqlSession, String tcId){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectTeacherCounsel", tcId);
+	}
+	// 반 학생 조회
+	public ArrayList<Student> selectStuList(SqlSessionTemplate sqlSession, String classCode){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectStuList",classCode);
 	}
 }

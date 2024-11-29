@@ -289,9 +289,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectAttendance(sqlSession, classCode);
 	}
 	
+
 	// 선생님 상담 리스트 
 	@Override
 	public ArrayList<Counsel> getTeacherCounsel(String tcId) {
 		return memberDao.selectTeacherCounsel(sqlSession, tcId);
+	}
+
+	// 반학생 조회
+	@Override
+	public ArrayList<Student> selectStuList(String classCode) {
+		return memberDao.selectStuList(sqlSession, classCode);
 	}
 }

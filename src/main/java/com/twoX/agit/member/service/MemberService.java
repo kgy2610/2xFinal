@@ -147,6 +147,11 @@ public interface MemberService {
 	// 선생님 - 출결
 	ArrayList<Teacher> selectAttendance(String classCode);
 	
+
 	// 선생님 상당일정 리스트
 	ArrayList<Counsel> getTeacherCounsel(String tcId);
+
+	//반학생 조회
+	ArrayList<Student> selectStuList(String classCode);
+
 }
