@@ -40,7 +40,7 @@
 
 				<form action="update.homework_student" method="post" enctype="multipart/form-data">
 					<div id="enroll_file">
-						<input type="file" name="upfile" id="fileInput" style="display: none;" onchange="showFileName()">
+						<input type="file" name="reupfile" id="fileInput" style="display: none;" onchange="showFileName()">
 							<label for="fileInput" class="custom-file-upload"> 파일 선택 </label>
 							
 							<c:choose>
@@ -59,7 +59,7 @@
 						</div>
 				<input type="hidden" name="boNo" value="${npage.boNo}">
 				<input type="hidden" name="classCode" value="${npage.classCode}">
-				<button type="submit" class="create_button" id="modify_button">수정</button>
+				<button type="submit" class="submit_button" id="modify_button">수정</button>
 					</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
