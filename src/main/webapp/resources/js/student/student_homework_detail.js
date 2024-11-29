@@ -1,4 +1,3 @@
-
 $(function(){
             $('#sb_homework').summernote({
             height: 215,                 // 에디터 높이
@@ -22,7 +21,7 @@ $(function(){
             
             });
             $('#create_button').click(function() {
-                    var markup = $('#en_content').summernote('code'); // HTML 형식의 내용 가져오기
+                    var markup = $('#sb_homework').summernote('code'); // HTML 형식의 내용 가져오기
                     console.log("Original HTML: ", markup); // 원본 HTML 출력
             });
         })
@@ -39,15 +38,16 @@ $(function(){
                 fd.append("fileList",file);
             }
 
-            insertFile(fd,function(nameList){
-                for(let name of nameList){
-                    $("#en_content").summernote("insertImage","/img/"+name)
+            // 서버로 이미지 업로드 요청
+		    insertFile(fd, function (nameList) {
+		        for(let name of nameList){
+                    $("#sb_homework").summernote("insertImage","resources/img/homework/"+name)
                 }
             })
         }
         function insertFile(data, callback){
             $.ajax({
-                url: "upload",
+                url: "StuUpload",
                 type: "POST",
                 data: data,
                 processData: false, //기본이 true -> 전송하는 data를 string으로 변환해서 요청

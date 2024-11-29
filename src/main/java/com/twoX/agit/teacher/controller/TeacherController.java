@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.twoX.agit.board.model.vo.HmSubmit;
@@ -155,7 +156,7 @@ public class TeacherController {
 
 	// 숙제 등록페이지
 	@RequestMapping("enrollHomework")
-	public String enrollHomework(String title, String subject, String content, String dueDate, HttpSession session, Model model) {
+	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile file,  HttpSession session, Model model) {
 		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");

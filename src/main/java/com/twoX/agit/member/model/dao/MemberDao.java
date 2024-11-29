@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
@@ -291,5 +292,15 @@ public class MemberDao {
 	// 반 학생 채팅리스트 조회
 	public ArrayList<Chat> selectStuChatList(SqlSessionTemplate sqlSession, String classCode){
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuChatList",classCode);
+	}
+	
+
+	// 선생님 상담 리스트
+	public ArrayList<Counsel> selectTeacherCounsel(SqlSessionTemplate sqlSession, String tcId){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectTeacherCounsel", tcId);
+	}
+	// 반 학생 조회
+	public ArrayList<Student> selectStuList(SqlSessionTemplate sqlSession, String classCode){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectStuList",classCode);
 	}
 }

@@ -124,7 +124,7 @@ a{
 	  text-align: center;
 	}
 	
-	.chat_modal .close {
+	.chat_modal .closeModal {
 	   position: absolute; 
 	   top: 20px;
 	   right: 20px; 
@@ -166,7 +166,7 @@ a{
 	  color: white;
 	}
 	
-	.close {
+	.closeModal {
 	   width: 40px; height: 40px;
 	   line-height: 38px;
 	   color: #A98467;
@@ -179,8 +179,8 @@ a{
 	   padding: 5px;
 	}
 	
-	.close:hover,
-	.close:focus {
+	.closeModal:hover,
+	.closeModal:focus {
 	   color: #705845;
 	   text-decoration: none;
 	   cursor: pointer;
@@ -190,7 +190,7 @@ a{
 		height:480px;
 		overflow:auto;
 	}
-	#modal_talk_content{
+	.modal_talk_content{
 		width:100%;
 		height:430px;
 		overflow:auto;
@@ -232,37 +232,37 @@ a{
 	 	padding:10px;
 	 }
 		 
-	#modal_talk_content::-webkit-scrollbar {
+	.modal_talk_content::-webkit-scrollbar {
 	    width: 8px; /* 스크롤바 너비 */
 	}
 	
-	#modal_talk_content::-webkit-scrollbar-track {
+	.modal_talk_content::-webkit-scrollbar-track {
 	    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
 	    border-radius: 10px;
 	}
 	
-	#modal_talk_content::-webkit-scrollbar-thumb {
+	.modal_talk_content::-webkit-scrollbar-thumb {
 	    background: #A98467; /* 스크롤바 핸들 색상 */
-	border-radius: 10px; /* 둥근 모서리 */
+		border-radius: 10px; /* 둥근 모서리 */
 	}
 	
-	#modal_talk_content::-webkit-scrollbar-thumb:hover {
+	.modal_talk_content::-webkit-scrollbar-thumb:hover {
 	    background: #81644e; /* 스크롤바 핸들 호버 색상 */
 	}
-	#modal_Stu_content::-webkit-scrollbar {
+	.modal_Stu_content::-webkit-scrollbar {
 	    width: 8px; /* 스크롤바 너비 */
 	}
 	
-	#modal_Stu_content::-webkit-scrollbar-track {
+	.modal_Stu_content::-webkit-scrollbar-track {
 	    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
 	    border-radius: 10px;
 	}
 	
-	#modal_Stu_content::-webkit-scrollbar-thumb {
+	.modal_Stu_content::-webkit-scrollbar-thumb {
 	    background: #A98467; /* 스크롤바 핸들 색상 */
-	border-radius: 10px; /* 둥근 모서리 */
+		border-radius: 10px; /* 둥근 모서리 */
 	}
 	
-	#modal_Stu_content::-webkit-scrollbar-thumb:hover {
+	.modal_Stu_content::-webkit-scrollbar-thumb:hover {
 	    background: #81644e; /* 스크롤바 핸들 호버 색상 */
 	}

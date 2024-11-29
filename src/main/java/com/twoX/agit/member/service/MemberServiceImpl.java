@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.dao.MemberDao;
 import com.twoX.agit.member.model.vo.Homework;
@@ -286,5 +287,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public ArrayList<Teacher> selectAttendance(String classCode) {
 		return memberDao.selectAttendance(sqlSession, classCode);
+	}
+	
+
+	// 선생님 상담 리스트 
+	@Override
+	public ArrayList<Counsel> getTeacherCounsel(String tcId) {
+		return memberDao.selectTeacherCounsel(sqlSession, tcId);
+	}
+
+	// 반학생 조회
+	@Override
+	public ArrayList<Student> selectStuList(String classCode) {
+		return memberDao.selectStuList(sqlSession, classCode);
 	}
 }

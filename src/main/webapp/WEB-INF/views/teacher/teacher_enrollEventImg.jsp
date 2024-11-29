@@ -28,7 +28,7 @@
     	<form action="enroll_IMG" method="POST">
         <div id="enroll_title" ><input type="text" id="en_title" name="title" placeholder="제목을 입력해주세요" required></div>
         <div id="enroll_content">
-            <textarea id="en_content" name="boContent"></textarea>
+            <textarea id="en_content" name="boContent" style="overflow:visible;"></textarea>
         </div>
         <button type = "submit" id="create_button">등록하기</button>
         </form>
@@ -61,7 +61,7 @@
             }
         }
         
-        $(function(){
+        $(document).ready(function(){
             $('#en_content').summernote({
             height: 620,                 // 에디터 높이
             minHeight: null,
