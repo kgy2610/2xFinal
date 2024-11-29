@@ -434,7 +434,7 @@ public class BoardController {
 		}	
 	}
 	
-	//부모님 커뮤니티 사진올릴때
+	// 커뮤니티 사진올릴때
 	@ResponseBody
 	@PostMapping("upload")
 	public String upload(List<MultipartFile> fileList, HttpSession session) {
@@ -527,5 +527,11 @@ public class BoardController {
 			return "redirect:/all_community";
 		}
 		
+	}
+	
+	//선생님 상담일정
+	@RequestMapping("teacherCounsel")
+	public String teacherCounsel() {
+		return "teacher/teacher_Counsel";
 	}
 }
