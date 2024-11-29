@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
 import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
-import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
 import com.twoX.agit.teacher.model.vo.TeacherMemo;
 import com.twoX.agit.teacher.model.vo.TeacherNotice;
@@ -100,7 +100,7 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("logout.me")
 	public String logoutSt(HttpSession session) {
-		session.removeAttribute("loginUser");
+		session.invalidate();
 
 		return "redirect:/";
 	}
@@ -119,19 +119,29 @@ public class MemberController {
 	   public String studentMyPage(HttpSession session, Model model) {
 	      Student loginUser = (Student) session.getAttribute("loginUser");
 
-	      if (loginUser != null) {
-	         String classCode = loginUser.getClassCode();
-	         
-	         // 학교명 조회
-	         String schoolName = memberService.getSchoolNameByClassCode(classCode);
-	         String teacherName = memberService.teacherName(classCode);
-	         session.setAttribute("schoolName", schoolName);
-	         model.addAttribute("schoolName", schoolName);
-	         model.addAttribute("loginUser", loginUser);
-	         session.setAttribute("teacherName", teacherName);
-	      }
-	      return "student/myPage";
-	   }
+		if (loginUser != null) {
+			String classCode = loginUser.getClassCode();
+			System.out.println("classCode : " + classCode);
+			// 학교명 조회
+			String schoolName = memberService.getSchoolNameByClassCode(classCode);
+			Teacher teacher = memberService.selectTeacher(loginUser);
+			session.setAttribute("schoolName", schoolName);
+			model.addAttribute("schoolName", schoolName);
+			model.addAttribute("loginUser", loginUser);
+			session.setAttribute("teacherName", teacher);
+			System.out.println("학교명 : " + schoolName);
+			System.out.println("선생님 : " + teacher);
+		}
+		return "student/myPage";
+	}
+	   
+	   @ResponseBody
+		@RequestMapping(value="selectChatList", produces="application/json; charset-UTF-8")
+		public String ajaxSelectChatList(HttpSession session) {
+		   Student loginUser = (Student) session.getAttribute("loginUser");
+		   ArrayList<Chat> clist = memberService.selectChatList(loginUser);
+		   return new Gson().toJson(clist);
+		}
 	      
 	   // 학생 로그인
 	   @RequestMapping("login.student")
@@ -211,7 +221,6 @@ public class MemberController {
 	         return "redirect:/";
 	      }
 	   }
-
 
 	@RequestMapping("student.update")
 	public String studentUpdate(String updateNum, HttpSession session, Model model) {
@@ -533,7 +542,9 @@ public class MemberController {
 	        } else if(!"0000".equals(classCode)) { // classCode 값이 0000이 아닐 경우(반 개설 후 선생님)
 	        	
 	        	System.out.println("반 개설 후 선생님 로그인 성공");
-	        	
+	        	ArrayList<Chat> slist = memberService.selectStuChatList(classCode);
+	        	System.out.println(slist);
+	        	session.setAttribute("slist", slist);
 	            return "teacher/myPage";
 	        } else {
 	            // 오류 처리

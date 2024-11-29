@@ -29,8 +29,7 @@
    <% session.removeAttribute("alertMsg"); %>
    
    <%} %>
-	<jsp:include page="../common/teacher_menubar.jsp" />
-
+   <jsp:include page="../common/teacher_menubar.jsp" />
 	<div class="whole_body">
 		<h1><%=grade%>학년
 			<%=teacher_class%>반(<%=classCode%>)
@@ -93,7 +92,6 @@
 		    <!-- 메모 추가 버튼 -->
 		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.JPG'/>">
 		</div>
-
 
 
 
@@ -235,5 +233,6 @@
 	</div>
 
 	<script src="<c:url value='/resources/js/teacher/myPage.js'/>"></script>
+
 </body>
 </html>

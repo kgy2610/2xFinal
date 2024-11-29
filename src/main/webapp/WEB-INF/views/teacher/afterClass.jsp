@@ -114,9 +114,6 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
 			</div>
 		</div>
 
-		<div id="chat_button">
-			<img src="<c:url value='/resources/img/teacher/message.png'/>">
-		</div>
 	</div>
 
 	<!-- 모달 -->
