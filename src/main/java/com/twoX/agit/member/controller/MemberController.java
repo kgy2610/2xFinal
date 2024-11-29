@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.twoX.agit.board.model.vo.Counsel;
+import com.twoX.agit.board.service.BoardService;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -43,7 +45,7 @@ public class MemberController {
 	@Autowired
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
-	}
+	}	
 
 	@RequestMapping("login")
 	public String login() {
@@ -519,6 +521,10 @@ public class MemberController {
 	        // 총 공지사항 수를 구하는 메서드 호출
 	     	int NoticeCount = memberService.getNoticeCount();
 	     	String tcId = loginTeacher.getTcId();
+	     	
+	     	// 상담일정 리스트 가져오기
+	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
+	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
 	        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(NoticeCount, tcId);

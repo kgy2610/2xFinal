@@ -42,6 +42,7 @@
 		<result column="PR_ID" property="prId" />
 		<result column="CS_LOCATION" property="scLocation" />
 		<result column="CS_CONTENT" property="csContent" />
+		<result column="PR_NAME" property="prName" />
  	</resultMap>
  	
  	<resultMap type="EventImgBoard" id="EventImgBoardResultSet">
@@ -349,6 +350,21 @@
 	    SET TC_COMMENT = #{teacherComment}, SCORE = #{score}
 	    WHERE STU_ID = #{stuId}
 	</update>
-
 	
+	
+	<!-- 교직원 상담 리스트 -->
+<select id="selectTeacherCounsel" resultMap="CounselResultSet">
+    SELECT
+        c.CS_NO,
+        TO_CHAR(c.CS_DATE, 'YYYY-MM-DD') AS CS_DATE,  <!-- 날짜만 가져오기 -->
+        c.TC_ID,
+        c.PR_ID,
+        c.CS_LOCATION,
+        c.CS_CONTENT,
+        p.PR_NAME  <!-- 학부모 이름 -->
+    FROM COUNSEL c
+    JOIN PARENTS p ON c.PR_ID = p.PR_ID  <!-- PARENTS 테이블과 JOIN -->
+    WHERE c.TC_ID = #{tcId}
+</select>
+
  </mapper>

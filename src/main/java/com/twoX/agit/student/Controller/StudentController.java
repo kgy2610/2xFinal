@@ -200,6 +200,8 @@ public class StudentController {
 			return "student/myPage";
 		}
 
+
+//	}
 	
 	
 // =================================== 방과후 ===================================
