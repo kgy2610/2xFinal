@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/teacher/studentManage.css'/>">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 	<jsp:include page="../common/teacher_menubar.jsp" />
 	<div class="whole_body">
@@ -31,7 +32,8 @@
 						<hr class="line1">
 
 						<c:forEach var="g" items="${stuManageList}">
-							<div class="real-list-information">
+							<div class="real-list-information"
+								onclick="showStudentInfo('${g.STUNAME}', '${g.PHONE}', '${g.ATTENDANCERATE}', '${g.STUID}')">
 								<div>${g.STUNUM}</div>
 								<div>${g.STUNAME}</div>
 								<div>${g.ATTENDANCERATE}</div>
@@ -45,10 +47,13 @@
 				<div class="content2-con1">
 					<div class="student-information">학생정보</div>
 					<div class="real-student-information">
-						<div>이름 : 신서희</div>
-						<div>전화번호 : 010-1111-2222</div>
-						<div>출석률 : 80%</div>
-						<div class="cancel">승 인 취 소</div>
+						<div>이름 :</div>
+						<div>전화번호 :</div>
+						<div>출석률 :</div>
+						<form action="studentManageCansel.me" method="post">
+							<input type="hidden" name="classCode" value="${} }">
+							<button type="submit" class="cancel">승인 취소</button>
+						</form>
 					</div>
 				</div>
 				<div class="content2-con2">
@@ -59,11 +64,7 @@
 							<div>점수</div>
 						</div>
 						<hr class="line3">
-						<div class="real-grade-information">
-							<div>국어 수행평가</div>
-							<div>80점</div>
-						</div>
-						<hr class="line4">
+
 					</div>
 				</div>
 			</div>
@@ -101,38 +102,7 @@
 		</div>
 	</div>
 </body>
-<script>
-	// 모달 열기
-	function openModal(element) {
-		var fullText = element.getAttribute('data-full-text');
-		var date = element.getAttribute('data-date');
+<script src="<c:url value='/resources/js/teacher/studentManage.js'/>"></script>
 
-		document.getElementById('modalContent').textContent = fullText;
-		document.getElementById('modalDate').textContent = date;
-
-		document.getElementById('noticeModal').style.display = 'block';
-	}
-
-	// 모달 닫기
-	function closeModal() {
-		document.getElementById('noticeModal').style.display = 'none';
-	}
-
-	// 공지사항 길이 제한
-	document.querySelectorAll(".text-limit").forEach(function(element) {
-		const text = element.innerText;
-		if (text.length > 20) {
-			element.innerText = text.substring(0, 20) + " ...";
-		}
-	});
-
-	// 모달 밖 클릭 시 닫기
-	window.onclick = function(event) {
-		var modal = document.getElementById('noticeModal');
-		if (event.target == modal) {
-			closeModal();
-		}
-	}
-</script>
 
 </html>
