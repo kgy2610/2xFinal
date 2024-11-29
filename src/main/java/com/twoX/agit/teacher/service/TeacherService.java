@@ -65,5 +65,8 @@ public interface TeacherService {
 	//성적 과목 가져오기
 	 List<Map<String, Object>> getStudentScoresByStuId(String stuId);
 	
-
+	  String udStudentStatus(String classCode, String stuId);
+	  
+	  ArrayList<Student> inStudentListbyScCode(String cCode);
+	  
 }

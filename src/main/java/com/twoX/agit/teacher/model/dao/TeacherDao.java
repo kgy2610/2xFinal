@@ -126,5 +126,16 @@ public class TeacherDao {
         return sqlSession.selectList("stuManageMapper.getStudentScoresByStuId", stuId);
     }
 	
+	public int udStudentStatus(SqlSessionTemplate sqlSession, String classCode, String stuId) {
+		 Map<String, String> params = new HashMap<>();
+		    params.put("classCode", classCode);
+		    params.put("stuId", stuId);
+		    return sqlSession.update("stuManageMapper.udStudentStatus", params);
+    }
+	
+	
+	public ArrayList<Student> stuActiveList(SqlSessionTemplate sqlSession, String status, String cCode) {
+		return (ArrayList)sqlSession.selectList("stuManageMapper.studentListbyScCode", cCode);
+	}
 	
 }

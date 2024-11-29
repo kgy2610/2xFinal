@@ -7,7 +7,14 @@
 		document.getElementById('modalDate').textContent = date;
 
 		document.getElementById('noticeModal').style.display = 'block';
+		
+		console.log(document.getElementById('modalContent'));
 	}
+	
+	
+	
+          
+    	
 
 	// 모달 닫기
 	function closeModal() {
@@ -38,6 +45,8 @@
 				+ phone;
 		document.querySelector('.real-student-information div:nth-child(3)').textContent = '출석률 : '
 				+ attendanceRate + '%';
+
+  		document.querySelector("input[name='stuId']").value = stuId;
 
 		fetchScores(stuId);
 		
@@ -82,11 +91,13 @@ function fetchScores(stuId) {
 
                 // 과목명, 점수, 구분선 포함된 전체 구조 생성 후, line3 뒤에 추가
                 const gradeHtml = `
+                	<div>
                     <div class="real-grade-information">
                         <div>${sl.SUBJECT}</div>   <!-- 과목명 -->
                         <div>${sl.SCORE}점</div>   <!-- 점수 -->
                     </div>
                     <hr class="line4">  <!-- 구분선 -->
+                	<div>
                 `;
 
                 // line3 이후에 추가
@@ -99,8 +110,96 @@ function fetchScores(stuId) {
     });   
     
 }
-	function chCancel(){
-		
-	}
+	
+ //승인이 필요한 교직원 목록
+           window.onload = function(){
+           	// AJAX로 요청 보내기
+           	$.ajax({
+           		url: "yStudentStatus", 
+           		type: "GET", 
+           		success: function(data) {
+           			console.log(data);  // 데이터가 어떻게 반환되는지 확인
+           			if (data && Array.isArray(data.yStudentStatuss)) {
+           				yStudentStatuss(data.yStudentStatuss); 
+           			} else {
+           				console.error('반환된 데이터가 예상한 배열 형식이 아닙니다.', data);
+           			}
+           		},
+           		error: function(xhr, status, error) {
+           			console.error('선생님 목록을 불러오는 중 오류 발생:', error);
+           		}
+           	});
+           }
+	
+	  // 승인 필요 선생님 목록을 화면에 표시
+           function yStudentStatuss(StudentListIn) {
+               let str = "";
+              
+               
+               // studentOutList가 배열인지 확인
+               if (Array.isArray(StudentListIn)) {
+                   for (let sli of StudentListIn) {
+                       console.log('sli:', sli); 
+                       console.log('status:', sli.status); 
+                       
 
+                       str +=       
+	                    `<div class="real-num-name-check">` + 
+							`<div>` + sli.stuNum + `</div>` +
+							`<div>` + sli.stuName + `</div>` + 
+							`<div>`
+								<input type="button" value="수락" onclick="studentRequest('`  sli.classCode  `', '`  sli.status  `')"
+	                                   style="width: 100px; height: 30px; background: #DDE5B6; border-radius: 10px; border: none; 
+	                                   color: #A98467; font-size: 15px; font-weight: 800; cursor: pointer;"> +
+							`</div>`+
+						`</div>` +
+						`<hr class="line6">`;
+                       
+                        
+                   }
+               } else {
+                   console.error('StudentListIn는 배열이 아닙니다:', StudentListIn);
+               }
 
+               const element = document.getElementById('modalContent');
+               element.innerHTML += str; // 'modalContent' 요소에 HTML 추가
+           }
+           
+           
+       // 교직원 승인 여부 모달 열기
+       function studentRequest(stuId, status){
+    	    
+    	    if(status === 'N'){
+    	        if(confirm(`승인하시겠습니까?`)){
+    	            request(stuId, 'Y');
+    	        }    
+    	    } else{
+    	    	 alert(`올바르지 않은 요청입니다. 받은 status: ${status}`);// 정확한 status 값도 알 수 있음
+    	    }
+    	}
+    	
+    	  //교직원 승인
+          function request(stuId, status){
+          	console.log("request js | 승인할 선생님의 stuId : " + stuId);
+          	console.log("request js | 승인할 선생님의 status : "+ status);
+
+          	$.ajax({
+          		url: "requestStudent",
+          		type: "POST",
+          		data: {stuId : stuId, status : status},
+          		success: function(response){
+          			if(response === "success"){
+          				alert("승인 완료");
+          				location.reload();
+          			}else if(response === "fail"){
+          				alert("승인 실패");
+          			}else if(response === "올바르지 않은 요청입니다."){
+          				alert(response)
+          			}
+          		},
+          		error: function(){
+          			alert("요청 작업 실패");
+          			location.reload();
+          		}
+          	});
+          }

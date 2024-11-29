@@ -1,6 +1,7 @@
 package com.twoX.agit.teacher.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.twoX.agit.board.model.vo.HmSubmit;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
@@ -376,7 +378,7 @@ public class TeacherController {
 
 	    // 학생별 출석률 가져오기
 	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
-	    System.out.println(stuManageList);
+	    System.out.println("뭣" + stuManageList);
 	    
 	    
 
@@ -389,7 +391,6 @@ public class TeacherController {
 	@RequestMapping(value = "studentManage.me", produces="application/json; charset-UTF-8")
 	@ResponseBody
 	public String getStudentScores(String stuId) {
-	    System.out.println("Received stuId: " + stuId); 
 	    List<Map<String, Object>> scoresList = teacherService.getStudentScoresByStuId(stuId);
 	    System.out.println("scoresList: " + scoresList);
 	    return new Gson().toJson(scoresList);  // JSON 형식으로 반환
@@ -397,16 +398,37 @@ public class TeacherController {
 	
 	// 한학생 승인 취소
 	@RequestMapping("studentManageCansel.me")
-	public String studentManageCansel(HttpSession session, Model model) {
-	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
-	    String classCode = loginUser.getClassCode();
-
+	public String studentManageCansel(@RequestParam("classCode") String classCode, @RequestParam("stuId") String stuId, HttpSession session, Model model) {
+		  System.out.println("Received classCode: " + classCode);
+		    System.out.println("Received stuId: " + stuId);
+	   
+	   String csCode = teacherService.udStudentStatus(classCode, stuId);
 	    
 	    
-	    return "teacher/studentManage";
+	    return "redirect:studentManage.me?stuId=" + stuId;
 	}
 	
 	
-	
+	@ResponseBody 
+	@RequestMapping(value = "yStudentStatus", produces = "application/json; charset=UTF-8")
+	public Map<String, Object> ajaxAcceptTeacherList(HttpSession session) {
+		Map<String , Object> response = new HashMap<String , Object>();
+		
+		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		
+		if(loginUser != null) {
+			String cCode = loginUser.getClassCode();
+			
+			ArrayList<Student> StudentListIn = teacherService.inStudentListbyScCode(cCode);
+        System.out.println("학생 리스트 : " + StudentListIn);
+			
+			
+	        response.put("StudentListIn", StudentListIn);  // 데이터가 배열로 들어가야 합니다.
+	    } else {
+	        response.put("message", "로그인 정보가 없습니다.");
+	    }
+		
+		return response;
+	}
 
 }

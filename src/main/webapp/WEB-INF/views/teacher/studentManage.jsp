@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.twoX.agit.member.model.vo.Teacher"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+	String classCode = loginUser.getClassCode();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +40,7 @@
 								onclick="showStudentInfo('${g.STUNAME}', '${g.PHONE}', '${g.ATTENDANCERATE}', '${g.STUID}')">
 								<div>${g.STUNUM}</div>
 								<div>${g.STUNAME}</div>
-								<div>${g.ATTENDANCERATE}</div>
+								<div>${g.ATTENDANCERATE}%</div>
 							</div>
 							<hr class="line2">
 						</c:forEach>
@@ -51,7 +55,8 @@
 						<div>전화번호 :</div>
 						<div>출석률 :</div>
 						<form action="studentManageCansel.me" method="post">
-							<input type="hidden" name="classCode" value="${} }">
+							<input type="hidden" name="classCode" value="<%=classCode%>">
+							<input type="hidden" name="stuId" value="">
 							<button type="submit" class="cancel">승인 취소</button>
 						</form>
 					</div>
@@ -84,13 +89,11 @@
 						<div>신서희</div>
 						<div>
 							<div class="radio-label">
-								<label> <input type="radio" name="contact" value="email" />
-								</label>
+								<label> <input type="radio" name="contact" value="email" /></label>
 							</div>
 						</div>
 					</div>
 					<hr class="line6">
-					<button class="save">저장</button>
 					</p>
 					<p id="modalDate"></p>
 				</div>
