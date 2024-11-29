@@ -292,4 +292,9 @@ public class MemberDao {
 	public ArrayList<Chat> selectStuChatList(SqlSessionTemplate sqlSession, String classCode){
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuChatList",classCode);
 	}
+	
+	// 반 학생 조회
+	public ArrayList<Student> selectStuList(SqlSessionTemplate sqlSession, String classCode){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectStuList",classCode);
+	}
 }

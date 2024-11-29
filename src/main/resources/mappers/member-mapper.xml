@@ -132,11 +132,17 @@
 	</insert>
 	<!-- 반학생 채팅 조회 -->
 	<select id="selectStuChatList" resultMap="ChatResultSet">
-			SELECT S.STU_NAME AS "STU_ID",MAX(C.CH_CONTENT) KEEP (DENSE_RANK LAST ORDER BY CH_DATE) AS CH_CONTENT
+			SELECT S.STU_NAME AS "TC_ID",MAX(C.CH_CONTENT) KEEP (DENSE_RANK LAST ORDER BY CH_DATE) AS CH_CONTENT,S.STU_ID AS "STU_ID"
 			FROM CHAT C
 			LEFT JOIN STUDENT S ON C.STU_ID=S.STU_ID 
 			WHERE C.CLASS_CODE = #{classCode}
-			GROUP BY S.STU_NAME
+			GROUP BY S.STU_NAME,S.STU_ID
+	</select>
+	<!-- 반학생 조회 -->
+	<select id="selectStuList" resultMap="studentResultSet">
+		SELECT STU_NAME,STU_ID
+		FROM STUDENT
+		WHERE CLASS_CODE = #{classCode}
 	</select>
 
 	<!-- 학부모 -->

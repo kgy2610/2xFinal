@@ -116,10 +116,10 @@ public class BoardController {
 	@RequestMapping("parents_score")
 	public String parents_score(HttpSession session) {
 		Student s = (Student)session.getAttribute("child");
-		if(s.getClassCode()==null ) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			return "parents/parents_myPage";
-		}
+//		if(s.getClassCode()==null ) {
+//			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
+//			return "parents/parents_myPage";
+//		}
 		ArrayList<Double> list = new ArrayList();
 		list = boardService.selectscore(s.getStuId());
 		if (list.size() < 7) {
@@ -160,10 +160,6 @@ public class BoardController {
 	@RequestMapping("parents_mypage")
 	public String parents_mypage(HttpSession session) {
 		Student s = (Student)session.getAttribute("child");
-		if(s.getClassCode()==null ) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			return "parents/parents_myPage";
-		}
 		return "parents/parents_myPage";
 	}
 	
@@ -228,11 +224,6 @@ public class BoardController {
 	// 부모님 상담페이지로 이동
 	@RequestMapping("parents_calendar")
 	public String parents_calendar(HttpSession session) {
-		Student s = (Student) session.getAttribute("child");
-		if (s.getClassCode() == null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			return "parents/parents_myPage";
-		}
 		return "parents/parents_calendar";
 	}
 

@@ -41,4 +41,46 @@
 	 		<beans:bean class="적용인터셉터클레스" id="아이디" />
 	 	</interceptor>
 	 </interceptors> -->
+	 <interceptors>
+	 	<interceptor>
+	 		<mapping path="/studentMyPage"/>
+	 		<mapping path="/student.classCode"/>
+	 		<mapping path="/student.update"/>
+	 		<mapping path="/student.upadatePwd"/>
+	 		<mapping path="/imgselect"/>
+	 		<beans:bean class="com.twoX.agit.common.intercepter.StudentInterceptor" id="StudentInterceptor" />
+	 	</interceptor>
+	 	<interceptor>
+	 		<mapping path="/parents_score"/>
+	 		<mapping path="/parents_mypage"/>
+	 		<mapping path="/parents_community"/>
+	 		<mapping path="/parents_calendar"/>
+	 		<mapping path="/updateCounsel"/>
+	 		<mapping path="/parents_eventImgList"/>
+	 		<mapping path="/eventImgList_detail"/>
+	 		<mapping path="/enroll_community"/>
+	 		<mapping path="/all_community"/>
+	 		<mapping path="/enroll_board"/>
+	 		<mapping path="/board_detail"/>
+	 		<mapping path="/board_modify"/>
+	 		<mapping path="/modifyParentsBoard"/>
+	 		<mapping path="/deleteParentsBoard"/>
+	 		<beans:bean class="com.twoX.agit.common.intercepter.ParentsInterceptor" id="ParentsInterceptor" />
+	 	</interceptor>
+	 	<interceptor>
+	 		<mapping path="/addNoticeForm"/>
+	 		<mapping path="/updateNotice"/>
+	 		<mapping path="/deleteNotice"/>
+	 		<mapping path="/addMemo"/>
+	 		<mapping path="/deleteMemo"/>
+	 		<mapping path="/teacher_eventImgList"/>
+	 		<mapping path="/teacher_eventImgList_detail"/>
+	 		<mapping path="/teacher_eventImgList_modify"/>
+	 		<mapping path="/teacher_eventImgList_enroll"/>
+	 		<mapping path="/deleteImgBoard"/>
+	 		<mapping path="/enroll_IMG"/>
+	 		<mapping path="/modifyImgBoard"/>
+	 		<beans:bean class="com.twoX.agit.common.intercepter.TeacherInterceptor" id="TeacherInterceptor" />
+	 	</interceptor>
+	 </interceptors>
 </beans:beans>
