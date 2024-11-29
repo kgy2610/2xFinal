@@ -48,7 +48,7 @@
 	 		<mapping path="/student.update"/>
 	 		<mapping path="/student.upadatePwd"/>
 	 		<mapping path="/imgselect"/>
-	 		<beans:bean class="com.twoX.agit.common.intercepter.StudentInterceptor" id="StudentInterceptor" />
+	 		<beans:bean class="com.twoX.agit.common.interceptor.StudentInterceptor" id="StudentInterceptor" />
 	 	</interceptor>
 	 	<interceptor>
 	 		<mapping path="/parents_score"/>
@@ -65,7 +65,7 @@
 	 		<mapping path="/board_modify"/>
 	 		<mapping path="/modifyParentsBoard"/>
 	 		<mapping path="/deleteParentsBoard"/>
-	 		<beans:bean class="com.twoX.agit.common.intercepter.ParentsInterceptor" id="ParentsInterceptor" />
+	 		<beans:bean class="com.twoX.agit.common.interceptor.ParentsInterceptor" id="ParentsInterceptor" />
 	 	</interceptor>
 	 	<interceptor>
 	 		<mapping path="/addNoticeForm"/>
@@ -80,7 +80,7 @@
 	 		<mapping path="/deleteImgBoard"/>
 	 		<mapping path="/enroll_IMG"/>
 	 		<mapping path="/modifyImgBoard"/>
-	 		<beans:bean class="com.twoX.agit.common.intercepter.TeacherInterceptor" id="TeacherInterceptor" />
+	 		<beans:bean class="com.twoX.agit.common.interceptor.TeacherInterceptor" id="TeacherInterceptor" />
 	 	</interceptor>
 	 </interceptors>
 </beans:beans>
