@@ -21,4 +21,5 @@ public class Counsel {
 	private String prId;
 	private String scLocation;
 	private String csContent;
+	private String prName;
 }

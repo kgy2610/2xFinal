@@ -29,6 +29,8 @@
 		DELETE FROM MEMO 
 		WHERE MM_CONTENT = #{mmContent} 
 	</delete>
+	
+	<!-- 메모 수정 -->
 
 </mapper>
 

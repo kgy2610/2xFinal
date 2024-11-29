@@ -216,6 +216,18 @@ a{
     cursor: not-allowed;
 }
 
-
+.update_button {
+    width: 20%;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 40%;
+    background-color: #4CAF50; /* 초록색 */
+    color: white; /* 텍스트 흰색 */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 
