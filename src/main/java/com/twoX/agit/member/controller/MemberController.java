@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.twoX.agit.board.model.vo.Counsel;
+import com.twoX.agit.board.service.BoardService;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -43,7 +45,7 @@ public class MemberController {
 	@Autowired
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
-	}
+	}	
 
 	@RequestMapping("login")
 	public String login() {
@@ -137,9 +139,17 @@ public class MemberController {
 	   
 	   @ResponseBody
 		@RequestMapping(value="selectChatList", produces="application/json; charset-UTF-8")
-		public String ajaxSelectChatList(HttpSession session) {
-		   Student loginUser = (Student) session.getAttribute("loginUser");
-		   ArrayList<Chat> clist = memberService.selectChatList(loginUser);
+		public String ajaxSelectChatList(String stuId,String classCode,HttpSession session) {
+		   ArrayList<Chat> clist =new ArrayList();
+		   if(stuId==null) {
+			   Student loginUser = (Student) session.getAttribute("loginUser");
+			   clist = memberService.selectChatList(loginUser);
+		   }else {
+			   Student s = new Student();
+			   s.setStuId(stuId);
+			   s.setClassCode(classCode);
+			   clist = memberService.selectChatList(s);
+		   }
 		   return new Gson().toJson(clist);
 		}
 	      
@@ -507,6 +517,10 @@ public class MemberController {
 	        // 총 공지사항 수를 구하는 메서드 호출
 	     	int NoticeCount = memberService.getNoticeCount();
 	     	String tcId = loginTeacher.getTcId();
+	     	
+	     	// 상담일정 리스트 가져오기
+	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
+	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
 	        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(NoticeCount, tcId);
@@ -538,7 +552,7 @@ public class MemberController {
 	        } else if(!"0000".equals(classCode)) { // classCode 값이 0000이 아닐 경우(반 개설 후 선생님)
 	        	
 	        	System.out.println("반 개설 후 선생님 로그인 성공");
-	        	ArrayList<Chat> slist = memberService.selectStuChatList(classCode);
+	        	ArrayList<Student> slist = memberService.selectStuList(classCode);
 	        	System.out.println(slist);
 	        	session.setAttribute("slist", slist);
 	            return "teacher/myPage";

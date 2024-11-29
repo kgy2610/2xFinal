@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>학생 출결 페이지</title>
@@ -45,7 +46,7 @@
         <button type="submit" class="save-button">저장</button>
     </form>
     
-    <button type="button" class="update-button" onclick="updateAttendance()">수정</button>
+    <button type="button" class="update_button" onclick="updateAttendance()">수정</button>
    </div>
 
 <script src="<c:url value='/resources/js/teacher/teacherAttendance.js'/>"></script>
