@@ -35,16 +35,16 @@
 		<div class="chat_modal-content">
          <h2 class="modalTitle" id="classGrade"></h2>
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
            
            <div id="modal_Stu_content">
            		<c:forEach var="sl" items="${slist}">
-           			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;">
+           			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;" onclick="openChatModal('${sl.stuId}','${loginUser.classCode}')">
 	           			<tr>
-	           				<td class="modal_stuName" style="width:20%">${sl.stuId}</td>
-	           				<td class="modal_lastChat" style="width:60%">${sl.chContent}</td>
-	           				<td class="modal_newMsgCount" style="width:20%"><span style="display:inline-bloack; background-color:#efccb0; padding: 10px 15px 10px 15px; border-radius:15px;">4 +</span></td>
+	           				<td class="modal_stuName" style="width:20%">${sl.stuName}</td>
+	           				<td class="modal_lastChat" style="width:60%"></td>
+	           				<td class="modal_newMsgCount" style="width:20%;"><div style="width:80%; height:40px; background-color:#efccb0;border-radius:15px; display: none; justify-content: center; align-items: center;" id="newMsgEv${sl.stuId}">n e w</div></td>
 	           			</tr>
 	           		</table>	
            		</c:forEach>
@@ -52,28 +52,27 @@
            </div>
          </div>
         </div>
-        
-	<div id="chatModal" class="chat_modal">
-      <div class="chat_modal-content">
-         <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
-         <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
-           <hr>
-           
-           <div id="modal_talk_content">
+        <c:forEach var="st" items="${slist}">
+        	<div id="chatModal${st.stuId}" class="chat_modal">
+      			<div class="chat_modal-content">
+         			<h2 class="modalTitle">${st.stuName}</h2>
+         			<span class="closeModal" onclick="backModal('${st.stuId}')">&lt;</span>
+          			<hr>
+          			<input type="hidden" value="${st.stuId}" class="ChatStuId">
+           			<div class="modal_talk_content" id="${st.stuId}talk_content">
            		
-           </div>
-               <table>
-                  <tr>
-                     <td><input type="text" placeholder="메세지를 입력하세요" id="msg"></td>
-                     <td><button type="button" onclick="sendMsg()">전 송</button></td>
-                  </tr>
-               </table>
-         </div>
-        </div>
+           			</div>
+               		<table>
+	                  	<tr>
+	                    	<td><input type="text" placeholder="메세지를 입력하세요" id="msg${st.stuId}"></td>
+	                    	<td><button type="button" onclick="sendMsg('${st.stuId}')">전 송</button></td>
+	                  	</tr>
+               		</table>
+        		</div>
+        	</div>
+        </c:forEach>
 	<script>
 	   function openStuModal(classCode) {
-		   console.log(classCode)
 		   if(classCode === undefined){
 			   alert("반 배정 후 이용가능합니다.")
 			   return
@@ -81,12 +80,23 @@
 		   document.getElementById('classGrade').innerText = classCode.slice(9,10) + "학년 " + classCode.slice(10,12) + "반"
 	       document.getElementById('stuModal').style.display = 'flex';
 	       document.getElementById("newMsg").style.display='none';
-	       selectChatList()
 	   }
 	
+	   function openChatModal(stuId,classCode){
+		   document.getElementById('stuModal').style.display = 'none';
+		   document.getElementById("newMsg").style.display='none';
+		   document.getElementById('chatModal'+stuId).style.display = 'flex';
+		   document.getElementById("newMsgEv"+stuId).style.display='none';
+		   selectChatList(stuId,classCode)
+	   }
 	   // 모달 닫기
 	   function closeModal() {
 	       document.getElementById('stuModal').style.display = 'none';
+	   }
+	   
+	   function backModal(stuId){
+		   document.getElementById('stuModal').style.display = 'flex';
+		   document.getElementById('chatModal'+stuId).style.display = 'none';
 	   }
         const socket = new WebSocket("ws://localhost:2222/agit/server");
 
@@ -105,25 +115,27 @@
         //socket연결로부터 데이터가 도착했을 때 실행하는 이벤트
         socket.onmessage = function(ev){
             const reveice = JSON.parse(ev.data);
-            if(reveice.sendMessenger === 'ST'){
-            	document.getElementById("newMsg").style.display='flex';	
+            if(reveice.sendMessenger === 'ST' && window.getComputedStyle(document.getElementById('chatModal'+reveice.stuId)).display==='none'){
+            	document.getElementById("newMsg").style.display='flex';
+            	document.getElementById("newMsgEv"+reveice.stuId).style.display='flex';
             }
-            selectChatList();
+            selectChatList(reveice.stuId,reveice.classCode);
             setTimeout(scrollToBottom, 50);
         }
 
-        function sendMsg(){
+        function sendMsg(stuId){
             const msgData = {
-                message: document.querySelector("#msg").value,
-                target: document.querySelector("#teacherId").value,
+                message: document.querySelector("#msg"+stuId).value,
+                target: stuId,
             }
-            document.querySelector("#msg").value='';
+            document.querySelector("#msg"+stuId).value='';
             socket.send(JSON.stringify(msgData));
         }
         
-        function selectChatList(){
+        function selectChatList(stuId,classCode){
         	$.ajax({
         		url:"selectChatList",
+        		data:{stuId:stuId,classCode:classCode},
         		success:function(res){
         			let str=''
         			let todate=''
@@ -133,13 +145,13 @@
         	      			+"<hr style='width:90%; height:3px; margin: 20px auto;'>"
         					todate=ch.chDate
         				}
-        				if(ch.sendMessenger === 'ST'){
+        				if(ch.sendMessenger === 'TC'){
         					str+="<div class='sendMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
         				}else{
         					str+="<div class='recMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
         				}
         			}
-        			document.getElementById("modal_talk_content").innerHTML = str;
+        			document.getElementById(stuId+"talk_content").innerHTML = str;
         			setTimeout(scrollToBottom, 50);
         		},
         		error:function(){
@@ -147,10 +159,15 @@
         		}
         	})
         }
+        
+        
         function scrollToBottom() {
-            const chatBox = document.getElementById("modal_talk_content");
-            requestAnimationFrame(() => {
-                chatBox.scrollTop = chatBox.scrollHeight; // 스크롤을 맨 아래로 이동
+            const chatBoxes = document.getElementsByClassName("modal_talk_content");
+            // 각 요소에 대해 스크롤을 맨 아래로 이동
+            Array.from(chatBoxes).forEach(chatBox => {
+                requestAnimationFrame(() => {
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                });
             });
         }
     </script>

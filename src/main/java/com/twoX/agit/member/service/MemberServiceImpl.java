@@ -287,4 +287,10 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Teacher> selectAttendance(String classCode) {
 		return memberDao.selectAttendance(sqlSession, classCode);
 	}
+	
+	// 반학생 조회
+	@Override
+	public ArrayList<Student> selectStuList(String classCode) {
+		return memberDao.selectStuList(sqlSession, classCode);
+	}
 }

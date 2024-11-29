@@ -23,7 +23,7 @@
             <label for="logout"> <a href="logout.me">로그아웃</a></label>
         </div>
     </div>
-    <div id="chat_button" onclick="openModal('${loginUser.status }')">
+    <div id="chat_button" onclick="openModal('${loginUser.status }','${loginUser.stuId}','${loginUser.classCode}')">
 		<img src="<c:url value='/resources/img/student/message.png'/>">
 	</div>
 	<div style="background-color:red; width:20px; height:20px; border-radius:40px; border:none; position: absolute; bottom:115px; right:50px; display:none;" id="newMsg"></div>
@@ -32,32 +32,33 @@
       <div class="chat_modal-content">
          <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
            
-           <div id="modal_talk_content">
+           <div class="modal_talk_content">
            </div>
                <table>
                   <tr>
                      <td><input type="text" placeholder="메세지를 입력하세요" id="msg"></td>
-                     <td><button type="button" onclick="sendMsg()">전 송</button></td>
+                     <td><button type="button" onclick="sendMsg('${loginUser.stuId}','${loginUser.classCode}')">전 송</button></td>
                   </tr>
                </table>
          </div>
         </div>
     <script>
-	   function openModal(status) {
+	   function openModal(status,stuId,classCode) {
 		   if(status ==="N"){
 			   alert("반 등록 후 이용 가능합니다.")
 			   return
 		   }
 	       document.getElementById('chatModal').style.display = 'flex';
 	       document.getElementById("newMsg").style.display='none';
-	       selectChatList()
+	       selectChatList(stuId,classCode)
 	   }
 	
 	   // 모달 닫기
 	   function closeModal() {
+		   document.getElementById("newMsg").style.display='none';
 	       document.getElementById('chatModal').style.display = 'none';
 	   }
         const socket = new WebSocket("ws://localhost:2222/agit/server");
@@ -76,12 +77,12 @@
 
         //socket연결로부터 데이터가 도착했을 때 실행하는 이벤트
         socket.onmessage = function(ev){
-            console.log(ev)
+        	const modal = document.getElementById('chatModal');
             const reveice = JSON.parse(ev.data);
-            if(reveice.sendMessenger === 'TC'){
+            if(reveice.sendMessenger === 'TC' && window.getComputedStyle(modal).display==='none'){
             	document.getElementById("newMsg").style.display='flex';	
             }
-            selectChatList();
+            selectChatList(reveice.stuId,reveice.classCode);
             setTimeout(scrollToBottom, 50);
             
         }
@@ -95,9 +96,10 @@
             socket.send(JSON.stringify(msgData));
         }
         
-        function selectChatList(){
+        function selectChatList(stuId,classCode){
         	$.ajax({
         		url:"selectChatList",
+        		data:{stuId:stuId,classCode:classCode},
         		success:function(res){
         			let str=''
         			let todate=''
@@ -113,7 +115,7 @@
         					str+="<div class='recMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
         				}
         			}
-        			document.getElementById("modal_talk_content").innerHTML = str;
+        			document.getElementsByClassName("modal_talk_content")[0].innerHTML = str;
         			setTimeout(scrollToBottom, 50);
         		},
         		error:function(){
@@ -122,7 +124,7 @@
         	})
         }
         function scrollToBottom() {
-            const chatBox = document.getElementById("modal_talk_content");
+            const chatBox = document.getElementsByClassName("modal_talk_content")[0];
             requestAnimationFrame(() => {
                 chatBox.scrollTop = chatBox.scrollHeight; // 스크롤을 맨 아래로 이동
             });

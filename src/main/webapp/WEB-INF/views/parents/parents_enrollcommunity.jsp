@@ -68,7 +68,7 @@
             }
         }
         
-        $(function(){
+        $(document).ready(function(){
             $('#en_content').summernote({
             height: 535,                 // 에디터 높이
             minHeight: null,
