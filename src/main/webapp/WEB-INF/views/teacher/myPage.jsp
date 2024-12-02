@@ -19,9 +19,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGIT</title>
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/teacher/teacherMypagePlus.css'/>">
+<title>선생님 마이페이지</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacherMypagePlus.css'/>">
+<script src="<c:url value='/resources/js/teacher/myPage.js'/>"></script>
+
 </head>
 <body>
    <% if(alertMsg != null) {%>
@@ -236,8 +237,5 @@
         </div>
 
 	</div>
-
-	<script src="<c:url value='/resources/js/teacher/myPage.js'/>"></script>
-
 </body>
 </html>

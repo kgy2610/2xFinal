@@ -7,8 +7,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>agit</title>
-    <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_eventImgList.css'/>">
+    <title>행사사진</title>
+    
 	<link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_myPage.css'/>">
     <style>
 
@@ -37,8 +37,6 @@
 		        	</c:forEach>
             	</c:otherwise>
             </c:choose>
-   	     		
-	             
         </div>
       </div>
 </body>

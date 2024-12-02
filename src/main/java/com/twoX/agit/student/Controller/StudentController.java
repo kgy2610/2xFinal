@@ -28,7 +28,7 @@ import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Student;
-import com.twoX.agit.member.model.vo.Teacher;
+import com.twoX.agit.student.model.vo.HomeworkFile;
 import com.twoX.agit.student.model.vo.HomeworkSubmit;
 import com.twoX.agit.student.service.StudentService;
 
@@ -117,12 +117,6 @@ public class StudentController {
 		// 로그인 정보 확인
 		Student s = (Student) session.getAttribute("loginUser");
 		
-		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = Template.saveFile(upfile, session, "/resources/file/homework_files/");
-			
-			hm.setChangeName("/resources/file/homework_files/" + changeName);
-			hm.setOriginName(upfile.getOriginalFilename());
-		}
 		hm.setStuId(s.getStuId());
 		hm.setStatus("Y");
 		System.out.println(hm);
@@ -139,6 +133,7 @@ public class StudentController {
 	// 학생 숙제 제출 완료 후 제출한 숙제 조회
 	@RequestMapping("homework.check")
 	public String homeworkCheck(int boNo,
+								@ModelAttribute HomeworkFile hf,
             					@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
             					HttpSession session,
             					Model model) {
@@ -154,6 +149,8 @@ public class StudentController {
 		model.addAttribute("npage", npage);
 		model.addAttribute("cpage", currentPage);
 		
+		System.out.println("npage OrName : " + npage.getOriginName());
+		System.out.println("napge ChName: " + npage.getChangeName());
 		return "student/homeworkConfirm";
 	}
 	
@@ -173,23 +170,6 @@ public class StudentController {
 	public String updateStuAnswer(HomeworkSubmit hm, MultipartFile reupfile, HttpSession session) {
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		System.out.println("hm : " + hm);
-		if(!reupfile.getOriginalFilename().equals("")) {
-			//기존 첨부파일이 있다 -> 기존파일을 삭제
-			if(hm.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(hm.getChangeName())).delete();
-			}
-			
-			//새로운 첨부파일을 서버에 업로드하기
-			String changeName = Template.saveFile(reupfile, session, "/resources/file/homework_files/");
-			
-			hm.setOriginName(reupfile.getOriginalFilename());
-			hm.setChangeName( "/resources/file/homework_files/" + changeName);
-		}else {
-			HomeworkSubmit hms = (HomeworkSubmit)session.getAttribute("npage");
-			System.out.println("hms : " + hms);
-			hm.setOriginName(hms.getOriginName());
-			hm.setChangeName(hms.getChangeName());
-		}
 		
 		int result = studentService.updateHomework(hm);
 		if(result > 0) {
