@@ -47,13 +47,22 @@ public class StudentDao {
 
 	// 학생 숙제 제출
 	public int insertStudentHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
-		System.out.println(hm);
 		return sqlSession.insert("studentMapper.insertStudentHomework", hm);
 	}
 
 	// 학생 숙제 답변 조회
 	public HomeworkSubmit selectNowAnswer(SqlSessionTemplate sqlSession, int boNo) {
-		return sqlSession.selectOne("studentMapper.selectNowAnswer", boNo);
+	    HomeworkSubmit result = sqlSession.selectOne("studentMapper.selectNowAnswer", boNo);
+
+	    // 디버깅: 반환된 HomeworkSubmit 객체의 originName과 changeName 값 출력
+	    if (result != null) {
+	        System.out.println("Origin Name: " + result.getOriginName());
+	        System.out.println("Change Name: " + result.getChangeName());
+	    } else {
+	        System.out.println("Result is null for BO_NO: " + boNo);
+	    }
+
+	    return result;
 	}
 
 	// 학생 숙제 제출 상태 불러오기
@@ -66,7 +75,6 @@ public class StudentDao {
 	}
 	// 숙제 수정하기
 	public int updateStuHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
-		System.out.println("Dao : " + hm);
 		return sqlSession.update("studentMapper.updateStuHomework", hm);
 	}
 

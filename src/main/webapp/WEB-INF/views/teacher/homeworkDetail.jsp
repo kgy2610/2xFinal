@@ -27,8 +27,11 @@
 		        <select name="subject" class="subject-select">
 		            <option value="국어" ${subject eq '국어' ? 'selected' : ''}>국어</option>
 		            <option value="수학" ${subject eq '수학' ? 'selected' : ''}>수학</option>
-		            <option value="과학" ${subject eq '과학' ? 'selected' : ''}>과학</option>
 		            <option value="영어" ${subject eq '영어' ? 'selected' : ''}>영어</option>
+		            <option value="과학" ${subject eq '과학' ? 'selected' : ''}>과학</option>
+		            <option value="사회" ${subject eq '사회' ? 'selected' : ''}>사회</option>
+		            <option value="미술" ${subject eq '미술' ? 'selected' : ''}>미술</option>
+		            <option value="체육" ${subject eq '체육' ? 'selected' : ''}>체육</option>
 		        </select>
     		</div>
             <div class="real-body">

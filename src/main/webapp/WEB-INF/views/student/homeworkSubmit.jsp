@@ -37,14 +37,19 @@
 			<div id="enroll_content">
 				<div id="enroll_info">마감일 | ${npage.deadLine}</div>
 				<div id="en_content">${npage.hmContent}</div>
+				<div id="enroll_file">
+					<c:choose>
+		            	<c:when test="${not empty npage.originName }">
+		            	<span>첨부된 파일 : </span><a id="downloadLink" href="<c:url value='${npage.changeName}'/>" download="${npage.originName }">${npage.originName }</a>
+		            	</c:when>
+		            	<c:otherwise>
+							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
+						</c:otherwise>
+		            </c:choose>
+				</div>
+			</div>
 
 				<form action="enroll.homework_student" method="post" enctype="multipart/form-data">
-					<div id="enroll_file">
-						<input type="file" name="upfile" id="fileInput" style="display: none;" onchange="showFileName()">
-							<label for="fileInput" class="custom-file-upload"> 파일 선택 </label>
-							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
-					</div>
-			</div>
 					<div id="submit_area">
 						<div id="submit_homework">
 							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;">${napge.hmStuContent}</textarea>
