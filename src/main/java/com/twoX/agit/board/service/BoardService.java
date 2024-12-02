@@ -95,4 +95,7 @@ public interface BoardService {
 	int insertIMGBoard(EventImgBoard eib);
 	
 	int updateImgBoard(EventImgBoard eib);
+	
+	//선생님 상담일정 추가
+	int insertCounsel(Counsel c);
 }  

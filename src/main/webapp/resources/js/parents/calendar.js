@@ -94,18 +94,21 @@ function selectSameMonthCounsel(){
 		url: 'selectSameMonthCounsel',
 		data: {month: month},
 		success:function(res){
+			const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
 			let cal = document.getElementById("cal");
 			let elements = cal.getElementsByTagName("td");
     		for(let c of res){
     			for(let m of elements){
     				let to = today.getDate();
-    				if(m.innerText.substring(0,2) == c.csDate.substring(3,5)){
+    				if((m.innerText.split(":")[0].length===1||m.innerText.split(":")[0].length===3?'0'+m.innerText.substring(0,1):m.innerText.substring(0,2)) == c.csDate.substring(3,5)){
     					if(c.csDate.substring(3,5) < to){
-    						m.innerHTML+="<button class='cs_nubutton'>"+c.csDate.substring(6,11)+" / "+c.scLocation+"</button>"
+    						m.innerHTML+="<button class='cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
     					}else if(c.prId != null){
-    						m.innerHTML+="<button class='cs_nubutton'>"+c.csDate.substring(6,11)+" / "+c.scLocation+"</button>"
-    					}else{
-    						m.innerHTML+="<button class='cs_button'>"+c.csDate.substring(6,11)+" / "+c.scLocation+"<input type='hidden' id='bt_cs_no' value='"+c.csNo+"'></button>"
+    						m.innerHTML+="<button class='cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
+    					}else if(c.csDate.substring(0,2)!== currentMonth){
+            				m.innerHTML+="<button class='cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
+            			}else{
+    						m.innerHTML+="<button class='cs_button'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"<input type='hidden' id='bt_cs_no' value='"+c.csNo+"'></button>"
     					}
     				}  
     			}

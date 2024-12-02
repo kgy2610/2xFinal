@@ -38,7 +38,7 @@
                                 <th>토</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="cal">
                             <!-- 날짜(js) -->
                         </tbody>
                     </table>
@@ -59,7 +59,39 @@
                     <div>상담내용</div>
                 </div>
                 <hr>
-                <div class="real-information-info" id="consultationList"></div>
+                <div class="real-information-info" id="consultationList" >
+                	<table id="counselTable">
+                		<tr>
+                			<td>12:40/2층 교무실</td>
+                			<td>송혁규</td>
+                			<td>010-8424-8422</td>
+                			<td>awefawef</td>
+                		</tr>
+                		<tr>
+                			<td>12:40/2층 교무실</td>
+                			<td>송혁규</td>
+                			<td>010-8424-8422</td>
+                			<td>awefawef</td>
+                		</tr>
+                		<tr>
+                			<td>12:40/2층 교무실</td>
+                			<td>송혁규</td>
+                			<td>010-8424-8422</td>
+                			<td>awefawef</td>
+                		</tr><tr>
+                			<td>12:40/2층 교무실</td>
+                			<td>송혁규</td>
+                			<td>010-8424-8422</td>
+                			<td>awefawef</td>
+                		</tr><tr>
+                			<td>12:40/2층 교무실</td>
+                			<td>송혁규</td>
+                			<td>010-8424-8422</td>
+                			<td>awefawef</td>
+                		</tr>
+                		
+                	</table>
+                </div>
                 <!--상담 등록-->
                 <div id="modal" class="modal">
                     <div class="modal-content">
@@ -129,6 +161,7 @@
 
             $('#monthSelect').on('change', function () {
                 createCalendar(fixedYear);
+                selectSameMonthCounsel()
             });
 
             $('#calendar').on('click', 'td', function () {
@@ -136,9 +169,9 @@
                 if (day) {
                     const month = $('#monthSelect').val().padStart(2, '0');
                     const consultationDate = `${fixedYear}-${month}-${day.padStart(2, '0')}`;
-                    $('#selectedDate').text(consultationDate); // Update selected date display
                     $('#modal').css('display', 'block');
                     selectedCell = $(this);
+                    
                 }
             });
 
@@ -219,15 +252,17 @@
             }
 
             // Create new button with consultation details
-            const button = $('<button class="appointment-time"></button>')
-                .text(`${consultationTime} / ${consultationLocation}`)
+            const button = $('<button class="appointment-time cs_button">'+consultationTime+' <br> '+consultationLocation+'</button>')
                 .on('click', function () {
                     $('#consultationTime').val(consultationTime);
                     $('#consultationLocation').val(consultationLocation);
                     $('#deleteBtn').show(); // Show delete button when appointment is selected
-                    selectedButton = $(this); // Save reference to selected button
                 });
-
+            const month = $('#monthSelect').val();
+            const currentYear = new Date().getFullYear();
+            const selectDay = selectedCell.text().split(":")[0].length===3?selectedCell.text().substring(0,1):selectedCell.text().substring(0,2);
+            const CounselTime = currentYear +"-"+month+"-"+selectDay+" "+consultationTime+":00";
+			insertCounsel(CounselTime,consultationLocation);
             selectedCell.append(button); // Add button to selected cell
             $('#modal').css('display', 'none'); // Hide modal
             $('#consultationTime').val(''); // Clear input fields
@@ -244,6 +279,87 @@
                 $('#consultationLocation').val('');
             }
         }
+        
+        function insertCounsel(consultationTime,consultationLocation){
+        	console.log(consultationTime)
+        	$.ajax({
+        		url: "insertCounsel",
+        		data:{csDate : consultationTime,csLocation : consultationLocation},
+        		success:function(res){
+        			if(res === 0){
+        				alert("상담일정 추가에 실패하였습니다.");
+        			}
+        		},
+        		error:function(){
+        			console.log("이건 또 왜 안되는데");
+        		}
+        	})
+        }
+        window.onload=function(){
+        	selectSameMonthCounsel();
+        	document.getElementById('selectedDate').innerText = getTodayDate()
+        	selectCounselList(getTodayDate())
+        }
+        function selectSameDayCounsel(){
+        	
+        }
+        function selectSameMonthCounsel(){
+        	const month = $('#monthSelect').val();
+        	const today = new Date();
+        	$.ajax({
+        		url: 'selectSameMonthCounsel',
+        		data: {month: month},
+        		success:function(res){
+        			const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+        			let cal = document.getElementById("cal");
+        			let elements = cal.getElementsByTagName("td");
+            		for(let c of res){
+            			for(let m of elements){
+            				let to = today.getDate();
+            				if((m.innerText.split(":")[0].length===1||m.innerText.split(":")[0].length===3?'0'+m.innerText.substring(0,1):m.innerText.substring(0,2)) == c.csDate.substring(3,5)){
+            					if(c.csDate.substring(3,5) < to){
+            						m.innerHTML+="<button class='appointment-time cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
+            					}else if(c.prId != null){
+            						m.innerHTML+="<button class='appointment-time cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
+            					}else if(c.csDate.substring(0,2)!== currentMonth){
+            						m.innerHTML+="<button class='appointment-time cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
+            					}else{
+            						m.innerHTML+="<button class='appointment-time cs_button'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"<input type='hidden' id='bt_cs_no' value='"+c.csNo+"'></button>"
+            					}
+            				}  
+            			}
+            		}
+        		},
+        		error:function(){
+        			console.log("일단 왜인지는 모르겠는데 안됨");
+        		}
+        	})
+        }
+        function selectCounselList(selectDay){
+        	$.ajax({
+        		url: 'selectCounselList',
+        		data: {selectDay:selectDay},
+        		seccess:function(res){
+        			let str='';
+        			for(let c of res){
+        				//str += "<tr><td>"++"</td><td>"++"</td><td>"++"</td><td>"++"</td></tr>"	
+        			}
+					document.getElementById('counselTable').innerHTML = str;        			
+        		},
+        		error:function(){
+        			console.log("일단 왜인지는 모르겠는데 안됨");
+        		}
+        	})
+        }
+        function getTodayDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+            const day = String(today.getDate()).padStart(2, '0'); // 날짜는 두 자릿수로 맞추기 위해 padStart 사용
+
+            return year+'-'+month+'-'+day;
+        }
+        
     </script>
 </body>
 
