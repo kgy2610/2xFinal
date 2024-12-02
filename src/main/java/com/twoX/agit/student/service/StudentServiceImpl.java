@@ -88,4 +88,12 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.selectHomeworkSubmit(sqlSession, boNo, stuId);
 	}
 
+	// 숙제 수정하기
+	@Override
+	public int updateHomework(HomeworkSubmit hm) {
+		System.out.println("serviceImpl : " + hm);
+		return studentDao.updateStuHomework(sqlSession, hm);
+	}
+
+	
 }

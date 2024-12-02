@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.dao.MemberDao;
 import com.twoX.agit.member.model.vo.Homework;
@@ -96,8 +97,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 학생 - 비밀번호 수정
 	@Override
-	public int studentPwdUpdate(Map<String, String> map) {
-		return memberDao.studentPwdUpdate(sqlSession, map);
+	public int studentPwdUpdate(Student s) {
+		return memberDao.studentPwdUpdate(sqlSession, s);
 	}
 	
 	// 학생 - 프로필 사진 변경
@@ -288,6 +289,13 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectAttendance(sqlSession, classCode);
 	}
 	
+
+	// 선생님 상담 리스트 
+	@Override
+	public ArrayList<Counsel> getTeacherCounsel(String tcId) {
+		return memberDao.selectTeacherCounsel(sqlSession, tcId);
+	}
+
 	// 반학생 조회
 	@Override
 	public ArrayList<Student> selectStuList(String classCode) {

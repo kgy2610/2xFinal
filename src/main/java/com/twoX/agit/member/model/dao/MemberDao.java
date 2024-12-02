@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
@@ -87,8 +88,8 @@ public class MemberDao {
 	}
 
 	// 학생 - 비번수정
-	public int studentPwdUpdate(SqlSessionTemplate sqlSession, Map<String, String> map) {
-		return sqlSession.update("memberMapper.studentPwdUpdate", map);
+	public int studentPwdUpdate(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("memberMapper.studentPwdUpdate", s);
 	}
 
 	// 학생 - 프로필 변경
@@ -293,6 +294,11 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuChatList",classCode);
 	}
 	
+
+	// 선생님 상담 리스트
+	public ArrayList<Counsel> selectTeacherCounsel(SqlSessionTemplate sqlSession, String tcId){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectTeacherCounsel", tcId);
+	}
 	// 반 학생 조회
 	public ArrayList<Student> selectStuList(SqlSessionTemplate sqlSession, String classCode){
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuList",classCode);

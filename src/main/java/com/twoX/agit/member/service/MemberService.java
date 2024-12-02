@@ -3,6 +3,7 @@ package com.twoX.agit.member.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
@@ -49,7 +50,7 @@ public interface MemberService {
 	int studentUpdate(Map<String, String> map);
 
 	// 비밀번호 수정
-	int studentPwdUpdate(Map<String, String> map);
+	int studentPwdUpdate(Student s);
 
 	// 프로필 사진 변경
 	int studentSelectImg(Map<String, String> map);
@@ -146,6 +147,11 @@ public interface MemberService {
 	// 선생님 - 출결
 	ArrayList<Teacher> selectAttendance(String classCode);
 	
+
+	// 선생님 상당일정 리스트
+	ArrayList<Counsel> getTeacherCounsel(String tcId);
+
 	//반학생 조회
 	ArrayList<Student> selectStuList(String classCode);
+
 }

@@ -64,6 +64,11 @@ public class StudentDao {
 		
 		return sqlSession.selectOne("studentMapper.selectHomeworkSubmit", params);
 	}
+	// 숙제 수정하기
+	public int updateStuHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
+		System.out.println("Dao : " + hm);
+		return sqlSession.update("studentMapper.updateStuHomework", hm);
+	}
 
 	// 방과후
 	public int updateAfterschoolCode(SqlSessionTemplate sqlSession, Map<String, String> map) {

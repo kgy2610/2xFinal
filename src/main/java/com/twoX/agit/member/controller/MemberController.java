@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.twoX.agit.board.model.vo.Counsel;
+import com.twoX.agit.board.service.BoardService;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -43,7 +45,7 @@ public class MemberController {
 	@Autowired
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
-	}
+	}	
 
 	@RequestMapping("login")
 	public String login() {
@@ -252,25 +254,21 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-
 	@RequestMapping("student.upadatePwd")
-	public String updatePwdSt(String updatePwd, HttpSession session, Model model) {
-		Student s = (Student) session.getAttribute("loginUser");
-		String stuId = s.getStuId();
+	public String updatePwdSt(Student s,String newPwd, HttpSession session, Model model) {
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("stuId", stuId);
-		map.put("updatePwd", updatePwd);
-		int result = memberService.studentPwdUpdate(map);
-
+		Student student = (Student)session.getAttribute("loginUser");
+		
+		s.setStuId(student.getStuId());
+		s.setStuPwd(newPwd);
+		
+		int result = memberService.studentPwdUpdate(s);
 		if (result > 0) {
-			Student student = memberService.loginStudent(s);
-			session.setAttribute("loginUser", student);
-			session.setAttribute("alertMsg", "수정 성공");
-
+			session.setAttribute("loginUser", memberService.loginStudent(s));
+			session.setAttribute("alertMsg", "비밀번호 수정 성공");
 			return "redirect:/studentMyPage";
 		} else {
-			model.addAttribute("alertMsg", "수정실패");
+			session.setAttribute("alertMsg", "비밀번호 수정 실패");
 			return "redirect:/";
 		}
 	}
@@ -519,6 +517,10 @@ public class MemberController {
 	        // 총 공지사항 수를 구하는 메서드 호출
 	     	int NoticeCount = memberService.getNoticeCount();
 	     	String tcId = loginTeacher.getTcId();
+	     	
+	     	// 상담일정 리스트 가져오기
+	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
+	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
 	        ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(NoticeCount, tcId);

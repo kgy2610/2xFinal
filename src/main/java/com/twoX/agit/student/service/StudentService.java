@@ -28,6 +28,9 @@ public interface StudentService {
 
 	// 숙제 제출 상태 불러오기
 	HomeworkSubmit selectHomeworkSubmit(int boNo, String stuId);
+	
+	// 숙제 수정하기
+	int updateHomework(HomeworkSubmit hm);
 
 	//방과후
 	int updateAfterschoolCode(Map<String, String> map);
