@@ -1,17 +1,16 @@
 // 모달 열기
 	function openModal(element) {
-		var fullText = element.getAttribute('data-full-text');
-		var date = element.getAttribute('data-date');
 
-		document.getElementById('modalContent').textContent = fullText;
-		document.getElementById('modalDate').textContent = date;
-
-		document.getElementById('noticeModal').style.display = 'block';
+		  document.getElementById('noticeModal').style.display = 'block';
+		
+		console.log(document.getElementById('modalContent'));
+		
 	}
 
 	// 모달 닫기
-	function closeModal() {
-		document.getElementById('noticeModal').style.display = 'none';
+	function closeModal1() {
+		  document.getElementById('noticeModal').style.display = 'none';
+    console.log("모달 닫힘");
 	}
 
 	// 공지사항 길이 제한
@@ -38,6 +37,8 @@
 				+ phone;
 		document.querySelector('.real-student-information div:nth-child(3)').textContent = '출석률 : '
 				+ attendanceRate + '%';
+
+  		document.querySelector("input[name='stuId']").value = stuId;
 
 		fetchScores(stuId);
 		
@@ -82,11 +83,13 @@ function fetchScores(stuId) {
 
                 // 과목명, 점수, 구분선 포함된 전체 구조 생성 후, line3 뒤에 추가
                 const gradeHtml = `
+                	<div>
                     <div class="real-grade-information">
-                        <div>${sl.SUBJECT}</div>   <!-- 과목명 -->
-                        <div>${sl.SCORE}점</div>   <!-- 점수 -->
+                        <div>${sl.SUBJECT}</div> 
+                        <div>${sl.SCORE}점</div>  
                     </div>
-                    <hr class="line4">  <!-- 구분선 -->
+                    <hr class="line4">  
+                	<div>
                 `;
 
                 // line3 이후에 추가
@@ -99,8 +102,114 @@ function fetchScores(stuId) {
     });   
     
 }
-	function chCancel(){
-		
-	}
+	
+	
+	
+	 //승인이 필요한 교직원 목록
+       window.onload = function(){
+       	// AJAX로 요청 보내기
+		   	$.ajax({
+		   		url: "yStudentStatus", 
+		   		type: "GET", 
+		   		success: function(data) {
+		   			console.log(data);  // 데이터가 어떻게 반환되는지 확인
+		   			if (data && Array.isArray(data.StudentListIn)) {
+		   				StudentListIn(data.StudentListIn); 
+		   			} else {
+		   				console.error('반환된 데이터가 예상한 배열 형식이 아닙니다.', data);
+		   			}
+		   		},
+		   		error: function(xhr, status, error) {
+		   			console.error('선생님 목록을 불러오는 중 오류 발생:', error);
+		   		}
+		   	});
+		   }
+	
+	  // 승인 필요 선생님 목록을 화면에 표시
+           function StudentListIn(StudentListIn) {
+               let str = "";
+              
+               
+               // studentOutList가 배열인지 확인
+               if (Array.isArray(StudentListIn)) {
+                   for (let sli of StudentListIn) {
+                       console.log('sli:', sli); 
+                       console.log('STATUS:', sli.STATUS); 
+                       
+      
+					    str += `
+                <div class="real-num-name-check">
+                    <div>${sli.STU_NUM}</div>
+                    <div>${sli.STU_NAME}</div>
+                    <div>
+                        <input type="button" value="수락" onclick="studentInRequest('${sli.STU_ID}', '${sli.STATUS}', '${sli.CLASS_CODE}')"
+                               style="width: 100px; height: 30px; background: #DDE5B6; border-radius: 10px; border: none; color: #A98467;
+                               font-size: 15px; font-weight: 800; cursor: pointer;">
+                    </div>
+                </div>
+                <hr class="line6">
+            `;
+                       
+                  
+                   }
+               } else {
+                   console.error('StudentListIn는 배열이 아닙니다:', StudentListIn);
+               }
 
+               const hrElement = document.querySelector('.line5');  
+    if (hrElement) {
+        // 새로 추가된 내용을 기존 내용 뒤에 삽입
+           hrElement.insertAdjacentHTML('afterend', str);
 
+    } else {
+        console.error('modalContent를 찾을 수 없습니다.');
+    }
+}
+	
+	
+	 // 교직원 승인 여부 모달 열기
+     function studentInRequest(stuId, status, classCode){
+		    if(status === 'N'){
+		        if(confirm(`승인하시겠습니까?`)){
+		            request1(stuId, 'Y', classCode);
+		        }    
+		    } else if (status === 'Y'){
+		        alert("이미 승인된 상태입니다.");
+		    } else {
+		        alert(`올바르지 않은 요청입니다. 받은 status: ${status}`); 
+		    }
+		}
+	
+		  //교직원 승인
+          function request1(stuId, status, classCode){
+          	console.log("request js | 승인할 학생의 stuId : " + stuId);
+          	console.log("request js | 승인할 학생 의 status : "+ status);
+          	  console.log(`승인 요청: stuId = ${stuId}, status = ${status}`);
+
+          	$.ajax({
+          		url: "requestInStudent",
+          		type: "POST",
+          		data: {stuId : stuId, status : status, classCode : classCode},
+          		success: function(response){
+          			if(response === "success"){
+          				alert("승인 완료");
+          				location.reload();
+          			}else if(response === "fail"){
+          				alert("승인 실패");
+          			}else if(response === "올바르지 않은 요청입니다."){
+          				alert(response)
+          			}
+          		},
+          		error: function(){
+          			alert("요청 작업 실패");
+          			location.reload();
+          		}
+          	});
+          }
+	
+	 
+    	
+    
+	
+	
+	

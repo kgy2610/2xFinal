@@ -138,10 +138,30 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
           
             // 모달 열기
            function requestList(){
-	var modal = document.getElementById('noticeModal');
-    modal.style.display = "block";
-}
+				var modal = document.getElementById('noticeModal');
+    			modal.style.display = "block";
+			}
             
+           //승인이 필요한 교직원 목록
+           window.onload = function(){
+           	// AJAX로 요청 보내기
+           	$.ajax({
+           		url: "acceptStudent", // 서버 URL
+           		type: "GET", // GET 방식 요청
+           		success: function(data) {
+           			console.log(data);  // 데이터가 어떻게 반환되는지 확인
+           			if (data && Array.isArray(data.acceptStudents)) {
+           				acceptStudents(data.acceptStudents); // 승인이 필요한 선생님 목록을 화면에 표시
+           			} else {
+           				console.error('반환된 데이터가 예상한 배열 형식이 아닙니다.', data);
+           			}
+           		},
+           		error: function(xhr, status, error) {
+           			console.error('불러오는 중 오류 발생:', error);
+           		}
+           	});
+           }
+           
         // 승인 필요 선생님 목록을 화면에 표시
            function acceptStudents(studentOutList) {
                let str = "";
@@ -176,25 +196,7 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
                const element = document.getElementById('request-students');
                element.innerHTML += str; // 'request-teachers' 요소에 HTML 추가
            }
-          //승인이 필요한 교직원 목록
-            window.onload = function(){
-            	// AJAX로 요청 보내기
-            	$.ajax({
-            		url: "acceptStudent", // 서버 URL
-            		type: "GET", // GET 방식 요청
-            		success: function(data) {
-            			console.log(data);  // 데이터가 어떻게 반환되는지 확인
-            			if (data && Array.isArray(data.acceptStudents)) {
-            				acceptStudents(data.acceptStudents); // 승인이 필요한 선생님 목록을 화면에 표시
-            			} else {
-            				console.error('반환된 데이터가 예상한 배열 형식이 아닙니다.', data);
-            			}
-            		},
-            		error: function(xhr, status, error) {
-            			console.error('선생님 목록을 불러오는 중 오류 발생:', error);
-            		}
-            	});
-            }
+        
          
           
 

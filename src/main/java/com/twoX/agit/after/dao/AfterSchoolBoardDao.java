@@ -82,6 +82,7 @@ public class AfterSchoolBoardDao {
 		params.put("stuId",stuId);
 		params.put("status", status);
 		params.put("scCode", scCode);
+		System.out.println("classCode: " + scCode + status + ", stuId: " + stuId);
 		return sqlSession.update("afterMapper.RequestTeacherByTcIdAndStatus", params);
 	}
 
