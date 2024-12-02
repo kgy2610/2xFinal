@@ -57,61 +57,7 @@
 
    </div>
 
-   <!-- 정보수정모달 -->
-   <!-- 정보수정 모달 -->
-   <div id="updateModal" class="modal2">
-   <form method="post" action="student.update" id="infoForm">
-      <div class="modal-content2">
-         <h2 id="modalTitle">정보 수정</h2>
-         <span class="close" onclick="closeUpdateModal()">&times;</span>
-         <div id="modalForm">
-            <!-- 기본 정보 수정 폼 -->
-               <table>
-                  <tr>
-                     <td>코드</td>
-                     <td><input type="text" value="${loginUser.classCode}" readonly></td>
-                  </tr>
-                  <tr>
-                     <td colspan="2">
-                        <div>
-                           <input type="text" value="<%= grade %>" readonly> 학년
-                           <input type="text" value="<%= classNum %>"readonly> 반
-                           <input type="text" value="${loginUser.stuNum}" id="updateNum" name="updateNum"> 번
-                        </div>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>아이디</td>
-                     <td><input type="text" value="${loginUser.stuId}" readonly></td>
-                  </tr>
-               </table>
-               <button type="submit">수정하기</button>
-           <hr>
-     
-            </form>
-            
-            <!-- 비밀번호 수정 폼 (기본적으로 숨김) -->
-            <form method="post" action="student.upadatePwd" id="pwdForm">
-               <table>
-                  <tr>
-                     <td>기존 비밀번호</td>
-                     <td><input type="password" placeholder="기존 비밀번호를 입력하세요"></td>
-                  </tr>
-                  <tr>
-                     <td>수정 비밀번호</td>
-                     <td><input type="password" placeholder="수정할 비밀번호를 입력하세요" id="updatePwd" name="updatePwd"></td>
-                  </tr>
-                  <tr>
-                     <td>비밀번호 확인</td>
-                     <td><input type="password"></td>
-                  </tr>
-               </table>
-               <button type="submit">비밀번호 수정하기</button>
-              
-            </form>
-         </div>
-      </div>
-   </div>
+   
 
    <!-- 이미지 선택 모달 -->
    <div id="imageSelectModal" class="modal3">
