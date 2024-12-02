@@ -8,8 +8,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교직원 숙제 페이지</title>
+    <title>선생님 숙제 페이지</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacher_homework.css'/>">
+    
+    <script src="<c:url value='/resources/js/teacher/homework.js'/>"></script>
 </head>
 <body>
    <jsp:include page="../common/teacher_menubar.jsp" />
@@ -18,12 +20,12 @@
         <div class="box">
             <h1>숙제 목록 </h1>
             <select id="subjectSelect" name="subject" onchange="filterHomework()">
-            	<option value="전체">전체</option>
-                <option value="국어">국어</option>
-                <option value="수학">수학</option>
-                <option value="영어">영어</option>
-                <option value="과학">과학</option>
-                <option value="사회">사회</option>
+            	<option value="전체">전 체</option>
+                <option value="국어">국 어</option>
+                <option value="수학">수 학</option>
+                <option value="영어">영 어</option>
+                <option value="과학">과 학</option>
+                <option value="사회">사 회</option>
             </select>
             <a href="gosubject">
     			<button class="navigate-button">우리반 숙제 이동</button>
@@ -50,12 +52,8 @@
         		   </c:forEach>
                 </tbody>
             </table>
-
             <img src="<c:url value='/resources/img/teacher/homework.PNG'/>" class="homeworkplus" onclick="addHomeworkPage()">
-            
         </div>
     </div>
-
-    <script src="<c:url value='/resources/js/teacher/homework.js'/>"></script>
 </body>
 </html>

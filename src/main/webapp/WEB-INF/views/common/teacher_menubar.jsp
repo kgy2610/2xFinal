@@ -37,7 +37,6 @@
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
          <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
-           
            <div id="modal_Stu_content">
            		<c:forEach var="sl" items="${slist}">
            			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;" onclick="openChatModal('${sl.stuId}','${loginUser.classCode}')">
