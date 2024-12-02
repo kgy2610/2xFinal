@@ -15,7 +15,7 @@
 }
 
 .header_left{
-   border: #A98467 solid 2px;
+   border: #A98467 solid 3px;
    border-radius: 40px;
    width: 70%; height: 230px;
    float: left;
@@ -29,7 +29,7 @@
 }
 
 .list{
-   border: #A98467 solid 2px;
+   border: #A98467 solid 3px;
    border-radius: 40px;
    padding: 40px;
    margin-top: 20px;

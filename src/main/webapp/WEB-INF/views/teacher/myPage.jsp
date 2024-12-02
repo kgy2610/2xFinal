@@ -20,10 +20,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선생님 마이페이지</title>
-
 <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacherMypagePlus.css'/>">
-
 <script src="<c:url value='/resources/js/teacher/myPage.js'/>"></script>
+
 </head>
 <body>
    <% if(alertMsg != null) {%>
@@ -53,12 +52,12 @@
 
 		<div class="textbox2">
 			<h1>공지사항</h1>
-			    <hr class="body_line">
+			    <hr class="body_line1">
 			    	<div class="bottom_container">
 			        	<c:forEach var="notice" items="${teacherNotice}">
-			            	<div class="body_content">
+			            	<div class="body_content"  onclick="openDeleteNoticeModal('${notice.ntContent}', '${notice.NTno}')">
 			            		<input type="hidden" id="noticeNo" name="noticeNo" value="${notice.NTno}">
-			                	<div class="body_title" onclick="openDeleteNoticeModal('${notice.ntContent}', '${notice.NTno}')">
+			                	<div class="body_title">
 			                    	${notice.ntContent} <!-- 공지사항 제목 표시 -->
 			               		</div>
 			                
@@ -66,11 +65,11 @@
 			                    	${notice.createDate} <!-- 공지사항 작성일 표시 -->
 			                	</div>
 			            	</div>
-			            <hr class="body_line">
+			            <hr class="body_line2">
 			        	</c:forEach>
 			    	</div>
 			<!-- 이미지 클릭 시 공지사항 작성 모달 열기 -->
-	        <img class="body_plus" onclick="openAddNoticeModal()" src="<c:url value='/resources/img/teacher/plus.JPG'/>">  
+	        <img class="body_plus" onclick="openAddNoticeModal()" src="<c:url value='/resources/img/teacher/plus.png'/>">  
 		</div> 
 
 
@@ -88,7 +87,7 @@
 		            </div>
 		            
 					<!-- 삭제 버튼 -->
-		        <form method="POST" action="deleteMemo")">
+		        <form method="POST" action="deleteMemo">
 		            <input type="hidden" name="memoContent" value="${memo.mmContent}">
 		            <button type="submit" class="memo-delete-btn">x</button>
 		        </form>
@@ -96,7 +95,7 @@
 		    </c:forEach>
 		
 		    <!-- 메모 추가 버튼 -->
-		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.JPG'/>">
+		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.png'/>">
 		</div>
 
 
@@ -198,7 +197,8 @@
         <!-- 공지사항 수정/삭제 모달 -->
         <div id="deleteNoticeModal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeDeleteNoticeModal()">&times;</span>        
+                <span class="close" onclick="closeDeleteNoticeModal()">&times;</span>  
+                 <h3>공지사항 수정&삭제</h3>      
 				<!-- 공지사항 제목 입력 -->
 				<input type="text" id="noticeTitle" name="noticeTitle" required>
 				<!-- 공지사항 번호 (hidden 필드) -->
