@@ -30,6 +30,12 @@
  		<result column="CREATE_DATE" property="createDate" />
  		<result column="SUBJECT" property="subject" />
  	</resultMap>
+ 	
+ 	<resultMap type="HomeworkFile" id="HomeworkFileResultSet">
+ 		<result column="BO_NO" property="boNo"/>
+ 		<result column="ORIGIN_NAME" property="originName"/>
+ 		<result column="CHANGE_NAME" property="changeName"/>
+ 	</resultMap>
  	 
  	<select id="showHomeworkList" parameterType="map" resultMap="HomeworkSubmitResultSet">
 		SELECT H.BO_NO, H.SUBJECT, H.HM_TITLE, H.DEADLINE, HS.STATUS, HS.SCORE
@@ -67,9 +73,12 @@
 			   h.HM_TITLE,
 			   h.SUBJECT,
 			   TO_CHAR(h.DEADLINE, 'YYYY-MM-DD') AS "DEADLINE",
-			   h.HM_CONTENT
+			   h.HM_CONTENT,
+			   hf.ORIGIN_NAME,
+			   hf.CHANGE_NAME
 		 FROM HOMEWORK h
-		 LEFT JOIN HM_SUBMIT hm ON h.BO_NO = hm.BO_NO
+		 LEFT JOIN HOMEWORK_FILE hf
+		   ON h.BO_NO = hf.BO_NO
 		 WHERE h.BO_NO = #{boNo}
 	</select>
 	
@@ -89,8 +98,6 @@
 							   SCORE,
 							   TC_COMMENT,
 							   CREATE_DATE,
-							   ORIGIN_NAME,
-							   CHANGE_NAME,
 							   STATUS
 							  ) VALUES( #{stuId},
 							  			#{boNo},
@@ -100,8 +107,6 @@
 							  			<if test="tcComment != null">#{tcComment},</if>
 							  			<if test="tcComment == null">'숙제 검사 전입니다.',</if>
 							  			SYSDATE,
-							  			#{originName},
-							  			#{changeName},
 							  			#{status}
 							  			)
 	</insert>
@@ -118,11 +123,12 @@
 			   hm.SCORE,
 			   hm.TC_COMMENT,
 			   hm.CREATE_DATE,
-			   hm.ORIGIN_NAME,
-			   hm.CHANGE_NAME,
+			   hf.ORIGIN_NAME,
+			   hf.CHANGE_NAME,
 			   hm.STATUS
 		  FROM HM_SUBMIT hm
 		  LEFT JOIN HOMEWORK h ON hm.BO_NO = h.BO_NO
+		  LEFT JOIN HOMEWORK_FILE hf ON hm.BO_NO = hf.BO_NO
 		 WHERE hm.BO_NO = #{boNo}
 	</select>
 	
@@ -130,8 +136,6 @@
 	<update id="updateStuHomework">
 		UPDATE HM_SUBMIT
 		   SET HM_STUCONTENT = #{hmStuContent},
-		   	   ORIGIN_NAME = #{originName},
-		   	   CHANGE_NAME = #{changeName}
 		 WHERE BO_NO = #{boNo}
 	</update> 
  </mapper>

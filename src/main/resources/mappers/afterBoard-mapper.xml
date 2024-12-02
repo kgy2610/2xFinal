@@ -15,8 +15,7 @@
 
 
 	<!-- 방과후 게시판 -->
-	<resultMap type="AfterSchoolBoard"
-		id="afterSchoolBoardResultSet">
+	<resultMap type="AfterSchoolBoard" id="afterSchoolBoardResultSet">
 		<result column="BO_NO" property="boNo" />
 		<result column="STU_ID" property="stuId" />
 		<result column="CODE" property="code" />

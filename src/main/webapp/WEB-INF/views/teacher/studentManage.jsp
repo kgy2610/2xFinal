@@ -10,15 +10,20 @@ String classCode = loginUser.getClassCode();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>teacher_menubar</title>
+
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/menubar.css'/>">
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/teacher/studentManage.css'/>">
-	
-</head>
+
+
+<link rel="stylesheet" href="<c:url value='/resources/css/teacher/studentManage.css'/>">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value='/resources/js/teacher/studentManage.js'/>"></script>
+</head>
+
+
 <body>
 	<jsp:include page="../common/teacher_menubar.jsp" />
 	<div class="whole_body">
@@ -90,13 +95,11 @@ String classCode = loginUser.getClassCode();
 					<p id="modalDate"></p>
 				</div>
 			</div>
-
 		</div>
 		<div id="chat_button">
 			<img src="<c:url value='/resources/img/student/message.png'/>">
 		</div>
 	</div>
 </body>
-
 
 </html>

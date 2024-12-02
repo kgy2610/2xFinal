@@ -22,7 +22,7 @@
 	<select id="selectNotice" resultMap="NoticeResultSet" parameterType="map">
 		SELECT NOTICE_NO, TC_ID , CLASS_CODE , NT_CONTENT , CREATE_DATE 
 		FROM NOTICE WHERE TC_ID = #{tcId} 
-		ORDER BY CREATE_DATE ASC 
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<!--  공지사항 추가  -->
