@@ -18,6 +18,7 @@
 		<typeAlias type="com.twoX.agit.member.model.vo.School" alias="School" />
 		<typeAlias type="com.twoX.agit.member.model.vo.Homework" alias="Homework" />
 		<typeAlias type="com.twoX.agit.student.model.vo.HomeworkSubmit" alias="HomeworkSubmit"/>
+		<typeAlias type="com.twoX.agit.student.model.vo.HomeworkFile" alias="HomeworkFile"/>
 		<typeAlias type="com.twoX.agit.board.model.vo.Notice" alias="Notice" />
 		<typeAlias type="com.twoX.agit.board.model.vo.HmSubmit" alias="HmSubmit" />
 		<typeAlias type="com.twoX.agit.board.model.vo.ParentsBoard" alias="ParentsBoard" />
@@ -33,7 +34,6 @@
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherMemo" alias="TeacherMemo" />
 		<typeAlias type="com.twoX.agit.member.model.vo.Attendance" alias="Attendance"/>
 		<typeAlias type="com.twoX.agit.chat.Chat" alias="Chat"/>
-		
 	</typeAliases>
 
 

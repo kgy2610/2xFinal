@@ -67,8 +67,8 @@ a{
 }
 
 .whole_body{
-    width: 870px;
-    height: 820px;
+    width: 1050px;
+    height: 802px;
     margin-left: 603px;
     margin-top: 50px;
     border: solid #A98467 3px;
@@ -90,22 +90,22 @@ a{
 .subject-select{
     font-size: 25px;
     border-radius: 30px;
-    width: 200px;
+    width: 220px;
     height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 60px;
+    padding-left: 75px;
     border: solid #DDE5B6 0px;
     background-color: #DDE5B6;
-    margin-left: 0px;
+    margin-right: 25px;
     color: #A98467;
 }
 
 .subject-name{
     font-size: 25px;
     border-radius: 30px;
-    width: 550px;
+    width: 680px;
     height: 60px;
     display: flex;
     justify-content: center;
@@ -115,13 +115,18 @@ a{
     margin-left: 20px;
     color: #A98467;
 }
-
-.real-body{
-    border-radius: 30px;
-    width: 760px;
-    height: 600px;
-    border: solid #A98467 3px;
-    margin-bottom: 17px;
+.subject-name > input[type="text"]{
+	background: none;
+	border: none;
+	font-size: 30px;
+    width: 100%;
+    padding: 20px;
+    color: #A98467;
+    text-align: center;
+}
+.subject-name > input[type="text"]:focus{
+	border: none;
+	outline: none;
 }
 
 .real-head{
@@ -135,13 +140,13 @@ a{
 .real-head > hr{
     height: 25px;
     border: solid #A98467 1px;
-    margin-bottom: 0px;
-    margin-top: 10px;
+    margin: 10px 30px 0px 30px;
+    
 }
 
 .real-head > div{
     height: 25px;
-    margin-top: 10px;
+    margin: 10px 30px 0px auto;
     color: #A98467;
     font-size: 25px;
 }
@@ -184,8 +189,9 @@ a{
     padding-top: 10px;
     background-color: #DDE5B6;
     border-radius: 40px;
-    width: 770px;
+    width: 900px;
     height: 60px;
+    bottom: 25px;
 }
 
 #file-upload {
@@ -241,7 +247,7 @@ a{
     cursor: pointer;
     font-size: 25px;
     color: #A98467;
-    margin-top: 0px;
+    margin-bottom: 35px;
 }
 
 
@@ -263,22 +269,10 @@ a{
 
 .img-calendar{
     margin-top: 7px;
+    margin-right: 30px;
+    margin-left: 30px
 }
 
-.foot-first{
-    background-color: #DDE5B6;
-    margin-left: 50px;
-    width: 170px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    height: 50px;
-    border: solid black 0px;
-    cursor: pointer;
-    font-size: 25px;
-    color: #A98467;
-}
 
 .foot-second{
     background-color: #DDE5B6;
@@ -458,8 +452,10 @@ a{
             padding: 20px;
             border: 3px solid #A98467;
             border-radius: 30px;
-            width: 810px;
+            width: 950px;
+            height: 600px;
             margin: 20px auto;
+            margin-bottom: 0px;
         }
 
         #enroll_content {
@@ -613,15 +609,6 @@ a{
             top: 0;
             left: 0;
             z-index: 1000;
-        }
-
-        .real-body {
-            position: relative;
-            padding: 20px;
-            border: 3px solid #A98467;
-            border-radius: 30px;
-            width: 810px;
-            margin: 20px auto;
         }
 
         #enroll_content {

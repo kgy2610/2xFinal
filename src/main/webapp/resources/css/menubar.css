@@ -29,7 +29,7 @@ a{
     margin: 46px auto;
 }
 .nav > .menu{
-    width: 182px; height: 560px;
+    width: 182px; height: 580px;
     display: flex;
     flex-direction: column;
 }
@@ -41,6 +41,7 @@ a{
 }
 .menu > label > a{
     color: #A98467;
+    line-height: 20px;
 }
 .menu > label > a:hover{
     color: #7C604B;
@@ -54,6 +55,9 @@ a{
 }
 .undermenu > label{
     padding-top: 10px;
+}
+.undermenu > label:last-child{
+	padding-bottom: 15px;
 }
 .undermenu > label > a{
     color: #A98467;
