@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 // Summernote 초기화
 $('#en_content').summernote({
-    height: 380,
+    height: 300,
     minHeight: null,
     maxHeight: null,
     lang: "ko-KR",
