@@ -254,25 +254,21 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-
 	@RequestMapping("student.upadatePwd")
-	public String updatePwdSt(String updatePwd, HttpSession session, Model model) {
-		Student s = (Student) session.getAttribute("loginUser");
-		String stuId = s.getStuId();
+	public String updatePwdSt(Student s,String newPwd, HttpSession session, Model model) {
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("stuId", stuId);
-		map.put("updatePwd", updatePwd);
-		int result = memberService.studentPwdUpdate(map);
-
+		Student student = (Student)session.getAttribute("loginUser");
+		
+		s.setStuId(student.getStuId());
+		s.setStuPwd(newPwd);
+		
+		int result = memberService.studentPwdUpdate(s);
 		if (result > 0) {
-			Student student = memberService.loginStudent(s);
-			session.setAttribute("loginUser", student);
-			session.setAttribute("alertMsg", "수정 성공");
-
+			session.setAttribute("loginUser", memberService.loginStudent(s));
+			session.setAttribute("alertMsg", "비밀번호 수정 성공");
 			return "redirect:/studentMyPage";
 		} else {
-			model.addAttribute("alertMsg", "수정실패");
+			session.setAttribute("alertMsg", "비밀번호 수정 실패");
 			return "redirect:/";
 		}
 	}

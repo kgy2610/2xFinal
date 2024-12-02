@@ -138,4 +138,14 @@ public class TeacherDao {
 		return (ArrayList)sqlSession.selectList("stuManageMapper.studentListbyScCode", cCode);
 	}
 	
+	public int inStudentListbyStatus(SqlSessionTemplate sqlSession, String status, String scCode, String stuId) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("status", status);
+		params.put("scCode", scCode);
+		params.put("stuId",stuId);
+		
+		System.out.println("Executing inStudentListbyStatus with stuId: " + stuId + ", status: " + status + ", scCode: " + scCode);
+		return sqlSession.update("stuManageMapper.inStudentListbyStatus", params);
+	}
+	
 }

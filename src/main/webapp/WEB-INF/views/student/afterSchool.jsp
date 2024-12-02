@@ -22,7 +22,7 @@ ArrayList<AfterSchoolBoard> list = (ArrayList)session.getAttribute("boardList");
          <div class="header_left">
             <h4>${afterschool.className}</h4>
             <p>${afterschool.explanation}</p>
-            <p>담당 선생님 | ${teacherName} 선생님</p>
+            <p>담당 선생님 | ${afteacherName} 선생님</p>
          </div>
          <img src="<c:url value='/resources/img/student/afterschool.png'/>" alt="">
       </div>

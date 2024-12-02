@@ -432,4 +432,30 @@ public class TeacherController {
 		return response;
 	}
 
+	@ResponseBody
+	@RequestMapping(value="requestInStudent")
+	public String ajaxRequestTeacher(HttpSession session, @RequestParam("status") String status, @RequestParam("stuId") String stuId){
+		Teacher clCode = (Teacher) session.getAttribute("loginUser");
+		System.out.println("Request Controller | 로그인한 유저의 clCode : " + clCode );
+		if(clCode != null) {
+			String scCode = clCode.getClassCode();
+			System.out.println("Request Controller | 로그인한 유저의 scCode : " + scCode);
+			System.out.println("Request Controller | 로그인한 유저의 status : " + status);
+			
+		
+			
+			int result = teacherService.inStudentListbyStatus(status, scCode, stuId);
+			System.out.println("Request Controller | 승인할 학생의 stuId, status : " + stuId + ", " + status);
+			System.out.println(result);
+			
+			if(result > 0) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		}
+		return "success";
+	}
+	
+	
 }

@@ -30,9 +30,9 @@
     </style>
     	 <div id="content_border">
       <input type="hidden" name="boNo" value="${npage.boNo}" />
-        <div id="enroll_title" ><input type="text" id="en_title" value="${npage.title}" name="title"></div>
+        <div id="enroll_title" ><input type="text" id="en_title" value="${npage.title}" name="title" readonly></div>
         <div id="enroll_content" >
-            <textarea id="en_content" name="boContent">${npage.boContent}</textarea>
+            <textarea id="en_content" name="boContent" readonly>${npage.boContent}</textarea>
             <div id="enroll_file">
             	<c:choose>
             		<c:when test="${not empty npage.originName }">
@@ -65,6 +65,5 @@
     </div>
     
    
-    <div id="chat_button"><img src="img/message.png"></div>
 </body>
 </html>

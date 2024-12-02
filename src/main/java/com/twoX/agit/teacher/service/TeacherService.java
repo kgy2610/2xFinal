@@ -69,4 +69,6 @@ public interface TeacherService {
 	  
 	  ArrayList<Student> inStudentListbyScCode(String cCode);
 	  
+	  int inStudentListbyStatus( String status, String scCode, String stuId);
+	  
 }

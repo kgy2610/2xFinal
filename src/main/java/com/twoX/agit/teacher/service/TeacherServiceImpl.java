@@ -143,6 +143,11 @@ public class TeacherServiceImpl  implements TeacherService{
 		return teacherDao.stuActiveList(sqlSession, "sqlSession", cCode);
 	}
 
+	@Override
+	public int inStudentListbyStatus( String status, String scCode, String stuId) {
+		return teacherDao.inStudentListbyStatus(sqlSession,status , scCode, stuId);
+	}
+
 	
 	
 }

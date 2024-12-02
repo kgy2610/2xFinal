@@ -200,11 +200,15 @@ public class StudentController {
 			return "student/myPage";
 		}
 
+
 	}
 
 //	}
 
 	
+
+	
+
 	
 // =================================== 방과후 ===================================
 	
@@ -276,12 +280,14 @@ public class StudentController {
 		
 		AfterSchoolStudent afterschoolStudent = studentService.afterschoolStart(stuId);
 		AfterSchool afterschool = studentService.afterschool(code);
-		String teacherName = studentService.afterschoolTeacher(afterschool.getTcId());
+		String afteacherName = studentService.afterschoolTeacher(afterschool.getTcId());
 		
 		
 		model.addAttribute("afterschool",afterschool);
-		model.addAttribute("teacherName",teacherName);
+		model.addAttribute("afteacherName",afteacherName);
 		
+		System.out.println("방과후 : " + afterschool);
+		System.out.println("방과후 선생님 이름 : " + afteacherName);
 		
 		session.setAttribute("code", code);
 		model.addAttribute("className", code);

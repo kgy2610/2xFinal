@@ -115,7 +115,10 @@
 		resultType="map">
 		SELECT
 		s.STU_NUM, 
-		s.STU_NAME 
+		s.STU_NAME,
+		s.STATUS,
+		s.STU_ID,
+		s.CLASS_CODE
 		FROM
 		Student s 
 		WHERE
@@ -123,5 +126,13 @@
 		AND s.STATUS = 'N'
 	</select>
 
+
+	<!-- 학생 승인 -->
+		<update id="inStudentListbyStatus">
+			UPDATE STUDENT
+			SET STATUS = 'Y'
+			WHERE CLASS_CODE = #{scCode}
+		AND STU_ID = #{stuId}
+		</update>
 
 </mapper>
