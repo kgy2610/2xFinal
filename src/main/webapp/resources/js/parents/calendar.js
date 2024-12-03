@@ -20,12 +20,14 @@
 
     $('#closeBtn').on('click', function() {
         $('#modal').css('display', 'none'); // 모달 닫기
+        $('#adviceContent').val('');
     });
 
 
     $(window).on('click', function(event) {
         if ($(event.target).is('#modal')) {
             $('#modal').css('display', 'none'); // 모달 외부 클릭 시 닫기
+            $('#adviceContent').val('');
         }
     });
 });
