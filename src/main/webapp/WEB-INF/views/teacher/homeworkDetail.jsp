@@ -9,15 +9,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>교직원-숙제 수정/삭제하기</title>
+    
     <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacherhomework_modify.css'/>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
-    
     <!-- Summernote CSS CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
     
+    <!-- jQuery 및 기타 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+    <script src="<c:url value='/resources/js/teacher/modifyhomework.js'/>"></script>
 </head>
 <body>
-<jsp:include page="../common/teacher_menubar.jsp" />
+	<jsp:include page="../common/teacher_menubar.jsp" />
+	<style>
+       *{
+          overflow:visible;
+       }
+    </style>
    
         <div class="whole_body">
         	<form action="updateHomework" method="POST" enctype="multipart/form-data">
@@ -27,8 +39,11 @@
 		        <select name="subject" class="subject-select">
 		            <option value="국어" ${subject eq '국어' ? 'selected' : ''}>국어</option>
 		            <option value="수학" ${subject eq '수학' ? 'selected' : ''}>수학</option>
-		            <option value="과학" ${subject eq '과학' ? 'selected' : ''}>과학</option>
 		            <option value="영어" ${subject eq '영어' ? 'selected' : ''}>영어</option>
+		            <option value="과학" ${subject eq '과학' ? 'selected' : ''}>과학</option>
+		            <option value="사회" ${subject eq '사회' ? 'selected' : ''}>사회</option>
+		            <option value="미술" ${subject eq '미술' ? 'selected' : ''}>미술</option>
+		            <option value="체육" ${subject eq '체육' ? 'selected' : ''}>체육</option>
 		        </select>
     		</div>
             <div class="real-body">
@@ -79,16 +94,6 @@
 			    <input type="hidden" name="changeName" value="${changeName}">
 			    <button type="submit" class="foot-third">삭제</button> 
 			</form>
-
             </div>
- 
-    
-        <!-- jQuery 및 기타 스크립트 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-    <script src="<c:url value='/resources/js/teacher/modifyhomework.js'/>"></script>
    </body>
 </html>

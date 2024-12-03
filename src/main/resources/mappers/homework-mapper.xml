@@ -17,7 +17,7 @@
 		<result column="CHANGE_NAME" property="changeName" />
 	</resultMap>
 	
-	<resultMap type="HomeworkFile" id="HomeworkFileResultSet">
+	<resultMap type="TeacherHomeworkFile" id="HomeworkFileResultSet">
 		<result column="BO_NO" property="boNo" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />

@@ -8,43 +8,77 @@
    margin: 0 auto;
    padding: 0;
    font-family: 'NanumSquareRound';
+   overflow: hidden;
    box-sizing: border-box;
    letter-spacing: -1px;
 }
 a{
    text-decoration: none;
 }
-
-#create_button{
-    position:absolute; 
-    width: 150px;
-    height: 50px;
-	top:100px; 
-	right:350px;
-    border-radius: 40px; 
-    background-color: #F4DABF;
-    color:#A98467;
-    font-size: 20px;
-    border: 0px;
+.nav{
+   width: 306px; height: 100%;
+   background-color: #F4DABF;
+   position: fixed;
+   margin: 0;
+   margin-left: 227px;
+   display: flex;
+   flex-direction: column;
+}
+.nav > img{
+   width: 182px; height: 80px;
+   margin: 46px auto;
+}
+.nav > .menu{
+   width: 182px; height: 560px;
+   display: flex;
+   flex-direction: column;
+}
+.menu > label{
+   font-weight: 700;
+   font-size: 40px;
+   margin-top: 37px;
+   margin-right: 0px;
+}
+.menu > label > a{
+   color: #A98467;
+}
+.menu > label > a:hover{
+   color: #7C604B;
+   font-weight: 800;
+}
+.undermenu{
+   display: flex;
+   flex-direction: column;
+   margin-right: 20px;
+   margin-top: 80px;
+}
+.undermenu > label{
+   padding-top: 10px;
+}
+.undermenu > label > a{
+   color: #A98467;
+   font-size: 30px;
+   font-weight: 300;
+   text-decoration: underline;
+}
+.undermenu > label > a:hover{
+   color: #7C604B;
+   font-weight: 500;
 }
 
-#create_button:hover{
-    background-color: #A98467;
-    color: white;
-    cursor: pointer;
-}
 /* 행사사진 리스트 */
 .wrap {
-   width: 1040px;
-   height: 784px;
-   margin-left: 603px;
-   margin-top: 65px;
-   margin-bottom: 98px;
-   font-size: 25px;
-   color: #A98467;
-   border: #A98467 solid 2px;
-   border-radius: 30px;
-   flex-direction: column;
+	width: 1040px;
+	height: 784px;
+	margin-left: 603px;
+	margin-top: 65px;
+	margin-bottom: 98px;
+	display: flex;
+	font-size: 25px;
+	color: #A98467;
+	flex-direction: column;
+	border: #A98467 solid 2px;
+    border-radius: 30px;
 }
 
 .header{
@@ -93,11 +127,6 @@ a{
    padding: 30px;
    text-align: center;
    margin-bottom: 20px; 
-}
-
-.thumbnail img{
-	width: 200px;
-	height: 200px;
 }
 
 .thumbnail:hover{

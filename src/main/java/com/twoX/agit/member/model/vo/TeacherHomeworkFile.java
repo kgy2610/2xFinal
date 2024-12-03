@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class HomeworkFile {
+public class TeacherHomeworkFile {
 	private int boNo;
 	private String originName;
 	private String changeName;

@@ -24,13 +24,13 @@ public class HomeworkSubmit {
 	private Date createDate;
 	private String status;
 	
+	private String originName;
+	private String changeName;
+	private String filePath;
+	
 	private String classCode;
 	private String hmTitle;
 	private String subject;
 	private Date deadLine;
 	private String hmContent;
-	
-	private String filePath;
-	private String originName;
-	private String changeName;
 }

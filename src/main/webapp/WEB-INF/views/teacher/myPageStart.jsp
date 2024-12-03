@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGIT</title>
+    <title>선생님 마이페이지</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacherMypage.css'/>">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="<c:url value='/resources/js/teacher/startClass.js'/>"></script>
 
 </head>
 <body>
@@ -37,7 +39,5 @@
             </form>
         </div>
     </div>
-    
-<script src="<c:url value='/resources/js/teacher/startClass.js'/>"></script>
 </body>
 </html>

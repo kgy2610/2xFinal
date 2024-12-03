@@ -16,7 +16,7 @@
             <label for="mypage"><a href="teacher.myPage">마이페이지</a></label>
             <label for="homework"><a href="homeworkList">숙제</a></label>
             <label for="attendance"><a href="teacherAttendance">출결</a></label>
-            <label for="advicePlan"><a href="#">상담일정</a></label>
+            <label for="advicePlan"><a href="teacherCounsel">상담일정</a></label>
             <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
             <label for="photo"><a href="teacher_eventImgList">행사사진</a></label>
             <label for="studentManage"><a href="studentManage.me">학생관리</a></label>
@@ -37,7 +37,6 @@
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
          <span class="closeModal" onclick="closeModal()">&times;</span>
            <hr>
-           
            <div id="modal_Stu_content">
            		<c:forEach var="sl" items="${slist}">
            			<table class="modal_stuList" style="background-color:#DDE5B6; width:430px; height:60px; border-radius:15px; text-align:center; margin-bottom:10px;" onclick="openChatModal('${sl.stuId}','${loginUser.classCode}')">

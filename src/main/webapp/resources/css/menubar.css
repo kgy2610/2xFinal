@@ -1,451 +1,486 @@
 @font-face {
-    font-family: 'NanumSquareRound';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'NanumSquareRound';
+	src:url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-*{
-    margin: 0 auto;
-    padding: 0;
-    font-family: 'NanumSquareRound';
-    overflow: hidden;
-    box-sizing: border-box;
-    letter-spacing: -1px;
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	font-family: 'NanumSquareRound';
+	overflow: hidden;
+	box-sizing: border-box;
+	letter-spacing: -1px;
 }
-a{
-    text-decoration: none;
+
+a {
+	text-decoration: none;
 }
-.nav{
-    width: 306px; height: 100%;
-    background-color: #F4DABF;
-    position: fixed;
-    margin: 0;
-    margin-left: 227px;
-    display: flex;
-    flex-direction: column;
+
+.nav {
+	width: 306px;
+	height: 100%;
+	background-color: #F4DABF;
+	position: fixed;
+	margin: 0;
+	margin-left: 227px;
+	display: flex;
+	flex-direction: column;
 }
-.nav > img{
-    width: 182px; height: 80px;
-    margin: 46px auto;
+
+.nav>img {
+	width: 182px;
+	height: 80px;
+	margin: 46px auto;
 }
-.nav > .menu{
-    width: 182px; height: 560px;
-    display: flex;
-    flex-direction: column;
+
+.nav>.menu {
+	width: 182px;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
 }
-.menu > label{
-    font-weight: 700;
+
+.menu>label {
+	font-weight: 700;
     font-size: 40px;
-    margin-top: 37px;
+    margin-top: 22px;
     margin-right: 0px;
 }
-.menu > label > a{
-    color: #A98467;
+
+.menu>label>a {
+	color: #A98467;
+	line-height: 20px;
 }
-.menu > label > a:hover{
-    color: #7C604B;
-    font-weight: 800;
+
+.menu>label>a:hover {
+	color: #7C604B;
+	font-weight: 800;
 }
-.undermenu{
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    margin-top: 80px;
+
+.undermenu {
+	display: flex;
+	flex-direction: column;
+	margin-right: 20px;
+	margin-top: 80px;
 }
-.undermenu > label{
-    padding-top: 10px;
+
+.undermenu>label {
+	padding-top: 10px;
 }
-.undermenu > label > a{
-    color: #A98467;
-    font-size: 30px;
-    font-weight: 300;
-    text-decoration: underline;
+.undermenu>label:first-child{
+	padding-top: 65px;
 }
-.undermenu > label > a:hover{
-    color: #7C604B;
-    font-weight: 500;
+
+.undermenu>label:last-child {
+	padding-bottom: 15px;
 }
-#chat_button{
-    position: absolute;
-    right: 47px;
-    bottom: 40px;
-    height: 100px;
-    width: 100px;
-    background-color: #DDE5B6;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+
+.undermenu>label>a {
+	color: #A98467;
+	font-size: 30px;
+	font-weight: 300;
+	text-decoration: underline;
 }
+
+.undermenu>label>a:hover {
+	color: #7C604B;
+	font-weight: 500;
+}
+
+#chat_button {
+	position: absolute;
+	right: 47px;
+	bottom: 40px;
+	height: 100px;
+	width: 100px;
+	background-color: #DDE5B6;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
 .chat_modal {
-  display: none; 
-  position: fixed;
-  z-index: 1000; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
 }
-	
-	.chat_modal-content {
-	   background-color: #fefefe;
-	   margin: auto;
-	   padding: 0px;
-	   border: 3px solid #A98467;
-	   border-radius: 30px;
-	   width: 500px;
-	   height: 600px;
-	   position: absolute;
-	   left: 40%;
-	   top: 20%;
-	   color: #A98467;
-	   font-size: 20px;
-	}
-	.modalTitle{
-		margin: 20px auto 20px 20px;
-	}
-	.chat_modal hr{
-	   margin:10px;
-	   height:5px;
-	   background-color: #A98467;
-	}
-	
-	.chat_modal h2 {
-	   width: 80%;
-	   text-align: left;
-	   color: #A98467;
-	   font-size: 25px;
-	   margin
-	}
-	
-	.chat_modal form{
-	  text-align: center;
-	}
-	
-	.chat_modal .closeModal {
-	   position: absolute; 
-	   top: 20px;
-	   right: 20px; 
-	   cursor: pointer;
-	}
-	
-	.chat_modal input {
-	   width: 250px;
-	   height: 40px;
-	   color: #A98467;
-	   border-radius: 20px;
-	   border: #A98467 solid 2px;
-	   margin: 10px 0px;
-	   text-align: center;
-	   font-size: 15px;
-	}
-	
-	.chat_modal tr td div input{
-	   width: 80px;
-	}
-	
-	.chat_modal button{
-	  background-color: #DDE5B6;
-	  padding: 10px;
-	  border-radius: 10px;
-	  width: 150px;
-	  border:none;
-	  font-size: 15px;
-	  color: #A98467;
-	}
-	
-	.chat_modal button:hover{
-	  background-color: #bfc59e;
-	  padding: 10px;
-	  border-radius: 10px;
-	  width: 150px;
-	  border:none;
-	  font-size: 15px;
-	  color: white;
-	}
-	
-	.closeModal {
-	   width: 40px; height: 40px;
-	   line-height: 38px;
-	   color: #A98467;
-	   float: right;
-	   font-size: 45px;
-	   font-weight: bold;
-	   text-align: center;
-	   background-color: #DDE5B6;
-	   border-radius: 10px;
-	   padding: 5px;
-	}
-	
-	.closeModal:hover,
-	.closeModal:focus {
-	   color: #705845;
-	   text-decoration: none;
-	   cursor: pointer;
-	}
-	#modal_Stu_content{
-		width:100%;
-		height:480px;
-		overflow:auto;
-	}
-	.modal_talk_content{
-		width:100%;
-		height:430px;
-		overflow:auto;
-	}
-	.chat_modal input{
-		width: 350px;
-	}
-	.chat_modal button[type=button]{
-	  background-color: #DDE5B6;
-	  padding: 10px;
-	  border-radius: 15px;
-	  width: 80px;
-	  border:none;
-	  font-size: 15px;
-	  color: #A98467;
-	  margin-left: 15px;
-	}
-	.chat_modal button[type=button]:hover{
-	  background-color: #bfc59e;
-	  padding: 10px;
-	  border-radius: 10px;
-	  border:none;
-	  font-size: 15px;
-	  color: white;
-	}
-	
-	.sendMsg{
-		 text-align: right; 
-		 padding-right: 30px;
-	}
-	.recMsg{
-		 text-align: left; 
-		 padding-left:30px;
-	}
-	.chMsg{
-	 	display:inline-block; 
-	 	background-color: #DDE5B6; 
-	 	border-radius:15px; 
-	 	padding:10px;
-	 }
-		 
-	.modal_talk_content::-webkit-scrollbar {
-	    width: 8px; /* 스크롤바 너비 */
-	}
-	
-	.modal_talk_content::-webkit-scrollbar-track {
-	    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
-	    border-radius: 10px;
-	}
-	
-	.modal_talk_content::-webkit-scrollbar-thumb {
-	    background: #A98467; /* 스크롤바 핸들 색상 */
-		border-radius: 10px; /* 둥근 모서리 */
-	}
-	
-	.modal_talk_content::-webkit-scrollbar-thumb:hover {
-	    background: #81644e; /* 스크롤바 핸들 호버 색상 */
-	}
-	.modal_Stu_content::-webkit-scrollbar {
-	    width: 8px; /* 스크롤바 너비 */
-	}
-	
-	.modal_Stu_content::-webkit-scrollbar-track {
-	    background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
-	    border-radius: 10px;
-	}
-	
-	.modal_Stu_content::-webkit-scrollbar-thumb {
-	    background: #A98467; /* 스크롤바 핸들 색상 */
-		border-radius: 10px; /* 둥근 모서리 */
-	}
-	
-	.modal_Stu_content::-webkit-scrollbar-thumb:hover {
-	    background: #81644e; /* 스크롤바 핸들 호버 색상 */
-	}
-	
-	/*학생 정보수정모달*/
-	/* 모달 */
- /* 정보수정 모달 스타일 */
- .modal2 {
-   display: none; 
-   position: fixed;
-   z-index: 1000; 
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+
+.chat_modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 0px;
+	border: 3px solid #A98467;
+	border-radius: 30px;
+	width: 500px;
+	height: 600px;
+	position: absolute;
+	left: 40%;
+	top: 20%;
+	color: #A98467;
+	font-size: 20px;
+}
+
+.modalTitle {
+	margin: 20px auto 20px 20px;
+}
+
+.chat_modal hr {
+	margin: 10px;
+	height: 5px;
+	background-color: #A98467;
+}
+
+.chat_modal h2 {
+	width: 80%;
+	text-align: left;
+	color: #A98467;
+	font-size: 25px;
+	margin
+}
+
+.chat_modal form {
+	text-align: center;
+}
+
+.chat_modal .closeModal {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.chat_modal input {
+	width: 250px;
+	height: 40px;
+	color: #A98467;
+	border-radius: 20px;
+	border: #A98467 solid 2px;
+	margin: 10px 0px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.chat_modal tr td div input {
+	width: 80px;
+}
+
+.chat_modal button {
+	background-color: #DDE5B6;
+	padding: 10px;
+	border-radius: 10px;
+	width: 150px;
+	border: none;
+	font-size: 15px;
+	color: #A98467;
+}
+
+.chat_modal button:hover {
+	background-color: #bfc59e;
+	padding: 10px;
+	border-radius: 10px;
+	width: 150px;
+	border: none;
+	font-size: 15px;
+	color: white;
+}
+
+.closeModal {
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	color: #A98467;
+	float: right;
+	font-size: 45px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #DDE5B6;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.closeModal:hover, .closeModal:focus {
+	color: #705845;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#modal_Stu_content {
+	width: 100%;
+	height: 480px;
+	overflow: auto;
+}
+
+.modal_talk_content {
+	width: 100%;
+	height: 430px;
+	overflow: auto;
+}
+
+.chat_modal input {
+	width: 350px;
+}
+
+.chat_modal button[type=button] {
+	background-color: #DDE5B6;
+	padding: 10px;
+	border-radius: 15px;
+	width: 80px;
+	border: none;
+	font-size: 15px;
+	color: #A98467;
+	margin-left: 15px;
+}
+
+.chat_modal button[type=button]:hover {
+	background-color: #bfc59e;
+	padding: 10px;
+	border-radius: 10px;
+	border: none;
+	font-size: 15px;
+	color: white;
+}
+
+.sendMsg {
+	text-align: right;
+	padding-right: 30px;
+}
+
+.recMsg {
+	text-align: left;
+	padding-left: 30px;
+}
+
+.chMsg {
+	display: inline-block;
+	background-color: #DDE5B6;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.modal_talk_content::-webkit-scrollbar {
+	width: 8px; /* 스크롤바 너비 */
+}
+
+.modal_talk_content::-webkit-scrollbar-track {
+	background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+	border-radius: 10px;
+}
+
+.modal_talk_content::-webkit-scrollbar-thumb {
+	background: #A98467; /* 스크롤바 핸들 색상 */
+	border-radius: 10px; /* 둥근 모서리 */
+}
+
+.modal_talk_content::-webkit-scrollbar-thumb:hover {
+	background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+
+.modal_Stu_content::-webkit-scrollbar {
+	width: 8px; /* 스크롤바 너비 */
+}
+
+.modal_Stu_content::-webkit-scrollbar-track {
+	background: #F2CEB2; /* 스크롤바 트랙 배경 색상 */
+	border-radius: 10px;
+}
+
+.modal_Stu_content::-webkit-scrollbar-thumb {
+	background: #A98467; /* 스크롤바 핸들 색상 */
+	border-radius: 10px; /* 둥근 모서리 */
+}
+
+.modal_Stu_content::-webkit-scrollbar-thumb:hover {
+	background: #81644e; /* 스크롤바 핸들 호버 색상 */
+}
+
+/*학생 정보수정모달*/
+/* 모달 */
+/* 정보수정 모달 스타일 */
+.modal2 {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
 }
 
 .modal-content2 {
-   background-color: #fefefe;
-   margin: auto;
-   padding: 40px;
-   border: 3px solid #A98467;
-   border-radius: 30px;
-   width: 25%;
-   position: absolute;
-   left: 40%;
-   top: 20%;
-   color: #A98467;
-   font-size: 20px;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 40px;
+	border: 3px solid #A98467;
+	border-radius: 30px;
+	width: 25%;
+	position: absolute;
+	left: 40%;
+	top: 20%;
+	color: #A98467;
+	font-size: 20px;
 }
 
-.modal2 hr{
-   margin:10px;
-   height:5px;
-   background-color: #A98467;
+.modal2 hr {
+	margin: 10px;
+	height: 5px;
+	background-color: #A98467;
 }
 
 .modal2 h2 {
-   width: 80%;
-   text-align: left;
-   color: #A98467;
-   font-size: 25px;
-   margin-left: -10px;
-   margin-top: -10px;
+	width: 80%;
+	text-align: left;
+	color: #A98467;
+	font-size: 25px;
+	margin-left: -10px;
+	margin-top: -10px;
 }
 
-.modal2 form{
-  text-align: center;
+.modal2 form {
+	text-align: center;
 }
 
 .modal2 .close {
-   position: absolute; 
-   top: 20px;
-   right: 20px; 
-   cursor: pointer;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
 }
 
 .modal2 input {
-   width: 250px;
-   height: 40px;
-   color: #A98467;
-   border-radius: 20px;
-   border: #A98467 solid 2px;
-   margin: 10px 0px;
-   text-align: center;
-   font-size: 15px;
+	width: 250px;
+	height: 40px;
+	color: #A98467;
+	border-radius: 20px;
+	border: #A98467 solid 2px;
+	margin: 10px 0px;
+	text-align: center;
+	font-size: 15px;
 }
 
-.modal2 tr td div input{
-   width: 80px;
+.modal2 tr td div input {
+	width: 80px;
 }
 
-.modal2 button{
-  background-color: #DDE5B6;
-  padding: 10px;
-  border-radius: 10px;
-  width: 150px;
-  border:none;
-  font-size: 15px;
-  color: #A98467;
+.modal2 button {
+	background-color: #DDE5B6;
+	padding: 10px;
+	border-radius: 10px;
+	width: 150px;
+	border: none;
+	font-size: 15px;
+	color: #A98467;
 }
 
-.modal2 button:hover{
-  background-color: #bfc59e;
-  padding: 10px;
-  border-radius: 10px;
-  width: 150px;
-  border:none;
-  font-size: 15px;
-  color: white;
+.modal2 button:hover {
+	background-color: #bfc59e;
+	padding: 10px;
+	border-radius: 10px;
+	width: 150px;
+	border: none;
+	font-size: 15px;
+	color: white;
 }
 
 .close {
-   width: 40px; height: 40px;
-   line-height: 38px;
-   color: #A98467;
-   float: right;
-   font-size: 45px;
-   font-weight: bold;
-   text-align: center;
-   background-color: #DDE5B6;
-   border-radius: 10px;
-   padding: 5px;
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	color: #A98467;
+	float: right;
+	font-size: 45px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #DDE5B6;
+	border-radius: 10px;
+	padding: 5px;
 }
 
-.close:hover,
-.close:focus {
-   color: #705845;
-   text-decoration: none;
-   cursor: pointer;
+.close:hover, .close:focus {
+	color: #705845;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /* 이미지 선택 모달의 이미지 그리드 스타일 */
 .image-grid {
-   display: grid;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	margin-top: 20px;
+}
 
-   grid-template-columns: repeat(3, 1fr);
-   gap: 10px;
-   margin-top: 20px;
-}
 .image-grid img {
-   width: 100px;
-   height: 100px;
-   cursor: pointer;
-   border: 2px solid transparent;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+	border: 2px solid transparent;
 }
+
 .image-grid img:hover {
-   border-color: #333;
+	border-color: #333;
 }
 
 .modal3 {
-   display: none; 
-   position: fixed;
-   z-index: 1000; 
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
 }
 
 .modal-content3 {
-   background-color: #fefefe;
-   margin: auto;
-   padding: 40px;
-   border: 3px solid #A98467;
-   border-radius: 30px;
-   width: 25%;
-   position: absolute;
-   left: 40%;
-   top: 20%;
-   color: #A98467;
-   font-size: 20px;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 40px;
+	border: 3px solid #A98467;
+	border-radius: 30px;
+	width: 25%;
+	position: absolute;
+	left: 40%;
+	top: 20%;
+	color: #A98467;
+	font-size: 20px;
 }
 
 .image-grid img {
-   width: 100px; 
-   height: 100px; 
-   border-radius: 50%; 
-   transition: border 0.3s; 
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	transition: border 0.3s;
 }
 
 .image-grid img.selected {
-   border: 5px solid #d1c673; /* 노란색 테두리 */
-  
+	border: 5px solid #d1c673; /* 노란색 테두리 */
 }
 
-.modal3 button{
-   width: 200px;
-   height: 40px;
-   display: block;
-   padding: 10px;
-   border-radius: 10px;
-   margin-top: 20px;
-   background-color: #DDE5B6;
-   color: #A98467;
-   border: none;
-   font-size: 20px;
-   line-height: 10px;
+.modal3 button {
+	width: 200px;
+	height: 40px;
+	display: block;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 20px;
+	background-color: #DDE5B6;
+	color: #A98467;
+	border: none;
+	font-size: 20px;
+	line-height: 10px;
 }
 
-.modal3 button:hover{
-   background-color: rgb(166, 175, 115);
-   color: white;
+.modal3 button:hover {
+	background-color: rgb(166, 175, 115);
+	color: white;
 }

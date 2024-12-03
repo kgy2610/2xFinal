@@ -111,8 +111,8 @@
     color: #A98467;
     font-size: 30px;
     font-weight: bold;
-    margin-left: 140px;
-    
+    text-align: center;
+    width:50%;
     
 }
 
@@ -120,7 +120,7 @@
     color: #A98467;
     font-size: 30px;
     font-weight: bold;
-    margin-right: 30px;
+    text-align: center;
 }
 
 .left_write_content{
@@ -131,8 +131,9 @@
 }
 
 .head_line1{
-    border: solid 3px;
+    border: solid 2px;
     border-color: #A98467; 
+    border-radius: 100px;
 }
 
 
@@ -144,23 +145,25 @@
 }
 
 .body_line1{ 
-    border: solid 2px;
+    border: solid 1px;
     border-color: #A98467; 
     width: 478px;
+    border-radius:100px;
 }
 
 .body_content > .body_title{
     font-weight: normal;
     font-size: 25px;
-    margin-left: 20px;
+    text-align:center;
     color: #A98467;
+    width:50%;
 }
 
 .body_content > .body_writer{
     font-weight: normal;
     font-size: 25px;
-    margin-right: 40px;
     color: #A98467;
+    text-align:center;
 }
 
 .select_number {
@@ -172,6 +175,9 @@
     height: 50px;
     font-size: 30px;
     color: #A98467;
+    position: fixed;
+    bottom:130px;
+    left:720px;
 }
 
 .notice > .right_write_subject{
@@ -204,15 +210,17 @@
 }
 
 .head_line2{
-    border: solid 3px;
-    border-color: #A98467; 
-    width: 220px;
-}
-
-.body_line2{ 
     border: solid 2px;
     border-color: #A98467; 
     width: 220px;
+    border-radius: 100px;
+}
+
+.body_line2{ 
+    border: solid 1px;
+    border-color: #A98467; 
+    width: 220px;
+    border-radius: 100px;
 }
 
 .body_line3{ 
@@ -250,7 +258,7 @@
 
 .plus_button {
     display: flex;
-    width: 200px; 
+    width: 150px; 
     height: 40px;
     background-color: #DDE5B6;
     justify-content: center;
@@ -258,6 +266,9 @@
     border-radius: 30px; 
     font-size: 25px;
     color: #A98467;
+     position: fixed;
+    bottom:130px;
+    left:1350px;
 }
 
 

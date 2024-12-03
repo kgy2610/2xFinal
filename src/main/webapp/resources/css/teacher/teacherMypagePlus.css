@@ -1,38 +1,4 @@
-@font-face {
-    font-family: 'NanumSquareRound';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-*{
-    margin: 0 auto;
-    padding: 0;
-    font-family: 'NanumSquareRound';
-    overflow: hidden;
-    box-sizing: border-box;
-    letter-spacing: -1px;
-}
-a{
-    text-decoration: none;
-}
-.nav{
-    width: 306px; height: 919px;
-    background-color: #F4DABF;
-    position: fixed;
-    margin: 0;
-    margin-left: 227px;
-    display: flex;
-    flex-direction: column;
-}
-.nav > img{
-    width: 182px; height: 80px;
-    margin: 46px auto;
-}
-.nav > .menu{
-    width: 182px; height: 560px;
-    display: flex;
-    flex-direction: column;
-}
+
 .menu > label{
     font-weight: 700;
     font-size: 40px;
@@ -79,18 +45,20 @@ a{
 
 .whole_body > h1 {
     color: #A98467;
-    margin-top: 150px;
+    margin-top: 65px;
     margin-bottom: 20px;
     margin-left: 70px;
+    font-size:40px;
+    
 }
 
 .whole_body > .textbox1{
     box-sizing: border-box;
     border: #A98467 solid 3px;
     margin-left: 70px;
-    width: 650px;
-    height: 80px;
-    border-radius: 12px;
+    width: 629px;
+    height: 196px;
+    border-radius: 30px;
 }
 
 .whole_body > .textbox1 .text1{
@@ -104,29 +72,32 @@ a{
     box-sizing: border-box;
     border: #A98467 solid 3px;
     margin-left: 70px;
-    width: 650px;
-    height: 470px;
-    border-radius: 15px;
+    width: 629px;
+    height: 475px;
+    border-radius: 30px;
+    padding:20px;
+    overflow-y: auto;            
+    overflow-x: hidden; 
 }
 
 .whole_body > .textbox2 > h1 {
     color: #A98467;
-    margin-top: 20px;
     margin-bottom: 10px;
     margin-left: 20px;
+    font-weight:900;
 }
 
 .whole_body > .textbox1 > hr{ 
     border: solid 1px;
     border-color: #A98467; 
-    width: 600PX;
+    width: 500PX;
     margin-top: 4px;
 }
 
 
-.whole_body > .textbox2 > hr{
+.body_line2{
     border: solid 1px;
-    border-color: #A98467; 
+    color: #A98467; 
     width: 600px;
 }
 
@@ -137,16 +108,14 @@ a{
     margin-left: 50px;
 }
 
-.body_content > .body_title{
+.body_title{
     font-weight: normal;
-    font-size: 15px;
     margin-left: 70px;
     color: #A98467;
 }
 
-.body_content > .body_writer{
+.body_writer{
     font-weight: normal;
-    font-size: 15px;
     margin-right: 40px;
     color: #A98467;
 }
@@ -155,30 +124,42 @@ a{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 15px 0px;
+    cursor:pointer;
+    height: 45px;
+    font-size:20px;
+}
+.body_content:hover{
+	background-color:#DDE5B6;
 }
 
 .body_plus{
-    width: 100px;
-    margin-top: 220px;
-    margin-left: 530px;
-    position: fixed;  /* 고정 위치 설정 */
-    bottom: 140px;  /* 화면 하단에서 고정된 위치 */
+    width: 80px;
+    margin-left: 500px;
+    position: fixed; 
+    bottom: 90px;  
 }
 
+.body_line1{
+	border: solid 2px;
+    color: #A98467; 
+    width: 600px;
+    border-radius:20px;
+    margin-left:-8px;
+}
 
-.whole_body > .memo_content{
-    box-sizing: border-box;
+.whole_body > .memo_content {
     margin-left: 750px;
-    width: 280px;
-    height: 620px;
-    margin-top: -620px;
-    border-radius: 12px;
+    width: 390px;
+    height: 754px;
+    margin-top: -750px;
+    border-radius: 30px;
     border: #A98467 solid 3px;
+    overflow-y: auto;            
+    overflow-x: hidden; 
+    padding: 10px; 
 }
-
 .whole_body > .memo_content > h1{
-    font-weight: normal;
+    font-weight: 900;
     font-size: 30px;
     margin-left: 15px;
     margin-top: 5px;
@@ -186,31 +167,44 @@ a{
 }
 
 .whole_body > .memo_content > .memo_box {
-    box-sizing: border-box;
-    margin-left: 10px;
-    width: 250px;
-    height: 50px;
-    border-radius: 30px;
-    border: #A98467 solid 3px;
+       margin-left: 10px;
+    width: 330px;
+    min-height: 50px;
+    height: auto;
+    border-radius: 20px;
+    border: #A98467 solid 2px;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 10px;
+    overflow: hidden;
+    word-wrap: break-word;
+    padding:10px;
 }
 
 .memo_text {
-    display: flex;
+	width:230px;
+	float:left;
     justify-content: center;
     color: #A98467;
     align-items: center;
+    text-align: center; 
+    word-wrap: break-word; 
+    white-space: normal;
+    font-size: 20px;
+    line-height:25px;
 }
 
 
 .memo-delete-btn{
-    margin-top: 7px;
-    width: 30px;
-    height: 30px;
+	width:100px;
+    float: right;
+    width: 50px;
     border: none;
     background-color: white;
+    font-size: 25px;
+    color: #A98467;
+    font-weight: 900;
 }
 
 
@@ -224,11 +218,10 @@ input{
 }
 
 .memo_plus{
-    width: 100px;
-    margin-top: 400px;
-    margin-left: 160px;
-    bottom: 140px;  /* 화면 하단에서 고정된 위치 */
-    position: fixed;  /* 고정 위치 설정 */
+    width: 80px;
+    margin-left: 270px;
+    bottom: 90px;  
+    position: fixed; 
 }
 
 .date {
@@ -239,7 +232,47 @@ input{
 }
 
 
+/* 스크롤바 스타일 */
+.memo_content::-webkit-scrollbar {
+    width: 8px;
+}
 
+.memo_content::-webkit-scrollbar-track {
+    background: #F2CEB2;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.memo_content::-webkit-scrollbar-thumb {
+    background: #A98467;
+    border-radius: 8px;
+}
+
+.memo_content::-webkit-scrollbar-thumb:hover {
+    background: #81644e;
+}
+
+/* 스크롤바 스타일 */
+.textbox2::-webkit-scrollbar {
+    width: 8px;
+}
+
+.textbox2::-webkit-scrollbar-track {
+    background: #F2CEB2;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.textbox2::-webkit-scrollbar-thumb {
+    background: #A98467;
+    border-radius: 8px;
+}
+
+.textbox2::-webkit-scrollbar-thumb:hover {
+    background: #81644e;
+}
 
 
 
@@ -413,6 +446,7 @@ input{
     width: 250px; /* 입력란 너비 */
     height: 30px; /* 입력란 높이 */
     margin-left: 20px;
+    
 }
 
 .confirm-delete-button {
@@ -465,76 +499,102 @@ input{
 .announcementTextField {
     width: 370px; /* 공지사항 입력란 너비 */
     height: 100px; /* 공지사항 입력란 높이 */
-    border: 2px solid #A98467; /* 두꺼운 테두리 */
-    border-radius: 15px; /* 둥근 모서리 */
-    margin-top: 15px; /* 위쪽 여백 */
-    padding: 5px; /* 내부 여백 추가 */
-    font-size: 16px; /* 글자 크기 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    border: 2px solid #A98467;
+    border-radius: 15px; 
+    margin-top: 15px;
+    padding: 5px; 
+    font-size:25px;
 }
 
 /* 등록 버튼 스타일 */
 .postAnnouncementButton {
-    background-color: #DDE5B6; /* 버튼 배경색 */
-    color: #A98467; /* 버튼 글자색 */
-    border: none; /* 테두리 제거 */
-    border-radius: 15px; /* 둥근 모서리 */
-    padding: 10px 15px; /* 버튼 내 여백 */
-    cursor: pointer; /* 커서 모양 변경 */
-    width: 120px; /* 버튼 너비 */
-    margin-top: 20px; /* 위쪽 여백 */
-    margin-left: 260px; /* 왼쪽 여백 */
-    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+    background-color: #DDE5B6;
+    color: #A98467;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 25px;
+    width: 30%;
+    margin-left: 135px;
 }
 
 .postAnnouncementButton:hover {
-    background-color: #C4D79D; /* 호버 시 색상 */
-    transform: translateY(-2px); /* 약간의 위로 이동 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 */
+     background-color: #C4D79D;
+    color: #705845;
 }
+
+#addNoticeModal .modal-content{
+	margin-top:300px;
+	margin-left:750px;
+}
+
+#addNoticeModal .close {
+    float: right;
+    font-size: 40px;
+    cursor: pointer;
+    color: #A98467;
+    background-color: #DDE5B6;
+    border-radius: 8px;
+    line-height:35px;
+}
+
+
+#addNoticeModal .close:hover {
+    color: #705845;
+    background-color: #C4D79D;
+    
+}
+
 
 
 
 /* 공지사항 수정/삭제 모달 스타일 */
 #deleteNoticeModal .modal-content {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 400px;
-    margin: auto;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	margin-top:300px;
+	margin-left:750px;
+	height: 260px;
+	padding:25px;
 }
 
 #deleteNoticeModal .close {
     float: right;
-    font-size: 24px;
+    font-size: 40px;
     cursor: pointer;
+    color: #A98467;
+    background-color: #DDE5B6;
+    border-radius: 8px;
+    line-height:35px;
 }
 
-#deleteNoticeModal h3 {
-    margin-top: 0;
-    text-align: center;
+
+#deleteNoticeModal .close:hover {
+    color: #705845;
+    background-color: #C4D79D;
+    
 }
 
 #deleteNoticeModal input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    margin: 15px 0;
-    margin-top: 5px;
-    margin-left: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    width: 370px; /* 공지사항 입력란 너비 */
+    height: 100px; /* 공지사항 입력란 높이 */
+    border: 2px solid #A98467;
+    border-radius: 15px; 
+    margin-top: 25px;
+    padding: 5px; 
+    font-size:25px;
 }
 
 #deleteNoticeModal .confirm-button, 
 #deleteNoticeModal .delete-button {
-    width: 45%;
-    margin: 10px 2%;
-    border-radius: 12px;
+    width: 42%;
+    margin-top: 25px;
+    border-radius: 10px;
     border: none;
     color: #A98467;
     font-size: 16px;
     cursor: pointer;
+    padding:5px;
 }
 
 /* 수정 버튼: 초록색 배경 */
@@ -571,8 +631,9 @@ input{
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-top: 350px;
+    padding-left:150px;
 }
 
 #addMemoModal .modal-content {
@@ -581,15 +642,15 @@ input{
     padding: 20px;
     border: 2px solid #A98467;
     border-radius: 20px;
-    width: 30%; /* 너비 설정 */
-    max-width: 400px;
+    width: 500px; 
+    height:200px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 메모 입력 필드 스타일 */
 #addMemoModal #memoText {
-    width: 100%; /* 필드 너비 */
-    height: 50px; /* 필드 높이 */
+    width: 95%;
+    height: 50px;
     margin-top: 15px;
     padding: 10px;
     font-size: 16px;
@@ -602,16 +663,18 @@ input{
 /* 닫기 버튼 스타일 */
 #addMemoModal .close {
     float: right;
-    font-size: 24px;
+    font-size: 40px;
     cursor: pointer;
     color: #A98467;
     background-color: #DDE5B6;
     border-radius: 8px;
-    padding: 2px 6px;
+    line-height:35px;
 }
 
 #addMemoModal .close:hover {
     color: #705845;
+    background-color: #C4D79D;
+    
 }
 
 /* 메모 등록 버튼 스타일 */
@@ -623,13 +686,14 @@ input{
     padding: 8px 15px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 25px;
     width: 30%;
     margin-left: 135px;
 }
 
 #addMemoModal button:hover {
     background-color: #C4D79D;
+    color: #705845;
 }
 
 
@@ -661,8 +725,9 @@ input{
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-top: 350px;
+    padding-left:150px;
 }
 
 #modifyMemoModal .modal-content {
@@ -671,8 +736,8 @@ input{
     padding: 20px;
     border: 2px solid #A98467;
     border-radius: 20px;
-    width: 30%;
-    max-width: 400px;
+    width: 500px; 
+    height:200px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -685,21 +750,23 @@ input{
     border: 2px solid #A98467;
     border-radius: 10px;
     color: #A98467;
-    box-sizing: border-box;
 }
 
 #modifyMemoModal .close {
     float: right;
-    font-size: 24px;
+    font-size: 40px;
     cursor: pointer;
     color: #A98467;
     background-color: #DDE5B6;
     border-radius: 8px;
-    padding: 2px 6px;
+    line-height:35px;
 }
+
 
 #modifyMemoModal .close:hover {
     color: #705845;
+    background-color: #C4D79D;
+    
 }
 
 #modifyMemoModal button {

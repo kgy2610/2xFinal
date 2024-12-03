@@ -19,17 +19,25 @@
 <body>
 
 		<jsp:include page="../common/teacher_menubar.jsp" />
+		<style>
+	       *{
+	          overflow: visible;
+	       }
+	    </style>
    
         <div class="whole_body">
        
             <form action="enrollHomework" method="POST" enctype="multipart/form-data">
 	            <div class="use-body">
-	                <div class="subject-name"><input type="text" name="title"></div>
+	                <div class="subject-name"><input type="text" placeholder="숙제 제목을 입력하세요" name="title"></div>
 		                <select class="subject-select" name="subject">
 		                    <option value="국어">국어</option>
 		                    <option value="수학">수학</option>
-		                    <option vlaue="과학">과학</option>
 		                    <option vlaue="영어">영어</option>
+		                    <option vlaue="과학">과학</option>
+		                    <option vlaue="사회">사회</option>
+		                    <option vlaue="미술">미술</option>
+		                    <option vlaue="체육">체육</option>
 		                </select>
 	            </div>
 	            
