@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
@@ -123,5 +125,29 @@ public class TeacherServiceImpl  implements TeacherService{
 	 public List<Map<String, Object>> getStudentScoresByStuId(String stuId) {
         return teacherDao.getStudentScoresByStuId(sqlSession, stuId);
     }
+	
+	@Override
+    public String udStudentStatus(String classCode, String stuId) {
+        // 예시: classCode에 해당하는 학생들의 상태를 업데이트하는 로직
+        int updatedCount = teacherDao.udStudentStatus(sqlSession, classCode, stuId);
+        
+        if (updatedCount > 0) {
+            return "학생 상태가 성공적으로 업데이트되었습니다.";
+        } else {
+            return "학생 상태 업데이트에 실패하였습니다.";
+        }
+    }
 
+	@Override
+	public ArrayList<Student> inStudentListbyScCode(String cCode) {
+		return teacherDao.stuActiveList(sqlSession, "sqlSession", cCode);
+	}
+
+	@Override
+	public int inStudentListbyStatus( String status, String scCode, String stuId) {
+		return teacherDao.inStudentListbyStatus(sqlSession,status , scCode, stuId);
+	}
+
+	
+	
 }
