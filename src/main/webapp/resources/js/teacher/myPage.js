@@ -6,76 +6,7 @@
             }
         });
 
-       
-   
-    // 모달 열기
-    function openInfoModal() {
-        document.getElementById('noticeModal').style.display = 'block';
-    }
-
-    // 모달 닫기
-    function closeInfoModal() {
-        document.getElementById('noticeModal').style.display = 'none';
-    }
-
-    // 정보 수정하기
-    function updateInfo() {
-        const code = document.getElementById('code').value;
-        const grade = document.getElementById('grade').value;
-        const classValue = document.getElementById('class').value;
-
-        // 수정 기능 구현 로직 추가
-        alert(`정보 수정:\n코드: ${code}\n학년: ${grade}\n반: ${classValue}`);
-        closeInfoModal();
-    }
-
-    // 비밀번호 수정 모달 열기
-    function openPasswordModal() {
-        document.getElementById('passwordModal').style.display = 'block';
-    }
-
-    // 비밀번호 수정 모달 닫기
-    function closePasswordModal() {
-        document.getElementById('passwordModal').style.display = 'none';
-    }
-
-    // 비밀번호 수정 확인
-    function confirmPasswordUpdate() {
-        const currentPassword = document.getElementById('currentPassword').value;
-        const newPassword = document.getElementById('newPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        // 비밀번호 수정 로직 추가
-        if (newPassword === confirmPassword) {
-            alert('비밀번호가 수정되었습니다.');
-            closePasswordModal();
-            closeInfoModal();
-        } else {
-            alert('비밀번호가 일치하지 않습니다.');
-        }
-    }
-
-    // 반 삭제 모달 열기
-    function openDeleteModal() {
-        document.getElementById('deleteClassModal').style.display = 'block';
-    }
-
-    // 반 삭제 모달 닫기
-    function closeDeleteModal() {
-        document.getElementById('deleteClassModal').style.display = 'none';
-    }
-
-    // 반 삭제 확인
-    function confirmDelete() {
-        const deleteCode = document.getElementById('deleteCode').value;
-
-		//서버에 요청
-		
-        // 반 삭제 로직 추가
-        alert(`반 ${deleteCode}가 삭제되었습니다.`);
-        closeDeleteModal();
-        closeInfoModal();
-    }
+  
 
 // 공지사항 추가 모달 열기
 function openAddNoticeModal() {
