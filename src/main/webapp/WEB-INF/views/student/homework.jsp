@@ -1,9 +1,10 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList,com.twoX.agit.board.model.vo.HmSubmit,com.twoX.agit.member.model.vo.Homework,com.twoX.agit.common.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, java.util.Arrays,com.twoX.agit.board.model.vo.HmSubmit,com.twoX.agit.member.model.vo.Homework,com.twoX.agit.common.vo.PageInfo, java.util.Arrays"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	ArrayList<Homework> homeworkList = (ArrayList)session.getAttribute("homeworkList");
+	ArrayList<Double> stuScoreList = (ArrayList<Double>) session.getAttribute("stuScoreList");
+	ArrayList<String> slist = new ArrayList(Arrays.asList("국어", "수학", "영어", "과학", "사회", "미술", "체육"));
 %>
 <!DOCTYPE html>
 <html>
@@ -47,16 +48,16 @@
 				                <c:otherwise>제출</c:otherwise>
 				            </c:choose>
 				        </td>
-				        <td>
+				        <td class="stu_score">
 				            <c:choose>
 				                <c:when test="${homework.score == 0}">-</c:when>
 				                <c:otherwise>${homework.score}</c:otherwise>
 				            </c:choose>
 				        </td>
-			       </tr>
 			    </c:forEach>
 			</tbody>
 		</table>
+		
 		<br>
 		<br>
 		<div id="arrow_button">

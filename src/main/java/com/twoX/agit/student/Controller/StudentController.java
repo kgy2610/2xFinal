@@ -63,7 +63,7 @@ public class StudentController {
 	    
 	    int homeworkCount = studentService.selectListCount(loginStudent.getClassCode(), loginStudent.getStuId());
 	    
-	    PageInfo pi = Template.getPageInfo(homeworkCount, currentPage, 5, 5);
+	    PageInfo pi = Template.getPageInfo(homeworkCount, currentPage, 5, 4);
 	    
 	    ArrayList<Homework> list = studentService.selectStudentHomeworkList(loginStudent.getClassCode(), loginStudent.getStuId(), pi);
 	    session.setAttribute("homeworkList", list);
@@ -93,6 +93,20 @@ public class StudentController {
 		model.addAttribute("npage", npage);
 		model.addAttribute("cpage", currentPage);
 		
+		// 학생 숙제 점수 조회
+		ArrayList<Double> list = new ArrayList();
+		list = studentService.selectStuScore(s.getStuId());
+		if(list.size() < 7) {
+			while(list.size() < 7) {
+				list.add(0.0);
+			}
+		}
+		for(int i=0; i<list.size();i++) {
+			list.set(i, Math.round(list.get(i) * 10.0) / 10.0);
+		}
+		
+		System.out.println("학생 점수 리스트: " + list);
+		session.setAttribute("stuScoreList", list);
 		
 		if (hm == null) {
 	        // hm_submit에 데이터가 없으면 제출 페이지로 이동
