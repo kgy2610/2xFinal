@@ -38,6 +38,7 @@ import com.twoX.agit.board.model.vo.Notice;
 import com.twoX.agit.board.model.vo.ParentsBoard;
 import com.twoX.agit.board.model.vo.Reply;
 import com.twoX.agit.board.service.BoardService;
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Parents;
@@ -232,10 +233,14 @@ public class BoardController {
 	@RequestMapping(value = "selectSameMonthCounsel", produces = "application/json; charset-UTF-8")
 	public String selectSameMonthCounsel(String month, HttpSession session) {
 		Teacher t = (Teacher) session.getAttribute("teacher");
+		if(t==null) {
+			t = (Teacher)session.getAttribute("loginUser");
+		}
 		Map<String, String> params = new HashMap();
 		params.put("tcId", t.getTcId());
 		params.put("month", month);
 		ArrayList<Counsel> list = boardService.selectSameMonthCounsel(params);
+		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 
@@ -434,7 +439,7 @@ public class BoardController {
 		}	
 	}
 	
-	//부모님 커뮤니티 사진올릴때
+	// 커뮤니티 사진올릴때
 	@ResponseBody
 	@PostMapping("upload")
 	public String upload(List<MultipartFile> fileList, HttpSession session) {
@@ -528,4 +533,23 @@ public class BoardController {
 		}
 		
 	}
+	
+	//선생님 상담일정
+	@RequestMapping("teacherCounsel")
+	public String teacherCounsel() {
+		return "teacher/teacher_Counsel";
+	}
+	
+	//선생님 상담일정 불러오기
+	
+	//선생님 상담일정 추가
+	@ResponseBody
+	@RequestMapping("insertCounsel")
+	public int insertCounsel(Counsel c, HttpSession session) {
+		String tcId = ((Teacher)session.getAttribute("loginUser")).getTcId();
+		c.setTcId(tcId);
+		int result = boardService.insertCounsel(c);
+		return result;
+	}
+	
 }

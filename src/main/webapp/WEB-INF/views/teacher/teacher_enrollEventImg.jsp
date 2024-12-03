@@ -20,17 +20,16 @@
 </head>
 <body>
     <jsp:include page="../common/teacher_menubar.jsp" />
-    <style>
-    	*{
-    		overflow:visible;
-    	}
-    </style>
-    
-    <div id="content_border">
+	<style>
+		*{
+			overflow:visible;
+		}
+	</style>
+    <div id="content_border" >
     	<form action="enroll_IMG" method="POST">
         <div id="enroll_title" ><input type="text" id="en_title" name="title" placeholder="제목을 입력해주세요" required></div>
         <div id="enroll_content">
-            <textarea id="en_content" name="boContent" style="overflow:visible;"></textarea>
+            <textarea id="en_content" name="boContent"></textarea>
         </div>
         <button type = "submit" id="create_button">등록하기</button>
         </form>

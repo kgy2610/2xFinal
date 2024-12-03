@@ -40,7 +40,7 @@
 		<result column="CS_DATE" property="csDate" />
 		<result column="TC_ID" property="tcId" />
 		<result column="PR_ID" property="prId" />
-		<result column="CS_LOCATION" property="scLocation" />
+		<result column="CS_LOCATION" property="csLocation" />
 		<result column="CS_CONTENT" property="csContent" />
 		<result column="PR_NAME" property="prName" />
  	</resultMap>
@@ -143,6 +143,7 @@
 		FROM COUNSEL 
 		WHERE TC_ID = #{tcId}
 		  AND TO_CHAR(CS_DATE, 'MM') = #{month}
+		ORDER BY CS_DATE
 	</select>
 	
 	<!-- 부모님 상담 신청 -->
@@ -366,5 +367,10 @@
     JOIN PARENTS p ON c.PR_ID = p.PR_ID  <!-- PARENTS 테이블과 JOIN -->
     WHERE c.TC_ID = #{tcId}
 </select>
+
+<insert id="insertCounsel">
+	INSERT INTO COUNSEL(CS_DATE,TC_ID,CS_LOCATION)
+	VALUES(TO_DATE(#{csDate},'YYYY-MM-DD HH24:MI:SS'),#{tcId},#{csLocation})
+</insert>
 
  </mapper>

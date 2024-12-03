@@ -192,6 +192,12 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.updateImgBoard(sqlSession,eib);
 	}
 	
+	//선생님 상담일정 추가
+	@Override
+	public int insertCounsel(Counsel c) {
+		return boardDao.insertCounsel(sqlSession,c);
+	}
+	
 	
 	
 

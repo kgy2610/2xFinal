@@ -156,4 +156,8 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateImgBoard",eib);
 	}
 	
+	public int insertCounsel(SqlSessionTemplate sqlSession, Counsel c) {
+		return sqlSession.insert("boardMapper.insertCounsel",c);
+	}
+	
 }

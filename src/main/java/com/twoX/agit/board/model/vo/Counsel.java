@@ -19,7 +19,7 @@ public class Counsel {
 	private String csDate;
 	private String tcId;
 	private String prId;
-	private String scLocation;
+	private String csLocation;
 	private String csContent;
 	private String prName;
 }
