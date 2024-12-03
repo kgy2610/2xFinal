@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.twoX.agit.member.model.vo.Teacher"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String alertMsg = (String) session.getAttribute("alertMsg");
+	Teacher s = (Teacher) session.getAttribute("loginUser");
+	
+	
+	String classCode = s.getClassCode();//클래스 코드가 빈값이면 0000이 아니라 null로 바꾸어야한다.
+	String grade = classCode.substring(9, 10);
+	String teacher_class = classCode.substring(10, 12);	
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +79,87 @@
         		</div>
         	</div>
         </c:forEach>
+        
+		<!-- 모달 -->
+
+		<div id="noticeModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeInfoModal()">&times;</span>
+				<h3>정보수정</h3>
+				<form id="updateForm" action="updateInfo.me">
+					<label for="code">코드</label> <input type="text" id="code"
+						name="classCode" value="<%=classCode%>" required readonly><br>
+					<br>
+
+					<div class="input-group">
+						<label for="grade">학년</label> <input type="text" id="grade"
+							name="grade" value="<%=grade%>" required><br>
+						<br> <label for="class">반</label> <input type="text"
+							id="class" name="teacher_class" value="<%=teacher_class%>"
+							required><br>
+						<br>
+					</div>
+					<div class="button-group">
+						<div class="top-buttons">
+							<button class="update-button" type="submit"
+								onclick="updateInfo()">수정하기</button>
+							<button class="password-button" type="button"
+								onclick="openPasswordModal()">비밀번호 수정</button>
+						</div>
+						<button class="delete-button" type="button"
+							onclick="openDeleteModal()">반 삭제</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		<!-- 반 삭제 확인 모달 -->
+		<div id="deleteClassModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeDeleteModal()">&times;</span>
+				<h3>반 삭제</h3>
+				<form id="classdeleteForm" action="classdelete.me">
+					<input type="hidden" value="<%=s.getClassCode()%>">
+					<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
+					<div class="input-group">
+						<p id="deleteClassMessage">
+							코드: <input type="text" id="deleteCode" name="deleteCode" required>
+						</p>
+					</div>
+					<div class="button-group">
+						<button class="confirm-delete-button" type="submit">삭제하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+
+		<!-- 비밀번호 수정 모달 -->
+		<div id="passwordModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closePasswordModal()">&times;</span>
+				<h3>비밀번호 수정</h3>
+
+				<!-- 비밀번호 수정 폼 -->
+				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
+				<input type="hidden" value="<%=s.getTcPwd() %>">
+					<label for="currentPassword">현재 비밀번호</label> <input type="password"
+						id="currentPassword" name="currentPassword" required> <label
+						for="newPassword">수정 비밀번호</label> <input type="password"
+						id="newPassword" name="newPassword" required> <label
+						for="confirmPassword">비밀번호 확인</label> <input type="password"
+						id="confirmPassword" name="confirmPassword" required>
+
+					<div class="button-group">
+						<button class="confirm-password-button" type="submit">비밀번호 수정하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+        
 	<script>
 	   function openStuModal(classCode) {
 		   if(classCode === undefined){
@@ -168,6 +258,72 @@
                     chatBox.scrollTop = chatBox.scrollHeight;
                 });
             });
+        }
+        
+        
+        
+        // 모달 열기
+        function openInfoModal() {
+            document.getElementById('noticeModal').style.display = 'block';
+        }
+
+        // 모달 닫기
+        function closeInfoModal() {
+            document.getElementById('noticeModal').style.display = 'none';
+        }
+
+        // 정보 수정하기
+        function updateInfo() {
+          
+            closeInfoModal();
+        }
+
+        // 비밀번호 수정 모달 열기
+        function openPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'block';
+        }
+
+        // 비밀번호 수정 모달 닫기
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+
+        // 비밀번호 수정 확인
+        function confirmPasswordUpdate() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // 비밀번호 수정 로직 추가
+            if (newPassword === confirmPassword) {
+                alert('비밀번호가 수정되었습니다.');
+                closePasswordModal();
+                closeInfoModal();
+            } else {
+                alert('비밀번호가 일치하지 않습니다.');
+            }
+        }
+
+        // 반 삭제 모달 열기
+        function openDeleteModal() {
+            document.getElementById('deleteClassModal').style.display = 'block';
+        }
+
+        // 반 삭제 모달 닫기
+        function closeDeleteModal() {
+            document.getElementById('deleteClassModal').style.display = 'none';
+        }
+
+        // 반 삭제 확인
+        function confirmDelete() {
+            const deleteCode = document.getElementById('deleteCode').value;
+
+    		//서버에 요청
+    		
+            // 반 삭제 로직 추가
+            alert(`반 ${deleteCode}가 삭제되었습니다.`);
+            closeDeleteModal();
+            closeInfoModal();
         }
     </script>
 </body>
