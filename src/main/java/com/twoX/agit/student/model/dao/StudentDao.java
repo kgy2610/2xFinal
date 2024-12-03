@@ -77,6 +77,16 @@ public class StudentDao {
 	public int updateStuHomework(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
 		return sqlSession.update("studentMapper.updateStuHomework", hm);
 	}
+	
+	// 숙제 점수 불러오기
+	public ArrayList<Double> selectStuScore(SqlSessionTemplate sqlSession, String stuId) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectStuScore", stuId);
+	}
+
+	// 숙제 점수 평균 불러오기
+	public ArrayList<Double> selectAVGstuScore(SqlSessionTemplate sqlSession, String classCode) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectAVGstuScore", classCode);
+	}
 
 	// 방과후
 	public int updateAfterschoolCode(SqlSessionTemplate sqlSession, Map<String, String> map) {

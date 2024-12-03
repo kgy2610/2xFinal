@@ -54,6 +54,7 @@
 
 	<select id="smCodeStudent" parameterType="String"
 		resultType="map">
+
 		SELECT
 		s.STU_ID AS stuId,
 		s.STU_NAME AS stuName,
@@ -61,12 +62,16 @@
 		stuNum,
 		s.PHONE AS phone,
 		s.CLASS_CODE AS classCode,
-		COUNT(CASE WHEN a.LA IN ('TA', 'AT') THEN 1 END) AS attendedDays,
-		(SELECT
-		COUNT(*) FROM Attendance WHERE STU_ID = s.STU_ID) AS totalDays,
-		ROUND((COUNT(CASE WHEN a.LA IN ('TA', 'AT') THEN 1 END) * 1.0 /
-		(SELECT COUNT(*) FROM Attendance WHERE STU_ID = s.STU_ID)) * 100, 2)
-		AS attendanceRate
+		COUNT(CASE WHEN a.LA
+		IN ('TA', 'AT') THEN 1 END) AS attendedDays,
+		(SELECT COUNT(*) FROM
+		Attendance WHERE STU_ID = s.STU_ID) AS totalDays,
+		ROUND((COUNT(CASE
+		WHEN a.LA IN ('TA', 'AT') THEN 1 END) * 1.0 /
+		NULLIF((SELECT COUNT(*)
+		FROM Attendance WHERE STU_ID = s.STU_ID), 0))
+		* 100, 2) AS
+		attendanceRate
 		FROM
 		Student s
 		LEFT JOIN
@@ -81,7 +86,8 @@
 		s.STU_NUM ASC
 	</select>
 
-	<select id="getStudentScoresByStuId" parameterType="String" resultType="map">
+	<select id="getStudentScoresByStuId" parameterType="String"
+		resultType="map">
 		SELECT
 		h.HM_TITLE AS subject,                <!-- 과목 제목 -->
 		hs.SCORE AS score                      <!-- 성적 -->
@@ -94,7 +100,39 @@
 		ORDER BY
 		h.HM_TITLE ASC                         <!-- 과목 제목 순으로 정렬 -->
 	</select>
-	
-	
+
+
+	<update id="udStudentStatus" parameterType="map">
+		UPDATE STUDENT
+		SET
+		STATUS = 'N'
+		WHERE CLASS_CODE = #{classCode}
+		AND STU_ID = #{stuId}
+	</update>
+
+
+	<select id="studentListbyScCode" parameterType="String"
+		resultType="map">
+		SELECT
+		s.STU_NUM, 
+		s.STU_NAME,
+		s.STATUS,
+		s.STU_ID,
+		s.CLASS_CODE
+		FROM
+		Student s 
+		WHERE
+		s.CLASS_CODE = #{classCode} 
+		AND s.STATUS = 'N'
+	</select>
+
+
+	<!-- 학생 승인 -->
+		<update id="inStudentListbyStatus">
+			UPDATE STUDENT
+			SET STATUS = 'Y'
+			WHERE CLASS_CODE = #{scCode}
+		AND STU_ID = #{stuId}
+		</update>
 
 </mapper>

@@ -156,4 +156,24 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateImgBoard",eib);
 	}
 	
+	public int insertCounsel(SqlSessionTemplate sqlSession, Counsel c) {
+		return sqlSession.insert("boardMapper.insertCounsel",c);
+	}
+	
+	public ArrayList<Counsel> selectCounselList(SqlSessionTemplate sqlSession, Counsel c){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectCounselList",c);
+	}
+	
+	public int updateCounselInfo (SqlSessionTemplate sqlSession,Counsel c) {
+		return sqlSession.update("boardMapper.updateCounselInfo",c);
+	}
+	
+	public int deleteCounselInfo (SqlSessionTemplate sqlSession,Counsel c) {
+		return sqlSession.delete("boardMapper.deleteCounselInfo",c);
+	}
+	
+	public int deleteParentsCounsel (SqlSessionTemplate sqlSession,Counsel c) {
+		return sqlSession.update("boardMapper.deleteParentsCounsel",c);
+	}
+	
 }

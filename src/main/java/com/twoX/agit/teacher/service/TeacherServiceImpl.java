@@ -8,7 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
@@ -64,11 +66,28 @@ public class TeacherServiceImpl  implements TeacherService{
 			String dueDate) {
 		return teacherDao.enrollHomework(sqlSession, tcId, classCode, title, subject, content, dueDate);
 	}
+	
+	// 가장 최근 숙제 조회
+	public int getRecentHomeworkBoNo(String tcId) { // 가장 최근 등록된 BO_NO 가져오기
+		return teacherDao.selectRecentHomeworkBoNo(sqlSession, tcId);
+	}
+	
+	// 파일 업로드
+	@Override
+	public int uploadHomeworkFile(int boNo, String originName, String changeName) {
+		return teacherDao.uploadHomeworkFile(sqlSession, boNo, originName, changeName);
+	}
 
 	// 숙제 조회
 	@Override
 	public Homework selectHomework(int bno) {
 		return teacherDao.selectHomework(sqlSession, bno);
+	}
+	
+	// 파일 삭제
+	@Override
+	public int deleteFile(int boNo, String changeName) {
+		return teacherDao.deleteFile(sqlSession, boNo, changeName);
 	}
 
 	// 숙제 삭제
@@ -81,6 +100,12 @@ public class TeacherServiceImpl  implements TeacherService{
 	@Override
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return teacherDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
+	}
+	
+	// 숙제 파일 수정
+	@Override
+	public int updateHomeworkFile(int boNo, String originName, String newFileName, String changeName) {
+		return teacherDao.updateHomeworkFile(sqlSession, boNo, originName, newFileName, changeName);
 	}
 
 	// 해당 숙제 페이지로 이동
@@ -123,5 +148,29 @@ public class TeacherServiceImpl  implements TeacherService{
 	 public List<Map<String, Object>> getStudentScoresByStuId(String stuId) {
         return teacherDao.getStudentScoresByStuId(sqlSession, stuId);
     }
+	
+	@Override
+    public String udStudentStatus(String classCode, String stuId) {
+        // 예시: classCode에 해당하는 학생들의 상태를 업데이트하는 로직
+        int updatedCount = teacherDao.udStudentStatus(sqlSession, classCode, stuId);
+        
+        if (updatedCount > 0) {
+            return "학생 상태가 성공적으로 업데이트되었습니다.";
+        } else {
+            return "학생 상태 업데이트에 실패하였습니다.";
+        }
+    }
 
+	@Override
+	public ArrayList<Student> inStudentListbyScCode(String cCode) {
+		return teacherDao.stuActiveList(sqlSession, "sqlSession", cCode);
+	}
+
+	@Override
+	public int inStudentListbyStatus( String status, String scCode, String stuId) {
+		return teacherDao.inStudentListbyStatus(sqlSession,status , scCode, stuId);
+	}
+
+	
+	
 }

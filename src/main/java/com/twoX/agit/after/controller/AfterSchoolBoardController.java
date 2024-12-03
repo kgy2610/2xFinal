@@ -113,7 +113,7 @@ public class AfterSchoolBoardController {
 				
 				//CODE가 로그인된 선생님과 같은 학생의 리스트 불러오기
 				ArrayList<Student> acceptList = afterSchoolBoardService.ajaxAcceptStudentListbyScCode(scCode);
-	        System.out.println("Controller | 승인이 필요한 선생님 리스트 : " + acceptList);
+				System.out.println("Controller | 승인이 필요한 선생님 리스트 : " + acceptList);
 				
 				
 		        response.put("acceptStudents", acceptList);  // 데이터가 배열로 들어가야 합니다.
@@ -125,7 +125,7 @@ public class AfterSchoolBoardController {
 		}
 	
 		
-		//학생 승인 (status 값이 N인 선생님을 수락버튼을 통해 Y로 변경)
+		//학생 승인 (status 값이 N인 학생을 수락버튼을 통해 Y로 변경)
 		@ResponseBody
 		@RequestMapping(value="requestStudent")
 		public String ajaxRequestTeacher(HttpSession session, @RequestParam("status") String status, @RequestParam("stuId") String stuId){

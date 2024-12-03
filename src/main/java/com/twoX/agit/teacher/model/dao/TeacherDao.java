@@ -61,9 +61,32 @@ public class TeacherDao {
 		return sqlSession.insert("homeworkMapper.insertHomework", params);
 	}
 
+	// 가장 최근 숙제 번호
+	public int selectRecentHomeworkBoNo(SqlSessionTemplate sqlSession,  String tcId) {
+		return sqlSession.selectOne("homeworkMapper.selectRecentHomeworkBoNo", tcId);
+	}
+	
+	// 파일 업로드
+	public int uploadHomeworkFile(SqlSessionTemplate sqlSession, int boNo, String originName, String changeName) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
+		params.put("originName", originName);
+		params.put("changeName", changeName);
+		
+		return sqlSession.insert("homeworkMapper.uploadHomeworkFile", params);
+	}
+	
 	// 숙제 조회
 	public Homework selectHomework(SqlSessionTemplate sqlSession, int bno) {
 		return sqlSession.selectOne("homeworkMapper.selectHomework", bno);
+	}
+	
+	// 파일 삭제
+	public int deleteFile(SqlSessionTemplate sqlSession, int boNo, String changeName) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
+		params.put("changeName", changeName);
+		return sqlSession.delete("homeworkMapper.deleteFile", params);
 	}
 
 	// 숙제 삭제
@@ -81,6 +104,17 @@ public class TeacherDao {
 		params.put("hmContent", hmContent);
 
 		return sqlSession.update("homeworkMapper.updateHomework", params);
+	}
+	
+	// 숙제 파일 수정
+	public int updateHomeworkFile(SqlSessionTemplate sqlSession, int boNo, String originName, String newFileName, String changeName) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
+		params.put("originName", originName);
+		params.put("newFileName", newFileName);
+		params.put("changeName", changeName);
+		
+		return sqlSession.update("homeworkMapper.updateHomeworkFile", params);
 	}
 
 	// 해당 숙제 페이지로 이동
@@ -126,5 +160,26 @@ public class TeacherDao {
         return sqlSession.selectList("stuManageMapper.getStudentScoresByStuId", stuId);
     }
 	
+	public int udStudentStatus(SqlSessionTemplate sqlSession, String classCode, String stuId) {
+		 Map<String, String> params = new HashMap<>();
+		    params.put("classCode", classCode);
+		    params.put("stuId", stuId);
+		    return sqlSession.update("stuManageMapper.udStudentStatus", params);
+    }
+	
+	
+	public ArrayList<Student> stuActiveList(SqlSessionTemplate sqlSession, String status, String cCode) {
+		return (ArrayList)sqlSession.selectList("stuManageMapper.studentListbyScCode", cCode);
+	}
+	
+	public int inStudentListbyStatus(SqlSessionTemplate sqlSession, String status, String scCode, String stuId) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("status", status);
+		params.put("scCode", scCode);
+		params.put("stuId",stuId);
+		
+		System.out.println("Executing inStudentListbyStatus with stuId: " + stuId + ", status: " + status + ", scCode: " + scCode);
+		return sqlSession.update("stuManageMapper.inStudentListbyStatus", params);
+	}
 	
 }

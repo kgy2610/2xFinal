@@ -73,3 +73,22 @@ $(function(){
                 element.innerText = text.substring(0, 12) + "...";
             }
         });
+	
+	    // 수정 버튼 클릭 이벤트
+	    document.addEventListener("DOMContentLoaded", () => {
+            const today = new Date();
+            console.log(deadLine);
+            console.log(today);
+
+	        const modifyButton = document.getElementById("modify_button");
+	        modifyButton.addEventListener("click", (event) => {
+	            if (today > deadLine) {
+	                event.preventDefault();
+	                alert("마감일이 지났습니다. 수정할 수 없습니다.");
+	                location.href = `homework`;
+	            } else {
+	                location.href = `hmAnswer_modify?boNo=${npage.boNo}&cpage=${cpage}`;
+	            }
+	        });
+	    });
+	

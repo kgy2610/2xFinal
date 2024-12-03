@@ -92,7 +92,22 @@ public interface BoardService {
 	int deleteImgBoard(int boNo);
 	
 	//
-	int insertIMGBoard(EventImgBoard eib);
+	int insertIMGBoard(EventImgBoard eib); 
 	
 	int updateImgBoard(EventImgBoard eib);
+	
+	//선생님 상담일정 조회
+	ArrayList<Counsel> selectCounselList(Counsel c);
+	
+	//선생님 상담일정 추가
+	int insertCounsel(Counsel c);
+	
+	//선생님 상담일정 수정
+	int updateCounselInfo(Counsel c);
+	
+	//선생님 상담일정 삭제
+	int deleteCounselInfo(Counsel c);
+	
+	//선생님 상담일정 취소
+	int deleteParentsCounsel(Counsel c);
 }  

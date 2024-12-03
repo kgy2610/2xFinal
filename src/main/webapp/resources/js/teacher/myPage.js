@@ -1,4 +1,5 @@
- //글자 수 제한
+
+//글자 수 제한
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".body_title").forEach(function (element) {
         const text = element.innerText;
@@ -77,6 +78,7 @@
         closeDeleteModal();
         closeInfoModal();
     }
+
 
 // 공지사항 추가 모달 열기
 function openAddNoticeModal() {

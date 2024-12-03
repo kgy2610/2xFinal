@@ -19,7 +19,7 @@
 	<jsp:include page="parents_menubar.jsp" />
 
     <div class="wrap">
-        <div class="header">
+        <div class="header" style="padding:5px; height:auto;">
             <div>
                 2024년
                 <select id="monthSelect"></select>월

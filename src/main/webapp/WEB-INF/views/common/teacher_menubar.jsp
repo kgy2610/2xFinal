@@ -1,6 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.twoX.agit.member.model.vo.Teacher"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String alertMsg = (String) session.getAttribute("alertMsg");
+Teacher s = (Teacher) session.getAttribute("loginUser");
+
+String classCode = null;  // 기본값을 null로 설정
+String grade = null;
+String teacher_class = null;
+
+if (s != null) {
+    classCode = s.getClassCode();
+
+    // classCode가 null이거나 길이가 12보다 작으면 null로 처리
+    if (classCode == null || classCode.length() < 12) {
+        classCode = null; // classCode가 null 또는 길이가 부족하면 null로 설정
+    } else {
+        grade = classCode.substring(9, 10);  // 학년 추출
+        teacher_class = classCode.substring(10, 12);  // 반 추출
+    }
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
+    <script src="<c:url value='/resources/js/teacher/teacher_menubar.js'/>"></script>
 </head>
 <body>
     <div class="nav">
@@ -16,13 +37,13 @@
             <label for="mypage"><a href="teacher.myPage">마이페이지</a></label>
             <label for="homework"><a href="homeworkList">숙제</a></label>
             <label for="attendance"><a href="teacherAttendance">출결</a></label>
-            <label for="advicePlan"><a href="#">상담일정</a></label>
+            <label for="advicePlan"><a href="teacherCounsel">상담일정</a></label>
             <label for="community"><a href="makeAfterClass.me">방과후 반</a></label>
             <label for="photo"><a href="teacher_eventImgList">행사사진</a></label>
             <label for="studentManage"><a href="studentManage.me">학생관리</a></label>
         </div>
         <div class="undermenu">
-            <label for="info" onclick="openInfoModal()"><a href="#">정보수정</a></label>
+            <label for="info" onclick="openInfoModal2()"><a href="#">정보수정</a></label>
             <label for="logout"><a href="logout.me">로그아웃</a></label>
         </div>
     </div>
@@ -70,105 +91,85 @@
         		</div>
         	</div>
         </c:forEach>
-	<script>
-	   function openStuModal(classCode) {
-		   if(classCode === undefined){
-			   alert("반 배정 후 이용가능합니다.")
-			   return
-		   }
-		   document.getElementById('classGrade').innerText = classCode.slice(9,10) + "학년 " + classCode.slice(10,12) + "반"
-	       document.getElementById('stuModal').style.display = 'flex';
-	       document.getElementById("newMsg").style.display='none';
-	   }
-	
-	   function openChatModal(stuId,classCode){
-		   document.getElementById('stuModal').style.display = 'none';
-		   document.getElementById("newMsg").style.display='none';
-		   document.getElementById('chatModal'+stuId).style.display = 'flex';
-		   document.getElementById("newMsgEv"+stuId).style.display='none';
-		   selectChatList(stuId,classCode)
-	   }
-	   // 모달 닫기
-	   function closeModal() {
-	       document.getElementById('stuModal').style.display = 'none';
-	   }
-	   
-	   function backModal(stuId){
-		   document.getElementById('stuModal').style.display = 'flex';
-		   document.getElementById('chatModal'+stuId).style.display = 'none';
-	   }
-        const socket = new WebSocket("ws://localhost:2222/agit/server");
-
-        socket.onopen = function(){
-            console.log('연결성공....')
-        }
-
-        socket.onclose = function(){
-            console.log('연결끊어짐....')
-        }
-
-        socket.onerror = function(){
-            console.log('연결실패....')
-        }
-
-        //socket연결로부터 데이터가 도착했을 때 실행하는 이벤트
-        socket.onmessage = function(ev){
-            const reveice = JSON.parse(ev.data);
-            if(reveice.sendMessenger === 'ST' && window.getComputedStyle(document.getElementById('chatModal'+reveice.stuId)).display==='none'){
-            	document.getElementById("newMsg").style.display='flex';
-            	document.getElementById("newMsgEv"+reveice.stuId).style.display='flex';
-            }
-            selectChatList(reveice.stuId,reveice.classCode);
-            setTimeout(scrollToBottom, 50);
-        }
-
-        function sendMsg(stuId){
-            const msgData = {
-                message: document.querySelector("#msg"+stuId).value,
-                target: stuId,
-            }
-            document.querySelector("#msg"+stuId).value='';
-            socket.send(JSON.stringify(msgData));
-        }
         
-        function selectChatList(stuId,classCode){
-        	$.ajax({
-        		url:"selectChatList",
-        		data:{stuId:stuId,classCode:classCode},
-        		success:function(res){
-        			let str=''
-        			let todate=''
-        			for(let ch of res){
-        				if(ch.chDate !== todate){
-        					str+="<div style='text-align: center; font-size:15px;'>"+ch.chDate+"</div>"
-        	      			+"<hr style='width:90%; height:3px; margin: 20px auto;'>"
-        					todate=ch.chDate
-        				}
-        				if(ch.sendMessenger === 'TC'){
-        					str+="<div class='sendMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
-        				}else{
-        					str+="<div class='recMsg'><span class='chMsg'>"+ch.chContent+"</span></div>"
-        				}
-        			}
-        			document.getElementById(stuId+"talk_content").innerHTML = str;
-        			setTimeout(scrollToBottom, 50);
-        		},
-        		error:function(){
-        			console.log("이건 또 왜 안되는데")
-        		}
-        	})
-        }
-        
-        
-        function scrollToBottom() {
-            const chatBoxes = document.getElementsByClassName("modal_talk_content");
-            // 각 요소에 대해 스크롤을 맨 아래로 이동
-            Array.from(chatBoxes).forEach(chatBox => {
-                requestAnimationFrame(() => {
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                });
-            });
-        }
-    </script>
+		<!-- 모달 -->
+
+		<div id="noticeModal1" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeInfoModal2()">&times;</span>
+				<h3>정보수정</h3>
+				<form id="updateForm" action="updateInfo.me">
+					<label for="code">코드</label> <input type="text" id="code"
+						name="classCode" value="<%=classCode%>" required readonly><br>
+					<br>
+
+					<div class="input-group">
+						<label for="grade">학년</label> <input type="text" id="grade"
+							name="grade" value="<%=grade%>" required readonly><br>
+						<br> <label for="class">반</label> <input type="text"
+							id="class" name="teacher_class" value="<%=teacher_class%>"
+							required readonly><br>
+						<br>
+					</div>
+					<div class="button-group">
+						<div class="top-buttons">
+							
+							<button class="password-button" type="button"
+								onclick="openPasswordModal2()">비밀번호 수정</button>
+						</div>
+						<button class="delete-button" type="button"
+							onclick="openDeleteModal()">반 삭제</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		<!-- 반 삭제 확인 모달 -->
+		<div id="deleteClassModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeDeleteModal()">&times;</span>
+				<h3>반 삭제</h3>
+				<form id="classdeleteForm" action="classdelete.me">
+					<input type="hidden" value="<%=s.getClassCode()%>">
+					<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
+					<div class="input-group">
+						<p id="deleteClassMessage">
+							코드: <input type="text" id="deleteCode" name="deleteCode" required>
+						</p>
+					</div>
+					<div class="button-group">
+						<button class="confirm-delete-button" type="submit">삭제하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+
+		<!-- 비밀번호 수정 모달 -->
+		<div id="passwordModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closePasswordModal()">&times;</span>
+				<h3>비밀번호 수정</h3>
+
+				<!-- 비밀번호 수정 폼 -->
+				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
+				<input type="hidden" value="<%=s.getTcPwd() %>">
+					<label for="currentPassword">현재 비밀번호</label> <input type="password"
+						id="currentPassword" name="currentPassword" required> <label
+						for="newPassword">수정 비밀번호</label> <input type="password"
+						id="newPassword" name="newPassword" required> <label
+						for="confirmPassword">비밀번호 확인</label> <input type="password"
+						id="confirmPassword" name="confirmPassword" required>
+
+					<div class="button-group">
+						<button class="confirm-password-button" type="submit">비밀번호 수정하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+  
 </body>
 </html>

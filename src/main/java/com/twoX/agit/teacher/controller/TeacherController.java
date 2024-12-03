@@ -1,6 +1,7 @@
 package com.twoX.agit.teacher.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.common.template.Template;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
+import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
 import com.twoX.agit.member.service.LoginCheckService;
 import com.twoX.agit.member.service.MemberService;
@@ -139,7 +142,7 @@ public class TeacherController {
 		int listCount = teacherService.getListCount(); // 총 게시글 수를 구하는 메서드 호출
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
-
+		
 		model.addAttribute("homeworkList", homeworkList);
 		model.addAttribute("listCount", listCount);
 
@@ -154,7 +157,7 @@ public class TeacherController {
 
 	// 숙제 등록페이지
 	@RequestMapping("enrollHomework")
-	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile file,  HttpSession session, Model model) {
+	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile upfile,  HttpSession session, Model model) {
 		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
@@ -168,6 +171,16 @@ public class TeacherController {
 		String classCode = loginTeacher.getClassCode();
 
 		int result = teacherService.enrollHomework(tcId, classCode, title, subject, content, dueDate);
+		int boNo = teacherService.getRecentHomeworkBoNo(tcId); // 가장 최근 등록된 BO_NO 가져오기
+		
+		// 파일이 있는 경우 처리
+	    if (!upfile.getOriginalFilename().equals("") && result > 0) {
+	        String changeName = Template.saveFile(upfile, session, "/resources/file/");
+	        String originName = upfile.getOriginalFilename();
+
+	        // 파일 정보 DB 저장
+	        int fileResult = teacherService.uploadHomeworkFile(boNo, originName, "/resources/file/" + changeName);
+	    }
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
@@ -177,20 +190,20 @@ public class TeacherController {
 
 	// 숙제 상세 페이지
 	@RequestMapping("detailHomework")
-	public String homeworkDatail(String subject, String hmTitle, String hmContent, String deadLine, Model model) {
-
+	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String changeName, Model model) {
+		model.addAttribute("boNo", boNo);
 		model.addAttribute("subject", subject);
 		model.addAttribute("hmTitle", hmTitle);
 		model.addAttribute("hmContent", hmContent);
 		model.addAttribute("deadLine", deadLine);
+		model.addAttribute("changeName", changeName);
 
 		return "teacher/homeworkDetail";
 	}
 
 	// 숙제 삭제
 	@RequestMapping("deleteHomework")
-	public String deleteHomework(String hmTitle, HttpSession session, Model model) {
-		
+	public String deleteHomework(int boNo, String hmTitle, String changeName, HttpSession session, Model model) {		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
 			return "member/login_teacher";
@@ -201,6 +214,7 @@ public class TeacherController {
 		
 		String tcId = teacher.getTcId();
 
+		int res1 = teacherService.deleteFile(boNo, changeName);
 		int result = teacherService.deleteHomework(hmTitle);
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
@@ -211,8 +225,7 @@ public class TeacherController {
 
 	// 숙제 수정하기
 	@RequestMapping("updateHomework")
-	public String updateHomework(String hmTitle, String subject, String deadLine, String hmContent, HttpSession session, Model model) {
-		
+	public String updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent, String changeName, MultipartFile fileupload,  HttpSession session, Model model) {
 		if (!LoginCheckService.checkLogin(session)) {
 	        session.setAttribute("loginMessage", "로그인이 필요합니다.");
 	        return "member/login_teacher"; // 로그인되지 않았으면 로그인 페이지로 리다이렉트
@@ -222,8 +235,19 @@ public class TeacherController {
 		Teacher teacher = (Teacher) session.getAttribute("loginUser");
 		
 		String tcId = teacher.getTcId();
-
+		
 		int result = teacherService.updateHomework(hmTitle, subject, deadLine, hmContent);
+		
+		// 파일이 새로 업로드된 경우 처리
+	    if (!fileupload.getOriginalFilename().equals("") && result > 0) {
+	    	// 파일 저장
+	        String newFileName = Template.saveFile(fileupload, session, "/resources/file/");
+	        String originName = fileupload.getOriginalFilename();
+
+	        // 파일 정보 DB 저장
+	        int fileResult = teacherService.updateHomeworkFile(boNo, originName, newFileName, "/resources/file/" + changeName);
+	    }
+		
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
@@ -377,7 +401,7 @@ public class TeacherController {
 
 	    // 학생별 출석률 가져오기
 	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
-	    System.out.println(stuManageList);
+	    System.out.println("뭣" + stuManageList);
 	    
 	    
 
@@ -390,7 +414,6 @@ public class TeacherController {
 	@RequestMapping(value = "studentManage.me", produces="application/json; charset-UTF-8")
 	@ResponseBody
 	public String getStudentScores(String stuId) {
-	    System.out.println("Received stuId: " + stuId); 
 	    List<Map<String, Object>> scoresList = teacherService.getStudentScoresByStuId(stuId);
 	    System.out.println("scoresList: " + scoresList);
 	    return new Gson().toJson(scoresList);  // JSON 형식으로 반환
@@ -398,16 +421,63 @@ public class TeacherController {
 	
 	// 한학생 승인 취소
 	@RequestMapping("studentManageCansel.me")
-	public String studentManageCansel(HttpSession session, Model model) {
-	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
-	    String classCode = loginUser.getClassCode();
-
+	public String studentManageCansel(@RequestParam("classCode") String classCode, @RequestParam("stuId") String stuId, HttpSession session, Model model) {
+		  System.out.println("Received classCode: " + classCode);
+		    System.out.println("Received stuId: " + stuId);
+	   
+	   String csCode = teacherService.udStudentStatus(classCode, stuId);
 	    
 	    
-	    return "teacher/studentManage";
+	    return "redirect:studentManage.me?stuId=" + stuId;
 	}
 	
 	
-	
+	@ResponseBody 
+	@RequestMapping(value = "yStudentStatus", produces = "application/json; charset=UTF-8")
+	public Map<String, Object> ajaxAcceptTeacherList(HttpSession session) {
+		Map<String , Object> response = new HashMap<String , Object>();
+		
+		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
+		
+		if(loginUser != null) {
+			String cCode = loginUser.getClassCode();
+			
+			ArrayList<Student> StudentListIn = teacherService.inStudentListbyScCode(cCode);
+        System.out.println("학생 리스트 : " + StudentListIn);
+			
+			
+	        response.put("StudentListIn", StudentListIn);  // 데이터가 배열로 들어가야 합니다.
+	    } else {
+	        response.put("message", "로그인 정보가 없습니다.");
+	    }
+		
+		return response;
+	}
 
+	@ResponseBody
+	@RequestMapping(value="requestInStudent")
+	public String ajaxRequestTeacher(HttpSession session, @RequestParam("status") String status, @RequestParam("stuId") String stuId){
+		Teacher clCode = (Teacher) session.getAttribute("loginUser");
+		System.out.println("Request Controller | 로그인한 유저의 clCode : " + clCode );
+		if(clCode != null) {
+			String scCode = clCode.getClassCode();
+			System.out.println("Request Controller | 로그인한 유저의 scCode : " + scCode);
+			System.out.println("Request Controller | 로그인한 유저의 status : " + status);
+			
+		
+			
+			int result = teacherService.inStudentListbyStatus(status, scCode, stuId);
+			System.out.println("Request Controller | 승인할 학생의 stuId, status : " + stuId + ", " + status);
+			System.out.println(result);
+			
+			if(result > 0) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		}
+		return "success";
+	}
+	
+	
 }

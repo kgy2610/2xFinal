@@ -44,7 +44,7 @@
 			<div class="text1">
 				<span class="date">${counsel.csDate}</span>
 				&nbsp;&nbsp;&nbsp;&nbsp;학부모 이름 : ${counsel.prName}
-				&nbsp;&nbsp;&nbsp;&nbsp;상담 장소 : ${counsel.scLocation}
+				&nbsp;&nbsp;&nbsp;&nbsp;상담 장소 : ${counsel.csLocation}
 				&nbsp;&nbsp;&nbsp;&nbsp;상담 내용 : ${counsel.csContent}
 			</div>
 			<hr class="body_line">
@@ -99,86 +99,6 @@
 		    <img class="memo_plus" onclick="openAddMemoModal()" src="<c:url value='/resources/img/teacher/plus2.png'/>">
 		</div>
 
-
-
-		<!-- 모달 -->
-
-		<div id="noticeModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeInfoModal()">&times;</span>
-				<h3>정보수정</h3>
-				<form id="updateForm" action="updateInfo.me">
-					<label for="code">코드</label> <input type="text" id="code"
-						name="classCode" value="<%=classCode%>" required readonly><br>
-					<br>
-
-					<div class="input-group">
-						<label for="grade">학년</label> <input type="text" id="grade"
-							name="grade" value="<%=grade%>" required><br>
-						<br> <label for="class">반</label> <input type="text"
-							id="class" name="teacher_class" value="<%=teacher_class%>"
-							required><br>
-						<br>
-					</div>
-					<div class="button-group">
-						<div class="top-buttons">
-							<button class="update-button" type="submit"
-								onclick="updateInfo()">수정하기</button>
-							<button class="password-button" type="button"
-								onclick="openPasswordModal()">비밀번호 수정</button>
-						</div>
-						<button class="delete-button" type="button"
-							onclick="openDeleteModal()">반 삭제</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
-
-		<!-- 반 삭제 확인 모달 -->
-		<div id="deleteClassModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closeDeleteModal()">&times;</span>
-				<h3>반 삭제</h3>
-				<form id="classdeleteForm" action="classdelete.me">
-					<input type="hidden" value="<%=s.getClassCode()%>">
-					<label for="deleteCode" class="deleteOn">정말로 반을 삭제하시겠습니까?</label>
-					<div class="input-group">
-						<p id="deleteClassMessage">
-							코드: <input type="text" id="deleteCode" name="deleteCode" required>
-						</p>
-					</div>
-					<div class="button-group">
-						<button class="confirm-delete-button" type="submit">삭제하기</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
-
-
-		<!-- 비밀번호 수정 모달 -->
-		<div id="passwordModal" class="modal">
-			<div class="modal-content">
-				<span class="close" onclick="closePasswordModal()">&times;</span>
-				<h3>비밀번호 수정</h3>
-
-				<!-- 비밀번호 수정 폼 -->
-				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
-				<input type="hidden" value="<%=s.getTcPwd() %>">
-					<label for="currentPassword">현재 비밀번호</label> <input type="password"
-						id="currentPassword" name="currentPassword" required> <label
-						for="newPassword">수정 비밀번호</label> <input type="password"
-						id="newPassword" name="newPassword" required> <label
-						for="confirmPassword">비밀번호 확인</label> <input type="password"
-						id="confirmPassword" name="confirmPassword" required>
-
-					<div class="button-group">
-						<button class="confirm-password-button" type="submit">비밀번호 수정하기</button>
-					</div>
-				</form>
-			</div>
-		</div>
 
 
 
