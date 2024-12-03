@@ -33,7 +33,7 @@
 		<typeAlias type="com.twoX.agit.teacher.model.vo.TeacherMemo" alias="TeacherMemo" />
 		<typeAlias type="com.twoX.agit.member.model.vo.Attendance" alias="Attendance"/>
 		<typeAlias type="com.twoX.agit.chat.Chat" alias="Chat"/>
-		
+		<typeAlias type="com.twoX.agit.member.model.vo.HomeworkFile" alias="HomeworkFile" />
 	</typeAliases>
 
 

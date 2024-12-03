@@ -20,7 +20,7 @@
 <jsp:include page="../common/teacher_menubar.jsp" />
    
         <div class="whole_body">
-        	<form action="updateHomework" method="POST">
+        	<form action="updateHomework" method="POST" enctype="multipart/form-data">
 
             <div class="use-body">
                 <div class="subject-name"> <input type="hidden" name="hmTitle" value="${hmTitle}">${hmTitle}</div>
@@ -44,22 +44,39 @@
                 <div id="enroll_content">
                     <textarea id="en_content" name="hmContent">${hmContent}</textarea>
                 </div>
+                
+                <!-- <img src="<c:url value='${changeName}' />" /> -->
 
                 <div class="file-attachment">
                     <label for="file-upload" class="custom-file-upload">파일 첨부</label>
-                    <span class="file-name" id="file-name">선택된 파일 없음</span>
-                    <input type="file" id="file-upload" class="file-upload">
+                    <span class="file-name" id="file-name">        
+                    <!-- 파일이 선택된 경우 changeName을 출력하고, 선택되지 않은 경우 "선택된 파일 없음"을 출력 -->
+				        <c:choose>
+				            <c:when test="${not empty changeName}">
+				                ${changeName}
+				            </c:when>
+				            <c:otherwise>
+				               	 선택된 파일 없음
+				            </c:otherwise>
+				        </c:choose>
+			        </span>
+			        <input type="hidden" name="changeName" value="${changeName}">
+                    <input type="file" id="file-upload" name="fileupload" class="file-upload">
                 </div>
             </div>
             
+            
             <div class="real-foot">
                 <button class="foot-first">목록으로</button>
+                <input type="hidden" name="boNo" value="${boNo}" >
                 <button type="submit" class="foot-second">수정</button>
             </form>
                 
 			<!-- 삭제 버튼을 포함한 폼 -->
 			<form method="POST" action="deleteHomework">
+				<input type="hidden" name="boNo" value="${boNo}" >
 			    <input type="hidden" name="hmTitle" value="${hmTitle}">
+			    <input type="hidden" name="changeName" value="${changeName}">
 			    <button type="submit" class="foot-third">삭제</button> 
 			</form>
 

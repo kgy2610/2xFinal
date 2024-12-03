@@ -64,11 +64,28 @@ public class TeacherServiceImpl  implements TeacherService{
 			String dueDate) {
 		return teacherDao.enrollHomework(sqlSession, tcId, classCode, title, subject, content, dueDate);
 	}
+	
+	// 가장 최근 숙제 조회
+	public int getRecentHomeworkBoNo(String tcId) { // 가장 최근 등록된 BO_NO 가져오기
+		return teacherDao.selectRecentHomeworkBoNo(sqlSession, tcId);
+	}
+	
+	// 파일 업로드
+	@Override
+	public int uploadHomeworkFile(int boNo, String originName, String changeName) {
+		return teacherDao.uploadHomeworkFile(sqlSession, boNo, originName, changeName);
+	}
 
 	// 숙제 조회
 	@Override
 	public Homework selectHomework(int bno) {
 		return teacherDao.selectHomework(sqlSession, bno);
+	}
+	
+	// 파일 삭제
+	@Override
+	public int deleteFile(int boNo, String changeName) {
+		return teacherDao.deleteFile(sqlSession, boNo, changeName);
 	}
 
 	// 숙제 삭제
@@ -81,6 +98,12 @@ public class TeacherServiceImpl  implements TeacherService{
 	@Override
 	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
 		return teacherDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
+	}
+	
+	// 숙제 파일 수정
+	@Override
+	public int updateHomeworkFile(int boNo, String originName, String newFileName, String changeName) {
+		return teacherDao.updateHomeworkFile(sqlSession, boNo, originName, newFileName, changeName);
 	}
 
 	// 해당 숙제 페이지로 이동

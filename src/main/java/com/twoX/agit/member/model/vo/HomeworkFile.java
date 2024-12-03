@@ -1,4 +1,3 @@
-
 package com.twoX.agit.member.model.vo;
 
 import java.sql.Date;
@@ -16,18 +15,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Homework {
+public class HomeworkFile {
 	private int boNo;
-	private String tcId;
-	private String classCode;
-	private String hmTitle;
-	private Date deadLine;
-	private String hmContent;
-	private Date createDate;
-	private String subject;
-	private String status;
-	private int score;
-	
 	private String originName;
 	private String changeName;
+
 }
