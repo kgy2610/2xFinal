@@ -12,6 +12,15 @@
 		<result column="HM_CONTENT" property="hmContent" />
 		<result column="CREAT_DATE" property="createDate" />
 		<result column="SUBJECT" property="subject" />
+		
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+	</resultMap>
+	
+	<resultMap type="TeacherHomeworkFile" id="HomeworkFileResultSet">
+		<result column="BO_NO" property="boNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
 	</resultMap>
 	
 	<!--  게시글 총 갯수 조회  -->
@@ -21,12 +30,17 @@
 	</select>
 	  
 	<!--  숙제 리스트 조회  -->
-	<select id="selectAllList" resultType="Homework">
-		SELECT BO_NO bNO, TC_ID tcId, CLASS_CODE classCode, HM_TITLE hmTitle, DEADLINE deadLine, HM_CONTENT hmContent, CREAT_DATE createDate, SUBJECT subject 
-		FROM HOMEWORK 
-		WHERE TC_ID = #{tcId} ORDER BY BO_NO ASC 
-	</select>
-	 
+<select id="selectAllList" resultType="Homework">
+    SELECT h.BO_NO boNO, h.TC_ID tcId, h.CLASS_CODE classCode, h.HM_TITLE hmTitle, 
+           h.DEADLINE deadLine, h.HM_CONTENT hmContent, h.CREAT_DATE createDate, 
+           h.SUBJECT subject, f.ORIGIN_NAME originName, f.CHANGE_NAME changeName
+    FROM HOMEWORK h
+    LEFT JOIN HOMEWORK_FILE f ON h.BO_NO = f.BO_NO
+    WHERE h.TC_ID = #{tcId}
+    ORDER BY h.BO_NO ASC
+</select>
+
+
 	<!--  숙제 등록  -->
 	<insert id="insertHomework" parameterType="map">
 		INSERT INTO HOMEWORK 
@@ -34,13 +48,41 @@
 		VALUES 
 		(SEQ_HOMEWORK_BOARD.NEXTVAL, #{tcId}, #{classCode}, #{hmTitle}, #{deadLine}, #{hmContent}, SYSDATE, #{subject})
 	</insert>
+	
+	<!-- 최근 숙제 조회 -->
+	<select id="selectRecentHomeworkBoNo" parameterType="string" resultType="int">
+		SELECT BO_NO
+		FROM (
+		    SELECT BO_NO
+		    FROM HOMEWORK
+		    WHERE TC_ID = #{tcId}
+		    ORDER BY BO_NO DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 파일 업로드 -->
+	<insert id="uploadHomeworkFile" parameterType="map">
+	    INSERT INTO HOMEWORK_FILE 
+	    (BO_NO, ORIGIN_NAME, CHANGE_NAME) 
+	    VALUES 
+	    (#{boNo}, #{originName}, #{changeName})
+	</insert>
+	
 	  
 	<!--  숙제 전체 조회  -->
 	<select id="selectHomework" resultMap="HomeworkResultSet"> 
 		SELECT BO_NO, TC_ID, CLASS_CODE, HM_TITLE, DEADLINE, HM_CONTENT, CREATE_DATE, SUBJECT 
 		FROM HOMEWORK 
-		WHERE BO_NO = #{bno} 
+		WHERE BO_NO = #{bNo} 
 	</select>
+	
+	<!-- 파일 삭제 -->
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM HOMEWORK_FILE
+		WHERE BO_NO = #{boNo} AND CHANGE_NAME = #{changeName}
+	</delete>
+	
 	
 	<!--  숙제 삭제  -->
 	<delete id="deleteHomework" parameterType="String"> 
@@ -51,8 +93,15 @@
 	<!--  숙제 수정  -->
 	<update id="updateHomework" parameterType="map">
 		UPDATE HOMEWORK
-		SET SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent} 
+		SET SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent}
 		WHERE HM_TITLE = #{hmTitle} 
+	</update>
+	
+	<!-- 숙제 파일 수정 -->
+	<update id="updateHomeworkFile" parameterType="map">
+		UPDATE HOMEWORK_FILE
+		SET ORIGIN_NAME = #{originName}, CHANGE_NAME = #{newFileName}
+		WHERE BO_NO = #{boNo}
 	</update>
 	 
 	<!--  과목별 숙제 리스트 조회  -->
