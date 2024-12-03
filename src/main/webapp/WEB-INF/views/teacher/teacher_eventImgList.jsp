@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행사사진</title>
     
-	<link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_myPage.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacher_EventImgList.css'/>">
     <style>
 
     </style>

@@ -179,7 +179,16 @@ public class StudentController {
 			session.setAttribute("alertMsg", "수정실패");
 			return "student/myPage";
 		}
+
+
 	}
+
+//	}
+
+	
+
+	
+
 	
 // =================================== 방과후 ===================================
 	
