@@ -1,7 +1,5 @@
 package com.twoX.agit.student.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,22 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class HomeworkSubmit {
-	private String stuId;
+public class HomeworkFile {
 	private int boNo;
-	private String hmStuContent;
-	private int score;
-	private String tcComment;
-	private Date createDate;
-	private String status;
-	
 	private String originName;
 	private String changeName;
-	private String filePath;
 	
-	private String classCode;
-	private String hmTitle;
-	private String subject;
-	private Date deadLine;
-	private String hmContent;
+	private String filePath;
 }

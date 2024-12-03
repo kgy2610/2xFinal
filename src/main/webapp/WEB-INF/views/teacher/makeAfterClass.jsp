@@ -7,15 +7,17 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교직원 방과후 개설 전</title>
-    <link rel="stylesheet"
-	href="<c:url value='/resources/css/teacher/madeAfterSchool.css'/>">
+    <title>선생님 방과후 개설</title>
+    
+    <link rel="stylesheet" href="<c:url value='/resources/css/teacher/madeAfterSchool.css'/>">
+	
+	<script src="<c:url value='/resources/js/teacher/makeAfterClass.js'/>"></script>
 </head>
 <body>
     <jsp:include page="../common/teacher_menubar.jsp" />
 
     <div class="whole_body">
-         <img src="<c:url value='/resources/img/teacher/free-sticker-keyboard-12140857.png'/>">
+        <img src="<c:url value='/resources/img/teacher/free-sticker-keyboard-12140857.png'/>">
         <h1>개설한 방과후가 없습니다.</h1>
 
         <form id="classForm" action="makeAfterClass.me" method="post">
@@ -35,6 +37,5 @@
             </div>
         </form>
     </div>
-    <script src="<c:url value='/resources/js/teacher/makeAfterClass.js'/>"></script>
 </body>
 </html>

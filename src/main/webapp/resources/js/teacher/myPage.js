@@ -1,3 +1,13 @@
+   //글자 수 제한
+   document.querySelectorAll(".body_title").forEach(function (element) {
+            const text = element.innerText;
+            if (text.length > 15) {
+                element.innerText = text.substring(0, 15) + "...";
+            }
+        });
+
+       
+   
     // 모달 열기
     function openInfoModal() {
         document.getElementById('noticeModal').style.display = 'block';
@@ -272,5 +282,8 @@ function closeAddMemoModal() {
             closePasswordModal();
             closeDeleteModal();
             closeAddNoticeModal();
+            closeAddMemoModal();
+            closeModifyMemoModal();
+            closeDeleteNoticeModal();
         }   
     }
