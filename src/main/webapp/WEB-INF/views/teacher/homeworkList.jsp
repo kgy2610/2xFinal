@@ -47,7 +47,7 @@
 			                <td>${homework.subject}</td>
 			                <td><a href="detailHomework?subject=${homework.subject}&hmTitle=${homework.hmTitle}&deadLine=${homework.deadLine}&hmContent=${homework.hmContent}">${homework.hmTitle}</a></td>
 			                <td>${homework.deadLine}</td>
-			                <td><a href="detailHomework?subject=${homework.subject}&hmTitle=${homework.hmTitle}&deadLine=${homework.deadLine}&hmContent=${homework.hmContent}"><img src="<c:url value='/resources/img/teacher/pencil.PNG'/>"></a></td>
+			                <td><a href="detailHomework?boNo=${homework.boNo}&subject=${homework.subject}&hmTitle=${homework.hmTitle}&deadLine=${homework.deadLine}&hmContent=${homework.hmContent}&changeName=${homework.changeName}"><img src="<c:url value='/resources/img/teacher/pencil.PNG'/>"></a></td>
 			            </tr>
         		   </c:forEach>
                 </tbody>
