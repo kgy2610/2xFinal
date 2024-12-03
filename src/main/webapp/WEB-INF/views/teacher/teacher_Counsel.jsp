@@ -61,34 +61,7 @@
                 <hr>
                 <div class="real-information-info" id="consultationList" >
                 	<table id="counselTable">
-                		<tr>
-                			<td>12:40/2층 교무실</td>
-                			<td>송혁규</td>
-                			<td>010-8424-8422</td>
-                			<td>awefawef</td>
-                		</tr>
-                		<tr>
-                			<td>12:40/2층 교무실</td>
-                			<td>송혁규</td>
-                			<td>010-8424-8422</td>
-                			<td>awefawef</td>
-                		</tr>
-                		<tr>
-                			<td>12:40/2층 교무실</td>
-                			<td>송혁규</td>
-                			<td>010-8424-8422</td>
-                			<td>awefawef</td>
-                		</tr><tr>
-                			<td>12:40/2층 교무실</td>
-                			<td>송혁규</td>
-                			<td>010-8424-8422</td>
-                			<td>awefawef</td>
-                		</tr><tr>
-                			<td>12:40/2층 교무실</td>
-                			<td>송혁규</td>
-                			<td>010-8424-8422</td>
-                			<td>awefawef</td>
-                		</tr>
+
                 		
                 	</table>
                 </div>
@@ -111,6 +84,27 @@
                             <button type="button" id="deleteBtn"
                                 style="background-color: red; color: white; margin-top: 10px; display: none;">삭제</button>
                         </form>
+                    </div>
+                </div>
+                <div id="Counselmodal" class="modal">
+                    <div class="modal-content">
+                        <form action="">
+                            <span class="close" id="closeBtn2">&times;</span>
+                            <table>
+                                <tr>
+                                    <td>자녀 이름</td>
+                                    <td><input type="text" id="consultationName2" style="width: 194px; height: 44px;" readonly/></td>
+                                </tr>
+                                <tr>
+                                    <td>전화번호</td>
+                                    <td><input type="text" id="consultationPhone2" readonly/></td>
+                                </tr>
+                            </table>
+                            <button type="button" id="deleteBtn2"
+                                style="background-color: red; color: white; margin-top: 10px;">일정취소</button>
+                        </form>
+                        <br>
+                        <div style="text-align: center;">※취소 전 부모님과 상의하시기 바랍니다※</div>
                     </div>
                 </div>
             </div>
@@ -166,6 +160,14 @@
 
             $('#calendar').on('click', 'td', function () {
                 const day = $(this).text();
+                $('#consultationTime').val('');
+                $('#consultationLocation').val('');
+                $('#deleteBtn').hide();
+                $('#saveBtn').off('click');
+                $('#saveBtn').text('저장');
+                $('#saveBtn').on('click', function () {
+                    writeSchedule();
+                });
                 if (day) {
                     const month = $('#monthSelect').val().padStart(2, '0');
                     const consultationDate = `${fixedYear}-${month}-${day.padStart(2, '0')}`;
@@ -181,10 +183,6 @@
 
             $('#saveBtn').on('click', function () {
                 writeSchedule();
-            });
-
-            $('#deleteBtn').on('click', function () {
-                deleteSchedule(); // Call delete function
             });
 
             $(window).on('click', function (event) {
@@ -236,10 +234,13 @@
         }
 
         function writeSchedule() {
+        	document.getElementById('')
             const consultationTime = $('#consultationTime').val(); // Get the selected consultation time
             const consultationLocation = $('#consultationLocation').val();
 
             if (!consultationTime || !consultationLocation) {
+            	console.log(consultationTime)
+            	console.log(consultationLocation)
                 alert('모든 필드를 채워주세요.'); // Alert if fields are empty
                 return;
             }
@@ -260,7 +261,7 @@
                 });
             const month = $('#monthSelect').val();
             const currentYear = new Date().getFullYear();
-            const selectDay = selectedCell.text().split(":")[0].length===3?selectedCell.text().substring(0,1):selectedCell.text().substring(0,2);
+            const selectDay = selectedCell.text().split(":")[0].length===1||selectedCell.text().split(":")[0].length===3?'0'+selectedCell.text().substring(0,1):selectedCell.text().substring(0,2);
             const CounselTime = currentYear +"-"+month+"-"+selectDay+" "+consultationTime+":00";
 			insertCounsel(CounselTime,consultationLocation);
             selectedCell.append(button); // Add button to selected cell
@@ -269,19 +270,8 @@
             $('#consultationLocation').val('');
             $('#deleteBtn').hide(); // Hide delete button after saving
         }
-
-        function deleteSchedule() {
-            if (selectedButton) {
-                selectedButton.remove(); // Remove the selected button from the cell
-                selectedButton = null; // Clear the reference to the selected button
-                $('#deleteBtn').hide(); // Hide delete button
-                $('#consultationTime').val(''); // Clear input fields
-                $('#consultationLocation').val('');
-            }
-        }
         
         function insertCounsel(consultationTime,consultationLocation){
-        	console.log(consultationTime)
         	$.ajax({
         		url: "insertCounsel",
         		data:{csDate : consultationTime,csLocation : consultationLocation},
@@ -300,9 +290,8 @@
         	document.getElementById('selectedDate').innerText = getTodayDate()
         	selectCounselList(getTodayDate())
         }
-        function selectSameDayCounsel(){
-        	
-        }
+        
+        
         function selectSameMonthCounsel(){
         	const month = $('#monthSelect').val();
         	const today = new Date();
@@ -313,10 +302,15 @@
         			const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
         			let cal = document.getElementById("cal");
         			let elements = cal.getElementsByTagName("td");
+        			let buttons = cal.querySelectorAll("td button");  // 모든 td 안의 모든 button 선택
+        			// 모든 button을 삭제
+        			buttons.forEach(button => {
+        			    button.remove();  // 각 버튼을 삭제
+        			});
             		for(let c of res){
             			for(let m of elements){
             				let to = today.getDate();
-            				if((m.innerText.split(":")[0].length===1||m.innerText.split(":")[0].length===3?'0'+m.innerText.substring(0,1):m.innerText.substring(0,2)) == c.csDate.substring(3,5)){
+            				if((m.innerText.split("\n")[0].length===1?'0'+m.innerText.substring(0,1):m.innerText.substring(0,2)) == c.csDate.substring(3,5)){
             					if(c.csDate.substring(3,5) < to){
             						m.innerHTML+="<button class='appointment-time cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
             					}else if(c.prId != null){
@@ -324,7 +318,7 @@
             					}else if(c.csDate.substring(0,2)!== currentMonth){
             						m.innerHTML+="<button class='appointment-time cs_nubutton'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"</button>"
             					}else{
-            						m.innerHTML+="<button class='appointment-time cs_button'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"<input type='hidden' id='bt_cs_no' value='"+c.csNo+"'></button>"
+            						m.innerHTML+="<button class='appointment-time cs_button' onclick='openCounselModal(this)'>"+c.csDate.substring(6,11)+" <br> "+c.csLocation+"<input type='hidden' id='bt_cs_no' value='"+c.csNo+"'></button>"
             					}
             				}  
             			}
@@ -335,16 +329,114 @@
         		}
         	})
         }
+        function openCounselModal(el){
+        	selectedCell = $(el).parent();
+        	$('#saveBtn').text('수정');
+            $('#consultationTime').val(el.innerText.split("\n")[0]);
+            $('#consultationLocation').val(el.innerText.split("\n")[1]);
+        	$('#deleteBtn').show();
+        	$('#saveBtn').off('click');
+            $('#saveBtn').on('click', function () {
+                modifySchedule(el.querySelector('input').value);
+            });
+            $('#deleteBtn').off('click');
+            $('#deleteBtn').on('click', function () {
+                deleteSchedule(el.querySelector('input').value);
+            });
+        	$('#modal').css('display', 'block');
+        	event.stopPropagation();
+        }
+        
+        function modifySchedule(csNo){
+        	const Time = document.getElementById('consultationTime').value+":00"
+        	const Location = document.getElementById('consultationLocation').value
+        	$.ajax({
+        		url:'updateCounselInfo',
+        		data:{csNo:csNo,csDate:Time,csLocation:Location},
+        		success:function(res){
+        			if(res === 0){
+        				alert("상담일정 수정에 실패하였습니다.");
+        			}else{
+        				alert("상담일정 수정되었습니다.");
+        			}
+        			$('#modal').css('display', 'none');
+        			selectSameMonthCounsel();
+        		},
+        		error:function(){
+        			console.log("일단 왜인지는 모르겠는데 안됨");
+        		}
+        	})
+        }
+        
+        function deleteSchedule(csNo){
+        	$.ajax({
+        		url:'deleteCounselInfo',
+        		data:{csNo:csNo},
+        		success:function(res){
+        			if(res === 0){
+        				alert("상담일정 삭제에 실패하였습니다.");
+        			}else{
+        				alert("상담일정 삭제되었습니다.");
+        			}
+        			
+        			$('#modal').css('display', 'none');
+        			selectSameMonthCounsel();
+        		},
+        		error:function(){
+        			console.log("일단 왜인지는 모르겠는데 안됨");
+        		}
+        	})
+        }
         function selectCounselList(selectDay){
+        	if(selectDay===null){
+        		selectDay = document.getElementById("selectedDate").innerText;
+        	}
         	$.ajax({
         		url: 'selectCounselList',
-        		data: {selectDay:selectDay},
-        		seccess:function(res){
+        		data: {csDate:selectDay},
+        		success:function(res){
         			let str='';
         			for(let c of res){
-        				//str += "<tr><td>"++"</td><td>"++"</td><td>"++"</td><td>"++"</td></tr>"	
+        				str += "<tr onclick='openCounselModal2(\""+c.prId+"\",\""+c.tcId+"\",\""+c.csNo+"\")'><td>"+c.csDate.substring(11,16)+" / "+c.csLocation+"</td><td>"+c.prId+"</td><td>"+c.tcId+"</td><td>"+c.csContent+"</td></tr>"	
         			}
 					document.getElementById('counselTable').innerHTML = str;        			
+        		},
+        		error:function(){
+        			console.log("일단 왜인지는 모르겠는데 안됨");
+        		}
+        	})
+        }
+        function openCounselModal2(childeName,phone,csNo){
+        	document.getElementById('consultationName2').value=childeName
+        	document.getElementById('consultationPhone2').value=phone
+        	$('#Counselmodal').css('display','block');
+            $('#deleteBtn2').off('click');
+            $('#deleteBtn2').on('click', function () {
+            	deleteParentsCounsel(csNo);
+            });
+            $('#closeBtn2').on('click', function () {
+                $('#Counselmodal').css('display', 'none');
+            });
+            $(window).on('click', function (event) {
+                if ($(event.target).is('#Counselmodal')) {
+                    $('#Counselmodal').css('display', 'none');
+                }
+            });
+        }
+        function deleteParentsCounsel(csNo){
+        	$.ajax({
+        		url:'deleteParentsCounsel',
+        		data:{csNo:csNo},
+        		success:function(res){
+        			if(res === 0){
+        				alert("상담일정 삭제에 실패하였습니다.");
+        			}else{
+        				alert("상담일정 삭제되었습니다.");
+        			}
+        			
+        			$('#Counselmodal').css('display', 'none');
+        			selectSameMonthCounsel();
+        			selectCounselList();
         		},
         		error:function(){
         			console.log("일단 왜인지는 모르겠는데 안됨");
@@ -359,6 +451,25 @@
 
             return year+'-'+month+'-'+day;
         }
+        
+        const targetDiv = document.getElementById("selectedDate");
+
+        // 2. MutationObserver 생성
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === "childList" || mutation.type === "characterData") {
+                	selectCounselList(targetDiv.innerText)
+                }
+            }
+        });
+
+        const config = {
+        	    childList: true, // 자식 노드의 추가/제거 감지
+        	    subtree: true,   // 하위 노드의 변경도 감지
+        	    characterData: true // 텍스트 내용 변경 감지
+        	};
+
+        observer.observe(targetDiv, config);
         
     </script>
 </body>
