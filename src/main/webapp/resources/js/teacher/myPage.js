@@ -1,11 +1,12 @@
-   //글자 수 제한
-   document.querySelectorAll(".body_title").forEach(function (element) {
-            const text = element.innerText;
-            if (text.length > 15) {
-                element.innerText = text.substring(0, 15) + "...";
-            }
-        });
-
+ //글자 수 제한
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".body_title").forEach(function (element) {
+        const text = element.innerText;
+        if (text.length > 15) {
+            element.innerText = text.substring(0, 15) + "...";
+        }
+    });
+});
        
    
     // 모달 열기

@@ -112,6 +112,9 @@
     font-weight: normal;
     margin-left: 70px;
     color: #A98467;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .body_writer{
