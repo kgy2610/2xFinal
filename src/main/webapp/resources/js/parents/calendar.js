@@ -20,12 +20,14 @@
 
     $('#closeBtn').on('click', function() {
         $('#modal').css('display', 'none'); // 모달 닫기
+        $('#adviceContent').val('');
     });
 
 
     $(window).on('click', function(event) {
         if ($(event.target).is('#modal')) {
             $('#modal').css('display', 'none'); // 모달 외부 클릭 시 닫기
+            $('#adviceContent').val('');
         }
     });
 });
@@ -99,6 +101,7 @@ function selectSameMonthCounsel(){
 			let elements = cal.getElementsByTagName("td");
     		for(let c of res){
     			for(let m of elements){
+    				console.log(m.innerText.split("\n")[0]);
     				let to = today.getDate();
     				if((m.innerText.split(":")[0].length===1||m.innerText.split(":")[0].length===3?'0'+m.innerText.substring(0,1):m.innerText.substring(0,2)) == c.csDate.substring(3,5)){
     					if(c.csDate.substring(3,5) < to){
