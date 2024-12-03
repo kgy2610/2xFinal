@@ -6,9 +6,7 @@
    margin-bottom: 98px;
    font-size: 25px;
    color: #A98467;
-   border: #A98467 solid 2px;
-   border-radius: 30px;
-   flex-direction: column;
+   display:flex;
 }
 
 /* 마이페이지 */
