@@ -95,5 +95,17 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.updateStuHomework(sqlSession, hm);
 	}
 
+	// 숙제 점수 확인하기
+	@Override
+	public ArrayList<Double> selectStuScore(String stuId) {
+		return studentDao.selectStuScore(sqlSession, stuId);
+	}
+	
+	// 숙제 점수 평균 확인하기
+	@Override
+	public ArrayList<Double> selectAVGstuScore(String classCode) {
+		return studentDao.selectAVGstuScore(sqlSession, classCode);
+	}
+
 	
 }
