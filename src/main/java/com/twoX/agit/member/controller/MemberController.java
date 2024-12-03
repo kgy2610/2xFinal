@@ -520,6 +520,7 @@ public class MemberController {
 	     	
 	     	// 상담일정 리스트 가져오기
 	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
+	     	System.out.println(teacherCounsel);
 	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
