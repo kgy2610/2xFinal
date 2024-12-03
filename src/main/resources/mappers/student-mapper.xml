@@ -135,7 +135,44 @@
 	<!-- 학생 숙제 수정 -->
 	<update id="updateStuHomework">
 		UPDATE HM_SUBMIT
-		   SET HM_STUCONTENT = #{hmStuContent},
+		   SET HM_STUCONTENT = #{hmStuContent}
 		 WHERE BO_NO = #{boNo}
 	</update> 
+	
+	<!-- 학생 점수 가져오기 -->
+	<select id="selectStuScore" resultType="Double">
+		SELECT AVG(SCORE) as AVG
+		  FROM HM_SUBMIT
+		  LEFT JOIN HOMEWORK USING(BO_NO)
+		 WHERE STU_ID = #{stuId}
+		 GROUP BY SUBJECT
+		 ORDER BY CASE HOMEWORK.SUBJECT
+		  WHEN '국어' THEN 1
+		  WHEN '수학' THEN 2
+		  WHEN '영어' THEN 3
+		  WHEN '과학' THEN 4
+		  WHEN '사회' THEN 5
+		  WHEN '미술' THEN 6
+		  WHEN '체육' THEN 7
+		  ELSE 8
+		   END
+	</select>
+	
+	<!-- 학급 평균 점수 가져오기 -->
+	<select id="selectAVGstuScore" resultType="Double">
+		SELECT AVG(SCORE) as AVG
+		  FROM HM_SUBMIT
+		  LEFT JOIN HOMEWORK USING(BO_NO)
+		 WHERE CLASS_CODE = #{classCode}
+		 GROUP BY CASE HOMEWORK.SUBJECT
+		  WHEN '국어' THEN 1
+		  WHEN '수학' THEN 2
+		  WHEN '영어' THEN 3
+		  WHEN '과학' THEN 4
+		  WHEN '사회' THEN 5
+		  WHEN '미술' THEN 6
+		  WHEN '체육' THEN 7
+		  ELSE 8
+		   END
+	</select>
  </mapper>

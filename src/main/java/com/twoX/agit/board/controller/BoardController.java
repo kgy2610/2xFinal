@@ -144,7 +144,7 @@ public class BoardController {
 		return "parents/parents_score";
 	}
 	
-	//성적페이지 과목별 점수
+	//성적페이지 과목별별별별별별별 점수
 	@ResponseBody
 	@RequestMapping(value="score.list", produces="application/json; charset-UTF-8")
 	public String ajaxSelectReplyList(String subject,HttpSession session) {

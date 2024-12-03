@@ -32,6 +32,12 @@ public interface StudentService {
 	// 숙제 수정하기
 	int updateHomework(HomeworkSubmit hm);
 
+	// 학생 숙제 점수 조회
+	ArrayList<Double> selectStuScore(String stuId);
+	
+	// 학생 점수 평균 구하기
+	ArrayList<Double> selectAVGstuScore(String classCode);
+	
 	//방과후
 	int updateAfterschoolCode(Map<String, String> map);
 
@@ -42,5 +48,7 @@ public interface StudentService {
 	AfterSchool afterschool(String code);
 
 	String afterschoolTeacher(String tcId);
+
+
 
 }
