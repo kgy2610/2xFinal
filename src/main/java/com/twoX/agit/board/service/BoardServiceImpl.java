@@ -192,6 +192,37 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.updateImgBoard(sqlSession,eib);
 	}
 	
+	//선생님 상담일정 추가
+	@Override
+	public int insertCounsel(Counsel c) {
+		return boardDao.insertCounsel(sqlSession,c);
+	}
+
+	//선생님 상담일정 조회
+	@Override
+	public ArrayList<Counsel> selectCounselList(Counsel c) {
+		return boardDao.selectCounselList(sqlSession,c);
+	}
+
+	//선생님 상담일정 수정
+	@Override
+	public int updateCounselInfo(Counsel c) {
+		return boardDao.updateCounselInfo(sqlSession,c);
+	}
+	
+	
+	//선생님 상담일정 삭제
+	@Override
+	public int deleteCounselInfo(Counsel c) {
+		return boardDao.deleteCounselInfo(sqlSession,c);
+	}
+	
+	//선생님 상담일정 취소
+	@Override
+	public int deleteParentsCounsel(Counsel c) {
+		return boardDao.deleteParentsCounsel(sqlSession,c);
+	}
+	
 	
 	
 

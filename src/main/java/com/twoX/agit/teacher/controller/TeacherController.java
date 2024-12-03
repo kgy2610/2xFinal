@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.twoX.agit.board.model.vo.HmSubmit;
+import com.twoX.agit.common.template.Template;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
@@ -141,7 +142,7 @@ public class TeacherController {
 		int listCount = teacherService.getListCount(); // 총 게시글 수를 구하는 메서드 호출
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
-
+		
 		model.addAttribute("homeworkList", homeworkList);
 		model.addAttribute("listCount", listCount);
 
@@ -156,7 +157,7 @@ public class TeacherController {
 
 	// 숙제 등록페이지
 	@RequestMapping("enrollHomework")
-	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile file,  HttpSession session, Model model) {
+	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile upfile,  HttpSession session, Model model) {
 		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
@@ -170,6 +171,16 @@ public class TeacherController {
 		String classCode = loginTeacher.getClassCode();
 
 		int result = teacherService.enrollHomework(tcId, classCode, title, subject, content, dueDate);
+		int boNo = teacherService.getRecentHomeworkBoNo(tcId); // 가장 최근 등록된 BO_NO 가져오기
+		
+		// 파일이 있는 경우 처리
+	    if (!upfile.getOriginalFilename().equals("") && result > 0) {
+	        String changeName = Template.saveFile(upfile, session, "/resources/file/");
+	        String originName = upfile.getOriginalFilename();
+
+	        // 파일 정보 DB 저장
+	        int fileResult = teacherService.uploadHomeworkFile(boNo, originName, "/resources/file/" + changeName);
+	    }
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);
@@ -179,20 +190,20 @@ public class TeacherController {
 
 	// 숙제 상세 페이지
 	@RequestMapping("detailHomework")
-	public String homeworkDatail(String subject, String hmTitle, String hmContent, String deadLine, Model model) {
-
+	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String changeName, Model model) {
+		model.addAttribute("boNo", boNo);
 		model.addAttribute("subject", subject);
 		model.addAttribute("hmTitle", hmTitle);
 		model.addAttribute("hmContent", hmContent);
 		model.addAttribute("deadLine", deadLine);
+		model.addAttribute("changeName", changeName);
 
 		return "teacher/homeworkDetail";
 	}
 
 	// 숙제 삭제
 	@RequestMapping("deleteHomework")
-	public String deleteHomework(String hmTitle, HttpSession session, Model model) {
-		
+	public String deleteHomework(int boNo, String hmTitle, String changeName, HttpSession session, Model model) {		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
 			return "member/login_teacher";
@@ -203,6 +214,7 @@ public class TeacherController {
 		
 		String tcId = teacher.getTcId();
 
+		int res1 = teacherService.deleteFile(boNo, changeName);
 		int result = teacherService.deleteHomework(hmTitle);
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
@@ -213,8 +225,7 @@ public class TeacherController {
 
 	// 숙제 수정하기
 	@RequestMapping("updateHomework")
-	public String updateHomework(String hmTitle, String subject, String deadLine, String hmContent, HttpSession session, Model model) {
-		
+	public String updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent, String changeName, MultipartFile fileupload,  HttpSession session, Model model) {
 		if (!LoginCheckService.checkLogin(session)) {
 	        session.setAttribute("loginMessage", "로그인이 필요합니다.");
 	        return "member/login_teacher"; // 로그인되지 않았으면 로그인 페이지로 리다이렉트
@@ -224,8 +235,19 @@ public class TeacherController {
 		Teacher teacher = (Teacher) session.getAttribute("loginUser");
 		
 		String tcId = teacher.getTcId();
-
+		
 		int result = teacherService.updateHomework(hmTitle, subject, deadLine, hmContent);
+		
+		// 파일이 새로 업로드된 경우 처리
+	    if (!fileupload.getOriginalFilename().equals("") && result > 0) {
+	    	// 파일 저장
+	        String newFileName = Template.saveFile(fileupload, session, "/resources/file/");
+	        String originName = fileupload.getOriginalFilename();
+
+	        // 파일 정보 DB 저장
+	        int fileResult = teacherService.updateHomeworkFile(boNo, originName, newFileName, "/resources/file/" + changeName);
+	    }
+		
 		
 		ArrayList<Homework> homeworkList = teacherService.getAllHomework(tcId);
 		model.addAttribute("homeworkList", homeworkList);

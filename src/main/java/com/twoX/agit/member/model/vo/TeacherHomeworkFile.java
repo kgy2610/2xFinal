@@ -1,5 +1,6 @@
+package com.twoX.agit.member.model.vo;
 
-package com.twoX.agit.board.model.vo;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -14,12 +15,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Counsel {
-	private int csNo;
-	private String csDate;
-	private String tcId;
-	private String prId;
-	private String csLocation;
-	private String csContent;
-	private String prName;
+public class TeacherHomeworkFile {
+	private int boNo;
+	private String originName;
+	private String changeName;
+
 }

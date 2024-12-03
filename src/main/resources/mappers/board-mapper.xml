@@ -40,7 +40,7 @@
 		<result column="CS_DATE" property="csDate" />
 		<result column="TC_ID" property="tcId" />
 		<result column="PR_ID" property="prId" />
-		<result column="CS_LOCATION" property="scLocation" />
+		<result column="CS_LOCATION" property="csLocation" />
 		<result column="CS_CONTENT" property="csContent" />
 		<result column="PR_NAME" property="prName" />
  	</resultMap>
@@ -143,6 +143,7 @@
 		FROM COUNSEL 
 		WHERE TC_ID = #{tcId}
 		  AND TO_CHAR(CS_DATE, 'MM') = #{month}
+		ORDER BY CS_DATE
 	</select>
 	
 	<!-- 부모님 상담 신청 -->
@@ -367,4 +368,38 @@
     WHERE c.TC_ID = #{tcId}
 </select>
 
+<insert id="insertCounsel">
+	INSERT INTO COUNSEL(CS_DATE,TC_ID,CS_LOCATION)
+	VALUES(TO_DATE(#{csDate},'YYYY-MM-DD HH24:MI:SS'),#{tcId},#{csLocation})
+</insert>
+
+<select id="selectCounselList" resultMap="CounselResultSet">
+	SELECT C.CS_NO,TO_CHAR(C.CS_DATE,'YYYY-MM-DD HH24:MI') AS CS_DATE,P.PHONE AS TC_ID,S.STU_NAME AS PR_ID,C.CS_LOCATION,C.CS_CONTENT
+	FROM COUNSEL C
+	LEFT JOIN PARENTS P ON P.PR_ID=C.PR_ID
+	LEFT JOIN STUDENT S ON C.PR_ID=S.STU_ID
+	WHERE TRUNC(CS_DATE)=TO_DATE(#{csDate},'YYYY-MM-DD')
+	AND TC_ID=#{tcId}
+	AND C.PR_ID IS NOT NULL
+</select>
+
+<update id="updateCounselInfo">
+	UPDATE COUNSEL
+	SET CS_DATE = TO_DATE(TO_CHAR(CS_DATE, 'YYYY-MM-DD') || #{csDate}, 'YYYY-MM-DD HH24:MI:SS'),
+		CS_LOCATION = #{csLocation}
+	WHERE CS_NO = #{csNo}
+</update>
+
+<delete id="deleteCounselInfo">
+	DELETE
+	FROM COUNSEL
+	WHERE CS_NO = #{csNo}
+</delete>
+
+<update id="deleteParentsCounsel">
+	UPDATE COUNSEL
+	SET PR_ID = NULL,
+		CS_CONTENT = NULL
+	WHERE CS_NO = #{csNo}
+</update>
  </mapper>

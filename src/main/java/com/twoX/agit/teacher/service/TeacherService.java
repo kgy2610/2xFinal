@@ -33,15 +33,27 @@ public interface TeacherService {
 
 	// 숙제 등록
 	int enrollHomework(String tcId, String classCode, String title, String subject, String content, String dueDate);
+	
+	// 최근 숙제 번호 조회
+	int getRecentHomeworkBoNo(String tcId); // 가장 최근 등록된 BO_NO 가져오기
+	
+	// 파일 추가
+	int uploadHomeworkFile(int boNo, String originName, String changeName);
 
 	// 숙제 조회
 	Homework selectHomework(int bno);
+	
+	// 파일 삭제
+	int deleteFile(int boNo, String changeName);
 
 	// 숙제 삭제
 	int deleteHomework(String hmTitle);
 
 	// 숙제 수정
 	int updateHomework(String hmTitle, String subject, String deadLine, String hmContent);
+	
+	// 숙제 파일 수정
+	int updateHomeworkFile(int boNo, String originName, String newFileName, String changeName);
 	
 	// 해당 숙제 페이지로 이동
 	ArrayList<Homework> selectSubject(String classCode);

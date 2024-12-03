@@ -38,6 +38,7 @@ import com.twoX.agit.board.model.vo.Notice;
 import com.twoX.agit.board.model.vo.ParentsBoard;
 import com.twoX.agit.board.model.vo.Reply;
 import com.twoX.agit.board.service.BoardService;
+import com.twoX.agit.chat.Chat;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.Parents;
@@ -69,7 +70,6 @@ public class BoardController {
 	  @GetMapping(value="BoMealService", produces="application/json; charset=UTF-8")
 	  public String getMealInfo(HttpSession session) throws IOException {
 		 Teacher t = (Teacher)session.getAttribute("teacher");
-		 System.out.println(t);
 		 String schoolCode = t.getClassCode().substring(0,7);
 		 String oecode = boardService.selectOeCode(schoolCode);
 	     String url = "https://open.neis.go.kr/hub/mealServiceDietInfo";
@@ -232,10 +232,14 @@ public class BoardController {
 	@RequestMapping(value = "selectSameMonthCounsel", produces = "application/json; charset-UTF-8")
 	public String selectSameMonthCounsel(String month, HttpSession session) {
 		Teacher t = (Teacher) session.getAttribute("teacher");
+		if(t==null) {
+			t = (Teacher)session.getAttribute("loginUser");
+		}
 		Map<String, String> params = new HashMap();
 		params.put("tcId", t.getTcId());
 		params.put("month", month);
 		ArrayList<Counsel> list = boardService.selectSameMonthCounsel(params);
+		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 
@@ -434,7 +438,7 @@ public class BoardController {
 		}	
 	}
 	
-	//부모님 커뮤니티 사진올릴때
+	// 커뮤니티 사진올릴때
 	@ResponseBody
 	@PostMapping("upload")
 	public String upload(List<MultipartFile> fileList, HttpSession session) {
@@ -527,5 +531,60 @@ public class BoardController {
 			return "redirect:/all_community";
 		}
 		
+	}
+	
+	//선생님 상담일정
+	@RequestMapping("teacherCounsel")
+	public String teacherCounsel() {
+		return "teacher/teacher_Counsel";
+	}
+	
+	//선생님 상담일정 불러오기
+	@ResponseBody
+	@RequestMapping(value ="selectCounselList", produces = "application/json; charset-UTF-8")
+	public String selectCounselList(Counsel c,HttpSession session) {
+		Teacher t = (Teacher)session.getAttribute("loginUser");
+		c.setTcId(t.getTcId());
+		ArrayList<Counsel> list = boardService.selectCounselList(c);
+		for(Counsel co : list) {
+			String part1 = co.getTcId().substring(0, 3);
+			String part2 = co.getTcId().substring(3, 7);
+			String part3 = co.getTcId().substring(7);
+			co.setTcId(part1 + "-" + part2 + "-" + part3);
+		}
+		return new Gson().toJson(list);
+	}
+	//선생님 상담일정 추가
+	@ResponseBody
+	@RequestMapping("insertCounsel")
+	public int insertCounsel(Counsel c, HttpSession session) {
+		String tcId = ((Teacher)session.getAttribute("loginUser")).getTcId();
+		c.setTcId(tcId);
+		int result = boardService.insertCounsel(c);
+		return result;
+	}
+	
+	//선생님 상담일정 수정
+	@ResponseBody
+	@RequestMapping("updateCounselInfo")
+	public int updateCounselInfo(Counsel c, HttpSession session) {
+		int result = boardService.updateCounselInfo(c);
+		return result;
+	}
+	
+	//선생님 상담일정 삭제
+	@ResponseBody
+	@RequestMapping("deleteCounselInfo")
+	public int deleteCounselInfo(Counsel c, HttpSession session) {
+		int result = boardService.deleteCounselInfo(c);
+		return result;
+	}
+	
+	//선생님 상담일정 취소
+	@ResponseBody
+	@RequestMapping("deleteParentsCounsel")
+	public int deleteParentsCounsel(Counsel c, HttpSession session) {
+		int result = boardService.deleteParentsCounsel(c);
+		return result;
 	}
 }

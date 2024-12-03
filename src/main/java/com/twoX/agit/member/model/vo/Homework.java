@@ -27,4 +27,7 @@ public class Homework {
 	private String subject;
 	private String status;
 	private int score;
+	
+	private String originName;
+	private String changeName;
 }
