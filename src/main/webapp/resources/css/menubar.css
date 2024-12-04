@@ -701,3 +701,8 @@ a {
 .confirm-password-button:hover {
     background-color: #C4D79D; /* 호버 시 색상 */
 }
+
+#selected{
+	color: #7C604B;
+	-webkit-text-stroke: 0.5px;
+}

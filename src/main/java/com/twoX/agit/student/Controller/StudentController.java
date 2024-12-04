@@ -67,6 +67,7 @@ public class StudentController {
 	    
 	    ArrayList<Homework> list = studentService.selectStudentHomeworkList(loginStudent.getClassCode(), loginStudent.getStuId(), pi);
 	    session.setAttribute("homeworkList", list);
+	    model.addAttribute("bbsId", "homework");
 	    model.addAttribute("pi", pi);
 	    
 	    return "student/homework"; // 숙제 리스트 페이지로 이동
@@ -107,6 +108,7 @@ public class StudentController {
 		
 		System.out.println("학생 점수 리스트: " + list);
 		session.setAttribute("stuScoreList", list);
+		model.addAttribute("bbsId", "homework");
 		
 		if (hm == null) {
 	        // hm_submit에 데이터가 없으면 제출 페이지로 이동
@@ -125,16 +127,18 @@ public class StudentController {
 	public String enrollHomeworkStu(@ModelAttribute Homework h,
 									@ModelAttribute HomeworkSubmit hm,
 									@RequestParam("upfile") MultipartFile upfile,
-									HttpSession session) {
-		System.out.println(hm);
-		System.out.println(hm.getHmStuContent());
+									HttpSession session,
+									Model model) {
+		model.addAttribute("bbsId", "homework");
+		
 		// 로그인 정보 확인
 		Student s = (Student) session.getAttribute("loginUser");
 		
 		hm.setStuId(s.getStuId());
 		hm.setStatus("Y");
-		System.out.println(hm);
+		
 		int result = studentService.insertStudentHomework(hm);
+		
 		
 		if(result > 0) {
 			return "redirect:/homework";
@@ -162,9 +166,8 @@ public class StudentController {
 		
 		model.addAttribute("npage", npage);
 		model.addAttribute("cpage", currentPage);
+		model.addAttribute("bbsId", "homework");
 		
-		System.out.println("npage OrName : " + npage.getOriginName());
-		System.out.println("napge ChName: " + npage.getChangeName());
 		return "student/homeworkConfirm";
 	}
 	
@@ -175,15 +178,17 @@ public class StudentController {
 		
 		session.setAttribute("npage", npage);
 		session.setAttribute("cpage", currentPage);
+		model.addAttribute("bbsId", "homework");
 		
 		return "student/modifyHomework";
 	}
 	
 	// 글 수정하기
 	@RequestMapping("update.homework_student")
-	public String updateStuAnswer(HomeworkSubmit hm, MultipartFile reupfile, HttpSession session) {
+	public String updateStuAnswer(HomeworkSubmit hm, MultipartFile reupfile, HttpSession session, Model model) {
 		Student loginUser = (Student)session.getAttribute("loginUser");
-		System.out.println("hm : " + hm);
+		
+		model.addAttribute("bbsId", "homework");
 		
 		int result = studentService.updateHomework(hm);
 		if(result > 0) {
@@ -209,6 +214,8 @@ public class StudentController {
 	//방과후 반 참가
     @RequestMapping("afterschoolStart.stu")
     public String afterschoolStartStudent(AfterSchoolStudent as, Student s, HttpSession session, Model model) {
+    	model.addAttribute("bbsId", "afterSchool");
+    	
         Student loginUser = (Student) session.getAttribute("loginUser");
         Map<String, String> map = new HashMap<>();
         String code = as.getCode();
@@ -235,7 +242,9 @@ public class StudentController {
     //신청 여부 및 승인여부
     @RequestMapping("afterschoolPage")
     public String afterschoolPage(AfterSchoolStudent as, Student s, HttpSession session, Model model) {
-    	 Student loginUser = (Student) session.getAttribute("loginUser");
+    	model.addAttribute("bbsId", "afterSchool");
+    	
+    	Student loginUser = (Student) session.getAttribute("loginUser");
     	
     	System.out.println("방과후 로그인 아이디 : " + loginUser.getStuId() );
     	String stuId = loginUser.getStuId();
@@ -267,6 +276,8 @@ public class StudentController {
     //방과후 참가 후 페이지
 	@RequestMapping("afterSchool")
 	public String studentAfterschool(@RequestParam(value="cpage",defaultValue="1") int currentPage,AfterSchoolStudent as,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		Student loginUser = (Student) session.getAttribute("loginUser");
 		String stuId = loginUser.getStuId();
 
@@ -303,21 +314,26 @@ public class StudentController {
 	//글 상세 조회
 	@RequestMapping("detail_after")
 	public String studentAfterschoolDetail(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage",defaultValue="1") int currentPage,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "afterSchool");
 		
-			AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
-			model.addAttribute("npage",npage);
-			model.addAttribute("cpage",currentPage);
-			return "student/afterSchoolBoardDetail";
+		AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
+		model.addAttribute("npage",npage);
+		model.addAttribute("cpage",currentPage);
+		
+		return "student/afterSchoolBoardDetail";
 	}
 	
 	@RequestMapping("enroll_afterschoolPage")
-	public String enroll_afterschoolPage() {
+	public String enroll_afterschoolPage(Model model) {
+		model.addAttribute("bbsId", "afterSchool");
 		return "student/enrollafterSchoolBoard";
 	}
 	
 	//글 등록하기
 	@RequestMapping("enroll_afterschool")
-	public String enroll_afterschool(AfterSchoolBoard asb, MultipartFile upfile, HttpSession session) {
+	public String enroll_afterschool(AfterSchoolBoard asb, MultipartFile upfile, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		String code =  studentService.afterschoolCode(loginUser.getStuId());
 		
@@ -345,8 +361,9 @@ public class StudentController {
 	// 학생 숙제 사진올릴때
 	@ResponseBody
 	@PostMapping("StuUpload")
-	public String StuUpload(List<MultipartFile> fileList, HttpSession session) {
-
+	public String StuUpload(List<MultipartFile> fileList, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		List<String> changeNameList = new ArrayList();
 		for (MultipartFile f : fileList) {
 			changeNameList.add(Template.saveFile(f, session, "/resources/img/homework/"));
@@ -357,6 +374,8 @@ public class StudentController {
 	//글 수정하기 페이지로 이동
 	@RequestMapping("after_modify")
 	public String board_modify(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
 		session.setAttribute("npage",npage);
 		session.setAttribute("cupage",currentPage);
@@ -365,7 +384,9 @@ public class StudentController {
 	
 	//글 수정하기
 	@RequestMapping("update.afterSt")
-	public String update_afterschoolStu(AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session) {
+	public String update_afterschoolStu(AfterSchoolBoard asb,MultipartFile reupfile,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		if(!reupfile.getOriginalFilename().equals("")) {
 			//기존 첨부파일이 있다 -> 기존파일을 삭제
@@ -397,7 +418,9 @@ public class StudentController {
 	
 	//글 삭제
 	@RequestMapping("delete.afterSt")
-	public String delete_afterschoolStu(@RequestParam(value="boNo")int boNo,AfterSchoolBoard asb,HttpSession session) {
+	public String delete_afterschoolStu(@RequestParam(value="boNo")int boNo,AfterSchoolBoard asb,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
+		
 		Student loginUser = (Student)session.getAttribute("loginUser");
 		asb.setStuId(loginUser.getStuId());
 		
@@ -414,7 +437,8 @@ public class StudentController {
 	//글 사진업로드
 	@ResponseBody
 	@PostMapping("afterupload")
-	public String upload(List<MultipartFile> fileList, HttpSession session) {
+	public String upload(List<MultipartFile> fileList, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "afterSchool");
 		
 		List<String> changeNameList = new ArrayList();
 		for(MultipartFile f : fileList) {

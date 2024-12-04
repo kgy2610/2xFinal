@@ -124,7 +124,7 @@ public class MemberController {
 
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
-			System.out.println("classCode : " + classCode);
+			
 			// 학교명 조회
 			String schoolName = memberService.getSchoolNameByClassCode(classCode);
 			Teacher teacher = memberService.selectTeacher(loginUser);
@@ -132,9 +132,10 @@ public class MemberController {
 			model.addAttribute("schoolName", schoolName);
 			model.addAttribute("loginUser", loginUser);
 			session.setAttribute("teacherName", teacher);
-			System.out.println("학교명 : " + schoolName);
-			System.out.println("선생님 : " + teacher);
 		}
+		
+		model.addAttribute("bbsId", "mypage");
+		
 		return "student/myPage";
 	}
 	   
@@ -207,6 +208,8 @@ public class MemberController {
 	   // 반 참가
 	   @RequestMapping("student.classCode")
 	   public String studentUpdateClassCode(Student s, HttpSession session, Model model) {
+		   model.addAttribute("bbsId", "mypage");
+		   
 		   Student loginUser = (Student) session.getAttribute("loginUser");
 
 	      if (s.getClassCode() == null || s.getClassCode().trim().isEmpty()) {
@@ -215,7 +218,7 @@ public class MemberController {
 	      }
 
 	      int result = memberService.studentUpdateClassCode(s);
-
+	      
 	      if (result > 0) {
 	         Student student = memberService.selectInfo(s.getStuId());
 	         session.setAttribute("loginUser", student);
@@ -235,6 +238,7 @@ public class MemberController {
 
 	@RequestMapping("student.update")
 	public String studentUpdate(String updateNum, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "mypage");
 
 		Student s = (Student) session.getAttribute("loginUser");
 		String stuId = s.getStuId();
@@ -257,6 +261,7 @@ public class MemberController {
 	}
 	@RequestMapping("student.upadatePwd")
 	public String updatePwdSt(Student s,String newPwd, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "mypage");
 
 		Student student = (Student)session.getAttribute("loginUser");
 		
@@ -276,6 +281,8 @@ public class MemberController {
 
 	@RequestMapping("imgselect")
 	public String imgselectupdate(String picNo, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "mypage");
+		
 		Student s = (Student) session.getAttribute("loginUser");
 		String stuId = s.getStuId();
 
@@ -297,7 +304,9 @@ public class MemberController {
 	// 급식
 	@ResponseBody
 	@GetMapping(value = "mealService", produces = "application/json; charset=UTF-8")
-	public String getMealInfo(HttpSession session) throws IOException {
+	public String getMealInfo(HttpSession session, Model model) throws IOException {
+		model.addAttribute("bbsId", "mypage");
+		
 		Student s = (Student) session.getAttribute("loginUser");
 		String schoolCode = s.getClassCode().substring(0, 7);
 		String oecode = memberService.selectOeCode(schoolCode);
@@ -345,7 +354,9 @@ public class MemberController {
 	// 시간표
 	@ResponseBody
 	@GetMapping(value = "scheduleService", produces = "application/json; charset=UTF-8")
-	public String getAirInfo(HttpSession session) throws IOException {
+	public String getAirInfo(HttpSession session, Model model) throws IOException {
+		model.addAttribute("bbsId", "mypage");
+		
 		Student s = (Student) session.getAttribute("loginUser");
 
 		// 학교 코드 추출
@@ -410,8 +421,9 @@ public class MemberController {
 	
 	// 부모님 로그인
 	@RequestMapping("parentsLogin")
-	public ModelAndView parentsLogin(Parents p, HttpSession session, ModelAndView mv) {
-
+	public ModelAndView parentsLogin(Parents p, HttpSession session, ModelAndView mv, Model model) {
+		model.addAttribute("bbsId", "parentsMypage");
+		
 		Parents loginParents = memberService.loginParents(p);
 		if (loginParents == null) { // 아이디없는 경우
 			session.setAttribute("alertMsg", "일치하는 계정을 찾을 수 없습니다.");
@@ -502,7 +514,9 @@ public class MemberController {
 	// ------------------------------ 선생님 ------------------------------
 	// 선생님 로그인
 	@RequestMapping("login.teacher")
-	public String login_teacher(Teacher t, HttpSession session, ModelAndView mv, String savetcId, HttpServletResponse response) {
+	public String login_teacher(Teacher t, HttpSession session, ModelAndView mv, String savetcId, HttpServletResponse response, Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 	    Teacher loginTeacher = memberService.loginTeacher(t);
 
 	    if (loginTeacher == null) {
@@ -623,6 +637,7 @@ public class MemberController {
 		// 선생님 반 개설
 		@RequestMapping("teacher.classCode")
 		public String updateClassCode(Teacher t, HttpSession session, Model model) {
+			model.addAttribute("bbsId", "teacherMypage");
 			t.setTcPwd(((Teacher)session.getAttribute("loginUser")).getTcPwd());
 
 			if (t.getClassCode() == null || t.getClassCode().trim().isEmpty()) {
@@ -645,13 +660,17 @@ public class MemberController {
 		
 	// 선생님 마이페이지 이동
 	@RequestMapping("teacher.myPage")
-	public String teacherMyPage() {
+	public String teacherMyPage(Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		return "teacher/myPage";
 	}
 	
 	// 선생님 공지사항 추가
 	@RequestMapping("addNoticeForm")
 	public String addNoticeForm(String noticeTitle, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
@@ -669,6 +688,8 @@ public class MemberController {
 	//공지사항 수정
 	@RequestMapping("updateNotice")
 	public String updateNotice(String noticeTitle, int noticeNo, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
@@ -685,6 +706,8 @@ public class MemberController {
 	// 선생님 공지사항 삭제
 	@RequestMapping("deleteNotice")
 	public String deleteNotice(String noticeTitle, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
@@ -701,7 +724,8 @@ public class MemberController {
 	// 선생님 메모 추가
 	@RequestMapping("addMemo")
 	public String AddMemo(String memoContent, HttpSession session, Model model) {
-
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
@@ -718,6 +742,8 @@ public class MemberController {
 	// 선생님 메모 삭제
 	@RequestMapping("deleteMemo")
 	public String deleteMemo(String memoContent, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherMypage");
+		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginTeacher.getClassCode();
 		

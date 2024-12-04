@@ -44,6 +44,8 @@ public class TeacherController {
 	 //정보수정
 	   @RequestMapping("updateInfo.me")
 	   public String updateInfo(String grade,String teacher_class, HttpSession session, Model m) {
+		   m.addAttribute("bbsId", "teacherMypage");
+		   
 		   Teacher t = (Teacher)session.getAttribute("loginUser");
 		   String newClassCode = t.getScCode()+"24"+grade+teacher_class;
 		   t.setClassCode(newClassCode);
@@ -62,6 +64,8 @@ public class TeacherController {
 	   //반삭제
 	   @RequestMapping("classdelete.me")
 	   public String classDelete(Teacher t, String deleteCode, HttpSession session, Model m) {
+		   m.addAttribute("bbsId", "teacherMypage");
+		   
 		   Teacher teacher = (Teacher)session.getAttribute("loginUser");
 		   
 		   if(teacher == null) {
@@ -90,6 +94,8 @@ public class TeacherController {
 	   //방과후 반 개설 전
 	   @RequestMapping("makeAfterClass.me")
 	   public String showMakeAfterClassPage(AfterSchool as, HttpSession session, Model m) {
+		   m.addAttribute("bbsId", "teacherAfterSchool");
+		   
 	       // 세션에서 로그인된 교사 정보 가져오기
 	       Teacher te = (Teacher) session.getAttribute("loginUser");
 	       // 로그인된 교사가 없으면 로그인 페이지로 리다이렉트
@@ -136,6 +142,8 @@ public class TeacherController {
 	// 숙제 리스트로 이동
 	@RequestMapping("homeworkList")
 	public String Teacherhomework(@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model, HttpSession session) {
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		Teacher teacher = (Teacher) session.getAttribute("loginUser");
 		String tcId = teacher.getTcId();
 		
@@ -151,13 +159,16 @@ public class TeacherController {
 
 	// 숙제 추가페이지 이동
 	@RequestMapping("addHomeworkPage")
-	public String addHomeworkPage() {
+	public String addHomeworkPage(Model model) {
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		return "teacher/addHomework";
 	}
 
 	// 숙제 등록페이지
 	@RequestMapping("enrollHomework")
 	public String enrollHomework(String title, String subject, String content, String dueDate, @RequestParam("upfile") MultipartFile upfile,  HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherHomework");
 		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
@@ -191,6 +202,8 @@ public class TeacherController {
 	// 숙제 상세 페이지
 	@RequestMapping("detailHomework")
 	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String changeName, Model model) {
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		model.addAttribute("boNo", boNo);
 		model.addAttribute("subject", subject);
 		model.addAttribute("hmTitle", hmTitle);
@@ -204,6 +217,8 @@ public class TeacherController {
 	// 숙제 삭제
 	@RequestMapping("deleteHomework")
 	public String deleteHomework(int boNo, String hmTitle, String changeName, HttpSession session, Model model) {		
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		if(!LoginCheckService.checkLogin(session)) {
 			session.setAttribute("loginMessage", "로그인이 필요합니다.");
 			return "member/login_teacher";
@@ -226,6 +241,8 @@ public class TeacherController {
 	// 숙제 수정하기
 	@RequestMapping("updateHomework")
 	public String updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent, String changeName, MultipartFile fileupload,  HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		if (!LoginCheckService.checkLogin(session)) {
 	        session.setAttribute("loginMessage", "로그인이 필요합니다.");
 	        return "member/login_teacher"; // 로그인되지 않았으면 로그인 페이지로 리다이렉트
@@ -258,6 +275,7 @@ public class TeacherController {
 	//우리 학생 숙제 페이지로 이동
 	@RequestMapping("gosubject")
 	public String goSubject( Model model, HttpSession session) {
+		model.addAttribute("bbsId", "teacherHomework");
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginUser.getClassCode();
 		
@@ -271,7 +289,8 @@ public class TeacherController {
 	// 숙제의 대한 상세페이지
 	@RequestMapping("homeworkDetail")
 	public String homeworkDetail(String title, String studentId, Model model) {
-
+		model.addAttribute("bbsId", "teacherHomework");
+		
 		ArrayList<HmSubmit> submitHomework = teacherService.gosubmitHomework(title, studentId);
 		System.out.println(submitHomework);
 
@@ -314,6 +333,8 @@ public class TeacherController {
 	// 출석 리스트로 이동
 	@RequestMapping("teacherAttendance")
 	public String teacherAttendance(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherAttendance");
+		
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginUser.getClassCode();
 		
@@ -328,6 +349,7 @@ public class TeacherController {
 	// 지각 출석 결석 제출
 	@RequestMapping("submitAttendance")
 	public String submitAttendance(String aDate, @RequestParam Map<String, String> attendanceData, Model model) {
+		model.addAttribute("bbsId", "teacherAttendance");
 		
         // 출결 리스트 생성
         List<Attendance> attendanceList = new ArrayList<>();
@@ -354,7 +376,8 @@ public class TeacherController {
 	//학생 출결 상태 업데이트
 	@RequestMapping("modifyAttendance")
 	    public String modifyAttendance(String aDate, @RequestParam("studentId") List<String> studentIds, 
-	    								@RequestParam Map<String, String> params) {
+	    								@RequestParam Map<String, String> params, Model model) {
+		model.addAttribute("bbsId", "teacherAttendance");
 		
 	    // 수정할 출석 데이터를 담을 리스트
 	    ArrayList<Attendance> updateAttendance = new ArrayList<>();
@@ -385,8 +408,6 @@ public class TeacherController {
 	        updateAttendance.add(attendance);
 	    }
 	    
-	    System.out.println("이게 나오나용:" + updateAttendance);
-	    
 	    int result = teacherService.updateAttendance(updateAttendance);
 	       
 	        
@@ -396,6 +417,8 @@ public class TeacherController {
 	//학생관리 페이지 이동
 	@RequestMapping("studentManage.me")
 	public String studentManage(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "studentManager");
+		
 	    Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 	    String classCode = loginUser.getClassCode();
 
@@ -458,17 +481,10 @@ public class TeacherController {
 	@RequestMapping(value="requestInStudent")
 	public String ajaxRequestTeacher(HttpSession session, @RequestParam("status") String status, @RequestParam("stuId") String stuId){
 		Teacher clCode = (Teacher) session.getAttribute("loginUser");
-		System.out.println("Request Controller | 로그인한 유저의 clCode : " + clCode );
 		if(clCode != null) {
 			String scCode = clCode.getClassCode();
-			System.out.println("Request Controller | 로그인한 유저의 scCode : " + scCode);
-			System.out.println("Request Controller | 로그인한 유저의 status : " + status);
-			
-		
 			
 			int result = teacherService.inStudentListbyStatus(status, scCode, stuId);
-			System.out.println("Request Controller | 승인할 학생의 stuId, status : " + stuId + ", " + status);
-			System.out.println(result);
 			
 			if(result > 0) {
 				return "success";
