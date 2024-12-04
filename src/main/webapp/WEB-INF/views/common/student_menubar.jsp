@@ -15,9 +15,9 @@
     <div class="nav">
         <img src="<c:url value='/resources/img/logo.png'/>">
         <div class="menu">
-            <label for="mypage"><a href="studentMyPage">마이페이지</a></label>
-            <label for="homework"><a href="homework">숙제</a></label>
-             <label for="afterSchool"><a href="afterschoolPage">방과후 반</a></label>
+            <label for="mypage"><a href="studentMyPage" ${bbsId == 'mypage' ? 'id="selected"' : ''}>마이페이지</a></label>
+            <label for="homework"><a href="homework" ${bbsId == 'homework' ? 'id="selected"' : ''}>숙제</a></label>
+             <label for="afterSchool"><a href="afterschoolPage" ${bbsId == 'afterSchool' ? 'id="selected"' : ''}>방과후 반</a></label>
         </div>
         <div class="undermenu">
             <label for="info" onclick="openUpdateModal()"><a href="#">정보수정</a></label>

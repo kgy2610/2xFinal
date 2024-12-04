@@ -58,7 +58,8 @@ public class BoardController {
 	//공지사항 가져오기
 	@ResponseBody
 	@RequestMapping(value="notice.list", produces="application/json; charset-UTF-8")
-	public String ajaxSelectNoticeList(HttpSession session) {
+	public String ajaxSelectNoticeList(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsMypage");
 		Teacher t = (Teacher)session.getAttribute("teacher");
 		Notice n = new Notice(t.getTcId(),t.getClassCode(),null,null);
 		ArrayList<Notice> list = boardService.selectNoticeList(n);
@@ -68,7 +69,9 @@ public class BoardController {
 	  //급식api 
 	  @ResponseBody
 	  @GetMapping(value="BoMealService", produces="application/json; charset=UTF-8")
-	  public String getMealInfo(HttpSession session) throws IOException {
+	  public String getMealInfo(HttpSession session, Model model) throws IOException {
+		 model.addAttribute("bbsId", "parentsMypage");
+		  
 		 Teacher t = (Teacher)session.getAttribute("teacher");
 		 String schoolCode = t.getClassCode().substring(0,7);
 		 String oecode = boardService.selectOeCode(schoolCode);
@@ -114,7 +117,9 @@ public class BoardController {
 	  }
 	//성적페이지 
 	@RequestMapping("parents_score")
-	public String parents_score(HttpSession session) {
+	public String parents_score(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "Score");
+		
 		Student s = (Student)session.getAttribute("child");
 //		if(s.getClassCode()==null ) {
 //			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
@@ -147,7 +152,8 @@ public class BoardController {
 	//성적페이지 과목별별별별별별별 점수
 	@ResponseBody
 	@RequestMapping(value="score.list", produces="application/json; charset-UTF-8")
-	public String ajaxSelectReplyList(String subject,HttpSession session) {
+	public String ajaxSelectReplyList(String subject,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "Score");
 		Parents p = (Parents)session.getAttribute("loginUser");
 		Map<String, String> params = new HashMap();
 		params.put("prId", p.getPrId());
@@ -158,7 +164,9 @@ public class BoardController {
 	
 	//부모님 마이페이지로 이동
 	@RequestMapping("parents_mypage")
-	public String parents_mypage(HttpSession session) {
+	public String parents_mypage(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsMypage");
+		
 		Student s = (Student)session.getAttribute("child");
 		return "parents/parents_myPage";
 	}
@@ -195,6 +203,8 @@ public class BoardController {
 	// 부모님 커뮤니티페이지로 이동
 	@RequestMapping("parents_community")
 	public String parents_community(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		Student s = (Student) session.getAttribute("child");
 		if (s.getClassCode() == null) {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
@@ -223,14 +233,18 @@ public class BoardController {
 
 	// 부모님 상담페이지로 이동
 	@RequestMapping("parents_calendar")
-	public String parents_calendar(HttpSession session) {
+	public String parents_calendar(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCalendar");
+		
 		return "parents/parents_calendar";
 	}
 
 	// 부모님 상담 가능시간 가져오기
 	@ResponseBody
 	@RequestMapping(value = "selectSameMonthCounsel", produces = "application/json; charset-UTF-8")
-	public String selectSameMonthCounsel(String month, HttpSession session) {
+	public String selectSameMonthCounsel(String month, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCalendar");
+		
 		Teacher t = (Teacher) session.getAttribute("teacher");
 		if(t==null) {
 			t = (Teacher)session.getAttribute("loginUser");
@@ -245,7 +259,9 @@ public class BoardController {
 
 	// 부모님 상담 신청
 	@RequestMapping("updateCounsel")
-	public String updateCounsel(Counsel c, HttpSession session) {
+	public String updateCounsel(Counsel c, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCalendar");
+		
 		Parents p = (Parents) session.getAttribute("loginUser");
 		c.setPrId(p.getPrId());
 		int result = boardService.updateCounsel(c);
@@ -259,7 +275,9 @@ public class BoardController {
 	
 	//부모님 행사사진페이지로 이동
 	@RequestMapping("parents_eventImgList")
-	public String parents_eventImgList(HttpSession session,Model model) {
+	public String parents_eventImgList(HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsEvent");
+		
 		Student s = (Student)session.getAttribute("child");
 		if(s.getClassCode()==null ) {
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
@@ -281,7 +299,9 @@ public class BoardController {
 	
 	//부모님 행사사진 게시글 조회
 	@RequestMapping("eventImgList_detail")
-	public String eventImgList_detail(HttpSession session,Model model,int boNo) {
+	public String eventImgList_detail(HttpSession session, Model model, int boNo) {
+		model.addAttribute("bbsId", "parentsEvent");
+		
 		EventImgBoard eib = boardService.selectDetailImg(boNo);
 		model.addAttribute("eib",eib);
 		return "parents/parents_eventImgDetail";
@@ -289,13 +309,17 @@ public class BoardController {
 	
 	//부모님 게시물작성 페이지로 이동
 	@RequestMapping("enroll_community")
-	public String enroll_community() {
+	public String enroll_community(Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		return "parents/parents_enrollcommunity";
 	}
 	
 	//부모님 커뮤니티 전체 글 보기
 	@RequestMapping("all_community")
 	public String all_community(@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		Student s = (Student)session.getAttribute("child");
 		int boardCount = boardService.selectListCount(s.getClassCode());
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 9);
@@ -307,7 +331,9 @@ public class BoardController {
 	
 	//부모님 게시물작성
 	@RequestMapping("enroll_board")
-	public String enroll_board(ParentsBoard pb, MultipartFile upfile, HttpSession session) {
+	public String enroll_board(ParentsBoard pb, MultipartFile upfile, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		Student s = (Student)session.getAttribute("child");
 		Parents p = (Parents)session.getAttribute("loginUser");
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -330,6 +356,8 @@ public class BoardController {
 	//부모님 게시물 조회
 	@RequestMapping("board_detail")
 	public String board_detail(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		int result = boardService.updateCount(boNo);
 		if(result>0) {
 			ParentsBoard npage = boardService.selectNowBoard(boNo);
@@ -346,6 +374,8 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "selectReply", produces = "application/json; charset-UTF-8")
 	public String selectReply(String boNo,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		ArrayList<Reply> rlist = boardService.selectReplyList(Integer.parseInt(boNo));
 		session.setAttribute("rlist", rlist);
 		return new Gson().toJson(rlist);
@@ -355,6 +385,8 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "insertReply")
 	public int insertReply(Reply r,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		r.setPrId(((Parents)session.getAttribute("loginUser")).getPrId());
 		int result = boardService.insertReply(r);
 		return result;
@@ -364,6 +396,8 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "deleteReply")
 	public int deleteReply(String reNo,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		ArrayList<Reply> rlist = (ArrayList)session.getAttribute("rlist");
 		for (Reply r : rlist) {
 			if(r.getPrepNo()==Integer.parseInt(reNo)) {
@@ -382,6 +416,8 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "modifyReply")
 	public int modifyReply(Reply r,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		int result = boardService.modifyReply(r);
 		return result;
 	}
@@ -389,6 +425,8 @@ public class BoardController {
 	//부모님 게시물 수정페이지로 이동
 	@RequestMapping("board_modify")
 	public String board_modify(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+
 		ParentsBoard npage = boardService.selectNowBoard(boNo);
 		session.setAttribute("npage",npage);
 		session.setAttribute("cupage",currentPage);
@@ -397,7 +435,9 @@ public class BoardController {
 	
 	//부모님 게시물 수정하기
 	@RequestMapping("modifyParentsBoard")
-	public String modifyParentsBoard(ParentsBoard pb,MultipartFile reupfile,HttpSession session) {
+	public String modifyParentsBoard(ParentsBoard pb,MultipartFile reupfile,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		if(!reupfile.getOriginalFilename().equals("")) {
 			//기존 첨부파일이 있다 -> 기존파일을 삭제
 			if(pb.getOriginName() != null) {
@@ -427,7 +467,9 @@ public class BoardController {
 	
 	//부모님 게시물 삭제하기
 	@RequestMapping("deleteParentsBoard")
-	public String deleteParentsBoard(int boNo,HttpSession session) {
+	public String deleteParentsBoard(int boNo,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
+		
 		int result = boardService.deleteParentBoard(boNo);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "삭제 완료되었습니다.");
@@ -441,7 +483,8 @@ public class BoardController {
 	// 커뮤니티 사진올릴때
 	@ResponseBody
 	@PostMapping("upload")
-	public String upload(List<MultipartFile> fileList, HttpSession session) {
+	public String upload(List<MultipartFile> fileList, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "parentsCommunity");
 		
 		List<String> changeNameList = new ArrayList();
 		for(MultipartFile f : fileList) {
@@ -454,6 +497,8 @@ public class BoardController {
 	//------------------------------------------------------------------------------------------------
 	@RequestMapping("teacher_eventImgList")
 	public String teacher_eventImgList(HttpSession session,Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		Teacher t = (Teacher)session.getAttribute("loginUser");
 		ArrayList<EventImgBoard> list = boardService.selectEventImgList(t);
 		for (EventImgBoard eib : list) {
@@ -471,6 +516,8 @@ public class BoardController {
 	//선생님 행사사진 게시글 조회
 	@RequestMapping("teacher_eventImgList_detail")
 	public String teacher_eventImgList_detail(HttpSession session,Model model,int boNo) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		EventImgBoard eib = boardService.selectDetailImg(boNo);
 		model.addAttribute("eib",eib);
 		return "teacher/teacher_eventImgDetail";
@@ -480,6 +527,8 @@ public class BoardController {
 	//선생님 행사사진 수정페이지로 이동
 	@RequestMapping("teacher_eventImgList_modify")
 	public String teacher_eventImgList_modify(@RequestParam(value="boNo")int boNo,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		EventImgBoard npage = boardService.selectDetailImg(boNo);
 		session.setAttribute("npage",npage);
 		return "teacher/teacher_modifyEventImg";
@@ -487,13 +536,17 @@ public class BoardController {
 	
 	//선생님 행사사진 작성페이지로 이동
 	@RequestMapping("teacher_eventImgList_enroll")
-	public String teacher_eventImgList_enroll() {
+	public String teacher_eventImgList_enroll(Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		return "teacher/teacher_enrollEventImg";
 	}
 	
 	//선생님 행사사진 삭제
 	@RequestMapping("deleteImgBoard")
 	public String deleteImgBoard(@RequestParam(value="boNo")int boNo,HttpSession session,Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		int result = boardService.deleteImgBoard(boNo);
 		if(result>0) {
 			session.setAttribute("alertMsg", "삭제되었습니다.");
@@ -505,7 +558,9 @@ public class BoardController {
 	
 	//선생님 행사사진 작성
 	@RequestMapping("enroll_IMG")
-	public String enroll_IMG(EventImgBoard eib, HttpSession session) {
+	public String enroll_IMG(EventImgBoard eib, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		Teacher t = (Teacher)session.getAttribute("loginUser");
 		eib.setTcId(t.getTcId());
 		eib.setClassCode(t.getClassCode());
@@ -521,7 +576,9 @@ public class BoardController {
 	
 	//선생님 행사사진 수정하기
 	@RequestMapping("modifyImgBoard")
-	public String modifyImgBoard(EventImgBoard eib,HttpSession session) {
+	public String modifyImgBoard(EventImgBoard eib,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherEvent");
+		
 		int result = boardService.updateImgBoard(eib);
 		if(result > 0) {
 			session.setAttribute("alertMsg","수정 완료되었습니다.");
@@ -535,14 +592,18 @@ public class BoardController {
 	
 	//선생님 상담일정
 	@RequestMapping("teacherCounsel")
-	public String teacherCounsel() {
+	public String teacherCounsel(Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		return "teacher/teacher_Counsel";
 	}
 	
 	//선생님 상담일정 불러오기
 	@ResponseBody
 	@RequestMapping(value ="selectCounselList", produces = "application/json; charset-UTF-8")
-	public String selectCounselList(Counsel c,HttpSession session) {
+	public String selectCounselList(Counsel c,HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		Teacher t = (Teacher)session.getAttribute("loginUser");
 		c.setTcId(t.getTcId());
 		ArrayList<Counsel> list = boardService.selectCounselList(c);
@@ -557,7 +618,9 @@ public class BoardController {
 	//선생님 상담일정 추가
 	@ResponseBody
 	@RequestMapping("insertCounsel")
-	public int insertCounsel(Counsel c, HttpSession session) {
+	public int insertCounsel(Counsel c, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		String tcId = ((Teacher)session.getAttribute("loginUser")).getTcId();
 		c.setTcId(tcId);
 		int result = boardService.insertCounsel(c);
@@ -567,7 +630,9 @@ public class BoardController {
 	//선생님 상담일정 수정
 	@ResponseBody
 	@RequestMapping("updateCounselInfo")
-	public int updateCounselInfo(Counsel c, HttpSession session) {
+	public int updateCounselInfo(Counsel c, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		int result = boardService.updateCounselInfo(c);
 		return result;
 	}
@@ -575,7 +640,9 @@ public class BoardController {
 	//선생님 상담일정 삭제
 	@ResponseBody
 	@RequestMapping("deleteCounselInfo")
-	public int deleteCounselInfo(Counsel c, HttpSession session) {
+	public int deleteCounselInfo(Counsel c, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		int result = boardService.deleteCounselInfo(c);
 		return result;
 	}
@@ -583,7 +650,9 @@ public class BoardController {
 	//선생님 상담일정 취소
 	@ResponseBody
 	@RequestMapping("deleteParentsCounsel")
-	public int deleteParentsCounsel(Counsel c, HttpSession session) {
+	public int deleteParentsCounsel(Counsel c, HttpSession session, Model model) {
+		model.addAttribute("bbsId", "teacherCalendar");
+		
 		int result = boardService.deleteParentsCounsel(c);
 		return result;
 	}
