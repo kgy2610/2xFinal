@@ -506,7 +506,7 @@ a {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 40px;
+    padding-top: 300px;
     font-size: 16px;
     color: #A98467;
 }
@@ -558,11 +558,15 @@ a {
     border: 1px solid #A98467;
     border-radius: 15px;
     margin-top: 15px;
+    justify-content: 20px;
+    align-items: center;
+    
 }
 
 .input-group {
     display: flex; /* 입력란들을 수평으로 배치 */
     align-items: center; /* 수직 정렬 */
+    padding-bottom: 18px;
 }
 
 #grade {
@@ -600,16 +604,17 @@ a {
 
 .update-button,
 .password-button {
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #A98467;
-    background-color: #DDE5B6; /* 버튼의 배경색 */
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 355px;
-    height: 30px;
-    margin-left: 15px; /* 간격 조정 */
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    color: #A98467 !important;
+    background-color: #DDE5B6 !important; /* 버튼의 배경색 */
+    border: none !important;
+    border-radius: 15px !important;
+    cursor: pointer !important;
+    width: 350px !important;
+    height: 30px !important;
+    margin-left: 20px !important; /* 간격 조정 */
+  	margin-bottom:18px !important;
 }
 
 .update-button:hover,
@@ -618,16 +623,16 @@ a {
 }
 
 .delete-button {
-    font-size: 14px;
-    color: #A98467;
-    background-color: #E9AAAA; /* 반 삭제 버튼의 배경색 */
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 370px;
-    height: 30px;
-    margin-left: 20px;
-    max-width: 350px;
+    font-size: 14px !important;
+    color: #A98467 !important;
+    background-color: #E9AAAA !important; /* 반 삭제 버튼의 배경색 */
+    border: none !important;
+    border-radius: 15px !important;
+    cursor: pointer !important;
+    width: 370px !important;
+    height: 30px !important;
+    margin-left: 20px !important;
+    max-width: 350px !important;
 }
 
 .delete-button:hover {
@@ -695,4 +700,9 @@ a {
 
 .confirm-password-button:hover {
     background-color: #C4D79D; /* 호버 시 색상 */
+}
+
+#selected{
+	color: #7C604B;
+	-webkit-text-stroke: 0.5px;
 }

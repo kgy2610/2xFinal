@@ -44,6 +44,7 @@ public class AfterSchoolBoardController {
 
 	@RequestMapping("list.bo")
 	public String selectList(AfterSchool as, HttpSession session, @RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
+		model.addAttribute("bbsId", "teacherAfterSchool");
 		
 		AfterSchool afCode = (AfterSchool) session.getAttribute("as");
 		System.out.println(afCode);
@@ -57,13 +58,9 @@ public class AfterSchoolBoardController {
 		
 		//현재 세션의 코드를 code 라는 변수에 넣기
 		String code = afCode.getCode();
-		System.out.println("방과후 반 코드: " + code);
 		
 		//선생님의 코드와 학생의 코드가 같은 학생의 총 명수
 		int boardCount = afterSchoolBoardService.afterSchoolListCount(code);
-		System.out.println(boardCount);
-		
-
 
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 5);
 		ArrayList<AfterSchoolBoard> list = afterSchoolBoardService.afSelectList(code, pi);
@@ -87,7 +84,6 @@ public class AfterSchoolBoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		model.addAttribute("studentList", studentList);
-		System.out.println(pi);
 		return "teacher/afterClass";
 	}
 	
@@ -109,11 +105,9 @@ public class AfterSchoolBoardController {
 			
 			if(afCode != null) {
 				String scCode = afCode.getCode();
-//				System.out.println("로그인한 유저의 Code: " + code);
 				
 				//CODE가 로그인된 선생님과 같은 학생의 리스트 불러오기
 				ArrayList<Student> acceptList = afterSchoolBoardService.ajaxAcceptStudentListbyScCode(scCode);
-				System.out.println("Controller | 승인이 필요한 선생님 리스트 : " + acceptList);
 				
 				
 		        response.put("acceptStudents", acceptList);  // 데이터가 배열로 들어가야 합니다.
@@ -133,10 +127,8 @@ public class AfterSchoolBoardController {
 			
 			if(afCode != null) {
 				String scCode = afCode.getCode();
-				System.out.println("Request Controller | 로그인한 유저의 scCode : " + scCode);
 				
 				int result = afterSchoolBoardService.RequestStudentByTcIdAndStatus(stuId, status, scCode);
-				System.out.println("Request Controller | 승인할 학생의 stuId, status : " + stuId + ", " + status);
 				
 				if(result > 0) {
 					return "success";

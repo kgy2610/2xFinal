@@ -21,11 +21,11 @@
     <div class="nav">
         <img src="<c:url value='/resources/img/logo.png'/>">
         <div class="menu">
-            <label for="mypage"><a href="parents_mypage">마이페이지</a></label>
-            <label for="score"><a href="parents_score">성적</a></label>
-            <label for="advice"><a href="parents_calendar">상담신청</a></label>
-            <label for="community"><a href="parents_community">커뮤니티</a></label>
-            <label for="photo"><a href="parents_eventImgList">행사사진</a></label>
+            <label for="mypage"><a href="parents_mypage" ${bbsId == 'parentsMypage' ? 'id="selected"' : ''}>마이페이지</a></label>
+            <label for="score"><a href="parents_score" ${bbsId == 'Score' ? 'id="selected"' : ''}>성적</a></label>
+            <label for="advice"><a href="parents_calendar" ${bbsId == 'parentsCalendar' ? 'id="selected"' : ''}>상담신청</a></label>
+            <label for="community"><a href="parents_community" ${bbsId == 'parentsCommunity' ? 'id="selected"' : ''}>커뮤니티</a></label>
+            <label for="photo"><a href="parents_eventImgList" ${bbsId == 'parentsEvent' ? 'id="selected"' : ''}>행사사진</a></label>
         </div>
         <div class="undermenu">
             <label for="info" onclick="openUpdateModal()"><a href="#">정보수정</a></label>
