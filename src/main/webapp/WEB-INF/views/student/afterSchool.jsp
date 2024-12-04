@@ -9,7 +9,7 @@ ArrayList<AfterSchoolBoard> list = (ArrayList)session.getAttribute("boardList");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>agit</title>
+    <title>AGIT</title>
     <link rel="stylesheet"
 	href="<c:url value='/resources/css/student/student_afterschool.css'/>">
 	<script src="<c:url value='/resources/js/student/student_myPage.js'/>"></script>
