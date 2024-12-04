@@ -6,14 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>parents_modifycommunity</title>
+	    <title>AGIT</title>
 	    
 	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	    <script src="<c:url value='/resources/js/teacher/teacherModifyEventImg.js'/>"></script>
 	    
-	    <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_modifycommunity.css'/>">
+	    <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacher_modifyEvent.css'/>">
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
 	    
     <div id="content_border">
     	<form action="modifyImgBoard" method="POST">
-    		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title }" name="title"></div>
+    		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title}" name="title"></div>
 	        <div id="enroll_content" >
 	        	<input type="hidden" name = "boNo" value = "${npage.boNo}">
 	            <textarea id="en_content" name="boContent">${npage.boContent }</textarea>

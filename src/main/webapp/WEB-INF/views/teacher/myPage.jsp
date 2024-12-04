@@ -43,9 +43,9 @@
 		<c:forEach var="counsel" items="${teacherCounsel}">
 			<div class="text1">
 				<span class="date">${counsel.csDate}</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;학부모 이름 : ${counsel.prName}
-				&nbsp;&nbsp;&nbsp;&nbsp;상담 장소 : ${counsel.csLocation}
-				&nbsp;&nbsp;&nbsp;&nbsp;상담 내용 : ${counsel.csContent}
+				&nbsp;&nbsp;학부모 이름 : ${counsel.prName}
+				&nbsp;&nbsp;상담 장소 : ${counsel.csLocation}
+				&nbsp;&nbsp;상담 내용 : ${counsel.csContent}
 			</div>
 			<hr class="body_line">
 			</c:forEach>

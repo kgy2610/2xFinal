@@ -31,13 +31,14 @@
    padding: 19px;
 }
 
-.center input{
+.center  #code{
    border:none;
    border-radius: 50px;
    width: 566px; height: 99px;
    font-size: 30px;
    padding: 20px;
    float: left;
+   margin-top:0;
 }
 
 .center img{
