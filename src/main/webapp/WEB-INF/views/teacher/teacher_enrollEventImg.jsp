@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
 
     <title>행사사진 작성하기</title>
-    <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_enrollcommunity.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacherEnrollEvent.css'/>">
     
 	<script src="<c:url value='/resources/js/teacher/teacherEnrollEventImg.js'/>"></script>
 </head>

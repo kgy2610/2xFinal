@@ -26,12 +26,16 @@
     width: 629px;
     height: 196px;
     border-radius: 30px;
+    padding:20px;
+    overflow-y: auto;            
+    overflow-x: hidden; 
 }
 
 .whole_body > .textbox1 .text1{
-    margin-left: 10px;
-    margin-top: 10px;
     color: #A98467;
+    font-size:18px;
+    margin-bottom:5px;
+    padding:5px;
 }
 
 .whole_body > .textbox2{
@@ -56,9 +60,10 @@
 
 .whole_body > .textbox1 > hr{ 
     border: solid 1px;
-    border-color: #A98467; 
-    width: 500PX;
+    border-color: #A98467;
+    width: 580PX;
     margin-top: 4px;
+    border-radius: 100px;
 }
 
 
@@ -195,12 +200,32 @@ input{
 }
 
 .date {
-    background-color: #DDE5B6; /* 초록색 배경 */
-    border-radius: 12px;
-    padding: 2px 6px;
+        background-color: #DDE5B6;
+    border-radius: 50px;
+    padding: 3px 15px;
     color: #A98467;
 }
 
+/* 스크롤바 스타일 */
+.textbox1::-webkit-scrollbar {
+    width: 8px;
+}
+
+.textbox1::-webkit-scrollbar-track {
+    background: #F2CEB2;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.textbox1::-webkit-scrollbar-thumb {
+    background: #A98467;
+    border-radius: 8px;
+}
+
+.textbox1::-webkit-scrollbar-thumb:hover {
+    background: #81644e;
+}
 
 /* 스크롤바 스타일 */
 .memo_content::-webkit-scrollbar {

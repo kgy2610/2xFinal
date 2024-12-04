@@ -81,8 +81,7 @@
                                 </tr>
                             </table>
                             <button type="button" id="saveBtn">저장</button>
-                            <button type="button" id="deleteBtn"
-                                style="background-color: red; color: white; margin-top: 10px; display: none;">삭제</button>
+                            <button type="button" id="deleteBtn">삭제</button>
                         </form>
                     </div>
                 </div>
@@ -100,8 +99,7 @@
                                     <td><input type="text" id="consultationPhone2" readonly/></td>
                                 </tr>
                             </table>
-                            <button type="button" id="deleteBtn2"
-                                style="background-color: red; color: white; margin-top: 10px;">일정취소</button>
+                            <button type="button" id="deleteBtn2">일정취소</button>
                         </form>
                         <br>
                         <div style="text-align: center;">※취소 전 부모님과 상의하시기 바랍니다※</div>

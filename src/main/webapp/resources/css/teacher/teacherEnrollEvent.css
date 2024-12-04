@@ -1,0 +1,132 @@
+#content_border{
+    position:absolute; 
+     width: 1040px;
+   height: 784px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+    border: solid #A98467 3px;
+    border-radius: 30px;
+    padding:30px;
+}
+#community_title{
+    position:absolute; 
+    left:30px;
+    top: 20px;
+    color: #A98467;
+}
+#create_button{
+    position:absolute; 
+    width: 150px;
+    height: 50px;
+    left: 450px;
+    bottom: 15px;
+    border-radius: 40px; 
+    background-color: #F4DABF;
+    color:#A98467;
+    font-size: 20px;
+    border: 0px;
+}
+#create_button:hover{
+    background-color: #A98467;
+    color: white;
+    cursor: pointer;
+}
+#enroll_title{
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    color: #A98467;
+}
+#en_title{
+    position:absolute;
+    text-align: center;
+    top: 36px;
+    left: 50px;
+    width: 889px;
+    height: 40px;
+    color:#A98467;
+    background: none;
+    font-size: 30px;
+    border: 0px;
+}
+#en_title::placeholder {
+    color: #A98467; /* 원하는 색상 코드로 변경 */
+    opacity: 1; /* 투명도 설정 (1이 불투명, 0이 완전 투명) */
+}
+#en_title:focus {
+    outline: none;
+}
+#enroll_content{
+    position: absolute;
+    top:100px;
+    left: 66px;
+    border: 3px solid #A98467;
+    width: 900px;
+    height: 600px;
+    font-size: 25px;
+}
+.note-editor .note-editable {
+    overflow-y: auto; /* 수직 스크롤바를 사용 가능하게 */
+}
+
+/* 스크롤바 스타일 */
+.note-editor .note-editable::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-thumb {
+    background-color: #A98467; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 둥글게 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-thumb:hover {
+    background-color: #81644e; /* 마우스 오버 시 색상 변경 */
+}
+
+.note-editor .note-editable::-webkit-scrollbar-track {
+    background: #F2CEB2; /* 스크롤바 트랙 색상 */
+}
+
+#enroll_file{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    bottom: 11px;
+    left: 20px;
+    background-color: #DDE5B6; 
+    border-radius: 40px;
+    width: 950px;
+    height: 60px;
+}
+
+.custom-file-upload {
+    position:absolute;
+    left: 20px;
+    padding: 10px 20px;
+    color: #A98467;
+    background-color: white; /* 버튼 색상 */
+    border: 0px;
+    border-radius: 30px; /* 모서리 둥글게 */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #A98467;
+    color: white;
+}
+.file-name {
+    position: absolute;
+    left: 130px;
+    width: 200px;
+    font-size: 16px;
+    color: #333;
+}
+.note-resizebar {
+    display: none;
+}
+

@@ -26,6 +26,7 @@ String classCode = loginUser.getClassCode();
 
 <body>
 	<jsp:include page="../common/teacher_menubar.jsp" />
+	<div class="wrap">
 	<div class="whole_body">
 		<div class="use-body">
 			<div class="content1">
@@ -41,7 +42,7 @@ String classCode = loginUser.getClassCode();
 							<div>출석률</div>
 						</div>
 						<hr class="line1">
-
+						<div class="list-info">
 						<c:forEach var="g" items="${stuManageList}">
 							<div class="real-list-information"
 								onclick="showStudentInfo('${g.STUNAME}', '${g.PHONE}', '${g.ATTENDANCERATE}', '${g.STUID}')">
@@ -51,6 +52,7 @@ String classCode = loginUser.getClassCode();
 							</div>
 							<hr class="line2">
 						</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -96,9 +98,8 @@ String classCode = loginUser.getClassCode();
 				</div>
 			</div>
 		</div>
-		<div id="chat_button">
-			<img src="<c:url value='/resources/img/student/message.png'/>">
-		</div>
+</div>
+		
 	</div>
 </body>
 
