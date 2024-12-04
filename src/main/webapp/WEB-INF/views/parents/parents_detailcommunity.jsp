@@ -13,6 +13,7 @@
 <body>
     <jsp:include page="parents_menubar.jsp" />
     <input type="hidden" value=${loginUser.prId } id="loginInfo">
+    <input type="hidden" value=${npage.prId } id="pageInfo">
     <div id="content_border">
         <div id="enroll_title">${npage.boTitle }</div>
         <div id="enroll_content" >
@@ -35,7 +36,16 @@
         	<input type="hidden" id="boardNum" name="boNo" value="${npage.boNo}">
             <tr>
                 <td><div></div></td>
-                <td>${npage.prNickname}</td>
+                <td>
+                	<c:choose>
+                		<c:when test="${npage.prId eq loginUser.prId}">
+                			<p style="font-weight:bold;">작성자</p>
+                		</c:when>
+                		<c:otherwise>
+                			${npage.prNickname}
+                		</c:otherwise>
+                	</c:choose>
+                </td>
                 <td><div><input type="text" placeholder="댓글을 입력하세요" id="en_reply"  name="reContent" required></div></td>
                 <td><div></div></td>
                 <td><div><button type="button" id="enroll_button" onclick="insertReply()">등록</button></div></td>
@@ -59,6 +69,7 @@
     	function showReplyList(){
     		const boNo = document.getElementById('boardNum').value;
     		const loginInfo = document.getElementById('loginInfo').value; 
+    		const pageInfo = document.getElementById('pageInfo').value;
     		$.ajax({
     			url:'selectReply',
     			data: {boNo:boNo},
@@ -70,11 +81,11 @@
     						str = "<table class='parents_reply' id='pr"+re.reNo+"'>" +
     			            "<tr>" +
     			            "<td><div></div></td>" +
-    			            "<td>" + re.nickname + "</td>" +
+    			            "<td>" + (pageInfo === re.prId ? "<p style='font-weight:bold'>작성자</p>":re.nickname) + "</td>" +
     			            "<td><div class='replyContent' id='el"+re.reNo+"'>" + (re.reContent ? re.reContent : "삭제된 댓글입니다.") + "</div></td>" +
     			            "<td><div>" + (loginInfo === re.prId ? "<button onclick='changeModifyForm(\""+re.reNo+"\",\""+re.reContent+"\",this)'>수정</button>" : "") + "</div></td>" +
     	                    "<td><div>" + (loginInfo === re.prId ? "<button onclick='deleteReply(\""+re.reNo+"\")'>삭제</button>" : "") + "</div></td>" +
-    			            "<td onclick='insertChildRep(\""+re.reNo+"\",\""+re.nickname+"\")'><img src='/agit/resources/img/parents/Vector.png' class='reply_icon'/></td>" +
+    			            "<td onclick='insertChildRep(\""+re.reNo+"\",\""+re.nickname+"\",\""+re.prId+"\")'><img src='/agit/resources/img/parents/Vector.png' class='reply_icon'/></td>" +
     			            "</tr>" +
     			            "</table>";
     						document.getElementById('reply_area').innerHTML += str;	
@@ -89,7 +100,7 @@
     						str = "<table class='parents_reply child_reply'>" +
     			            "<tr>" +
     			            "<td><div></div></td>" +
-    			            "<td>" + rp.nickname + "</td>" +
+    			            "<td>" + (pageInfo === rp.prId ? "<p style='font-weight:bold'>작성자</p>":rp.nickname) + "</td>" +
     			            "<td><div class='replyContent' id='el"+rp.reNo+"'>" + (rp.reContent ? rp.reContent : "삭제된 댓글입니다.") + "</div></td>" +
     			            "<td><div>" + (loginInfo === rp.prId ? "<button onclick='changeModifyForm(\""+rp.reNo+"\",\""+rp.reContent+"\",this)'>수정</button>" : "") + "</div></td>" +
     	                    "<td><div>" + (loginInfo === rp.prId ? "<button onclick='deleteReply(\""+rp.reNo+"\")'>삭제</button>" : "") + "</div></td>" +
@@ -108,13 +119,14 @@
     		})
     	}
     	
-    	function insertChildRep(reNo,nickname){
-    		RrepNickname = '@'+nickname
+    	function insertChildRep(reNo,nickname,prId){
+    		const pageInfo = document.getElementById('pageInfo').value;
+    		RrepNickname = '@'+(pageInfo === prId ? "작성자":nickname);
     		const divs = document.querySelectorAll('#enroll_reply div'); 
     		divs.forEach(div => {
     	        div.style.backgroundColor = '#F4DABF';
     	    });
-    		document.getElementById('en_reply').value='@'+nickname+'  '
+    		document.getElementById('en_reply').value='@'+(pageInfo === prId ? "작성자":nickname)+'  '
     		document.getElementById('enroll_button').setAttribute('onclick',"insertReply('"+reNo+"')");
     	}
     	

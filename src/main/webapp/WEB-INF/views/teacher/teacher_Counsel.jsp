@@ -279,9 +279,11 @@
         			if(res === 0){
         				alert("상담일정 추가에 실패하였습니다.");
         			}
+        			selectSameMonthCounsel();
         		},
         		error:function(){
-        			console.log("이건 또 왜 안되는데");
+        			alert("상담일정 같은 시간중복은 불가합니다.");
+        			selectSameMonthCounsel();
         		}
         	})
         }
