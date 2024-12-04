@@ -26,15 +26,18 @@ import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
 import com.twoX.agit.member.model.vo.Student;
 import com.twoX.agit.member.model.vo.Teacher;
+import com.twoX.agit.member.service.MemberService;
 
 @CrossOrigin
 @Controller
 public class AfterSchoolBoardController {
 	private final AfterSchoolBoardService afterSchoolBoardService;
+	private final AfterSchoolBoardService afterschoolService;
 
 	@Autowired
-	public AfterSchoolBoardController(AfterSchoolBoardService afterSchoolBoardService) {
+	public AfterSchoolBoardController(AfterSchoolBoardService afterSchoolBoardService,AfterSchoolBoardService afterschoolService) {
 		this.afterSchoolBoardService = afterSchoolBoardService;
+		this.afterschoolService = afterschoolService;
 	}
 
 	
@@ -52,6 +55,7 @@ public class AfterSchoolBoardController {
 		} else {
 			System.out.println("세션에서 afCode 값을 가져왔습니다: " + afCode.getCode());
 		}
+		
 		//현재 세션의 코드를 code 라는 변수에 넣기
 		String code = afCode.getCode();
 		
@@ -71,12 +75,24 @@ public class AfterSchoolBoardController {
 			
 			}
 		
+		System.out.println("list" + list);
+
+		
+		System.out.println("밍" + studentList);
 		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		model.addAttribute("studentList", studentList);
 		return "teacher/afterClass";
+	}
+	
+	@RequestMapping("teacherAfterDetail.bo")
+	public String teacherAfterschoolDetail(@RequestParam(value="boNo")int boNo,@RequestParam(value="cpage",defaultValue="1") int currentPage,HttpSession session,Model model) {
+		AfterSchoolBoard npage = afterschoolService.selectNowBoard(boNo);
+		model.addAttribute("npage",npage);
+		model.addAttribute("cpage",currentPage);
+		return "teacher/teacherAsDetail";
 	}
 	
 	//학생 승인 목록 조회 (로그인된 관리자와 학교코드가 일치하며, 승인을 받지 않은 상태의 선생님 리스트)

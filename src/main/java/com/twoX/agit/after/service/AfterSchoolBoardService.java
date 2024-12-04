@@ -46,4 +46,5 @@ public interface AfterSchoolBoardService {
 		//방과후 글 삭제
 		int deleteAfterschoolBoard(AfterSchoolBoard asb);
 
+		
 }

@@ -22,4 +22,5 @@ public class AfterSchoolBoard {
 	private Date createDate;
 	private String originName;
 	private String changeName;
+	private String stuName;
 }

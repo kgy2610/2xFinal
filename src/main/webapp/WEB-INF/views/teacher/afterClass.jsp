@@ -12,7 +12,7 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>teacher_after_school</title>
+<title>AGIT</title>
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet"
@@ -40,7 +40,7 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
 					</div>
 					<hr class="head_line1">
 					<c:forEach var="b" items="${list}">
-						<a href="teacherAfterDetail.bo?bno=${b.boNo}">
+						<a href="teacherAfterDetail.bo?boNo=${b.boNo}&cpage=${pi.currentPage}">
 							<div class="body_content">
 								<div class="body_title">${b.title}</div>
 								<div class="body_writer">${b.stuId}</div>
@@ -95,7 +95,7 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
 				<div class="notice">
 					<div class="right_write_subject">학생리스트</div>
 					<div class="right_write_content">
-						<div class="right_write_content1">학년-반</div>
+						<div class="right_write_content1">학년 - 반</div>
 						<div class="right_write_content2">이름</div>
 					</div>
 					<hr class="head_line2">

@@ -1,3 +1,4 @@
+
 .whole_body{
     width: 1000px;
     height: 825px;
@@ -8,158 +9,231 @@
 }
 
 #attendance a {
-    color: #7C604B;
+	color: #7C604B;
 }
 
-.whole_body > h1 {
-    color: #A98467;
-    margin-top: 20px;
-    margin-left: 20px;
+.whole_body>h1 {
+	color: #A98467;
+	margin-top: 20px;
+	margin-left: 20px;
 }
-
 
 .attendance-container {
-    width: 1000px;
-    height: 800px;
-    margin: 80px auto;
-    margin-left: 603px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 800px; /* 최대 높이 설정 */
-    overflow-y: auto; /* 수직 스크롤 추가 */
+	width: 1040px;
+	height: 790px;
+	margin-left: 603px;
+	margin-top: 65px;
+	margin-bottom: 98px;
+	font-size: 25px;
+	color: #A98467;
+	border: none;
+	border-radius: 30px;
+	padding: 10px;
+	border: solid 3px #A98467;
 }
 
-
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-top: -5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	margin-top: -5px;
+	height: 100px;
 }
 
 .title {
-    font-size: 18px;
+	    font-size: 35px;
     font-weight: bold;
-    color: #8b6e4e;
+    color: #A98467;
+}
+
+#attendanceForm{
+	margin-left:500px;
 }
 
 .date-picker {
-    background-color: #f4e3d1;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    padding: 5px;
-    color: #8b6e4e;
+	height: 50px;
+    background-color: #F4DABF;
+    border: none;
+    border-radius: 20px;
+    color: #A98467;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 30px;
+    width: 250px;
+    text-align: center;
+    margin-left:40px;
+    padding:20px;
 }
 
 .attendance-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+	width: 95%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	text-align:center;
 }
 
-.attendance-table th, .attendance-table td {
-    padding: 8px;
+.attendance-table thead {
+    display: table; 
+    width:95%;
+}
+
+.attendance-table th{
+	padding: 8px 50px;
+	text-align: center;
+	border-bottom: 3px solid #A98467;
+	color: #8b6e4e;
+	border-radius:100px;
+}
+
+.attendance-table th:nth-child(1),.attendance-table th:nth-child(2){
+	padding: 8px;
+	text-align: center;
+	border-bottom: 3px solid #A98467;
+	color: #8b6e4e;
+	border-radius:100px;
+	width:24%;
+}
+
+.attendance-table tbody {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+    width:95%;
+}
+
+
+ .attendance-table td {
+	padding: 8px 50px;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #A98467;
     color: #8b6e4e;
+    border-radius: 100px;
+    width: 15%;
+}
+
+ .attendance-table td:nth-child(1),.attendance-table td:nth-child(2) {
+	padding: 8px 50px;
+    text-align: center;
+    border-bottom: 2px solid #A98467;
+    color: #8b6e4e;
+    border-radius: 100px;
+    width: 20%;
+}
+
+/* 스크롤바 스타일 */
+.tableBody::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tableBody::-webkit-scrollbar-track {
+    background: #F2CEB2;
+    border-radius: 8px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.tableBody::-webkit-scrollbar-thumb {
+    background: #A98467;
+    border-radius: 8px;
+}
+
+.tableBody::-webkit-scrollbar-thumb:hover {
+    background: #81644e;
 }
 
 .attendance-table th {
-    font-weight: 600;
-    color: #8b6e4e;
+	font-weight: 600;
+	color: #8b6e4e;
 }
 
 .attendance-table td {
-    font-size: 14px;
+	font-size: 20px;
 }
 
 .save-button {
+	float: left;
     width: 20%;
+    margin-top: 43px;
+    margin-left: 25%;
     padding: 10px;
-    margin-top: 15px;
-    margin-left: 40%;
-    background-color: #a98467;
+    background-color: #A98467;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 30px;
+    font-size: 20px;
     cursor: pointer;
 }
 
 .save-button:hover {
-    background-color: #8b6e4e;
+	background-color: #8e6c51;
 }
 
-.radio-label > label {
-    font-size: 18px;
-    line-height: 2rem;
-    padding: 0.2em 0.4em;
-    margin-left: 0px;
+.radio-label>label {
+	font-size: 18px;
+	line-height: 2rem;
+	padding: 0.2em 0.4em;
+	margin-left: 0px;
 }
 
 [type="radio"], span {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 [type="radio"] {
-    appearance: none;
-    border: 2px solid #A98467; /* 체크하기 전 테두리 색 */
-    border-radius: 50%;
-    width: 1.5em; /* 크기 조절 */
-    height: 1.5em;
-    transition: background-color 0.3s ease; /* 색상 변화만 부드럽게 */
+	appearance: none;
+	border: 2px solid #A98467; /* 체크하기 전 테두리 색 */
+	border-radius: 50%;
+	width: 1.5em; /* 크기 조절 */
+	height: 1.5em;
+	transition: background-color 0.3s ease; /* 색상 변화만 부드럽게 */
 }
 
 [type="radio"]:checked {
-    background-color: #A98467; /* 체크 시 채워질 색상 */
-    border: 2px solid #A98467; /* 체크된 상태에서도 같은 테두리 */
+	background-color: #A98467; /* 체크 시 채워질 색상 */
+	border: 2px solid #A98467; /* 체크된 상태에서도 같은 테두리 */
 }
 
 [type="radio"]:focus-visible {
-    outline-offset: max(2px, 0.1em);
-    outline: max(2px, 0.1em) dotted #A98467;
+	outline-offset: max(2px, 0.1em);
+	outline: max(2px, 0.1em) dotted #A98467;
 }
 
 [type="radio"]:hover {
-    box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
-    cursor: pointer;
+	box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+	cursor: pointer;
 }
 
-[type="radio"]:hover + span {
-    cursor: pointer;
+[type="radio"]:hover+span {
+	cursor: pointer;
 }
 
 [type="radio"]:disabled {
-    background-color: lightgray;
-    box-shadow: none;
-    opacity: 0.7;
-    cursor: not-allowed;
+	background-color: lightgray;
+	box-shadow: none;
+	opacity: 0.7;
+	cursor: not-allowed;
 }
 
-[type="radio"]:disabled + span {
-    opacity: 0.7;
-    cursor: not-allowed;
+[type="radio"]:disabled+span {
+	opacity: 0.7;
+	cursor: not-allowed;
 }
 
 .update_button {
+	    float: right;
     width: 20%;
     padding: 10px;
-    margin-top: 15px;
-    margin-left: 40%;
-    background-color: #4CAF50; /* 초록색 */
-    color: white; /* 텍스트 흰색 */
+    margin-top: 43px;
+    margin-right: 275px;
+    background-color: #DDE5B6;
+    color: #A98467;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 30px;
+    font-size: 20px;
     cursor: pointer;
 }
 
-
+.update_button:hover{
+	background-color: #c4d181; 
+	color: #A98467;
+}
