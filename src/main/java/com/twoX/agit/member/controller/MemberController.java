@@ -41,6 +41,7 @@ import com.twoX.agit.teacher.model.vo.TeacherNotice;
 public class MemberController {
 	public static final String SERVICE_KEY = "f72f3af259f9408d88585329410824e5";
 	private final MemberService memberService;
+	private static int loginCount = 0;
 
 	@Autowired
 	public MemberController(MemberService memberService) {
@@ -413,8 +414,8 @@ public class MemberController {
 
 		Parents loginParents = memberService.loginParents(p);
 		if (loginParents == null) { // 아이디없는 경우
-			mv.addObject("errorMsg", "일치하는 아이디를 찾을 수 없습니다.");
-			mv.setViewName("common/errorPage");
+			session.setAttribute("alertMsg", "일치하는 계정을 찾을 수 없습니다.");
+			mv.setViewName("member/login_parents");
 		} else {
 			session.setAttribute("loginUser", loginParents);
 			Student s = memberService.selectStudent(p);

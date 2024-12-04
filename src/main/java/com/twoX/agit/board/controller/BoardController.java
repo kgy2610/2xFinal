@@ -116,10 +116,6 @@ public class BoardController {
 	@RequestMapping("parents_score")
 	public String parents_score(HttpSession session) {
 		Student s = (Student)session.getAttribute("child");
-//		if(s.getClassCode()==null ) {
-//			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-//			return "parents/parents_myPage";
-//		}
 		ArrayList<Double> list = new ArrayList();
 		list = boardService.selectscore(s.getStuId());
 		if (list.size() < 7) {
@@ -144,7 +140,7 @@ public class BoardController {
 		return "parents/parents_score";
 	}
 	
-	//성적페이지 과목별별별별별별별 점수
+	//성적페이지 과목별 점수
 	@ResponseBody
 	@RequestMapping(value="score.list", produces="application/json; charset-UTF-8")
 	public String ajaxSelectReplyList(String subject,HttpSession session) {

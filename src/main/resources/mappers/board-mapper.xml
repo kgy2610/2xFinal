@@ -113,7 +113,7 @@
 	<!-- 출석률 -->
 	<select id="selectRate" resultType="map">
 	    SELECT  COUNT(*) AS total_count,
-    			SUM(CASE WHEN LA = 'AT' THEN 1 ELSE 0 END) AS la_at_count
+    			SUM(CASE WHEN LA != 'AB' THEN 1 ELSE 0 END) AS la_at_count
 	    FROM ATTENDANCE
 	    WHERE STU_ID = #{stuId} 
 	</select>

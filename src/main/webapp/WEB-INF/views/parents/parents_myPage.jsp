@@ -39,7 +39,10 @@
       <div class=".contents-left">
          <div class="mypage">
 			<%String grade = classCode.substring(9,10);
-			  String child_class = classCode.substring(10,12); %>
+			  String child_class = classCode.substring(10,12); 
+				if (child_class.split("")[0].equals("0")){ 
+				child_class = child_class.split("")[1];
+			} %>
             <p><%=grade %>학년 <%=child_class %>반 ${child.stuName}</p>
             <p>담임선생님 : ${teacher.tcName}</p>
             <p>선생님 연락처 : ${teacher.phone}</p>
