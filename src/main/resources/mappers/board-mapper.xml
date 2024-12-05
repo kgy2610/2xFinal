@@ -70,6 +70,7 @@
 		FROM NOTICE
 		WHERE TC_ID = #{tcId}
 		AND CLASS_CODE = #{classCode}
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<!-- 학생 점수 가져오기 -->
