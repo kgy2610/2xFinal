@@ -559,7 +559,6 @@ public class BoardController {
 		Teacher t = (Teacher)session.getAttribute("loginUser");
 		eib.setTcId(t.getTcId());
 		eib.setClassCode(t.getClassCode());
-		System.out.println(eib);
 		int result = boardService.insertIMGBoard(eib);
 		if(result>0) {
 			return "redirect:/teacher_eventImgList";
