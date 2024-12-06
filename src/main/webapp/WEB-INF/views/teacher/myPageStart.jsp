@@ -24,9 +24,9 @@
             <div class="input-row">
                 <form method="post" action="teacher.classCode">
                 <input type="hidden" name="tcId" value="${loginUser.tcId}" />
-                    <input type="text" id="grade" name="grade" class="input-field" placeholder="학년입력">
+                    <input type="text" id="grade1" name="grade" class="input-field" placeholder="학년입력">
                     <span class="label">&nbsp학년&nbsp&nbsp&nbsp</span>
-                    <input type="text" id="class" name="class" class="input-field" placeholder="반입력">
+                    <input type="text" id="class1" name="class" class="input-field" placeholder="반입력">
                     <span class="label">&nbsp반</span>
                 </div>
 

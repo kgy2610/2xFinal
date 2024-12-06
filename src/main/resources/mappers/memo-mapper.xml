@@ -13,7 +13,8 @@
 	<!--  메모 조회  -->
 	<select id="selectMemo" resultMap="MemoResultSet"> 
 		SELECT MEMO_NO, TC_ID, CLASS_CODE, MM_CONTENT 
-		FROM MEMO WHERE CLASS_CODE = #{classCode} 
+		FROM MEMO WHERE CLASS_CODE = #{classCode}
+		ORDER BY MEMO_NO ASC 
 	</select>
 	
 	<!--  메모 추가  -->
@@ -25,12 +26,17 @@
 	</insert>
 	
 	<!--  메모 삭제  -->
-	<delete id="deleteMemo" parameterType="String"> 
+	<delete id="deleteMemo" parameterType="map"> 
 		DELETE FROM MEMO 
-		WHERE MM_CONTENT = #{mmContent} 
+		WHERE MEMO_NO = #{MMno} AND MM_CONTENT = #{memoContent}
 	</delete>
 	
 	<!-- 메모 수정 -->
+	<update id="updateMemo" parameterType="map">
+		UPDATE MEMO
+		SET MM_CONTENT = #{newMemo}
+		WHERE MM_CONTENT = #{originalMemo} AND MEMO_NO = #{MMno}
+	</update>
 
 </mapper>
 

@@ -10,6 +10,8 @@
     <title>parents_menubar</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_myPage.css'/>">
+    <script src="<c:url value='/resources/js/parents/modify_parents_info_api.js'/>"></script>
+    <script src="<c:url value='/resources/js/parents/modify_parents_pwd_api.js'/>"></script>
 </head>
 <body>
 	<% if(alertMsg != null) {%>

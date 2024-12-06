@@ -26,7 +26,7 @@
 		}
 	</style>
     <div id="content_border" >
-    	<form action="enroll_IMG" method="POST">
+    	<form action="enroll_IMG" method="POST" id="enroll_bo">
         <div id="enroll_title" ><input type="text" id="en_title" name="title" placeholder="제목을 입력해주세요" required></div>
         <div id="enroll_content">
             <textarea id="en_content" name="boContent"></textarea>

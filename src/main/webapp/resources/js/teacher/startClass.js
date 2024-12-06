@@ -1,7 +1,7 @@
 function generateClassCode() {
     const schoolCode = document.getElementById('school-code').value;  // 학교 코드
-    const grade = document.getElementById('grade').value;  // 학년 (1자리로 그대로)
-    const classInput = document.getElementById('class').value.padStart(2, '0');  // 반 2자리로 맞추기
+    const grade = document.getElementById('grade1').value;  // 학년 (1자리로 그대로)
+    const classInput = document.getElementById('class1').value.padStart(2, '0');  // 반 2자리로 맞추기
 
     // 현재 년도에서 24만 추출
     const year = new Date().getFullYear().toString().slice(-2);
@@ -15,6 +15,7 @@ function generateClassCode() {
 
 // 학년이나 반이 변경될 때마다 classCode를 갱신
 window.onload = function() {
-    document.getElementById('grade').addEventListener('input', generateClassCode);
-    document.getElementById('class').addEventListener('input', generateClassCode);
+console.log('바뀌라고!')
+    document.getElementById('grade1').addEventListener('input', generateClassCode);
+    document.getElementById('class1').addEventListener('input', generateClassCode);
 };

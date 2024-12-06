@@ -24,6 +24,7 @@ function modifyParentsPwdAjax(prId,oldPwd,prQuestion){
 			    				document.getElementById('new_pwd').value = '';
 			    				document.getElementById('new_pwd_co').value = '';
 			    				closeUpdateModal()
+			    				location.reload();
 			    			}                   
 				    	},error: function(){
 				    			console.log("ajax통신 실패")

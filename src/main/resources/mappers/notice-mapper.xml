@@ -41,10 +41,10 @@
 	</update>
 	
 	<!--  공지사항 삭제  -->
-	<delete id="deleteNotice" parameterType="String">
+	<delete id="deleteNotice" parameterType="map">
 		DELETE 
 		FROM NOTICE
-		WHERE NT_CONTENT = #{noticeTitle}
+		WHERE NT_CONTENT = #{noticeTitle} AND NOTICE_NO = #{noticeNo}
 	</delete>
 	
 	
