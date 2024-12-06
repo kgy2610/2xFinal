@@ -24,14 +24,14 @@
             <div class="form">
                 <div class="input-row">
                     <span class="label">반 이름&nbsp;&nbsp;&nbsp;</span>
-                    <input type="text" id="grade" name="className" class="input-field" maxlength="10" placeholder="방과후 반 이름을 입력하세요." required>
+                    <input type="text" id="grade1" name="className" class="input-field" maxlength="10" placeholder="방과후 반 이름을 입력하세요." required>
                 </div>
                 <div class="input-row">
                     <span class="label">반 설명&nbsp;&nbsp;&nbsp;</span>
-                    <input type="text" id="description" name="explanation" class="input-field" maxlength="20" placeholder="반 설명을 입력하세요." required>
+                    <input type="text" id="description1" name="explanation" class="input-field" maxlength="20" placeholder="반 설명을 입력하세요." required>
                 </div>
                 <div class="button-row">
-                    <input type="text" id="class-code" name="code" class="input-field" placeholder="참여코드를 입력하세요." required>
+                    <input type="text" id="class-code1" name="code" class="input-field" placeholder="참여코드를 입력하세요." required>
                     <button class="add-button" type="submit">+</button>
                 </div>
             </div>
