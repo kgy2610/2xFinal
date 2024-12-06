@@ -29,6 +29,8 @@
  		<result column="HM_CONTENT" property="hmContent" />
  		<result column="CREATE_DATE" property="createDate" />
  		<result column="SUBJECT" property="subject" />
+ 		<result column="ORIGIN_NAME" property="originName"/>
+ 		<result column="CHANGE_NAME" property="changeName"/>
  	</resultMap>
  	
  	<resultMap type="HomeworkFile" id="HomeworkFileResultSet">
