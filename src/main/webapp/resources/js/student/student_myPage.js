@@ -153,30 +153,42 @@ function getAirStatus() {
     }
 
     function drawschedule(itemArr) {
-    // 오늘과 내일의 시간표 데이터 구분
-    const todaySchedule = itemArr.slice(0, 5);  // 오늘의 시간표
-    const tomorrowSchedule = itemArr.slice(5, 10);  // 내일의 시간표
+    // 데이터가 없을 때 처리
+    if (!itemArr || itemArr.length === 0) {
+        document.getElementsByClassName("scheduledraw")[0].innerHTML = "<p>시간표 데이터가 없습니다.</p>";
+        return;
+    }
 
-    // 테이블 시작 태그 생성
+    // 오늘과 내일의 시간표 분리 (최대 5교시 기준)
+    const maxPeriods = 5; // 최대 교시 수
+    const todaySchedule = itemArr.slice(0, maxPeriods); // 오늘의 시간표
+    const tomorrowSchedule = itemArr.slice(maxPeriods, maxPeriods * 2); // 내일의 시간표
+
+    // 테이블 시작
     let tableHtml = "<div class='draw1'><h4>오늘과 내일의 시간표</h4>";
     tableHtml += "<table>";
-    tableHtml += "<tr><th></th><th>오늘의 시간표</th><th>내일의 시간표</th></tr>"; // 테이블 헤더
+    tableHtml += "<tr><th>교시</th><th>오늘의 시간표</th><th>내일의 시간표</th></tr>";
 
-    // 교시별로 오늘과 내일의 시간표 내용을 테이블에 추가
-    for (let i = 0; i < 5; i++) {
-        const period = todaySchedule[i] && todaySchedule[i].PERIO ? todaySchedule[i].PERIO : "정보 없음";
-        const todayContent = todaySchedule[i] && todaySchedule[i].ITRT_CNTNT ? todaySchedule[i].ITRT_CNTNT : "주말입니다";
-        const tomorrowContent = tomorrowSchedule[i] && tomorrowSchedule[i].ITRT_CNTNT ? tomorrowSchedule[i].ITRT_CNTNT : "주말입니다";
-        
-        tableHtml += "<tr>";
-        tableHtml += "<td>" + period + "교시</td>";  // 교시 번호
-        tableHtml += "<td>" + todayContent + "</td>";  // 오늘의 시간표
-        tableHtml += "<td>" + tomorrowContent + "</td>";  // 내일의 시간표
-        tableHtml += "</tr>";
+    // 교시별 시간표 작성
+    for (let i = 0; i < maxPeriods; i++) {
+        const period = todaySchedule[i] ? todaySchedule[i].PERIO + "교시" : null;
+        const todayContent = todaySchedule[i] && todaySchedule[i].ITRT_CNTNT !== "주말입니다" ? todaySchedule[i].ITRT_CNTNT : null;
+        const tomorrowContent = tomorrowSchedule[i] && tomorrowSchedule[i].ITRT_CNTNT !== "주말입니다" ? tomorrowSchedule[i].ITRT_CNTNT : null;
+
+        // 교시가 유효하고, 시간표 내용이 있는 경우만 출력
+        if (period && (todayContent || tomorrowContent)) {
+            tableHtml += `<tr>`;
+            tableHtml += `<td>${period}</td>`;
+            tableHtml += `<td>${todayContent || "쉬는날"}</td>`;
+            tableHtml += `<td>${tomorrowContent || "쉬는날"}</td>`;
+            tableHtml += `</tr>`;
+        }
     }
-    
-    tableHtml += "</table></div>"; // 테이블 닫기
 
-    // 테이블 HTML을 특정 클래스에 출력
+    // 콘솔로 확인
+    console.log("오늘의 시간표:", todaySchedule);
+    console.log("내일의 시간표:", tomorrowSchedule);
+
+    tableHtml += "</table></div>";
     document.getElementsByClassName("scheduledraw")[0].innerHTML = tableHtml;
 }
