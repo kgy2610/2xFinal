@@ -204,8 +204,11 @@ public class MemberDao {
 	}
 
 	// 선생님 - 공지사항 삭제
-	public int deleteNotice(SqlSessionTemplate sqlSession, String noticeTitle) {
-		return sqlSession.delete("noticeMapper.deleteNotice", noticeTitle);
+	public int deleteNotice(SqlSessionTemplate sqlSession, int noticeNo, String noticeTitle) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("noticeTitle", noticeTitle);
+		params.put("noticeNo", noticeNo);
+		return sqlSession.delete("noticeMapper.deleteNotice",params);
 	}
 	
 	// 선생님 - 메모 조회
@@ -224,8 +227,21 @@ public class MemberDao {
 	}
 
 	// 선생님 - 메모 삭제
-	public int deleteMemo(SqlSessionTemplate sqlSession, String memoContent) {
-		return sqlSession.delete("memoMapper.deleteMemo", memoContent);
+	public int deleteMemo(SqlSessionTemplate sqlSession, int MMno, String memoContent) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("MMno", MMno);
+		params.put("memoContent", memoContent);
+		return sqlSession.delete("memoMapper.deleteMemo",params);
+	}
+	
+	// 선생님 - 메모 수정
+	public int updateMemo(SqlSessionTemplate sqlSession, String tcId, int MMno, String originalMemo, String newMemo) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("tcId", tcId);
+		params.put("MMno", MMno);
+		params.put("originalMemo", originalMemo);
+		params.put("newMemo", newMemo);
+		return sqlSession.update("memoMapper.updateMemo", params);
 	}
 
 	// 선생님 - 숙제 조회
