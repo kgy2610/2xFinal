@@ -80,6 +80,15 @@
 	 		<mapping path="/deleteImgBoard"/>
 	 		<mapping path="/enroll_IMG"/>
 	 		<mapping path="/modifyImgBoard"/>
+	 		<mapping path="/list.bo"/>
+	 		<mapping path="/teacherAfterDetail.bo"/>
+	 		<mapping path="/eventPhotos.af"/>
+	 		<mapping path="/updatePassword.me"/>
+	 		<mapping path="/teacher.classCode"/>
+	 		<mapping path="/teacher.myPage"/>
+	 		<mapping path="/updateInfo.me"/>
+	 		<mapping path="/classdelete.me"/>
+	 		<mapping path="/makeAfterClass.me"/>
 	 		<beans:bean class="com.twoX.agit.common.interceptor.TeacherInterceptor" id="TeacherInterceptor" />
 	 	</interceptor>
 	 </interceptors>
