@@ -31,6 +31,13 @@ if (s != null) {
     <script src="<c:url value='/resources/js/teacher/teacher_menubar.js'/>"></script>
 </head>
 <body>
+	   <% if(alertMsg != null) {%>
+      <script>
+      alert("<%=alertMsg%>");
+      </script>
+   <% session.removeAttribute("alertMsg"); %>
+   
+   <%} %>
     <div class="nav">
         <img src="<c:url value='/resources/img/logo.png'/>">
         <div class="menu">
