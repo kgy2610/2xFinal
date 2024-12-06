@@ -133,6 +133,7 @@
    text-overflow: ellipsis;
    max-width: 200px; /* 셀 너비 제한 */
    display: inline-block;
+   width: 200px;
 }
 
 .notice tr{
