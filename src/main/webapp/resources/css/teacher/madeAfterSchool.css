@@ -39,20 +39,22 @@ img {
 }
 
 .input-field {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 50px; 
-    width: 400px; 
-    height: 80px;
-    text-align: center;
-    font-size: 25px;
-    background-color: white;
-    color: #BFBFBF;
+    padding: 10px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 50px !important; 
+    width: 400px !important; 
+    height: 80px !important;
+    text-align: center !important;
+    font-size: 25px !important;
+    background-color: white !important;
+    color: #BFBFBF !important;
+    margin-bottom: 10px;
 }
 
 .label {
     font-size: 25px;
-    color: #7C604B
+    color: #7C604B;
+    padding: 20px;
 }
 
 .button-row {
