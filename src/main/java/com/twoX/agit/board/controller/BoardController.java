@@ -111,7 +111,6 @@ public class BoardController {
 	
 	     br.close();
 	     urlConnection.disconnect();
-	     	     
 	     return result;
 	     
 	  }
@@ -329,7 +328,7 @@ public class BoardController {
 	@RequestMapping("enroll_board")
 	public String enroll_board(ParentsBoard pb, MultipartFile upfile, HttpSession session, Model model) {
 		model.addAttribute("bbsId", "parentsCommunity");
-		
+		System.out.println(pb);
 		Student s = (Student)session.getAttribute("child");
 		Parents p = (Parents)session.getAttribute("loginUser");
 		if(!upfile.getOriginalFilename().equals("")) {

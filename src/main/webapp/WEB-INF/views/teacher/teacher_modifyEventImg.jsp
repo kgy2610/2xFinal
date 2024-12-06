@@ -25,7 +25,7 @@
 	    </style>
 	    
     <div id="content_border">
-    	<form action="modifyImgBoard" method="POST">
+    	<form action="modifyImgBoard" method="POST" id="enroll_bo">
     		<div id="enroll_title" ><input type="text" id="en_title" placeholder="제목을 입력해주세요" value="${npage.title}" name="title"></div>
 	        <div id="enroll_content" >
 	        	<input type="hidden" name = "boNo" value = "${npage.boNo}">
