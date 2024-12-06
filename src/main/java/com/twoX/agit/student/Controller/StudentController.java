@@ -126,7 +126,6 @@ public class StudentController {
 	@RequestMapping("enroll.homework_student")
 	public String enrollHomeworkStu(@ModelAttribute Homework h,
 									@ModelAttribute HomeworkSubmit hm,
-									@RequestParam("upfile") MultipartFile upfile,
 									HttpSession session,
 									Model model) {
 		model.addAttribute("bbsId", "homework");
