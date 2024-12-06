@@ -25,7 +25,7 @@
     	}
     </style>
     <div id="content_border">
-    	<form action="enroll_board" method="POST" enctype="multipart/form-data">
+    	<form action="enroll_board" method="POST" enctype="multipart/form-data" id="enroll_bo">
         <div id="enroll_title" ><input type="text" id="en_title" name="boTitle" placeholder="제목을 입력해주세요" required></div>
         <div id="enroll_content">
             <textarea id="en_content" name="contents"></textarea>
@@ -88,6 +88,16 @@
 	        	onImageUpload: fileUpload
 	        }
             });
+            $('#enroll_bo').on('submit', function (e) {
+                // Summernote 내용 가져오기
+                var content = $('#en_content').val().trim();
+
+                if (!content) {
+                  // 내용이 비어있으면 경고 메시지 표시 및 제출 막기
+                  alert('내용을 입력해주세요.');
+                  e.preventDefault(); // 폼 제출 중단
+                }
+              });
         })
         
         function fileUpload(files){
@@ -126,7 +136,6 @@
                 }
             })
         }
-        
         
         
         

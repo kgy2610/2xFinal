@@ -218,8 +218,8 @@ public class MemberServiceImpl implements MemberService{
 
 	// 선생님 - 공지사항 삭제
 	@Override
-	public int deleteNotice(String noticeTitle) {
-		return memberDao.deleteNotice(sqlSession, noticeTitle);
+	public int deleteNotice(int noticeNo, String noticeTitle) {
+		return memberDao.deleteNotice(sqlSession, noticeNo, noticeTitle);
 	}
 	
 	// 선생님 - 메모 전체조회
@@ -236,8 +236,14 @@ public class MemberServiceImpl implements MemberService{
 
 	// 선생님 - 메모 삭제
 	@Override
-	public int deleteMemo(String memoContent) {
-		return memberDao.deleteMemo(sqlSession, memoContent);
+	public int deleteMemo(int MMno, String memoContent) {
+		return memberDao.deleteMemo(sqlSession, MMno, memoContent);
+	}
+	
+	// 선생님 - 메모 수정
+	@Override
+	public int updateMemo(String tcId, int MMno, String originalMemo, String newMemo) {
+		return memberDao.updateMemo(sqlSession, tcId, MMno, originalMemo, newMemo);
 	}
 	
 	// 선생님 - 숙제 페이징

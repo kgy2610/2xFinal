@@ -85,7 +85,7 @@ public class StudentController {
 		
 		// 클릭한 숙제 정보 불러오기
 		Homework npage = studentService.selectNowHomework(boNo);
-		
+		System.out.println(npage);
 		// 현재 학생이 제출한 숙제 상태를 가져옴
 	    HomeworkSubmit hm = studentService.selectHomeworkSubmit(boNo, s.getStuId());
 	    

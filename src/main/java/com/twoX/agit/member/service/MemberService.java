@@ -113,7 +113,7 @@ public interface MemberService {
 	int updateNotice(String noticeTitle, int noticeNo);
 
 	// 공지사항 삭제
-	int deleteNotice(String noticeTitle);
+	int deleteNotice(int noticeNo, String noticeTitle);
 
 	// 메모 리스트
 	ArrayList<TeacherMemo> getTeacherMemo(String classCode);
@@ -122,7 +122,10 @@ public interface MemberService {
 	int insertMemo(String tcId, String classCode, String memoContent);
 
 	// 메모 삭제
-	int deleteMemo(String memoContent);
+	int deleteMemo(int MMno, String memoContent);
+	
+	// 메모 수정
+	int updateMemo(String tcId, int MMno, String originalMemo, String newMemo);
 	
 	// 숙제 전체조회
 	int getListCount();

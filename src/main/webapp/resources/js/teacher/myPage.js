@@ -158,6 +158,7 @@ function confirmNoticeEdit() {
 
 // 공지사항 삭제
 function confirmNoticeDelete() {
+	const noticeNo = document.getElementById('noticeNo').value; // 모달에서 noticeNo 가져오기
     const noticeTitle = document.getElementById("noticeTitle").value;  // 삭제할 공지사항 제목
 
     // 삭제 요청을 위한 폼 생성
@@ -170,8 +171,15 @@ function confirmNoticeDelete() {
     titleInput.type = 'hidden';
     titleInput.name = 'noticeTitle';  // noticeTitle로 공지사항 제목 전송
     titleInput.value = noticeTitle;
+    
+    // 공지사항 번호를 폼에 추가
+    const noInput = document.createElement('input');
+    noInput.type = 'hidden';
+    noInput.name = 'noticeNo';
+    noInput.value = noticeNo;
 
     form.appendChild(titleInput);
+    form.appendChild(noInput);
 
     // form을 문서에 추가하고 제출
     document.body.appendChild(form);
@@ -255,26 +263,18 @@ function closeAddMemoModal() {
 
 
 
+// 메모 수정 모달 열기
+function openModifyMemoModal(memoContent, MMno) {
+    document.getElementById('modifyMemoModal').style.display = 'block';
+    document.getElementById('originalMemoText').value = memoContent; // 기존 메모 설정
+    document.getElementById('modifyMemoText').value = memoContent; // 초기값으로 기존 메모 설정
+    document.getElementById('modifyMemoMMno').value = MMno;  // MMno 값 설정
+}
 
-    // 메모 수정 모달 열기
-    function openModifyMemoModal(memoContent) {
-        document.getElementById('modifyMemoModal').style.display = 'block';
-        document.getElementById('modifyMemoText').value = memoContent;
-    }
-
-    // 메모 수정 모달 닫기
-    function closeModifyMemoModal() {
-        document.getElementById('modifyMemoModal').style.display = 'none';
-    }
-
-    // 메모 수정 내용 저장
-    function submitModifiedMemo() {
-        const modifiedMemoText = document.getElementById('modifyMemoText').value;
-        
-        // 수정 로직 추가 (예: 기존 메모 데이터 업데이트)
-        alert(`메모 수정 완료:\n내용: ${modifiedMemoText}`);
-        closeModifyMemoModal();
-    }
+// 메모 수정 모달 닫기
+function closeModifyMemoModal() {
+    document.getElementById('modifyMemoModal').style.display = 'none';
+}
 
 
     // 페이지 클릭 시 모달 닫기

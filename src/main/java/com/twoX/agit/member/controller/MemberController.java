@@ -547,6 +547,7 @@ public class MemberController {
 	        
 	        // classCode를 이용해 메모 리스트 가져오기
 	        ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
+	        System.out.println(teacherMemo);
 	        //메모 리스트를 세션에 추가
 	        session.setAttribute("teacherMemo", teacherMemo);
 
@@ -705,14 +706,16 @@ public class MemberController {
 
 	// 선생님 공지사항 삭제
 	@RequestMapping("deleteNotice")
-	public String deleteNotice(String noticeTitle, HttpSession session, Model model) {
+	public String deleteNotice(int noticeNo, String noticeTitle, HttpSession session, Model model) {
 		model.addAttribute("bbsId", "teacherMypage");
+		
+		System.out.println(noticeNo);
 		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 
 		String tcId = loginTeacher.getTcId();
 
-		int result = memberService.deleteNotice(noticeTitle);
+		int result = memberService.deleteNotice(noticeNo, noticeTitle);
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
@@ -741,17 +744,33 @@ public class MemberController {
 
 	// 선생님 메모 삭제
 	@RequestMapping("deleteMemo")
-	public String deleteMemo(String memoContent, HttpSession session, Model model) {
+	public String deleteMemo(String memoContent, int MMno, HttpSession session, Model model) {
 		model.addAttribute("bbsId", "teacherMypage");
 		
 		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginTeacher.getClassCode();
 		
-		int result = memberService.deleteMemo(memoContent);
+		int result = memberService.deleteMemo(MMno, memoContent);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
 		model.addAttribute("teacherMemo", teacherMemo);
 
+		return "teacher/myPage";
+	}
+	
+	// 선생님 메모 수정
+	@RequestMapping("updateMemo")
+	public String updateMemo(int MMno, String originalMemo, String newMemo, HttpSession session, Model model) {
+		
+		Teacher loginTeacher = (Teacher) session.getAttribute("loginUser");
+		String tcId = loginTeacher.getTcId();
+		String classCode = loginTeacher.getClassCode();
+		
+		int result = memberService.updateMemo(tcId, MMno, originalMemo, newMemo);
+		
+		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
+		model.addAttribute("teacherMemo", teacherMemo);
+		
 		return "teacher/myPage";
 	}
 	

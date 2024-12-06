@@ -42,7 +42,7 @@
                 			<p style="font-weight:bold;">작성자</p>
                 		</c:when>
                 		<c:otherwise>
-                			${npage.prNickname}
+                			${loginUser.nickname}
                 		</c:otherwise>
                 	</c:choose>
                 </td>
