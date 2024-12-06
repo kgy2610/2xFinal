@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class TeacherMemo {
-	private String MMno;
+	private int MMno;
 	private String tcId;
 	private String classCode;
 	private String mmContent;

@@ -82,7 +82,7 @@
 		    <c:forEach var="memo" items="${teacherMemo}">
 		        <div class="memo_box">
 		            <!-- 각 메모 항목 표시 -->
-		            <div class="memo_text" onclick="openModifyMemoModal('${memo.mmContent}')">
+		            <div class="memo_text" onclick="openModifyMemoModal('${memo.mmContent}', '${memo.MMno}')">
 		                ${memo.mmContent}
 		                
 		            </div>
@@ -90,6 +90,7 @@
 					<!-- 삭제 버튼 -->
 		        <form method="POST" action="deleteMemo">
 		            <input type="hidden" name="memoContent" value="${memo.mmContent}">
+		            <input type="hidden" name="MMno" value="${memo.MMno}" >
 		            <button type="submit" class="memo-delete-btn">x</button>
 		        </form>
 		        </div>
@@ -145,17 +146,22 @@
 		</div>
 
 
-        <!-- 메모 수정 모달 -->
-        <div id="modifyMemoModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModifyMemoModal()">&times;</span>
-                <h3>메모 수정</h3>
-                <form id="modifyMemoForm">
-                    <input type="text" id="modifyMemoText" placeholder="메모 내용을 수정하세요..." required>
-                    <button type="button" onclick="submitModifiedMemo()">저장</button>
-                </form>
-            </div>
-        </div>
+		<!-- 메모 수정 모달 -->
+		<div id="modifyMemoModal" class="modal">
+		    <div class="modal-content">
+		        <span class="close" onclick="closeModifyMemoModal()">&times;</span>
+		        <h3>메모 수정</h3>
+		        <!-- 수정 데이터를 포함할 폼 -->
+		        <form id="modifyMemoForm" method="POST" action="updateMemo">
+		            <!-- 기존 메모 내용 (hidden으로 전송) -->
+		            <input type="hidden" id="originalMemoText" name="originalMemo">
+		            <!-- 수정된 메모 내용 -->
+		            <input type="text" id="modifyMemoText" name="newMemo" placeholder="메모 내용을 수정하세요..." required>
+		            <input type="hidden" id="modifyMemoMMno" name="MMno" >
+		            <button type="submit">저장</button>
+		        </form>
+		    </div>
+		</div>
 
 	</div>
 </body>
