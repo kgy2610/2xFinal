@@ -61,6 +61,24 @@ $(function(){
                 }
             })
         }
+        
+        // 수정 버튼 클릭 이벤트
+	    document.addEventListener("DOMContentLoaded", () => {
+            const today = new Date();
+            console.log(deadLine);
+            console.log(today);
+
+	        const submitbutton = document.getElementById("submit_button");
+	        submit_button.addEventListener("click", (event) => {
+	            if (today > deadLine) {
+	                event.preventDefault();
+	                alert("날짜가 지났습니다. 숙제를 올릴 수 없습니다.");
+	                location.href = `homework`;
+	            } else {
+	                location.href = `hmAnswer_modify?boNo=${npage.boNo}&cpage=${cpage}`;
+	            }
+	        });
+	    });
 
         document.querySelectorAll(".text-limit").forEach(function (element) {
             const text = element.innerText;
