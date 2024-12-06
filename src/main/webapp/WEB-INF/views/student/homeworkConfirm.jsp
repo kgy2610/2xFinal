@@ -64,9 +64,5 @@
             <button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 
     </div>
-    
-    <div id="chat_button"><img src="<c:url value='/resource/img/student/message.png'/>"/></div>
-
-	
 </body>
 </html>

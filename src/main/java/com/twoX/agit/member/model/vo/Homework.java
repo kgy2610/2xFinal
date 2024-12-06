@@ -23,6 +23,7 @@ public class Homework {
 	private String hmTitle;
 	private Date deadLine;
 	private String hmContent;
+	private String hmStuContent;
 	private Date createDate;
 	private String subject;
 	private String status;
