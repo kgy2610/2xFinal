@@ -491,6 +491,9 @@ public class MemberController {
 	@RequestMapping("modify_parents_info")
 	public int modifyParentsInfo(Parents p, HttpSession session, Model model) {
 		int result = memberService.updateParentsInfo(p);
+		if(result>0) {
+			session.setAttribute("loginUser", memberService.loginParents(p));
+		}
 		return result;
 	}
 
