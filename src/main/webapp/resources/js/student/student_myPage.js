@@ -1,42 +1,3 @@
-// 모달 열기 및 닫기 함수
-function openUpdateModal() {
-    document.getElementById('updateModal').style.display = 'flex';
-}
-
-function closeUpdateModal() {
-    document.getElementById('updateModal').style.display = 'none';
-}
-
-// 정보 수정 폼에서 비밀번호 수정 폼으로 전환
-function switchToPwdForm() {
-    document.getElementById('infoForm').style.display = 'none';
-    document.getElementById('pwdForm').style.display = 'block';
-    document.getElementById('modalTitle').textContent = "비밀번호 수정";
-}
-
-// 비밀번호 수정 폼에서 정보 수정 폼으로 전환
-function switchToInfoForm() {
-    document.getElementById('pwdForm').style.display = 'none';
-    document.getElementById('infoForm').style.display = 'block';
-    document.getElementById('modalTitle').textContent = "정보 수정";
-}
-
-// 외부 클릭 시 모달 닫기
-window.onclick = function (event) {
-    const updateModal = document.getElementById('updateModal');
-    const imageSelectModal = document.getElementById('imageSelectModal');
-
-    // 정보 수정 모달 외부 클릭 시 닫기
-    if (event.target == updateModal) {
-        closeUpdateModal();
-    }
-
-    // 이미지 선택 모달 외부 클릭 시 닫기
-    if (event.target == imageSelectModal) {
-        closeImageSelectModal();
-    }
-}
-
 // 이미지 선택 모달 열기 및 닫기 함수
 function openImageSelectModal() {
     document.getElementById('imageSelectModal').style.display = 'flex';
@@ -93,11 +54,44 @@ function searchMealList(){
        document.getElementsByClassName("food")[0].innerHTML = "<tr><td colspan='5'>쉬는날!</td></tr>";
        return;
    }
-
+	// 오늘 날짜 가져오기
+	const today = new Date();
+	
+	// 연도, 월, 일 추출
+	const year = today.getFullYear();
+	const month = String(today.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+	const day = String(today.getDate()).padStart(2, "0"); // 일은 2자리로 변환
+	const tomorrow = new Date(today);
+	tomorrow.setDate(today.getDate() + 1); // 오늘에 1일을 추가
+	
+	// 연도, 월, 일 추출
+	const tomyear = tomorrow.getFullYear();
+	const tommonth = String(tomorrow.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+	const tomday = String(tomorrow.getDate()).padStart(2, "0"); // 일은 2자리로 변환
+	
+	
+	const formattedDate = `${year}${month}${day}`;
+	const toformattedDate = `${tomyear}${tommonth}${tomday}`;
    // 데이터가 있을 경우 테이블에 데이터 추가
+   try{
+   		if(itemArr[0].MLSV_FROM_YMD === formattedDate){
+	   		document.getElementsByClassName("food_left")[0].innerHTML += ("<div class='food1'>"+"<h4>오늘의 급식</h4>"+"<p>" + (itemArr[0].DDISH_NM || "정보 없음") + "</p>"+"</div>");
+	    }
+   		if(itemArr[1].MLSV_FROM_YMD === toformattedDate){
+   			document.getElementsByClassName("food_right")[0].innerHTML += ("<div class='food2'>"+"<h4>내일의 급식</h4>"+"<p>" + (itemArr[1].DDISH_NM || "정보 없음") + "</p>"+"</div>");
+   		}
+   		
+   }catch(error){
+		if(itemArr[0].MLSV_FROM_YMD === formattedDate){
+			document.getElementsByClassName("food_right")[0].innerHTML += ("<div class='food2'>"+"<h4>내일의 급식</h4>"+"<p>" + "쉬는날 입니다" + "</p>"+"</div>");
+		}
+		if(itemArr[0].MLSV_FROM_YMD === toformattedDate){
+			document.getElementsByClassName("food_left")[0].innerHTML += ("<div class='food1'>"+"<h4>오늘의 급식</h4>"+"<p>" + "쉬는날 입니다" + "</p>"+"</div>");
+			document.getElementsByClassName("food_right")[0].innerHTML += ("<div class='food2'>"+"<h4>내일의 급식</h4>"+"<p>" + (itemArr[0].DDISH_NM || "정보 없음") + "</p>"+"</div>");
+		}
+   }
    
-   document.getElementsByClassName("food_left")[0].innerHTML += ("<div class='food1'>"+"<h4>오늘의 급식</h4>"+"<p>" + (itemArr[0].DDISH_NM || "정보 없음") + "</p>"+"</div>");
-   document.getElementsByClassName("food_right")[0].innerHTML += ("<div class='food2'>"+"<h4>내일의 급식</h4>"+"<p>" + (itemArr[1].DDISH_NM || "정보 없음") + "</p>"+"</div>");
+   
 }
 
 
@@ -120,30 +114,63 @@ function getAirStatus() {
     }
 
     function drawschedule(itemArr) {
-    // 오늘과 내일의 시간표 데이터 구분
-    const todaySchedule = itemArr.slice(0, 5);  // 오늘의 시간표
-    const tomorrowSchedule = itemArr.slice(5, 10);  // 내일의 시간표
+    // 데이터가 없을 때 처리
+    if (!itemArr || itemArr.length === 0) {
+        document.getElementsByClassName("scheduledraw")[0].innerHTML = "<p>시간표 데이터가 없습니다.</p>";
+        return;
+    }
 
-    // 테이블 시작 태그 생성
+    // 오늘과 내일의 시간표 분리 (최대 5교시 기준)
+    const maxPeriods = 7; // 최대 교시 수
+	const referenceDate = itemArr[0].ALL_TI_YMD;
+    const todaySchedule = []; // 오늘의 시간표
+    const tomorrowSchedule = []; // 내일의 시간표
+	for (const entry of itemArr){
+		if(itemArr.length<5){
+			tomorrowSchedule.push(entry);
+		}else if(entry.ALL_TI_YMD === referenceDate){
+			todaySchedule.push(entry);
+		}else{
+			tomorrowSchedule.push(entry);
+		}
+	}
+	
+    // 테이블 시작
     let tableHtml = "<div class='draw1'><h4>오늘과 내일의 시간표</h4>";
     tableHtml += "<table>";
-    tableHtml += "<tr><th></th><th>오늘의 시간표</th><th>내일의 시간표</th></tr>"; // 테이블 헤더
+    tableHtml += "<tr><th>교시</th><th>오늘의 시간표</th><th>내일의 시간표</th></tr>";
+	if(todaySchedule.length>7){
+		// 콘솔로 확인
+	    console.log("오늘의 시간표:", todaySchedule);
+	    console.log("내일의 시간표:", tomorrowSchedule);
+		tableHtml += "<tr><td>1교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>2교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>3교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>4교시</td><td>-</td><td>-</td></tr>"
+	    tableHtml += "</table></div>";
+	    document.getElementsByClassName("scheduledraw")[0].innerHTML = tableHtml;
+	    return;
+	}
+    // 교시별 시간표 작성
+    for (let i = 0; i < maxPeriods; i++) {
+        const period = (i+1) + "교시";
+        const todayContent = todaySchedule[i] && todaySchedule[i].ITRT_CNTNT !== "주말입니다" ? todaySchedule[i].ITRT_CNTNT : null;
+        const tomorrowContent = tomorrowSchedule[i] && tomorrowSchedule[i].ITRT_CNTNT !== "주말입니다" ? tomorrowSchedule[i].ITRT_CNTNT : null;
 
-    // 교시별로 오늘과 내일의 시간표 내용을 테이블에 추가
-    for (let i = 0; i < 5; i++) {
-        const period = todaySchedule[i] && todaySchedule[i].PERIO ? todaySchedule[i].PERIO : "정보 없음";
-        const todayContent = todaySchedule[i] && todaySchedule[i].ITRT_CNTNT ? todaySchedule[i].ITRT_CNTNT : "주말입니다";
-        const tomorrowContent = tomorrowSchedule[i] && tomorrowSchedule[i].ITRT_CNTNT ? tomorrowSchedule[i].ITRT_CNTNT : "주말입니다";
-        
-        tableHtml += "<tr>";
-        tableHtml += "<td>" + period + "교시</td>";  // 교시 번호
-        tableHtml += "<td>" + todayContent + "</td>";  // 오늘의 시간표
-        tableHtml += "<td>" + tomorrowContent + "</td>";  // 내일의 시간표
-        tableHtml += "</tr>";
+        // 교시가 유효하고, 시간표 내용이 있는 경우만 출력
+        if (period && (todayContent || tomorrowContent)) {
+            tableHtml += `<tr>`;
+            tableHtml += `<td>${period}</td>`;
+            tableHtml += `<td>${todayContent || "-"}</td>`;
+            tableHtml += `<td>${tomorrowContent || "-"}</td>`;
+            tableHtml += `</tr>`;
+        }
     }
-    
-    tableHtml += "</table></div>"; // 테이블 닫기
+	
+    // 콘솔로 확인
+    console.log("오늘의 시간표:", todaySchedule);
+    console.log("내일의 시간표:", tomorrowSchedule);
 
-    // 테이블 HTML을 특정 클래스에 출력
+    tableHtml += "</table></div>";
     document.getElementsByClassName("scheduledraw")[0].innerHTML = tableHtml;
 }

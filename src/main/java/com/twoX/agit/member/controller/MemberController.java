@@ -317,6 +317,7 @@ public class MemberController {
 		String formattedDate = today.format(formatter);
 		LocalDate tomorrow = today.plusDays(1);
 		String tomorrowString = tomorrow.format(formatter);
+		
 		url += "?KEY=" + SERVICE_KEY;
 		url += "&type=json";
 		url += "&pIndex=1";
@@ -367,18 +368,31 @@ public class MemberController {
 		LocalDate today = LocalDate.now();
 		int currentYear = today.getYear();
 		String year = String.valueOf(currentYear); // 현재 연도
+		
 
 		// 학기 결정 (1월~6월: 1학기, 7월~12월: 2학기)
 		int currentMonth = today.getMonthValue();
 		String semester = (currentMonth >= 1 && currentMonth <= 6) ? "1" : "2";
 
-		String grade = s.getClassCode().substring(9, 9); // 학년 (예: "01")
-		String classNum = s.getClassCode().substring(11, 11); // 반 (예: "02")
+		String grade = s.getClassCode().substring(9, 10); 
+		String classNum;
+		 try {
+			 classNum = String.valueOf(Integer.parseInt(s.getClassCode().substring(10, 12)));
+	        } catch (NumberFormatException e) {
+	        	classNum = s.getClassCode().substring(10, 12);
+	        }
+		System.out.println("반 " + classNum);
+		System.out.println("학년 " + grade);
 
 		// 날짜 형식 지정 및 시간표 시작일자와 종료일자 설정
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		String formattedDate = today.format(formatter);
-		String tomorrowString = today.plusDays(1).format(formatter);
+		LocalDate tomorrow = today.plusDays(1);
+		String tomorrowString = tomorrow.format(formatter);
+
+		
+		
+		System.out.println(today + " / " + currentYear + " / " + formattedDate + " / " + tomorrowString);
 
 		// API URL 생성
 		String url = "https://open.neis.go.kr/hub/elsTimetable";
@@ -409,7 +423,6 @@ public class MemberController {
 
 		br.close();
 		urlConnection.disconnect();
-
 		return result;
 	}
 
@@ -491,6 +504,10 @@ public class MemberController {
 	@RequestMapping("modify_parents_info")
 	public int modifyParentsInfo(Parents p, HttpSession session, Model model) {
 		int result = memberService.updateParentsInfo(p);
+		if(result>0) {
+			p.setPrPwd(((Parents)session.getAttribute("loginUser")).getPrPwd());
+			session.setAttribute("loginUser", memberService.loginParents(p));
+		}
 		return result;
 	}
 
@@ -517,10 +534,21 @@ public class MemberController {
 	public String login_teacher(Teacher t, HttpSession session, ModelAndView mv, String savetcId, HttpServletResponse response, Model model) {
 		model.addAttribute("bbsId", "teacherMypage");
 		
+		
+		
 	    Teacher loginTeacher = memberService.loginTeacher(t);
+	    
+	    String teacherId = t.getTcId(); 
+	    String teacherPwd = t.getTcPwd(); 
+	    
+	    if (teacherId == null || t.getTcPwd() == null) {
+	        return "member/login_teacher"; // loginError 전달하지 않음
+	    }
+	    System.out.println(t);
 
 	    if (loginTeacher == null) {
 	        System.out.println("로그인 실패");
+	        model.addAttribute("loginError", "아이디 또는 비밀번호가 틀렸습니다. 다시입력해 주세요.");
 	        return "member/login_teacher";
 	    } else {
 	        session.setAttribute("loginUser", loginTeacher);  // 로그인한 Teacher 객체를 세션에 저장

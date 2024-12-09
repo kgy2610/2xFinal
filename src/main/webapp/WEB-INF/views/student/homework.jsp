@@ -13,6 +13,7 @@
 <title>숙제</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
+<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -101,9 +102,6 @@
 	</div>
 	<div id="monkey_img">
 		<img src="<c:url value='/resources/img/student/homework_monkey.png'/>">
-	</div>
-	<div id="chat_button">
-		<img src="<c:url value='/resources/img/student/message.png'/>">
 	</div>
 	
 	<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>

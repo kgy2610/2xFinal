@@ -18,9 +18,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homeworkSubmit.css'/>"/>
     <script src="<c:url value='/resources/js/student/student_homework_detail.js'/>"></script>
+    <script>
+            const deadLine = new Date("${npage.deadLine}");
+    </script>
+    
 </head>
 
 <body>
@@ -49,14 +52,14 @@
 				</div>
 			</div>
 
-				<form action="enroll.homework_student" method="post" enctype="multipart/form-data">
+				<form action="enroll.homework_student" method="post">
 					<div id="submit_area">
 						<div id="submit_homework">
 							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;">${napge.hmStuContent}</textarea>
 						</div>
 				<input type="hidden" name="boNo" value="${npage.boNo}">
 				<input type="hidden" name="classCode" value="${npage.classCode}">
-				<button class="submit_button">제출</button>
+				<button class="submit_button" id="submit_button">제출</button>
 					</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>

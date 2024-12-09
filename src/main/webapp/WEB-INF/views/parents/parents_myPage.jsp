@@ -15,8 +15,6 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>agit</title>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="<c:url value='/resources/js/parents/modify_parents_info_api.js'/>"></script>
-   <script src="<c:url value='/resources/js/parents/modify_parents_pwd_api.js'/>"></script>
    <script src="<c:url value='/resources/js/parents/search_notice_list_api.js'/>"></script>
    <script src="<c:url value='/resources/js/parents/search_meal_list_api.js'/>"></script>
    <script src="<c:url value='/resources/js/parents/search_status_api.js'/>"></script>

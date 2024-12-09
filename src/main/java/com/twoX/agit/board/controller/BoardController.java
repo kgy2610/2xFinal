@@ -111,7 +111,6 @@ public class BoardController {
 	
 	     br.close();
 	     urlConnection.disconnect();
-	     	     
 	     return result;
 	     
 	  }
@@ -249,7 +248,6 @@ public class BoardController {
 		params.put("tcId", t.getTcId());
 		params.put("month", month);
 		ArrayList<Counsel> list = boardService.selectSameMonthCounsel(params);
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 
@@ -329,7 +327,7 @@ public class BoardController {
 	@RequestMapping("enroll_board")
 	public String enroll_board(ParentsBoard pb, MultipartFile upfile, HttpSession session, Model model) {
 		model.addAttribute("bbsId", "parentsCommunity");
-		
+		System.out.println(pb);
 		Student s = (Student)session.getAttribute("child");
 		Parents p = (Parents)session.getAttribute("loginUser");
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -560,7 +558,6 @@ public class BoardController {
 		Teacher t = (Teacher)session.getAttribute("loginUser");
 		eib.setTcId(t.getTcId());
 		eib.setClassCode(t.getClassCode());
-		System.out.println(eib);
 		int result = boardService.insertIMGBoard(eib);
 		if(result>0) {
 			return "redirect:/teacher_eventImgList";

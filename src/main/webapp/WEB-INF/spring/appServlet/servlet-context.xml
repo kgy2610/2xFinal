@@ -48,6 +48,22 @@
 	 		<mapping path="/student.update"/>
 	 		<mapping path="/student.upadatePwd"/>
 	 		<mapping path="/imgselect"/>
+	 		<mapping path="/homework"/>
+	 		<mapping path="/unused"/>
+	 		<mapping path="/enroll.homework_student"/>
+	 		<mapping path="/homework.check"/>
+	 		<mapping path="/hmAnswer_modify"/>
+	 		<mapping path="/update.homework_student"/>
+	 		<mapping path="/afterschoolStart.stu"/>
+	 		<mapping path="/afterschoolPage"/>
+	 		<mapping path="/afterSchool"/>
+	 		<mapping path="/detail_after"/>
+	 		<mapping path="/enroll_afterschool"/>
+	 		<mapping path="/StuUpload"/>
+	 		<mapping path="/after_modify"/>
+	 		<mapping path="/update.afterSt"/>
+	 		<mapping path="/delete.afterSt"/>
+	 		<mapping path="/afterupload"/>
 	 		<beans:bean class="com.twoX.agit.common.interceptor.StudentInterceptor" id="StudentInterceptor" />
 	 	</interceptor>
 	 	<interceptor>
@@ -80,6 +96,15 @@
 	 		<mapping path="/deleteImgBoard"/>
 	 		<mapping path="/enroll_IMG"/>
 	 		<mapping path="/modifyImgBoard"/>
+	 		<mapping path="/list.bo"/>
+	 		<mapping path="/teacherAfterDetail.bo"/>
+	 		<mapping path="/eventPhotos.af"/>
+	 		<mapping path="/updatePassword.me"/>
+	 		<mapping path="/teacher.classCode"/>
+	 		<mapping path="/teacher.myPage"/>
+	 		<mapping path="/updateInfo.me"/>
+	 		<mapping path="/classdelete.me"/>
+	 		<mapping path="/makeAfterClass.me"/>
 	 		<beans:bean class="com.twoX.agit.common.interceptor.TeacherInterceptor" id="TeacherInterceptor" />
 	 	</interceptor>
 	 </interceptors>
