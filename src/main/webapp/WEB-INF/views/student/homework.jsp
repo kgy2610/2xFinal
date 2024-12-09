@@ -103,5 +103,7 @@
 	<div id="monkey_img">
 		<img src="<c:url value='/resources/img/student/homework_monkey.png'/>">
 	</div>
+	
+	<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 </body>
 </html>
