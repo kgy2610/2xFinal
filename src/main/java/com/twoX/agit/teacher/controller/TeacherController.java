@@ -201,7 +201,7 @@ public class TeacherController {
 
 	// 숙제 상세 페이지
 	@RequestMapping("detailHomework")
-	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String changeName, Model model) {
+	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String originName, String changeName, Model model) {
 		model.addAttribute("bbsId", "teacherHomework");
 		
 		model.addAttribute("boNo", boNo);
@@ -209,6 +209,7 @@ public class TeacherController {
 		model.addAttribute("hmTitle", hmTitle);
 		model.addAttribute("hmContent", hmContent);
 		model.addAttribute("deadLine", deadLine);
+		model.addAttribute("originName", originName);
 		model.addAttribute("changeName", changeName);
 
 		return "teacher/homeworkDetail";
@@ -339,12 +340,17 @@ public class TeacherController {
 		String classCode = loginUser.getClassCode();
 		
 		ArrayList<Teacher> attendanceList = memberService.selectAttendance(classCode);
+		System.out.println("dssd" + attendanceList);
+		
+		ArrayList<Attendance> TeacherAttendanceList = memberService.selectTeacherAttendance();
+		System.out.println(TeacherAttendanceList);
 		
 		model.addAttribute("attendanceList", attendanceList);
+		model.addAttribute("TeacherAttendanceList", TeacherAttendanceList);
 		
 		return "teacher/teacherAttendance";
 	}
-	
+
 	
 	// 지각 출석 결석 제출
 	@RequestMapping("submitAttendance")
@@ -367,8 +373,14 @@ public class TeacherController {
                 attendanceList.add(attendance);
             }
         });
-	
-	    int result = teacherService.insertAttendance(attendanceList);
+        
+        ArrayList<Attendance> today = teacherService.selectAttendanceList(aDate);
+        
+        if(today.size() > 1) {
+        	System.out.println("여기에 alert 메세지 추가하기");
+        } else {
+        	int result = teacherService.insertAttendance(attendanceList);
+        }
 	    
 		return "teacher/myPage";
 	}

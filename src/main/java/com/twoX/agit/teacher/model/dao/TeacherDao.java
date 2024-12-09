@@ -142,12 +142,17 @@ public class TeacherDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectsubmitHomework", params);
 	}
 	
+	// 오늘자 출석 조회
+	public ArrayList<Attendance> selectAttendanceList(SqlSessionTemplate sqlSession, String aDate) {
+		return (ArrayList)sqlSession.selectList("attendanceMapper.selectAttendance", aDate);
+	}
 	
+	// 출석 입력
 	public int insertAttendance(SqlSessionTemplate sqlSession, List<Attendance> attendanceList) {
 		return sqlSession.insert("attendanceMapper.insertAttendance", attendanceList);
 	}
 	
-
+	// 출석 수정
 	public int updateAttendance(SqlSessionTemplate sqlSession, ArrayList<Attendance> updateAttendance) {
 		return sqlSession.update("attendanceMapper.updateAttendance", updateAttendance);
 	}

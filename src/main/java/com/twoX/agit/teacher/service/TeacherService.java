@@ -64,6 +64,9 @@ public interface TeacherService {
 	// 숙제 점수 및 말씀 부여
 	int updateSubmitHomework(String teacherComment, int score, String stuId);
 	
+	// 오늘날짜 출결 조회
+	ArrayList<Attendance> selectAttendanceList(String aDate);
+	
 	// 출결 정보 저장
 	int insertAttendance(List<Attendance> attandanceList);
 	
