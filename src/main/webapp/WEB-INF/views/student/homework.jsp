@@ -13,6 +13,7 @@
 <title>숙제</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
+<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
