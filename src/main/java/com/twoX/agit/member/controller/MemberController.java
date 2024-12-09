@@ -375,7 +375,12 @@ public class MemberController {
 		String semester = (currentMonth >= 1 && currentMonth <= 6) ? "1" : "2";
 
 		String grade = s.getClassCode().substring(9, 10); 
-		String classNum = s.getClassCode().substring(11, 12); 
+		String classNum;
+		 try {
+			 classNum = String.valueOf(Integer.parseInt(s.getClassCode().substring(10, 12)));
+	        } catch (NumberFormatException e) {
+	        	classNum = s.getClassCode().substring(10, 12);
+	        }
 		System.out.println("반 " + classNum);
 		System.out.println("학년 " + grade);
 
@@ -384,6 +389,8 @@ public class MemberController {
 		String formattedDate = today.format(formatter);
 		LocalDate tomorrow = today.plusDays(1);
 		String tomorrowString = tomorrow.format(formatter);
+
+		
 		
 		System.out.println(today + " / " + currentYear + " / " + formattedDate + " / " + tomorrowString);
 
@@ -416,7 +423,6 @@ public class MemberController {
 
 		br.close();
 		urlConnection.disconnect();
-
 		return result;
 	}
 
@@ -499,6 +505,7 @@ public class MemberController {
 	public int modifyParentsInfo(Parents p, HttpSession session, Model model) {
 		int result = memberService.updateParentsInfo(p);
 		if(result>0) {
+			p.setPrPwd(((Parents)session.getAttribute("loginUser")).getPrPwd());
 			session.setAttribute("loginUser", memberService.loginParents(p));
 		}
 		return result;
@@ -527,10 +534,21 @@ public class MemberController {
 	public String login_teacher(Teacher t, HttpSession session, ModelAndView mv, String savetcId, HttpServletResponse response, Model model) {
 		model.addAttribute("bbsId", "teacherMypage");
 		
+		
+		
 	    Teacher loginTeacher = memberService.loginTeacher(t);
+	    
+	    String teacherId = t.getTcId(); 
+	    String teacherPwd = t.getTcPwd(); 
+	    
+	    if (teacherId == null || t.getTcPwd() == null) {
+	        return "member/login_teacher"; // loginError 전달하지 않음
+	    }
+	    System.out.println(t);
 
 	    if (loginTeacher == null) {
 	        System.out.println("로그인 실패");
+	        model.addAttribute("loginError", "아이디 또는 비밀번호가 틀렸습니다. 다시입력해 주세요.");
 	        return "member/login_teacher";
 	    } else {
 	        session.setAttribute("loginUser", loginTeacher);  // 로그인한 Teacher 객체를 세션에 저장

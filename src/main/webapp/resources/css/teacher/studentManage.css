@@ -340,11 +340,11 @@
 }
 
 .real-grade-information>div:nth-child(1) {
-	margin-left: 15px;
+	margin-left: 50px;
 }
 
 .real-grade-information>div:nth-child(2) {
-	margin-right: 60px;
+	margin-right: 85px;
 }
 
 /* 모달 스타일 */

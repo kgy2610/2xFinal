@@ -41,10 +41,19 @@
         </div>
     </div>
     
+    
+     
+    
     <script>
         function redirectToLogin() {
             window.location.href = '<c:url value="/login"/>'; // login 컨트롤러로 이동
         }
     </script>
+    
+   <c:if test="${not empty loginError}">
+        <script>
+            alert("${loginError}");
+        </script>
+    </c:if>
 </body>
 </html>
