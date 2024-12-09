@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homeworkConfirm.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 	<script src="<c:url value='/resources/js/student/student_homework_confirm.js'/>"></script>
     <script>
             const deadLine = new Date("${npage.deadLine}");

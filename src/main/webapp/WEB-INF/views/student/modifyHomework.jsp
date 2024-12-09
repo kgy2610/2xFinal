@@ -37,30 +37,26 @@
 			<div id="enroll_content">
 				<div id="enroll_info">마감일 | ${npage.deadLine}</div>
 				<div id="en_content">${npage.hmContent}</div>
-
-				<form action="update.homework_student" method="post" enctype="multipart/form-data">
 					<div id="enroll_file">
-						<input type="file" name="reupfile" id="fileInput" style="display: none;" onchange="showFileName()">
-							<label for="fileInput" class="custom-file-upload"> 파일 선택 </label>
-							
-							<c:choose>
-									<c:when test="${not empty npage.originName }">
-			                       		<span id="fileName" class="file-name">${npage.originName}</span>
-			                       	</c:when>
-			                       	<c:otherwise>
-										<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
-									</c:otherwise>
-			                </c:choose>
-					</div>
+					<c:choose>
+		            	<c:when test="${not empty npage.originName }">
+		            	<span>첨부된 파일 : </span><a id="downloadLink" href="<c:url value='${npage.changeName}'/>" download="${npage.originName }">${npage.originName }</a>
+		            	</c:when>
+		            	<c:otherwise>
+								<span id="fileName" class="file-name">올라온 파일이 없습니다</span>
+							</c:otherwise>
+		            </c:choose>
+				</div>
 			</div>
+				<form action="update.homework_student" method="post" enctype="multipart/form-data">
 					<div id="submit_area">
 						<div id="submit_homework">
 							<textarea id="sb_homework" name="hmStuContent" style="background-color: white;">${npage.hmStuContent}</textarea>
 						</div>
-				<input type="hidden" name="boNo" value="${npage.boNo}">
-				<input type="hidden" name="classCode" value="${npage.classCode}">
-				<button type="submit" class="submit_button" id="modify_button">수정</button>
-					</div>
+							<input type="hidden" name="boNo" value="${npage.boNo}">
+							<input type="hidden" name="classCode" value="${npage.classCode}">
+							<button type="submit" class="submit_button" id="modify_button">수정</button>
+						</div>
 				</form>
 			<button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 

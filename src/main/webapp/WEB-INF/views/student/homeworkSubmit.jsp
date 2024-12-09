@@ -46,8 +46,8 @@
 		            	<span>첨부된 파일 : </span><a id="downloadLink" href="<c:url value='${npage.changeName}'/>" download="${npage.originName }">${npage.originName }</a>
 		            	</c:when>
 		            	<c:otherwise>
-							<span id="fileName" class="file-name">선택된 파일이 없습니다</span>
-						</c:otherwise>
+								<span id="fileName" class="file-name">올라온 파일이 없습니다</span>
+							</c:otherwise>
 		            </c:choose>
 				</div>
 			</div>
