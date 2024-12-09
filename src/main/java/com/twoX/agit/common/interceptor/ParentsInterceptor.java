@@ -14,7 +14,6 @@ public class ParentsInterceptor implements HandlerInterceptor{
 			throws Exception {
 		//return : true -> 기존요청흐름대로 진행(Controller로 이동)
 		//return : false -> 요청중단후 반환
-		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginUser") instanceof Parents) {
 			return true;	

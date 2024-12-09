@@ -375,7 +375,12 @@ public class MemberController {
 		String semester = (currentMonth >= 1 && currentMonth <= 6) ? "1" : "2";
 
 		String grade = s.getClassCode().substring(9, 10); 
-		String classNum = s.getClassCode().substring(11, 12); 
+		String classNum;
+		 try {
+			 classNum = String.valueOf(Integer.parseInt(s.getClassCode().substring(10, 12)));
+	        } catch (NumberFormatException e) {
+	        	classNum = s.getClassCode().substring(10, 12);
+	        }
 		System.out.println("반 " + classNum);
 		System.out.println("학년 " + grade);
 
@@ -384,6 +389,8 @@ public class MemberController {
 		String formattedDate = today.format(formatter);
 		LocalDate tomorrow = today.plusDays(1);
 		String tomorrowString = tomorrow.format(formatter);
+
+		
 		
 		System.out.println(today + " / " + currentYear + " / " + formattedDate + " / " + tomorrowString);
 
@@ -416,7 +423,6 @@ public class MemberController {
 
 		br.close();
 		urlConnection.disconnect();
-
 		return result;
 	}
 
@@ -499,6 +505,7 @@ public class MemberController {
 	public int modifyParentsInfo(Parents p, HttpSession session, Model model) {
 		int result = memberService.updateParentsInfo(p);
 		if(result>0) {
+			p.setPrPwd(((Parents)session.getAttribute("loginUser")).getPrPwd());
 			session.setAttribute("loginUser", memberService.loginParents(p));
 		}
 		return result;
