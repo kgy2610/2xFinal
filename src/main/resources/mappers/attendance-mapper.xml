@@ -8,6 +8,24 @@
 		<result column="STU_ID" property="STU_ID"/>
 		<result column="LA" property="LA"/>
 	</resultMap>
+	
+<select id="selectTeacherAttendance" resultMap="AttendanceResultSet">
+    SELECT 
+        TO_CHAR(ADATE, 'YYYY-MM-DD') as aDate,
+        STU_ID,
+        LA
+    FROM ATTENDANCE
+</select>
+
+
+	<select id="selectAttendance" resultMap="AttendanceResultSet" resultType="int">
+		SELECT 
+		TO_CHAR(ADATE, 'YYYY-MM-DD') as aDate, STU_ID, LA
+		FROM ATTENDANCE
+		WHERE ADATE = #{aDate}
+	</select>
+	
+	
 
 	<!-- 학생 출결 상태 추가 -->
 	<insert id="insertAttendance" parameterType="list">

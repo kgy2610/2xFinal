@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
 import com.twoX.agit.member.model.dao.MemberDao;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -295,6 +296,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectAttendance(sqlSession, classCode);
 	}
 	
+	// 선생님  - 출결 리스트
+	@Override
+	public ArrayList<Attendance> selectTeacherAttendance() {
+		return memberDao.selectTeacherAttendance(sqlSession);
+	}
+	
 
 	// 선생님 상담 리스트 
 	@Override
@@ -307,4 +314,5 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Student> selectStuList(String classCode) {
 		return memberDao.selectStuList(sqlSession, classCode);
 	}
+
 }
