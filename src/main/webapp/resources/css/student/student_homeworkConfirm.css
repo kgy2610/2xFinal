@@ -99,23 +99,6 @@
 	width: fit-content;
 	margin-left: 25px;
 }
-.custom-file-upload {
-    position:absolute;
-    left: 20px;
-    padding: 10px 20px;
-    color: #A98467;
-    background-color: white; /* 버튼 색상 */
-    border: 0px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.custom-file-upload:hover {
-    background-color: #A98467;
-    color: white;
-}
 
 .file-name {
     position: absolute;

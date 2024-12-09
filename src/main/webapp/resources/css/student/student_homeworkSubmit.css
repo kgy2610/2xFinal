@@ -88,8 +88,7 @@
 }
 #enroll_file{
     position:absolute;
-    display: flex;
-    align-items: center;
+    line-height: 60px;
     bottom: 11px;
     left: 20px;
     background-color: #DDE5B6; 
@@ -97,26 +96,14 @@
     width: 950px;
     height: 60px;
 }
-.custom-file-upload {
-    position:absolute;
-    left: 20px;
-    padding: 10px 20px;
-    color: #A98467;
-    background-color: white; /* 버튼 색상 */
-    border: 0px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+#enroll_file span{
+	width: fit-content;
+	margin-left: 25px;
 }
 
-.custom-file-upload:hover {
-    background-color: #A98467;
-    color: white;
-}
 .file-name {
     position: absolute;
-    left: 130px;
+    left: 25px;
     width: 200px;
     font-size: 16px;
     color: #333;

@@ -1,5 +1,5 @@
-    let scoreElements = document.getElementsByClassName('stu_score');
-    let scores = Array.from(scoreElements).map(element => Number(element.innerText));
+    let elements = document.getElementsByClassName('stu_score');
+    let scores = Array.from(elements).map(element => Number(element.innerText));
     
     document.addEventListener('DOMContentLoaded', () => {
 	    const canvas = document.getElementById('barCanvas');
