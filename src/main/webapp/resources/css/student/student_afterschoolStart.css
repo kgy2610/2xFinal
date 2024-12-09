@@ -48,7 +48,7 @@
    float: right;
 }
 
-button{
+.add-button{
 	width:150px; 
 	height:99px;
    background-color: white;

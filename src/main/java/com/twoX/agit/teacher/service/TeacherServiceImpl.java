@@ -126,6 +126,11 @@ public class TeacherServiceImpl  implements TeacherService{
 		return teacherDao.updateSubmitHomework(sqlSession, teacherComment, score, stuId);
 	}
 
+	// 오늘자 출결 확인
+	@Override
+	public ArrayList<Attendance> selectAttendanceList(String aDate) {
+		return teacherDao.selectAttendanceList(sqlSession, aDate);
+	}
 
 	// 출결 저장
 	@Override
@@ -170,7 +175,6 @@ public class TeacherServiceImpl  implements TeacherService{
 	public int inStudentListbyStatus( String status, String scCode, String stuId) {
 		return teacherDao.inStudentListbyStatus(sqlSession,status , scCode, stuId);
 	}
-
 	
 	
 }

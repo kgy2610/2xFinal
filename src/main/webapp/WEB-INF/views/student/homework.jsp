@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>숙제</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
 <script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -150,7 +151,9 @@ public interface MemberService {
 	// 선생님 - 출결
 	ArrayList<Teacher> selectAttendance(String classCode);
 	
-
+	// 선생님 - 출결 리스트
+	ArrayList<Attendance> selectTeacherAttendance();
+	
 	// 선생님 상당일정 리스트
 	ArrayList<Counsel> getTeacherCounsel(String tcId);
 

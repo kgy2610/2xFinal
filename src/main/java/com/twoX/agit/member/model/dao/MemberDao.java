@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.twoX.agit.board.model.vo.Counsel;
 import com.twoX.agit.chat.Chat;
+import com.twoX.agit.member.model.vo.Attendance;
 import com.twoX.agit.member.model.vo.Homework;
 import com.twoX.agit.member.model.vo.Parents;
 import com.twoX.agit.member.model.vo.School;
@@ -293,6 +294,11 @@ public class MemberDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("classCode", classCode);
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAttendance", params);
+	}
+	
+	// 선생님 - 출결 리스트들
+	public ArrayList<Attendance> selectTeacherAttendance(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("attendanceMapper.selectTeacherAttendance");
 	}
 	
 	// 관리자 - 총 교직원 수
