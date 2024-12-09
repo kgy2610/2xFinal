@@ -160,18 +160,39 @@ function getAirStatus() {
     }
 
     // 오늘과 내일의 시간표 분리 (최대 5교시 기준)
-    const maxPeriods = 5; // 최대 교시 수
-    const todaySchedule = itemArr.slice(0, maxPeriods); // 오늘의 시간표
-    const tomorrowSchedule = itemArr.slice(maxPeriods, maxPeriods * 2); // 내일의 시간표
-
+    const maxPeriods = 7; // 최대 교시 수
+	const referenceDate = itemArr[0].ALL_TI_YMD;
+    const todaySchedule = []; // 오늘의 시간표
+    const tomorrowSchedule = []; // 내일의 시간표
+	for (const entry of itemArr){
+		if(itemArr.length<5){
+			tomorrowSchedule.push(entry);
+		}else if(entry.ALL_TI_YMD === referenceDate){
+			todaySchedule.push(entry);
+		}else{
+			tomorrowSchedule.push(entry);
+		}
+	}
+	
     // 테이블 시작
     let tableHtml = "<div class='draw1'><h4>오늘과 내일의 시간표</h4>";
     tableHtml += "<table>";
     tableHtml += "<tr><th>교시</th><th>오늘의 시간표</th><th>내일의 시간표</th></tr>";
-
+	if(todaySchedule.length>7){
+		// 콘솔로 확인
+	    console.log("오늘의 시간표:", todaySchedule);
+	    console.log("내일의 시간표:", tomorrowSchedule);
+		tableHtml += "<tr><td>1교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>2교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>3교시</td><td>-</td><td>-</td></tr>"+
+					"<tr><td>4교시</td><td>-</td><td>-</td></tr>"
+	    tableHtml += "</table></div>";
+	    document.getElementsByClassName("scheduledraw")[0].innerHTML = tableHtml;
+	    return;
+	}
     // 교시별 시간표 작성
     for (let i = 0; i < maxPeriods; i++) {
-        const period = todaySchedule[i] ? todaySchedule[i].PERIO + "교시" : null;
+        const period = (i+1) + "교시";
         const todayContent = todaySchedule[i] && todaySchedule[i].ITRT_CNTNT !== "주말입니다" ? todaySchedule[i].ITRT_CNTNT : null;
         const tomorrowContent = tomorrowSchedule[i] && tomorrowSchedule[i].ITRT_CNTNT !== "주말입니다" ? tomorrowSchedule[i].ITRT_CNTNT : null;
 
@@ -179,12 +200,12 @@ function getAirStatus() {
         if (period && (todayContent || tomorrowContent)) {
             tableHtml += `<tr>`;
             tableHtml += `<td>${period}</td>`;
-            tableHtml += `<td>${todayContent || "쉬는날"}</td>`;
-            tableHtml += `<td>${tomorrowContent || "쉬는날"}</td>`;
+            tableHtml += `<td>${todayContent || "-"}</td>`;
+            tableHtml += `<td>${tomorrowContent || "-"}</td>`;
             tableHtml += `</tr>`;
         }
     }
-
+	
     // 콘솔로 확인
     console.log("오늘의 시간표:", todaySchedule);
     console.log("내일의 시간표:", tomorrowSchedule);

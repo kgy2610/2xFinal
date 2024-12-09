@@ -248,7 +248,6 @@ public class BoardController {
 		params.put("tcId", t.getTcId());
 		params.put("month", month);
 		ArrayList<Counsel> list = boardService.selectSameMonthCounsel(params);
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 
