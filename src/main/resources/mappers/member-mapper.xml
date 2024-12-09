@@ -493,9 +493,13 @@
 	
 	<!-- 선생님 출결 리스트 조회 -->
 	<select id="selectAttendance" parameterType="Student" resultMap="studentResultSet">
-		SELECT S.STU_NAME, S.STU_ID
-		FROM STUDENT S
-		WHERE S.CLASS_CODE = #{classCode}
+    SELECT 
+        S.STU_ID,
+        S.STU_NAME
+    FROM 
+        STUDENT S
+    WHERE 
+        S.CLASS_CODE = #{classCode}
 	</select>
 	
 </mapper>

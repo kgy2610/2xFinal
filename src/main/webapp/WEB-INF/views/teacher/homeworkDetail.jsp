@@ -67,8 +67,8 @@
                     <span class="file-name" id="file-name">        
                     <!-- 파일이 선택된 경우 changeName을 출력하고, 선택되지 않은 경우 "선택된 파일 없음"을 출력 -->
 				        <c:choose>
-				            <c:when test="${not empty changeName}">
-				                ${changeName}
+				            <c:when test="${not empty originName}">
+				                ${originName}
 				            </c:when>
 				            <c:otherwise>
 				               	 선택된 파일 없음
