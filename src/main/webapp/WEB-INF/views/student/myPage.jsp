@@ -66,15 +66,42 @@
           <h2>이미지 선택</h2>
           <form action="imgselect" method="post">
           <div class="image-grid">
+          	<label>
+          	   <input type="radio" name="toggle" hidden>
                <img src="<c:url value='/resources/img/student/1.png'/>" alt="이미지1" onclick="selectImage(this)" id="1">
-              <img src="<c:url value='/resources/img/student/2.png'/>" alt="이미지2" onclick="selectImage(this)" id="2">
-              <img src="<c:url value='/resources/img/student/3.png'/>" alt="이미지3" onclick="selectImage(this)" id="3">
-              <img src="<c:url value='/resources/img/student/4.png'/>" alt="이미지4" onclick="selectImage(this)" id="4">
-              <img src="<c:url value='/resources/img/student/5.png'/>" alt="이미지5" onclick="selectImage(this)" id="5">
-              <img src="<c:url value='/resources/img/student/6.png'/>" alt="이미지6" onclick="selectImage(this)" id="6">
-              <img src="<c:url value='/resources/img/student/7.png'/>" alt="이미지7" onclick="selectImage(this)" id="7">
-              <img src="<c:url value='/resources/img/student/8.png'/>" alt="이미지8" onclick="selectImage(this)" id="8">
-              <img src="<c:url value='/resources/img/student/9.png'/>" alt="이미지9" onclick="selectImage(this)" id="9">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/2.png'/>" alt="이미지2" onclick="selectImage(this)" id="2">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/3.png'/>" alt="이미지3" onclick="selectImage(this)" id="3">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/4.png'/>" alt="이미지4" onclick="selectImage(this)" id="4">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/5.png'/>" alt="이미지5" onclick="selectImage(this)" id="5">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/6.png'/>" alt="이미지6" onclick="selectImage(this)" id="6">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/7.png'/>" alt="이미지7" onclick="selectImage(this)" id="7">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/8.png'/>" alt="이미지8" onclick="selectImage(this)" id="8">
+            </label>
+            <label>
+          	   <input type="radio" name="toggle" hidden>
+               <img src="<c:url value='/resources/img/student/9.png'/>" alt="이미지9" onclick="selectImage(this)" id="9">
+            </label>
                <input type="hidden" id="selectedImageId" name="picNo">
           </div>
           <button type="submit" onclick="applyImageChange()">변경하기</button>

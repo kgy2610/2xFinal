@@ -13,6 +13,7 @@ ArrayList<AfterSchoolBoard> list = (ArrayList)session.getAttribute("boardList");
     <link rel="stylesheet"
 	href="<c:url value='/resources/css/student/student_afterschool.css'/>">
 	<script src="<c:url value='/resources/js/student/student_myPage.js'/>"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <jsp:include page="../common/student_menubar.jsp" />

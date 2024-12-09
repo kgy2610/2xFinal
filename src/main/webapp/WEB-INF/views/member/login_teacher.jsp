@@ -50,7 +50,8 @@
         }
     </script>
     
-   <c:if test="${not empty loginError}">
+    
+     <c:if test="${not empty loginError}">
         <script>
             alert("${loginError}");
         </script>
