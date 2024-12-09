@@ -527,10 +527,21 @@ public class MemberController {
 	public String login_teacher(Teacher t, HttpSession session, ModelAndView mv, String savetcId, HttpServletResponse response, Model model) {
 		model.addAttribute("bbsId", "teacherMypage");
 		
+		
+		
 	    Teacher loginTeacher = memberService.loginTeacher(t);
+	    
+	    String teacherId = t.getTcId(); 
+	    String teacherPwd = t.getTcPwd(); 
+	    
+	    if (teacherId == null || t.getTcPwd() == null) {
+	        return "member/login_teacher"; // loginError 전달하지 않음
+	    }
+	    System.out.println(t);
 
 	    if (loginTeacher == null) {
 	        System.out.println("로그인 실패");
+	        model.addAttribute("loginError", "아이디 또는 비밀번호가 틀렸습니다. 다시입력해 주세요.");
 	        return "member/login_teacher";
 	    } else {
 	        session.setAttribute("loginUser", loginTeacher);  // 로그인한 Teacher 객체를 세션에 저장
