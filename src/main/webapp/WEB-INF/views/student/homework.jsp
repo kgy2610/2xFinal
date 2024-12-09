@@ -11,9 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>숙제</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
