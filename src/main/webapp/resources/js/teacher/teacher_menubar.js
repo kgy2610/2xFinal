@@ -16,7 +16,7 @@
 		   selectChatList(stuId,classCode)
 	   }
 	   // 모달 닫기
-	   function closeModal() {
+	   function closeChatModal() {
 	       document.getElementById('stuModal').style.display = 'none';
 	   }
 	   
