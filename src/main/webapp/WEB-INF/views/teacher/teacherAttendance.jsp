@@ -14,7 +14,7 @@
 
     <div class="attendance-container">
         <div class="header">
-            <span class="title">출석 리스트</span>
+            <span class="title">출석부</span>
             <form id="attendanceForm" action="submitAttendance" method="post">
                 <input type="date" class="date-picker" id="datePicker" name="aDate" >
         </div>

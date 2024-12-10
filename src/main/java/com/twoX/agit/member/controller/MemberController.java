@@ -355,7 +355,7 @@ public class MemberController {
 		String oecode = memberService.selectOeCode(schoolCode);
 
 		// 현재 날짜를 기반으로 연도(year)와 학기(semester) 계산
-		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.now(); //LocalDate.of(2024, 12, 13);
 		int currentYear = today.getYear();
 		String year = String.valueOf(currentYear); // 현재 연도
 		
@@ -410,7 +410,6 @@ public class MemberController {
 		while ((line = br.readLine()) != null) {
 			result += line;
 		}
-
 		br.close();
 		urlConnection.disconnect();
 		return result;
@@ -553,7 +552,6 @@ public class MemberController {
 	     	
 	     	// 상담일정 리스트 가져오기
 	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
-	     	System.out.println(teacherCounsel);
 	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
@@ -565,7 +563,6 @@ public class MemberController {
 	        
 	        // classCode를 이용해 메모 리스트 가져오기
 	        ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-	        System.out.println(teacherMemo);
 	        //메모 리스트를 세션에 추가
 	        session.setAttribute("teacherMemo", teacherMemo);
 
@@ -630,7 +627,7 @@ public class MemberController {
 	
 	// 교사 비번 수정
 		@RequestMapping("updatePassword.me")
-		public String updatePassword(Teacher t, String newPassword, HttpSession session, Model m) {
+		public String updatePassword(Teacher t, String currentPassword, String newPassword, String confirmPassword, HttpSession session, Model m) {
 			// 로그인 한 교사정보 가져오기
 			Teacher teacher = (Teacher) session.getAttribute("loginUser");
 			if (teacher == null) {
@@ -638,6 +635,20 @@ public class MemberController {
 				return "teacher/myPage";
 			}
 
+			 String storedPassword = teacher.getTcPwd(); // 세션에서 현재 비밀번호 가져오기
+			    if (!storedPassword.equals(currentPassword)) {
+			    	System.out.println(currentPassword);
+			    	System.out.println(storedPassword);
+			        session.setAttribute("alertMsg", "현재 비밀번호가 일치하지 않습니다.");
+			        return "teacher/myPage"; // 비밀번호 불일치 시 반환
+			    }
+			    
+			    // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
+			    if (!newPassword.equals(confirmPassword)) {
+			        session.setAttribute("alertMsg", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+			        return "teacher/myPage"; // 비밀번호 불일치 시 페이지 리다이렉트
+			    }
+			
 			t.setTcId(teacher.getTcId());
 			t.setTcPwd(newPassword);
 
@@ -699,8 +710,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
-
+        session.setAttribute("teacherNotice", teacherNotices);
 		return "teacher/myPage";
 	}
 
@@ -717,7 +727,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
+        session.setAttribute("teacherNotice", teacherNotices);
 		
 		return "teacher/myPage";
 	}
@@ -737,7 +747,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
+        session.setAttribute("teacherNotice", teacherNotices);
 
 		return "teacher/myPage";
 	}
@@ -755,7 +765,7 @@ public class MemberController {
 		int result = memberService.insertMemo(tcId, classCode, memoContent);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 
 		return "teacher/myPage";
 	}
@@ -771,7 +781,7 @@ public class MemberController {
 		int result = memberService.deleteMemo(MMno, memoContent);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 
 		return "teacher/myPage";
 	}
@@ -787,7 +797,7 @@ public class MemberController {
 		int result = memberService.updateMemo(tcId, MMno, originalMemo, newMemo);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 		
 		return "teacher/myPage";
 	}
