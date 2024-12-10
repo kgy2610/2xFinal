@@ -122,18 +122,9 @@ public class BoardController {
 		Student s = (Student)session.getAttribute("child");
 		ArrayList<Double> list = new ArrayList();
 		list = boardService.selectscore(s.getStuId());
-		if (list.size() < 7) {
-		    while (list.size() < 7) {
-		        list.add(0.0);
-		    }
-		}
 		ArrayList<Double> alist = new ArrayList();
 		alist = boardService.selectAVGscore(s.getClassCode());
-		if (alist.size() < 7) {
-		    while (alist.size() < 7) {
-		        alist.add(0.0);
-		    }
-		}
+
 		for (int i = 0; i <list.size(); i++) {
 			list.set(i,Math.round(list.get(i)*10.0)/10.0);
 			alist.set(i,Math.round(alist.get(i)*10.0)/10.0);

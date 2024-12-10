@@ -75,42 +75,44 @@
 	
 	<!-- 학생 점수 가져오기 -->
 	<select id="selectscore" resultType="Double">
-		SELECT AVG(SCORE) as AVG
-		FROM HM_SUBMIT
-		LEFT JOIN HOMEWORK USING(BO_NO)
-		WHERE STU_ID = #{stuId}
-		AND TC_COMMENT !='숙제 검사 전입니다.'
-		GROUP BY SUBJECT
-		ORDER BY CASE HOMEWORK.SUBJECT
-		    WHEN '국어' THEN 1
-		    WHEN '수학' THEN 2
-		    WHEN '영어' THEN 3
-		    WHEN '과학' THEN 4
-		    WHEN '사회' THEN 5
-		    WHEN '미술' THEN 6
-		    WHEN '체육' THEN 7
-		    ELSE 8
-		END
+      SELECT COALESCE(AVG(HM_SUBMIT.SCORE), 0) AS AVG
+	  FROM SUBJECT S
+      LEFT JOIN HOMEWORK ON S.SUB = HOMEWORK.SUBJECT
+	  LEFT JOIN HM_SUBMIT ON HOMEWORK.BO_NO = HM_SUBMIT.BO_NO
+      AND HM_SUBMIT.STU_ID = #{stuId}
+      AND HM_SUBMIT.TC_COMMENT != '숙제 검사 전입니다.'
+	  GROUP BY S.SUB
+	  ORDER BY CASE S.SUB
+    	WHEN '국어' THEN 1
+    	WHEN '수학' THEN 2
+    	WHEN '영어' THEN 3
+    	WHEN '과학' THEN 4
+    	WHEN '사회' THEN 5
+    	WHEN '미술' THEN 6
+    	WHEN '체육' THEN 7
+    	ELSE 8
+	  END
 	</select>
 	
 	<!-- 학급 평균 점수 가져오기  -->
 	<select id="selectAVGscore" resultType="Double">
-		SELECT AVG(SCORE) as AVG
-		FROM HM_SUBMIT
-		LEFT JOIN HOMEWORK USING(BO_NO)
-		WHERE CLASS_CODE = #{classCode}
-		AND TC_COMMENT !='숙제 검사 전입니다.'
-		GROUP BY SUBJECT
-		ORDER BY CASE HOMEWORK.SUBJECT
-		    WHEN '국어' THEN 1
-		    WHEN '수학' THEN 2
-		    WHEN '영어' THEN 3
-		    WHEN '과학' THEN 4
-		    WHEN '사회' THEN 5
-		    WHEN '미술' THEN 6
-		    WHEN '체육' THEN 7
-		    ELSE 8
-		END
+		SELECT COALESCE(AVG(HM_SUBMIT.SCORE), 0) AS AVG
+		FROM SUBJECT S
+      	LEFT JOIN HOMEWORK ON S.SUB = HOMEWORK.SUBJECT
+	  	LEFT JOIN HM_SUBMIT ON HOMEWORK.BO_NO = HM_SUBMIT.BO_NO
+      	AND HM_SUBMIT.TC_COMMENT != '숙제 검사 전입니다.'
+      	AND HOMEWORK.CLASS_CODE=#{classCode}
+	  	GROUP BY S.SUB
+		  ORDER BY CASE S.SUB
+	    	WHEN '국어' THEN 1
+	    	WHEN '수학' THEN 2
+	    	WHEN '영어' THEN 3
+	    	WHEN '과학' THEN 4
+	    	WHEN '사회' THEN 5
+	    	WHEN '미술' THEN 6
+	    	WHEN '체육' THEN 7
+	    	ELSE 8
+		  END
 	</select>
 	
 	<!-- 출석률 -->

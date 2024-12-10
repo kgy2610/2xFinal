@@ -176,6 +176,9 @@ public class MemberController {
 		         if (loginStudent.getStatus().equals("N")) {
 		            return "student/waitClassStatus";
 		         } else {
+		        	 if(loginStudent.getStuNum().equals("0")) {
+		        		 session.setAttribute("alertMsg", "정보 수정에서 본인 학급번호를 입력해주세요");
+		        	 }
 		            return "redirect:/studentMyPage";
 		         }
 	         }

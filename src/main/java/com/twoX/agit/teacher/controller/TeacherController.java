@@ -323,7 +323,9 @@ public class TeacherController {
 	public String updateSubmitHomework(int boNo, String teacherComment, int score, String stuId, Model model, HttpSession session) {
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginUser.getClassCode();
-		
+		if(teacherComment.equals("숙제 검사 전입니다.")) {
+			teacherComment="검사완료";
+		}
 		int result = teacherService.updateSubmitHomework(boNo,teacherComment,score,stuId);
 		
 		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
