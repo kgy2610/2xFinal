@@ -420,7 +420,6 @@ public class MemberController {
 		while ((line = br.readLine()) != null) {
 			result += line;
 		}
-
 		br.close();
 		urlConnection.disconnect();
 		return result;
