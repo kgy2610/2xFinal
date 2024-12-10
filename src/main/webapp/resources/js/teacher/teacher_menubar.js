@@ -125,21 +125,42 @@
             document.getElementById('passwordModal').style.display = 'none';
         }
 
-        // 비밀번호 수정 확인
-        function confirmPasswordUpdate() {
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            // 비밀번호 수정 로직 추가
-            if (newPassword === confirmPassword) {
-                alert('비밀번호가 수정되었습니다.');
-                closePasswordModal();
-                closeInfoModal();
-            } else {
-                alert('비밀번호가 일치하지 않습니다.');
-            }
-        }
+        
+       // 비밀번호 수정 확인
+		function confirmPasswordUpdate() {
+		    const currentPassword = document.getElementById('currentPassword').value;
+		    const newPassword = document.getElementById('newPassword').value;
+		    const confirmPassword = document.getElementById('confirmPassword').value;
+		    
+		    // JSP에서 숨겨둔 현재 비밀번호 값을 가져오기
+		    const hiddenInputValue = document.querySelector('input[type="hidden"]').value;
+		
+		    console.log(currentPassword);
+		    console.log(newPassword);
+		    console.log(confirmPassword);
+		    console.log(hiddenInputValue);
+		
+		    // 현재 비밀번호 확인
+		    if (currentPassword !== hiddenInputValue) {
+		        alert('현재 비밀번호가 올바르지 않습니다. 다시 입력해주세요');
+		        return false; // 폼 제출 중단
+		    }
+		
+		    // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
+		    if (newPassword !== confirmPassword) {
+		        alert('새 비밀번호가 일치하지 않습니다.');
+		        return false; // 폼 제출 중단
+		    }
+		
+		    // 비밀번호 수정 성공 후 처리
+		    alert('비밀번호가 수정되었습니다.');
+		
+		    // 모달 닫기
+		    closePasswordModal();
+		    closeInfoModal();
+		
+		    return true; // 폼 제출 계속 진행
+		}
 
         // 반 삭제 모달 열기
         function openDeleteModal() {
