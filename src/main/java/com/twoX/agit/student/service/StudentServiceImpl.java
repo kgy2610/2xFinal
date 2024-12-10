@@ -78,8 +78,8 @@ public class StudentServiceImpl implements StudentService{
 
 	// 학생 숙제 답변 조회
 	@Override
-	public HomeworkSubmit selectNowAnswer(int boNo) {
-		return studentDao.selectNowAnswer(sqlSession, boNo);
+	public HomeworkSubmit selectNowAnswer(HomeworkSubmit hm) {
+		return studentDao.selectNowAnswer(sqlSession, hm);
 	}
 
 	// 숙제 제출 여부 가져오기

@@ -365,7 +365,7 @@ public class MemberController {
 		String oecode = memberService.selectOeCode(schoolCode);
 
 		// 현재 날짜를 기반으로 연도(year)와 학기(semester) 계산
-		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.now(); //LocalDate.of(2024, 12, 13);
 		int currentYear = today.getYear();
 		String year = String.valueOf(currentYear); // 현재 연도
 		
@@ -420,7 +420,6 @@ public class MemberController {
 		while ((line = br.readLine()) != null) {
 			result += line;
 		}
-
 		br.close();
 		urlConnection.disconnect();
 		return result;
