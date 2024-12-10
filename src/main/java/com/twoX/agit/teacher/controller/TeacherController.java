@@ -448,7 +448,7 @@ public class TeacherController {
 	
 
 	 // 한 학생의 과목별 점수 조회
-	@RequestMapping(value = "studentManage.me", produces="application/json; charset-UTF-8")
+	@RequestMapping(value = "studentManage.bo", produces="application/json; charset-UTF-8")
 	@ResponseBody
 	public String getStudentScores(String stuId) {
 	    List<Map<String, Object>> scoresList = teacherService.getStudentScoresByStuId(stuId);

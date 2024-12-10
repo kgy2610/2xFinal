@@ -51,7 +51,7 @@ function fetchScores(stuId) {
     }
 
     $.ajax({
-        url: 'studentManage.me',
+        url: 'studentManage.bo',
         data: { stuId: stuId },
         dataType: 'json', // 서버 응답을 JSON으로 기대
         success: function(scoresList) {
