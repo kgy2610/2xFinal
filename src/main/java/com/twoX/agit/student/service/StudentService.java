@@ -49,6 +49,8 @@ public interface StudentService {
 
 	String afterschoolTeacher(String tcId);
 
+	int studentUpdateAfterschool(AfterSchoolStudent as);
+
 
 
 }

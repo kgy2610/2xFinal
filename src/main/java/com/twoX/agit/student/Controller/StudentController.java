@@ -233,7 +233,7 @@ public class StudentController {
         
         if (result > 0) {
             session.setAttribute("alertMsg", "참가 성공");
-            return "redirect:/afterschool";
+            return "redirect:/afterschoolPage";
         } else { 
             model.addAttribute("alertMsg", "참가 실패");
             return "redirect:/";
@@ -250,9 +250,6 @@ public class StudentController {
     	System.out.println("방과후 로그인 아이디 : " + loginUser.getStuId() );
     	String stuId = loginUser.getStuId();
     	
-    	System.out.println("1: "  + stuId);
-    	
-    	
     	AfterSchoolStudent afterschoolStudent = studentService.afterschoolStart(stuId);
     	
     	if(afterschoolStudent == null) {
@@ -260,18 +257,41 @@ public class StudentController {
     		return "student/afterSchoolStart";
     	}else{
     		if(afterschoolStudent.getStatus().equals("N")) {
-    			System.out.println("승인 필요");
     			model.addAttribute("errorMsg","승인 승락 필요");
-    			return "student/afterSchoolStart";
+    			session.setAttribute("code", afterschoolStudent.getCode());
+    			System.out.println(afterschoolStudent.getCode());
+    			return "student/waitAfterschool";
     		}else {
-    			session.setAttribute("loginUser", loginUser);
-    	        session.setAttribute("afterschoolStudent", afterschoolStudent);
+                session.setAttribute("loginUser", loginUser);
+                session.setAttribute("afterschoolStudent", afterschoolStudent);
     	        System.out.println("방과후 참가 성공");
     	        return "redirect:/afterSchool";
     		}
 	        }
     	
     	}
+    
+    @RequestMapping("student.aftercode")
+    public String updateAfterschoolCode(AfterSchoolStudent as,Student s, HttpSession session,Model model) {
+    	Student loginUser = (Student)session.getAttribute("loginUser");
+    	
+    	AfterSchoolStudent afterschoolStudent = studentService.afterschoolStart(loginUser.getStuId());
+    	
+    	int result = studentService.studentUpdateAfterschool(as);
+    	
+    	if(result > 0) {
+    		session.setAttribute("alertMsg", "수정 성공");
+    		
+    		if(afterschoolStudent.getStatus().equals("N")) {
+    			session.setAttribute("code", afterschoolStudent.getCode());
+    			
+    		}
+    	}else {
+    		model.addAttribute("alertMsg","수정 실패");
+    		return "redirect:/";
+    	}
+    	return "student/waitAfterschool";
+    }
     
     
     //방과후 참가 후 페이지

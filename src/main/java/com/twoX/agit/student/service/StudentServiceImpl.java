@@ -107,5 +107,10 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.selectAVGstuScore(sqlSession, classCode);
 	}
 
+	@Override
+	public int studentUpdateAfterschool(AfterSchoolStudent as) {
+		return studentDao.updateAfterschool(sqlSession, as);
+	}
+
 	
 }

@@ -259,24 +259,14 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-	@RequestMapping("student.upadatePwd")
-	public String updatePwdSt(Student s,String newPwd, HttpSession session, Model model) {
-		model.addAttribute("bbsId", "mypage");
-
-		Student student = (Student)session.getAttribute("loginUser");
-		
-		s.setStuId(student.getStuId());
-		s.setStuPwd(newPwd);
-		
-		int result = memberService.studentPwdUpdate(s);
-		if (result > 0) {
+	@ResponseBody
+	@RequestMapping("modify_student_PWD")
+	public int modifyStudentPWD(Student s,HttpSession session) {
+		int result = memberService.updateStuPwd(s);
+		if(result>0) {
 			session.setAttribute("loginUser", memberService.loginStudent(s));
-			session.setAttribute("alertMsg", "비밀번호 수정 성공");
-			return "redirect:/studentMyPage";
-		} else {
-			session.setAttribute("alertMsg", "비밀번호 수정 실패");
-			return "redirect:/";
 		}
+		return result;
 	}
 
 	@RequestMapping("imgselect")
