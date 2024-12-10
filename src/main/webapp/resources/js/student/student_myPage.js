@@ -122,13 +122,11 @@ function getAirStatus() {
 
     // 오늘과 내일의 시간표 분리 (최대 5교시 기준)
     const maxPeriods = 7; // 최대 교시 수
-	const referenceDate = itemArr[0].ALL_TI_YMD;
+	const referenceDate = getTodayDate();
     const todaySchedule = []; // 오늘의 시간표
     const tomorrowSchedule = []; // 내일의 시간표
 	for (const entry of itemArr){
-		if(itemArr.length<5){
-			tomorrowSchedule.push(entry);
-		}else if(entry.ALL_TI_YMD === referenceDate){
+		if(entry.ALL_TI_YMD === referenceDate){
 			todaySchedule.push(entry);
 		}else{
 			tomorrowSchedule.push(entry);
@@ -173,4 +171,12 @@ function getAirStatus() {
 
     tableHtml += "</table></div>";
     document.getElementsByClassName("scheduledraw")[0].innerHTML = tableHtml;
+}
+function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+    const day = String(today.getDate()).padStart(2, '0'); // 날짜는 두 자릿수로 맞추기 위해 padStart 사용
+
+    return year+month+day;
 }
