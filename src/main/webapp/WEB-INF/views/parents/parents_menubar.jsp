@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>parents_menubar</title>
+    <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
     <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_myPage.css'/>">
     <script src="<c:url value='/resources/js/parents/modify_parents_info_api.js'/>"></script>

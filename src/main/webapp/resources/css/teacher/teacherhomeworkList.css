@@ -1,86 +1,12 @@
-@font-face {
-    font-family: 'NanumSquareRound';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-*{
-    margin: auto;
-    padding: 0;
-    font-family: 'NanumSquareRound';
-    overflow: hidden;
-    box-sizing: border-box;
-    letter-spacing: -1px;
-}
-a{
-    text-decoration: none;
-}
-.nav{
-    width: 306px; height: 919px;
-    background-color: #F4DABF;
-    position: fixed;
-    margin: 0;
-    margin-left: 227px;
-    display: flex;
-    flex-direction: column;
-}
-.nav > img{
-    width: 182px; height: 80px;
-    margin: 46px auto;
-}
-.nav > .menu{
-    width: 182px; height: 560px;
-    display: flex;
-    flex-direction: column;
-}
-.menu > label{
-    font-weight: 700;
-    font-size: 40px;
-    margin-top: 37px;
-    margin-right: 0px;
-}
-.menu > label > a{
-    color: #A98467;
-}
-.menu > label > a:hover{
-    color: #7C604B;
-    font-weight: 800;
-}
-.undermenu{
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    margin-top: 80px;
-}
-.undermenu > label{
-    padding-top: 10px;
-}
-.undermenu > label > a{
-    color: #A98467;
-    font-size: 30px;
-    font-weight: 300;
-    text-decoration: underline;
-}
-.undermenu > label > a:hover{
-    color: #7C604B;
-    font-weight: 500;
-}
-
-#homework a {
-    color: #7C604B;
-}
-
-
 
 .whole_body {
-    width: 1050px;
-    height: 802px;
-    margin-left: 620px;
-    overflow-y: auto; /* 세로 스크롤 추가 */
-    padding: 20px; /* 패딩 추가 */
+   width: 1040px;
+   height: 790px;
+    margin-left: 603px;
+   margin-top: 65px;
+    padding: 10px;   
     border: #A98467 solid 3px;
-    border-radius: 12px;
-    margin-top: 70px;
+    border-radius: 30px;
 }
 
 .whole_body > .box {
@@ -91,37 +17,40 @@ a{
 
 .whole_body > .box > h1 {
     color: #A98467;
-    margin-top: 20px;
+    font-size:30px;
 }
 
 .attendance-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    font-size: 25px;
 }
 
 .attendance-table th, .attendance-table td {
-    padding: 8px;
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     color: #A98467;
+    padding: 10px;
 }
 
 .attendance-table th {
-    font-weight: 600;
-    color:#A98467;
+     color:#A98467;
+    font-weight: 800;
 }
 
 .attendance-table td {
-    font-size: 14px;
+    font-size: 23px;
+    font-weight: 500;
+    color:#A98467;
 }
 
 /* 점수 칸 스타일 추가 */
 .attendance-table td.score {
-    background-color: #d4edda; /* 초록색 배경 */
-    border-radius:  30px; /* 둥근 모서리 */
+    background-color: #DDE5B6;
+    border-radius:  30px;
     width: 100px;
-    height: 20px;
+    padding:0px;
 }
 
 

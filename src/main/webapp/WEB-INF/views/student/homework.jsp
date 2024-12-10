@@ -19,10 +19,10 @@
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
 	
-	</div>
+	<div class="wrap">
 	<div id="content_border">
 		<div id="community_title">
-			<h1>숙제 목록</h1>
+			<h2>숙제 목록</h2>
 		</div>
 		<table id="community_table">
 			<thead>
@@ -103,7 +103,7 @@
 	<div id="monkey_img">
 		<img src="<c:url value='/resources/img/student/homework_monkey.png'/>">
 	</div>
-	
+</div>
 	<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 </body>
 </html>

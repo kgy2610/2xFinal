@@ -51,7 +51,7 @@ public interface MemberService {
 	int studentUpdate(Map<String, String> map);
 
 	// 비밀번호 수정
-	int studentPwdUpdate(Student s);
+	int updateStuPwd(Student s);
 
 	// 프로필 사진 변경
 	int studentSelectImg(Map<String, String> map);
@@ -159,5 +159,8 @@ public interface MemberService {
 
 	//반학생 조회
 	ArrayList<Student> selectStuList(String classCode);
+
+	
+	
 
 }

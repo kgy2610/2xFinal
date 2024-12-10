@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-    <title>student_homeworkCheck</title>
+    <title>AGIT</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- Summernote CSS/JS CDN -->
@@ -59,8 +59,9 @@
                 <div>점수</div>
                 <div>${npage.score}</div>
                 <div>점</div>
+                 
             </div>
-            <button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
+           <button class="create_button" onclick="location.href='homework?capge=${cpage}'">목록으로</button>
         </div> 
     </div>
 </body>
