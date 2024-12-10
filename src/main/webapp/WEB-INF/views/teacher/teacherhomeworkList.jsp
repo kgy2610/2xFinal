@@ -38,7 +38,7 @@
 						<tr onclick="redirectToDetail('${homework.hmTitle}', '${homework.stuId}')">
 							<td>${homework.boNo}</td>
 							<!-- 과제 번호 -->
-							<td>${homework.stuId}</td>
+							<td>${homework.stuName}</td>
 							<!-- 학생 이름 -->
 							<td>${homework.hmTitle}</td>
 							<!-- 숙제 제목 -->
