@@ -151,7 +151,7 @@ a {
 	text-align: center;
 }
 
-.chat_modal .closeModal {
+.chat_modal .closeChatModal {
 	position: absolute;
 	top: 20px;
 	right: 20px;
@@ -193,7 +193,7 @@ a {
 	color: white;
 }
 
-.closeModal {
+.closeChatModal {
 	width: 40px;
 	height: 40px;
 	line-height: 38px;
@@ -207,7 +207,7 @@ a {
 	padding: 5px;
 }
 
-.closeModal:hover, .closeModal:focus {
+.closeChatModal:hover, .closeModal:focus {
 	color: #705845;
 	text-decoration: none;
 	cursor: pointer;

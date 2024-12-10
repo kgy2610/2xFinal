@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,macos,windows,visualstudiocode,maven,intellij,eclipse
 
 src/main/webapp/resources/img/board/
+src/main/webapp/resources/img/after/
+src/main/webapp/resources/img/homework/
 src/main/webapp/resources/file/
 
 ### Eclipse ###

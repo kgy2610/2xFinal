@@ -91,6 +91,7 @@ function closeUpdateModal() {
     document.getElementById('updateModal').style.display = 'none';
 }
 
+
 // 정보 수정 폼에서 비밀번호 수정 폼으로 전환
 function switchToPwdForm() {
     document.getElementById('infoForm').style.display = 'none';
