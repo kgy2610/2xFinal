@@ -350,7 +350,7 @@
 	<update id="updateSubject" parameterType="map">
 	    UPDATE HM_SUBMIT
 	    SET TC_COMMENT = #{teacherComment}, SCORE = #{score}
-	    WHERE STU_ID = #{stuId}
+	    WHERE STU_ID = #{stuId} AND BO_NO = #{boNo}
 	</update>
 	
 	
@@ -366,7 +366,8 @@
         p.PR_NAME  <!-- 학부모 이름 -->
     FROM COUNSEL c
     JOIN PARENTS p ON c.PR_ID = p.PR_ID  <!-- PARENTS 테이블과 JOIN -->
-    WHERE c.TC_ID = #{tcId}
+    WHERE c.TC_ID = #{tcId}  AND TRUNC(c.CS_DATE) BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 2
+    ORDER BY CS_NO ASC
 </select>
 
 <insert id="insertCounsel">
