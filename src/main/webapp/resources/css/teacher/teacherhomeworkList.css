@@ -45,12 +45,15 @@
     color:#A98467;
 }
 
+.attendance-table tbody tr:hover {
+            background-color: #DDE5B6; 
+            cursor: pointer; 
+            width:130%;
+        }
+
 /* 점수 칸 스타일 추가 */
 .attendance-table td.score {
-    background-color: #DDE5B6;
-    border-radius:  30px;
     width: 100px;
-    padding:0px;
 }
 
 
