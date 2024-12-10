@@ -149,14 +149,14 @@ public class StudentController {
 	
 	// 학생 숙제 제출 완료 후 제출한 숙제 조회
 	@RequestMapping("homework.check")
-	public String homeworkCheck(int boNo,
+	public String homeworkCheck(HomeworkSubmit hm,
 								@ModelAttribute HomeworkFile hf,
             					@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
             					HttpSession session,
             					Model model) {
 		Student s = (Student) session.getAttribute("loginUser");
-		
-		HomeworkSubmit npage = studentService.selectNowAnswer(boNo);
+		hm.setStuId(s.getStuId());
+		HomeworkSubmit npage = studentService.selectNowAnswer(hm);
 		
 		// null 체크 및 예외 처리
 	    if (npage == null) {
@@ -172,8 +172,10 @@ public class StudentController {
 	
 	// 학생 숙제 답변 수정 페이지로 이동
 	@RequestMapping("hmAnswer_modify")
-	public String homeworkModify(int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage, HttpSession session, Model model) {
-		HomeworkSubmit npage = studentService.selectNowAnswer(boNo);
+	public String homeworkModify(HomeworkSubmit hm,@RequestParam(value="cpage", defaultValue="1") int currentPage, HttpSession session, Model model) {
+		Student s = (Student) session.getAttribute("loginUser");
+		hm.setStuId(s.getStuId());
+		HomeworkSubmit npage = studentService.selectNowAnswer(hm);
 		
 		session.setAttribute("npage", npage);
 		session.setAttribute("cpage", currentPage);
