@@ -281,6 +281,7 @@ public class TeacherController {
 		String classCode = loginUser.getClassCode();
 		
 		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
+		System.out.println(subjectHomeworkList);
 
 		model.addAttribute("subjectHomeworkList", subjectHomeworkList);
 		
@@ -299,6 +300,7 @@ public class TeacherController {
 	        // 첫 번째 데이터를 사용하여 필요한 정보 추출
 	        HmSubmit homework = submitHomework.get(0);
 
+	        model.addAttribute("boNo", homework.getBoNo());
 	        model.addAttribute("hmTitle", homework.getHmTitle());       // 숙제 제목
 	        model.addAttribute("hmStuContent", homework.getHmStuContent()); // 학생이 제출한 답
 	        model.addAttribute("score", homework.getScore());         // 점수
@@ -318,11 +320,11 @@ public class TeacherController {
 	
 	//숙제 점수 및 말씀 부여
 	@RequestMapping("updateSubmitHomework")
-	public String updateSubmitHomework(String teacherComment, int score, String stuId, Model model, HttpSession session) {
+	public String updateSubmitHomework(int boNo, String teacherComment, int score, String stuId, Model model, HttpSession session) {
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginUser.getClassCode();
 		
-		int result = teacherService.updateSubmitHomework(teacherComment,score,stuId);
+		int result = teacherService.updateSubmitHomework(boNo,teacherComment,score,stuId);
 		
 		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
 		model.addAttribute("subjectHomeworkList", subjectHomeworkList);
