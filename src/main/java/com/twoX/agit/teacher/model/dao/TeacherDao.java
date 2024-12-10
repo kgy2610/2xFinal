@@ -125,8 +125,9 @@ public class TeacherDao {
 	}
 	
 	// 숙제 점수 및 말씀 부여
-	public int updateSubmitHomework(SqlSessionTemplate sqlSession, String teacherComment, int score, String stuId) {
+	public int updateSubmitHomework(SqlSessionTemplate sqlSession, int boNo, String teacherComment, int score, String stuId) {
 		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
 		params.put("teacherComment", teacherComment);
 		params.put("score", score);
 		params.put("stuId", stuId);

@@ -62,7 +62,7 @@ public interface TeacherService {
 	ArrayList<HmSubmit> gosubmitHomework(String title, String studentId);
 	
 	// 숙제 점수 및 말씀 부여
-	int updateSubmitHomework(String teacherComment, int score, String stuId);
+	int updateSubmitHomework(int boNo, String teacherComment, int score, String stuId);
 	
 	// 오늘날짜 출결 조회
 	ArrayList<Attendance> selectAttendanceList(String aDate);

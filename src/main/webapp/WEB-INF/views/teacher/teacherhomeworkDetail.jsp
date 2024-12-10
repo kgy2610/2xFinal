@@ -34,6 +34,7 @@
                 <textarea name="teacherComment" placeholder="선생님 말씀 작성" required>${tcComment}</textarea>
                 <div class="score-save">
                 	<input type="hidden" name="stuId" value="${stuId}">
+                	<input type="hidden" name="boNo" value="${boNo}">
                     <input type="number" name="score" value="${score}"  placeholder="점수 입력" min="0" max="100" required>
                     <button type="submit" class="save-button">저장</button>
                 </div>

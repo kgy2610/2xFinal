@@ -122,8 +122,8 @@ public class TeacherServiceImpl  implements TeacherService{
 	
 	// 숙제 점수 및 말씀 부여
 	@Override
-	public int updateSubmitHomework(String teacherComment, int score, String stuId) {
-		return teacherDao.updateSubmitHomework(sqlSession, teacherComment, score, stuId);
+	public int updateSubmitHomework(int boNo, String teacherComment, int score, String stuId) {
+		return teacherDao.updateSubmitHomework(sqlSession, boNo, teacherComment, score, stuId);
 	}
 
 	// 오늘자 출결 확인
