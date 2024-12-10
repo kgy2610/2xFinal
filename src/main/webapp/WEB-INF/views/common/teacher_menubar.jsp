@@ -163,6 +163,7 @@ if (s != null) {
 				<!-- 비밀번호 수정 폼 -->
 				<form id="passwordUpdateForm" action="updatePassword.me" method="POST">
 				<input type="hidden" value="<%=s.getTcPwd() %>">
+				<%System.out.println("아니 뭐야" + s.getTcPwd());%>
 					<label for="currentPassword">현재 비밀번호</label> <input type="password"
 						id="currentPassword" name="currentPassword" required> <label
 						for="newPassword">수정 비밀번호</label> <input type="password"
