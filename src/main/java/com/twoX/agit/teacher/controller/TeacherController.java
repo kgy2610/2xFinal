@@ -345,7 +345,7 @@ public class TeacherController {
 		System.out.println("dssd" + attendanceList);
 		
 		ArrayList<Attendance> TeacherAttendanceList = memberService.selectTeacherAttendance();
-		System.out.println(TeacherAttendanceList);
+		System.out.println("이거슨 수류탄이야" + TeacherAttendanceList);
 		
 		model.addAttribute("attendanceList", attendanceList);
 		model.addAttribute("TeacherAttendanceList", TeacherAttendanceList);

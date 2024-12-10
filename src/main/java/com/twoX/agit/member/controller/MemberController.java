@@ -562,7 +562,6 @@ public class MemberController {
 	     	
 	     	// 상담일정 리스트 가져오기
 	     	ArrayList<Counsel> teacherCounsel = memberService.getTeacherCounsel(tcId);
-	     	System.out.println(teacherCounsel);
 	     	session.setAttribute("teacherCounsel", teacherCounsel);
 	        
 	     	 // 공지사항 수를 이용해 공지사항 리스트 가져오기
@@ -574,7 +573,6 @@ public class MemberController {
 	        
 	        // classCode를 이용해 메모 리스트 가져오기
 	        ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-	        System.out.println(teacherMemo);
 	        //메모 리스트를 세션에 추가
 	        session.setAttribute("teacherMemo", teacherMemo);
 
@@ -708,8 +706,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
-
+        session.setAttribute("teacherNotice", teacherNotices);
 		return "teacher/myPage";
 	}
 
@@ -726,7 +723,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
+        session.setAttribute("teacherNotice", teacherNotices);
 		
 		return "teacher/myPage";
 	}
@@ -746,7 +743,7 @@ public class MemberController {
 		
 		int noticeCount = memberService.getNoticeCount();
         ArrayList<TeacherNotice> teacherNotices = memberService.getTeacherNotices(noticeCount, tcId);
-        model.addAttribute("teacherNotice", teacherNotices);
+        session.setAttribute("teacherNotice", teacherNotices);
 
 		return "teacher/myPage";
 	}
@@ -764,7 +761,7 @@ public class MemberController {
 		int result = memberService.insertMemo(tcId, classCode, memoContent);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 
 		return "teacher/myPage";
 	}
@@ -780,7 +777,7 @@ public class MemberController {
 		int result = memberService.deleteMemo(MMno, memoContent);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 
 		return "teacher/myPage";
 	}
@@ -796,7 +793,7 @@ public class MemberController {
 		int result = memberService.updateMemo(tcId, MMno, originalMemo, newMemo);
 		
 		ArrayList<TeacherMemo> teacherMemo = memberService.getTeacherMemo(classCode);
-		model.addAttribute("teacherMemo", teacherMemo);
+		session.setAttribute("teacherMemo", teacherMemo);
 		
 		return "teacher/myPage";
 	}
