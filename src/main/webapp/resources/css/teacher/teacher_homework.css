@@ -27,14 +27,37 @@
 }
 
 .whole_body {
-    width: 1050px;
-    height: 802px;
-    margin-left: 620px;
-    padding: 20px; /* 패딩 추가 */
+    width: 1040px;
+   height: 790px;
+    margin-left: 603px;
+   margin-top: 65px;
+    padding: 10px;   
     border: #A98467 solid 3px;
-    border-radius: 12px;
-    margin-top: 70px;
+    border-radius: 30px;
+    overflow:auto;
 }
+
+/* 스크롤바 스타일 */
+.whole_body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.whole_body::-webkit-scrollbar-track {
+    background: #F2CEB2;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.whole_body::-webkit-scrollbar-thumb {
+    background: #A98467;
+    border-radius: 8px;
+}
+
+.whole_body::-webkit-scrollbar-thumb:hover {
+    background: #81644e;
+}
+
 
 .whole_body > .box {
     background-color: #fff; /* 배경색 추가 */
@@ -46,6 +69,7 @@
     color: #A98467;
     margin-top: 10px;
     padding-left: 20px;
+    font-size:30px;
 }
 
 .attendance-table {
@@ -86,8 +110,8 @@
 
 .homeworkplus {
     position: fixed;
-    bottom: 80px;
-    right: 280px;
+    bottom: 85px;
+    right: 300px;
 }
 
 .pencil {
@@ -97,7 +121,7 @@
 
 
 .navigate-button {
-    background-color: #d7e6c6; /* 연한 초록색 배경 */
+    background-color: #DDE5B6; /* 연한 초록색 배경 */
     color: #7c6b2c; /* 갈색 텍스트 */
     border: none;
     border-radius: 20px; /* 둥근 모서리 */
@@ -107,5 +131,5 @@
 }
 
 .navigate-button:hover {
-    background-color: #c5d7a9; /* 호버 시 색상 변화 */
+    background-color: #c6d385; /* 호버 시 색상 변화 */
 }

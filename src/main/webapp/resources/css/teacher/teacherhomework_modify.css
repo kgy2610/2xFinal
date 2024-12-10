@@ -1,11 +1,11 @@
 .whole_body{
-    width: 1050px;
-    height: 802px;
+   width: 1040px;
+   height: 790px;
     margin-left: 603px;
-    margin-top: 50px;
-    border: solid #A98467 3px;
-    border-radius: 20px;
-    padding: 30px
+   margin-top: 65px;
+    padding: 10px;   
+    border: #A98467 solid 3px;
+    border-radius: 30px;
 }
 
 .menu > label > .homework{

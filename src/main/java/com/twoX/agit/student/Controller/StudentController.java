@@ -149,14 +149,14 @@ public class StudentController {
 	
 	// 학생 숙제 제출 완료 후 제출한 숙제 조회
 	@RequestMapping("homework.check")
-	public String homeworkCheck(int boNo,
+	public String homeworkCheck(HomeworkSubmit hm,
 								@ModelAttribute HomeworkFile hf,
             					@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
             					HttpSession session,
             					Model model) {
 		Student s = (Student) session.getAttribute("loginUser");
-		
-		HomeworkSubmit npage = studentService.selectNowAnswer(boNo);
+		hm.setStuId(s.getStuId());
+		HomeworkSubmit npage = studentService.selectNowAnswer(hm);
 		
 		// null 체크 및 예외 처리
 	    if (npage == null) {
@@ -172,8 +172,10 @@ public class StudentController {
 	
 	// 학생 숙제 답변 수정 페이지로 이동
 	@RequestMapping("hmAnswer_modify")
-	public String homeworkModify(int boNo,@RequestParam(value="cpage", defaultValue="1") int currentPage, HttpSession session, Model model) {
-		HomeworkSubmit npage = studentService.selectNowAnswer(boNo);
+	public String homeworkModify(HomeworkSubmit hm,@RequestParam(value="cpage", defaultValue="1") int currentPage, HttpSession session, Model model) {
+		Student s = (Student) session.getAttribute("loginUser");
+		hm.setStuId(s.getStuId());
+		HomeworkSubmit npage = studentService.selectNowAnswer(hm);
 		
 		session.setAttribute("npage", npage);
 		session.setAttribute("cpage", currentPage);
@@ -231,7 +233,7 @@ public class StudentController {
         
         if (result > 0) {
             session.setAttribute("alertMsg", "참가 성공");
-            return "redirect:/afterschool";
+            return "redirect:/afterschoolPage";
         } else { 
             model.addAttribute("alertMsg", "참가 실패");
             return "redirect:/";
@@ -248,9 +250,6 @@ public class StudentController {
     	System.out.println("방과후 로그인 아이디 : " + loginUser.getStuId() );
     	String stuId = loginUser.getStuId();
     	
-    	System.out.println("1: "  + stuId);
-    	
-    	
     	AfterSchoolStudent afterschoolStudent = studentService.afterschoolStart(stuId);
     	
     	if(afterschoolStudent == null) {
@@ -258,18 +257,41 @@ public class StudentController {
     		return "student/afterSchoolStart";
     	}else{
     		if(afterschoolStudent.getStatus().equals("N")) {
-    			System.out.println("승인 필요");
     			model.addAttribute("errorMsg","승인 승락 필요");
-    			return "student/afterSchoolStart";
+    			session.setAttribute("code", afterschoolStudent.getCode());
+    			System.out.println(afterschoolStudent.getCode());
+    			return "student/waitAfterschool";
     		}else {
-    			session.setAttribute("loginUser", loginUser);
-    	        session.setAttribute("afterschoolStudent", afterschoolStudent);
+                session.setAttribute("loginUser", loginUser);
+                session.setAttribute("afterschoolStudent", afterschoolStudent);
     	        System.out.println("방과후 참가 성공");
     	        return "redirect:/afterSchool";
     		}
 	        }
     	
     	}
+    
+    @RequestMapping("student.aftercode")
+    public String updateAfterschoolCode(AfterSchoolStudent as,Student s, HttpSession session,Model model) {
+    	Student loginUser = (Student)session.getAttribute("loginUser");
+    	
+    	AfterSchoolStudent afterschoolStudent = studentService.afterschoolStart(loginUser.getStuId());
+    	
+    	int result = studentService.studentUpdateAfterschool(as);
+    	
+    	if(result > 0) {
+    		session.setAttribute("alertMsg", "수정 성공");
+    		
+    		if(afterschoolStudent.getStatus().equals("N")) {
+    			session.setAttribute("code", afterschoolStudent.getCode());
+    			
+    		}
+    	}else {
+    		model.addAttribute("alertMsg","수정 실패");
+    		return "redirect:/";
+    	}
+    	return "student/waitAfterschool";
+    }
     
     
     //방과후 참가 후 페이지

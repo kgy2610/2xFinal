@@ -51,15 +51,15 @@ public class StudentDao {
 	}
 
 	// 학생 숙제 답변 조회
-	public HomeworkSubmit selectNowAnswer(SqlSessionTemplate sqlSession, int boNo) {
-	    HomeworkSubmit result = sqlSession.selectOne("studentMapper.selectNowAnswer", boNo);
+	public HomeworkSubmit selectNowAnswer(SqlSessionTemplate sqlSession, HomeworkSubmit hm) {
+	    HomeworkSubmit result = sqlSession.selectOne("studentMapper.selectNowAnswer", hm);
 
 	    // 디버깅: 반환된 HomeworkSubmit 객체의 originName과 changeName 값 출력
 	    if (result != null) {
 	        System.out.println("Origin Name: " + result.getOriginName());
 	        System.out.println("Change Name: " + result.getChangeName());
 	    } else {
-	        System.out.println("Result is null for BO_NO: " + boNo);
+	        System.out.println("Result is null for BO_NO: " + hm.getBoNo());
 	    }
 
 	    return result;
@@ -107,5 +107,9 @@ public class StudentDao {
 
 	public String afterschoolTeacher(SqlSessionTemplate sqlSession, String tcId) {
 		return sqlSession.selectOne("afterschoolmapper.afterschoolTeacher", tcId);
+	}
+
+	public int updateAfterschool(SqlSessionTemplate sqlSession, AfterSchoolStudent as) {
+		return sqlSession.update("afterschoolmapper.updateafterschoolcode",as);
 	}
 }

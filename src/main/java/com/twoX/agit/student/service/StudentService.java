@@ -24,7 +24,7 @@ public interface StudentService {
 	int insertStudentHomework(HomeworkSubmit hm);
 
 	// 학생 숙제 답변 조회
-	HomeworkSubmit selectNowAnswer(int boNo);
+	HomeworkSubmit selectNowAnswer(HomeworkSubmit hm);
 
 	// 숙제 제출 상태 불러오기
 	HomeworkSubmit selectHomeworkSubmit(int boNo, String stuId);
@@ -48,6 +48,8 @@ public interface StudentService {
 	AfterSchool afterschool(String code);
 
 	String afterschoolTeacher(String tcId);
+
+	int studentUpdateAfterschool(AfterSchoolStudent as);
 
 
 

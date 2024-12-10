@@ -9,15 +9,17 @@
 		<result column="LA" property="LA"/>
 	</resultMap>
 	
+<!-- 오늘날짜 조회 -->
 <select id="selectTeacherAttendance" resultMap="AttendanceResultSet">
     SELECT 
         TO_CHAR(ADATE, 'YYYY-MM-DD') as aDate,
         STU_ID,
         LA
-    FROM ATTENDANCE
+    FROM ATTENDANCE 
+    WHERE TRUNC(ADATE) = TRUNC(SYSDATE)
 </select>
 
-
+	<!-- 날짜 조회 -->
 	<select id="selectAttendance" resultMap="AttendanceResultSet" resultType="int">
 		SELECT 
 		TO_CHAR(ADATE, 'YYYY-MM-DD') as aDate, STU_ID, LA

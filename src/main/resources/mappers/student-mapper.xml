@@ -64,7 +64,7 @@
 			   hm.STATUS,
 			   hm.SCORE
 		  FROM HOMEWORK h
-		  LEFT JOIN HM_SUBMIT hm ON h.BO_NO = hm.BO_NO
+		  LEFT JOIN (SELECT STATUS,SCORE,BO_NO FROM HM_SUBMIT WHERE STU_ID=#{stuId}) hm ON h.BO_NO = hm.BO_NO
 		 WHERE h.CLASS_CODE = #{classCode}
 	  ORDER BY h.BO_NO DESC
 	</select>
@@ -132,6 +132,7 @@
 		  LEFT JOIN HOMEWORK h ON hm.BO_NO = h.BO_NO
 		  LEFT JOIN HOMEWORK_FILE hf ON hm.BO_NO = hf.BO_NO
 		 WHERE hm.BO_NO = #{boNo}
+		 AND hm.STU_ID = #{stuId}
 	</select>
 	
 	<!-- 학생 숙제 수정 -->

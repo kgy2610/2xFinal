@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>숙제</title>
+<link rel="icon" href="<c:url value='/resources/img/student/homework_monkey.png'/>"/>
+<link rel="apple-touch-icon" href="<c:url value='/resources/img/student/homework_monkey.png'/>"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/student/student_homework.css'/>">
@@ -19,10 +21,10 @@
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
 	
-	</div>
+	<div class="wrap">
 	<div id="content_border">
 		<div id="community_title">
-			<h1>숙제 목록</h1>
+			<h2>숙제 목록</h2>
 		</div>
 		<table id="community_table">
 			<thead>
@@ -103,7 +105,7 @@
 	<div id="monkey_img">
 		<img src="<c:url value='/resources/img/student/homework_monkey.png'/>">
 	</div>
-	
+</div>
 	<script src="<c:url value='/resources/js/student/student_homework.js'/>"></script>
 </body>
 </html>

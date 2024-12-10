@@ -105,6 +105,7 @@
 	 		<mapping path="/updateInfo.me"/>
 	 		<mapping path="/classdelete.me"/>
 	 		<mapping path="/makeAfterClass.me"/>
+	 		<mapping path="/studentManage.me"/>
 	 		<beans:bean class="com.twoX.agit.common.interceptor.TeacherInterceptor" id="TeacherInterceptor" />
 	 	</interceptor>
 	 </interceptors>
