@@ -21,6 +21,8 @@
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="STATUS" property="status" />
 		<result column="HOMEWORK_CONTENT" property="hmContent" />
+		
+		<result column="STU_NAME" property="stuName" />
  	</resultMap>
  	
  	<resultMap type="ParentsBoard" id="ParentsBoardResultSet">
@@ -328,8 +330,14 @@
 	
 	<!--  우리반 숙제 제출 리스트로 이동  -->
 	<select id="selectSubject" resultMap="HmSubmitResultSet"> 
-		SELECT hs.STU_ID, hs.BO_NO, hs.HM_STUCONTENT AS STUDENT_CONTENT, hs.SCORE, hs.TC_COMMENT, TO_CHAR(hs.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, hs.STATUS, h.HM_TITLE, h.HM_CONTENT AS HOMEWORK_CONTENT 
-		FROM HM_SUBMIT hs LEFT JOIN STUDENT s ON hs.STU_ID = s.STU_ID LEFT JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO 
+		SELECT 
+		hs.STU_ID, hs.BO_NO, hs.HM_STUCONTENT AS STUDENT_CONTENT, hs.SCORE, hs.TC_COMMENT, 
+		TO_CHAR(hs.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, hs.STATUS, h.HM_TITLE,
+		h.HM_CONTENT AS HOMEWORK_CONTENT,
+		s.STU_NAME
+		FROM HM_SUBMIT hs 
+		LEFT JOIN STUDENT s ON hs.STU_ID = s.STU_ID LEFT JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO
+		JOIN STUDENT s ON hs.STU_ID = s.STU_ID 
 		WHERE s.CLASS_CODE = #{classCode}
 	</select>
 	 
@@ -338,7 +346,7 @@
 	    SELECT 
 	        hs.STU_ID,
 	        hs.BO_NO,
-	        hs.HM_STUCONTENT,         -- 학생이 제출한 내용
+	        hs.HM_STUCONTENT AS HM_CONTENT,         -- 학생이 제출한 내용
 	        hs.SCORE,              -- 점수
 	        hs.TC_COMMENT,         -- 선생님 코멘트
 	        TO_CHAR(hs.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, -- 제출일
@@ -349,6 +357,7 @@
 	    JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO
 	    WHERE hs.STU_ID = #{studentId} 
 	      AND h.HM_TITLE = #{title}
+	    ORDER BY BO_NO DESC
 	</select>
 
 	<!-- 숙제 점수 및 말씀 부여 -->

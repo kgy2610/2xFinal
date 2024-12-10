@@ -26,4 +26,6 @@ public class HmSubmit {
 	private String tcComment;
 	private String createDate;
 	private String status;
+	
+	private String stuName;
 }
