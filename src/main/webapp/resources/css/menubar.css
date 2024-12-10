@@ -366,7 +366,10 @@ a {
 	text-align: center;
 	font-size: 15px;
 }
-
+.modal2 tr td:first-child{
+	padding-right: 5px;
+	text-align: right;
+}
 .modal2 tr td div input {
 	width: 80px;
 }

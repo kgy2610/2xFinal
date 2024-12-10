@@ -1,11 +1,15 @@
-#content_border{
-    position:absolute; 
-    border: 3px solid #A98467; 
-    border-radius: 30px; 
-    bottom: 47px; 
-    right: 228px; 
-    width: 1089px; 
-    height: 880px;
+.wrap {
+   width: 1040px;
+   height: 790px;
+   margin-left: 603px;
+   margin-top: 65px;
+   margin-bottom: 98px;
+   font-size: 25px;
+   color: #A98467;
+   border: 3px solid #A98467;
+   border-radius: 30px;
+   padding: 10px;  
+   position:absolute;  
 }
 #community_title{
     position:absolute; 
@@ -40,7 +44,7 @@
     left: 47px;
     background-color: #DDE5B6; 
     border-radius: 40px;
-    width: 989px;
+    width: 939px;
     height: 60px;
     text-align: center;
     color: #A98467;
@@ -55,31 +59,32 @@
     color: #A98467;
     font-size: 20px;
     padding-top: 10px;
-    padding-right: 10px;
+    padding-right: 70px;
 }
 #enroll_content{
     position:absolute;
-    top: 100px;
+    top: 110px;
     left: 47px;
     border: 3px solid #A98467; 
-    width: 989px;
-    height: 400px;
+    width: 939px;
+    height: 300px;
 }
 #en_content{
     overflow: auto;
-    height: 265px;
-    border-bottom: 3px solid #A98467;
+    height: 170px;
+    padding: 10px;
+    font-size: 28px;
 }
 #enroll_file{
     position:absolute;
     display: flex;
     align-items: center;
-    bottom: 11px;
+    bottom: 16px;
     left: 20px;
     background-color: #DDE5B6; 
     border-radius: 40px;
-    width: 950px;
-    height: 60px;
+    width: 890px;
+    height: 50px;
 }
 #enroll_file span{
 	position:absolute;
@@ -88,9 +93,10 @@
 }
 #downloadLink{
 	position:absolute;
-	left:150px;
+	left:185px;
 	color:#A98467;
 	text-decoration: underline;
+	
 }
 .custom-file-upload {
     position:absolute;
@@ -119,10 +125,12 @@
 #reply_area{
     position: absolute;
     left: 47px;
-    bottom: 132px;
-    height: 235px;
-    width: 989px;
+    bottom: 122px;
+    height: 225px;
+    width: 939px;
     overflow: auto;
+    overflow-x: hidden;
+    padding-bottom: 5px;
 }
 /* 댓글 섹션 스크롤바 스타일 */
 #reply_area::-webkit-scrollbar {
@@ -166,7 +174,7 @@
     border-collapse: collapse;
     width: 889px;
     height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .parents_reply tr td:nth-child(1){
     width: 7px;

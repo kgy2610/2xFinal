@@ -187,15 +187,16 @@
 .modal-content {
    background-color: #fefefe;
    margin: auto;
-   padding: 40px;
+   padding: 20px;
+   padding-top: 40px;
    border: 3px solid #A98467;
    border-radius: 30px;
-   width: 30%;
-   height: 30%;
+   width: 26%;
+   height: 25%;
    position: absolute;
-    left: 40%;
-    top: 35%;
-   max-height: 35%; /*스크롤제한높이*/
+   left: 40%;
+   top: 40%;
+   max-height: 25%; /*스크롤제한높이*/
    overflow-y: auto;/*스크롤활성화*/
 }
 
@@ -215,6 +216,9 @@
    background-color: #DDE5B6;
    border-radius: 10px;
    padding: 5px;
+   position: absolute;
+   right: 17px;
+   top: 17px;
 }
 
 .close:hover,
@@ -285,9 +289,10 @@
 }
 
 .modal2 form{
+	width: 500px;
+	height: 184px;
    text-align: center;
 }
-
 .modal2 .close {
     position: absolute; 
     top: 20px;
@@ -327,4 +332,8 @@
 }
 .food{
 	height:300px;
+}
+
+#modalForm > form{
+	width: 
 }
