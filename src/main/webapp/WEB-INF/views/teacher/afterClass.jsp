@@ -43,7 +43,7 @@ AfterSchool as = (AfterSchool) session.getAttribute("as");
 						<a href="teacherAfterDetail.bo?boNo=${b.boNo}&cpage=${pi.currentPage}">
 							<div class="body_content">
 								<div class="body_title">${b.title}</div>
-								<div class="body_writer">${b.stuId}</div>
+								<div class="body_writer">${b.stuName}</div>
 							</div>
 							<hr class="body_line1">
 						</a>

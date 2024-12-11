@@ -289,8 +289,7 @@
 }
 
 .modal2 form{
-	width: 500px;
-	height: 184px;
+	height: 200px;
    text-align: center;
 }
 .modal2 .close {
@@ -301,7 +300,7 @@
 }
 
 .modal2 input {
-    width: 250px;
+    width: 230px;
     height: 40px;
     color: #A98467;
     border-radius: 20px;
@@ -335,5 +334,5 @@
 }
 
 #modalForm > form{
-	width: 
+	width: 100%;
 }
