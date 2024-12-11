@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
+    <script src="<c:url value='/resources/js/student/modify_student_pwd_api.js'/>"></script>
 </head>
 <body>
 	<% if(alertMsg != null) {%>
@@ -65,22 +66,22 @@
             </form>
             
             <!-- 비밀번호 수정 폼 (기본적으로 숨김) -->
-            <form method="post" action="student.upadatePwd" id="pwdForm">
+            <form id="stuPwdForm">
                <table>
                   <tr>
                      <td>기존 비밀번호</td>
-                     <td><input type="password" placeholder="기존 비밀번호를 입력하세요"></td>
+                     <td><input type="password" placeholder="기존 비밀번호를 입력하세요" id="old_pwd" required></td>
                   </tr>
                   <tr>
                      <td>수정 비밀번호</td>
-                     <td><input type="password" placeholder="수정할 비밀번호를 입력하세요" id="newPwd" name="newPwd"></td>
+                     <td><input type="password" placeholder="수정할 비밀번호를 입력하세요" id="new_pwd" required></td>
                   </tr>
                   <tr>
                      <td>비밀번호 확인</td>
-                     <td><input type="password"></td>
+                     <td><input type="password" placeholder="비밀번호를 다시 입력하세요" id="new_pwd_co" required></td>
                   </tr>
                </table>
-               <button type="submit">비밀번호 수정하기</button>
+               <button type="button" onclick="modifyStudentPwdAjax('${loginUser.stuId}','${loginUser.stuPwd}','${loginUser.stuQuestion}')">비밀번호 수정하기</button>
               
             </form>
          </div>
@@ -99,7 +100,7 @@
       <div class="chat_modal-content">
          <h2 class="modalTitle">${teacherName.tcName} 선생님</h2>
          <input type="hidden" value="${teacherName.tcId }" id="teacherId">
-         <span class="closeModal" onclick="closeModal()">&times;</span>
+         <span class="closeChatModal" onclick="closeModal()">&times;</span>
            <hr>
            
            <div class="modal_talk_content">

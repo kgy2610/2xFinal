@@ -35,8 +35,8 @@ public class MemberDao {
 	}
 
 	// 학생, 부모님, 선생님 - 비밀번호 변경
-	public int updateStudentPwd(SqlSessionTemplate sqlSession, Parents p) {
-		return sqlSession.update("memberMapper.updateStudentPwd", p);
+	public int updateStuPwd(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("memberMapper.updateStudentPwd", s);
 	}
 
 	public int updateParentsPwd(SqlSessionTemplate sqlSession, Parents p) {
@@ -86,11 +86,6 @@ public class MemberDao {
 	// 학생 - 정보수정
 	public int studentUpdate(SqlSessionTemplate sqlSession, Map<String, String> map) {
 		return sqlSession.update("memberMapper.studentUpdate", map);
-	}
-
-	// 학생 - 비번수정
-	public int studentPwdUpdate(SqlSessionTemplate sqlSession, Student s) {
-		return sqlSession.update("memberMapper.studentPwdUpdate", s);
 	}
 
 	// 학생 - 프로필 변경
@@ -325,4 +320,7 @@ public class MemberDao {
 	public ArrayList<Student> selectStuList(SqlSessionTemplate sqlSession, String classCode){
 		return (ArrayList)sqlSession.selectList("memberMapper.selectStuList",classCode);
 	}
+
+	
+	
 }

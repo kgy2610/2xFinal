@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>선생님 숙제 페이지</title>
+    <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/teacher/teacher_homework.css'/>">
     
     <script src="<c:url value='/resources/js/teacher/homework.js'/>"></script>
@@ -28,7 +28,7 @@
                 <option value="사회">사 회</option>
             </select>
             <a href="gosubject">
-    			<button class="navigate-button">우리반 숙제제출 현황</button>
+    			<button class="navigate-button">채점하러 가기</button>
 			</a>
 
             <br><br>
@@ -52,7 +52,7 @@
         		   </c:forEach>
                 </tbody>
             </table>
-            <img src="<c:url value='/resources/img/teacher/homework.PNG'/>" class="homeworkplus" onclick="addHomeworkPage()">
+            <img src="<c:url value='/resources/img/teacher/homework.png'/>" class="homeworkplus" onclick="addHomeworkPage()">
         </div>
     </div>
 </body>

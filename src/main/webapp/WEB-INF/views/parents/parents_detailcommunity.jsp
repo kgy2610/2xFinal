@@ -12,9 +12,9 @@
 </head>
 <body>
     <jsp:include page="parents_menubar.jsp" />
+    <div class="wrap">
     <input type="hidden" value=${loginUser.prId } id="loginInfo">
     <input type="hidden" value=${npage.prId } id="pageInfo">
-    <div id="content_border">
         <div id="enroll_title">${npage.boTitle }</div>
         <div id="enroll_content" >
             <div id="enroll_info">작성자 ${npage.prNickname } | 조회수 ${npage.boCount } | ${npage.createDate }</div>

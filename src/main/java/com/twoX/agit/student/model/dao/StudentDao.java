@@ -108,4 +108,8 @@ public class StudentDao {
 	public String afterschoolTeacher(SqlSessionTemplate sqlSession, String tcId) {
 		return sqlSession.selectOne("afterschoolmapper.afterschoolTeacher", tcId);
 	}
+
+	public int updateAfterschool(SqlSessionTemplate sqlSession, AfterSchoolStudent as) {
+		return sqlSession.update("afterschoolmapper.updateafterschoolcode",as);
+	}
 }

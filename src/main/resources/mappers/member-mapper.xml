@@ -69,12 +69,6 @@
 		WHERE STU_ID = #{stuId}
 	</update>
 	
-	<!-- 학생 비번 수정 -->
-	<update id="studentPwdUpdate">
-		UPDATE STUDENT
-		SET STU_PWD = #{stuPwd}
-		WHERE STU_ID = #{stuId}
-	</update>
 	
 	<!-- 학생 프로필 변경 -->
 	<update id="studentSelectImg">
@@ -363,7 +357,7 @@
 	<!-- 공지사항 가져오기 -->
 	<select id="getTeacherNotices" resultMap="TeacherNotice">
 	    SELECT TC_ID, CLASS_CODE, NT_CONTENT, CREATE_DATE
-	    FROM NOTICE
+	    FROM NOTICE t
 	    WHERE CLASS_CODE = #{classCode}
 	    ORDER BY CREATE_DATE DESC
 	</select>
@@ -470,9 +464,9 @@
 	<!-- 학생테이블 비번변경 -->
 	<update id="updateStudentPwd">
 		UPDATE STUDENT
-		   SET STU_PWD=#{prPwd}
-		 WHERE STU_ID=#{prId}
-		   AND STU_QUESTION=#{prQuestion}
+		   SET STU_PWD=#{stuPwd}
+		 WHERE STU_ID=#{stuId}
+		   AND STU_QUESTION=#{stuQuestion}
 	</update>
 	
 	<!-- 학부모테이블 비번변경 -->

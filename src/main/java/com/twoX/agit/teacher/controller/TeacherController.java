@@ -323,7 +323,9 @@ public class TeacherController {
 	public String updateSubmitHomework(int boNo, String teacherComment, int score, String stuId, Model model, HttpSession session) {
 		Teacher loginUser = (Teacher) session.getAttribute("loginUser");
 		String classCode = loginUser.getClassCode();
-		
+		if(teacherComment.equals("숙제 검사 전입니다.")) {
+			teacherComment="검사완료";
+		}
 		int result = teacherService.updateSubmitHomework(boNo,teacherComment,score,stuId);
 		
 		ArrayList<Homework> subjectHomeworkList = teacherService.selectSubject(classCode);
@@ -439,7 +441,12 @@ public class TeacherController {
 	    // 학생별 출석률 가져오기
 	    List<Map<String, Object>> stuManageList = teacherService.smCodeStudent(classCode);
 	    System.out.println("뭣" + stuManageList);
-	    
+	    for(Map m : stuManageList) {
+			String part1 = ((String)m.get("PHONE")).substring(0, 3);
+			String part2 = ((String)m.get("PHONE")).substring(3, 7);
+			String part3 = ((String)m.get("PHONE")).substring(7);
+			m.put("PHONE",part1 + "-" + part2 + "-" + part3);
+	    }
 	    
 
 	    model.addAttribute("stuManageList", stuManageList);

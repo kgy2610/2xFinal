@@ -47,7 +47,6 @@ public class MemberServiceImpl implements MemberService{
 	// 비밀번호 변경
 	public int updatePwd(Parents p) {
 		int result = 0;
-		result += memberDao.updateStudentPwd(sqlSession, p);
 		result += memberDao.updateParentsPwd(sqlSession, p);
 		result += memberDao.updateTeacherPwd(sqlSession, p);
 		return result;
@@ -98,8 +97,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 학생 - 비밀번호 수정
 	@Override
-	public int studentPwdUpdate(Student s) {
-		return memberDao.studentPwdUpdate(sqlSession, s);
+	public int updateStuPwd(Student s) {
+		int result = 0;
+		result = memberDao.updateStuPwd(sqlSession, s);
+		return result;
 	}
 	
 	// 학생 - 프로필 사진 변경
@@ -314,5 +315,9 @@ public class MemberServiceImpl implements MemberService{
 	public ArrayList<Student> selectStuList(String classCode) {
 		return memberDao.selectStuList(sqlSession, classCode);
 	}
+
+	
+
+	
 
 }
