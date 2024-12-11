@@ -339,6 +339,7 @@
 		LEFT JOIN STUDENT s ON hs.STU_ID = s.STU_ID LEFT JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO
 		JOIN STUDENT s ON hs.STU_ID = s.STU_ID 
 		WHERE s.CLASS_CODE = #{classCode}
+		ORDER BY BO_NO DESC
 	</select>
 	 
 	<!-- 숙제 조회 -->
@@ -357,7 +358,6 @@
 	    JOIN HOMEWORK h ON hs.BO_NO = h.BO_NO
 	    WHERE hs.STU_ID = #{studentId} 
 	      AND h.HM_TITLE = #{title}
-	    ORDER BY BO_NO DESC
 	</select>
 
 	<!-- 숙제 점수 및 말씀 부여 -->

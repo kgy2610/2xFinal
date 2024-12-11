@@ -13,7 +13,6 @@
 
 
 
-
 	<!-- 방과후 게시판 -->
 	<resultMap type="AfterSchoolBoard" id="afterSchoolBoardResultSet">
 		<result column="BO_NO" property="boNo" />
@@ -24,6 +23,7 @@
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
+		<result column="STU_NAME" property="stuName" />
 	</resultMap>
 
 
@@ -38,10 +38,21 @@
 	<!-- 게시글 조회 -->
 	<select id="selectAfterBoard"
 		resultMap="afterSchoolBoardResultSet">
-		SELECT BO_NO, STU_ID, CODE, TITLE, BO_CONTENT, CREATE_DATE
-		FROM AFTERSCHOOL_BOARD
-		WHERE CODE = #{code}
-		ORDER BY BO_NO ASC
+		    SELECT 
+			    B.BO_NO, 
+			    B.STU_ID, 
+			    B.CODE, 
+			    B.TITLE, 
+			    B.BO_CONTENT, 
+			    B.CREATE_DATE,
+			    S.STU_NAME
+			FROM 
+			    AFTERSCHOOL_BOARD B
+			LEFT JOIN 
+			    STUDENT S ON B.STU_ID = S.STU_ID
+			     WHERE CODE = #{code}
+			ORDER BY 
+			    B.BO_NO ASC
 	</select>
 
 
