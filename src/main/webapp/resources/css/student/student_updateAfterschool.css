@@ -2,26 +2,29 @@
     overflow:visible;
 }
 #content_border{
-    position: absolute;
-    border: 3px solid #A98467;
-    border-radius: 30px;
-    bottom: 47px;
-    right: 228px;
-    width: 1089px;
-    height: 830px;
+     position:absolute; 
+    border: 3px solid #A98467; 
+    border-radius: 30px; 
+    top:65px;
+    bottom: 98px; 
+    left:603px;
+     width: 1040px;
+   height: 790px;
 }
 #community_title{
-    position:absolute; 
+     position:absolute; 
     left:30px;
     top: 20px;
     color: #A98467;
 }
 .create_button{
-    position:absolute; 
+      position:absolute; 
     width: 150px;
     height: 50px;
-    border-radius: 40px;
-    bottom: 30px;
+    left: 450px;
+    bottom: 13px;
+    border-radius: 40px; 
+    background-color: #F4DABF;
     color:#A98467;
     font-size: 20px;
     border: 0px;
@@ -33,7 +36,6 @@
 	text-decoration: underline;
 }
 .create_button:hover{
-    color: white;
     cursor: pointer;
 }
 #modify_button{
@@ -43,10 +45,10 @@
     left: 570px;
 }
 #enroll_title{
-    position: absolute;
-    top: 25px;
-    left: 47px;
-    background-color: #DDE5B6;
+    position:absolute;
+    top: 30px;
+    left: 30px;
+    background-color: #DDE5B6; 
     border-radius: 40px;
     width: 989px;
     height: 60px;
@@ -55,7 +57,7 @@
     position:absolute;
     text-align: center;
     top: 10px;
-    left: 50px;
+    left: 30px;
     width: 889px;
     height: 40px;
     color:#A98467;
@@ -68,24 +70,23 @@
 }
 #enroll_content{
     position: absolute;
-    bottom: 90px;
-    left: 47px;
+    top:110px;
+    left: 66px;
     border: 3px solid #A98467;
-    width: 989px;
-    height: 630px;
+    width: 900px;
+    height: 600px;
+    font-size: 25px;
 }
 #enroll_file{
-    position: absolute;
+    position:absolute;
     display: flex;
     align-items: center;
-    bottom: 20px;
+    bottom: 11px;
     left: 20px;
-    background-color: #DDE5B6;
+    background-color: #DDE5B6; 
     border-radius: 40px;
-    width: 950px;
+    width: 850px;
     height: 60px;
-    font-size: 20px;
-    color: #b08467;
 }
 #en_title::placeholder {
     color: #A98467; /* 원하는 색상 코드로 변경 */
@@ -113,7 +114,7 @@
     background: #F2CEB2; /* 스크롤바 트랙 색상 */
 }
 .custom-file-upload {
-    position:absolute;
+     position:absolute;
     left: 20px;
     padding: 10px 20px;
     color: #A98467;
@@ -138,14 +139,24 @@
 }
 
 #modify_button{
-	bottom:20px;
+	bottom:13px;
 	background-color: #DDE5B6;
 }
 
-#delete_button{
-	bottom:20px;
-	background-color: #E9AAAA;
+#modify_button:hover{
+	background-color: #ADC178;
 }
+
+#delete_button{
+	bottom:13px;
+	background-color: #E9AAAA;
+	color:white;
+}
+
+#delete_button:hover{
+	background-color: #D28383;
+}
+
 .note-resizebar {
     display: none;
 }

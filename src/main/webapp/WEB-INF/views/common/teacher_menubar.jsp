@@ -103,7 +103,7 @@ if (s != null) {
 
 		<div id="noticeModal1" class="modal">
 			<div class="modal-content">
-				<span class="close" onclick="closeInfoModal2()">&times;</span>
+				<span class="closemodal" onclick="closeInfoModal2()">&times;</span>
 				<h3>정보수정</h3>
 				<form id="updateForm" action="updateInfo.me">
 					<label for="code">코드</label> <input type="text" id="code"
@@ -135,7 +135,7 @@ if (s != null) {
 		<!-- 반 삭제 확인 모달 -->
 		<div id="deleteClassModal" class="modal">
 			<div class="modal-content">
-				<span class="close" onclick="closeDeleteModal()">&times;</span>
+				<span class="closemodal" onclick="closeDeleteModal()">&times;</span>
 				<h3>반 삭제</h3>
 				<form id="classdeleteForm" action="classdelete.me">
 					<input type="hidden" value="<%=s.getClassCode()%>">
@@ -157,7 +157,7 @@ if (s != null) {
 		<!-- 비밀번호 수정 모달 -->
 		<div id="passwordModal" class="modal">
 			<div class="modal-content">
-				<span class="close" onclick="closePasswordModal()">&times;</span>
+				<span class="closemodal" onclick="closePasswordModal()">&times;</span>
 				<h3>비밀번호 수정</h3>
 
 				<!-- 비밀번호 수정 폼 -->
