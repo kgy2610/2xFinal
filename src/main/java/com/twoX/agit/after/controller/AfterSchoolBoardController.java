@@ -64,6 +64,7 @@ public class AfterSchoolBoardController {
 
 		PageInfo pi = Template.getPageInfo(boardCount, currentPage, 5, 5);
 		ArrayList<AfterSchoolBoard> list = afterSchoolBoardService.afSelectList(code, pi);
+		System.out.println(list);
 		
 		//status가 y이고 code가 선생님과 학생이 같을때 가져오기
 		ArrayList<Student> studentList = afterSchoolBoardService.asCodeStudent(code);
@@ -71,12 +72,20 @@ public class AfterSchoolBoardController {
 			if(s.getClassCode()==null) {
 				continue;
 			}
-			s.setClassCode(s.getClassCode().substring(9, 10)+" - "+s.getClassCode().substring(10,12));
+			
+			String grade = s.getClassCode().substring(9, 10); 
+			String classNum;
+			 try {
+				 classNum = String.valueOf(Integer.parseInt(s.getClassCode().substring(10, 12)));
+		        } catch (NumberFormatException e) {
+		        	classNum = s.getClassCode().substring(10, 12);
+		        }
+			s.setClassCode(grade + " - " + classNum);
 			
 			}
 		
 		System.out.println("list" + list);
-
+		System.out.println("code" + code);
 		
 		System.out.println("밍" + studentList);
 		
