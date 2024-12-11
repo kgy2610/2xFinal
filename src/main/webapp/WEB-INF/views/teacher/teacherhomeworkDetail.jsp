@@ -20,7 +20,7 @@
             </div>
             <div class="homework-content">
              	${hmContent}
-                <div class="homework-photo">첨부 사진</div>
+                <!-- <div class="homework-photo">첨부 사진</div> -->
             </div>
             <div class="answer-section">
                 <div class="answer-list">
@@ -30,12 +30,13 @@
                 </div>
                 <h1></h1>
             </div>
+            <hr>
             <form action="updateSubmitHomework" method="POST" class="teacher-comments">
                 <textarea name="teacherComment" placeholder="선생님 말씀 작성" required>${tcComment}</textarea>
                 <div class="score-save">
                 	<input type="hidden" name="stuId" value="${stuId}">
                 	<input type="hidden" name="boNo" value="${boNo}">
-                    <input type="number" name="score" value="${score}"  placeholder="점수 입력" min="0" max="100" required>
+                    점수<input type="number" name="score" value="${score}"  placeholder="점수 입력" min="0" max="100" required>
                     <button type="submit" class="save-button">저장</button>
                 </div>
             </form>

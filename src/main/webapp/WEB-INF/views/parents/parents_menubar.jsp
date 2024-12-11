@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGIT</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/menubar.css'/>">
-    <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_myPage.css'/>">
     <script src="<c:url value='/resources/js/parents/modify_parents_info_api.js'/>"></script>
     <script src="<c:url value='/resources/js/parents/modify_parents_pwd_api.js'/>"></script>
 </head>
@@ -37,7 +36,7 @@
     <!-- 공지사항 모달 -->
    <div id="noticeModal" class="modal">
       <div class="modal-content">
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closemodal" onclick="closeModal()">&times;</span>
          <p id="modalContent"></p>
          <p id="modalDate"></p>
       </div>
@@ -47,7 +46,7 @@
    <div id="updateModal" class="modal2">
       <div class="modal-content2">
          <h2 id="modalTitle">정보 수정</h2>
-         <span class="close" onclick="closeUpdateModal()">&times;</span>
+         <span class="closemodal" onclick="closeUpdateModal()">&times;</span>
          <div id="modalForm">
             <!-- 기본 정보 수정 폼 -->
             <form id="infoForm" action="modify_parents_info" method="POST" >

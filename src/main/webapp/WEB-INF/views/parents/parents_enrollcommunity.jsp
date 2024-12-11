@@ -70,7 +70,7 @@
         
         $(document).ready(function(){
             $('#en_content').summernote({
-            height: 535,                 // 에디터 높이
+            height: 550,                 // 에디터 높이
             minHeight: null,
             maxHeight: null,
             lang: "ko-KR",

@@ -38,7 +38,7 @@
    <form method="post" action="student.update" id="infoForm">
       <div class="modal-content2">
          <h2 id="modalTitle">정보 수정</h2>
-         <span class="close" onclick="closeUpdateModal()">&times;</span>
+         <span class="stclosemodal" onclick="closeUpdateModal()">&times;</span>
          <div id="modalForm">
             <!-- 기본 정보 수정 폼 -->
                <table>

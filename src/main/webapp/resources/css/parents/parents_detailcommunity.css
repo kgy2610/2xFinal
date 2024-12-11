@@ -120,7 +120,7 @@
     left: 130px;
     width: 200px;
     font-size: 16px;
-    color: #333;
+    color: #A98467;
 }
 #reply_area{
     position: absolute;
@@ -175,6 +175,7 @@
     width: 889px;
     height: 50px;
     margin-bottom: 15px;
+    font-size: 20px;
 }
 .parents_reply tr td:nth-child(1){
     width: 7px;
@@ -219,6 +220,7 @@
     border-radius: 40px;
     cursor: pointer;
     color:#A98467;
+    font-size: 15px;
 }
 .parents_reply tr td:nth-child(4) button:hover{
     background-color: #A98467;
@@ -247,6 +249,7 @@
     border-radius: 40px;
     color:#A98467;
     cursor: pointer;
+    font-size: 15px;
 }
 #vector{
     margin-top: 10px;
