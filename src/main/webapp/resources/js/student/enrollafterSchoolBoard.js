@@ -44,6 +44,16 @@ document.querySelectorAll(".text-limit").forEach(function (element) {
 	        	onImageUpload: fileUpload
 	        }
             });
+            $('#enroll_afterschool').on('submit', function (e) {
+                // Summernote 내용 가져오기
+                var content = $('#en_content').val().trim();
+
+                if (!content) {
+                  // 내용이 비어있으면 경고 메시지 표시 및 제출 막기
+                  alert('내용을 입력해주세요.');
+                  e.preventDefault(); // 폼 제출 중단
+                }
+              });
         })
         function fileUpload(files){
             //썸머노트는 이미지를 추가하면 해당 이미지파일을 전달해준다.

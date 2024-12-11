@@ -41,7 +41,7 @@
          </div>
          
          <h4>${schoolName}</h4>
-         <p> <%= grade %> 학년 <%= classNum %>반 ${loginUser.stuName}</p>
+         <p> <%= grade %> 학년 ${classroom}반 ${loginUser.stuName}</p>
          <p>담임선생님 : ${teacherName.tcName} 선생님</p>
      </div>
 

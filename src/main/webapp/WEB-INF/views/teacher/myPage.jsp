@@ -30,7 +30,7 @@
    <jsp:include page="../common/teacher_menubar.jsp" />
 	<div class="whole_body">
 		<h1><%=grade%>학년
-			<%=teacher_class%>반(<%=classCode%>)
+			${classroom}반(<%=classCode%>)
 		</h1>
 
 		<div class="textbox1">
