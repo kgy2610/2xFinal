@@ -325,50 +325,15 @@ input{
 	margin-left:750px;
 }
 
-#addNoticeModal .close {
-    float: right;
-    font-size: 40px;
-    cursor: pointer;
-    color: #A98467;
-    background-color: #DDE5B6;
-    border-radius: 8px;
-    line-height:35px;
-}
-
-
-#addNoticeModal .close:hover {
-    color: #705845;
-    background-color: #C4D79D;
-    
-}
-
-
 
 
 /* 공지사항 수정/삭제 모달 스타일 */
 #deleteNoticeModal .modal-content {
-	margin-top:300px;
+	margin-top:100px;
 	margin-left:750px;
-	height: 260px;
-	padding:25px;
-}
-
-#deleteNoticeModal .close {
-    float: right;
-    font-size: 40px;
-    cursor: pointer;
-    color: #A98467;
-    background-color: #DDE5B6;
-    border-radius: 8px;
-    line-height:35px;
 }
 
 
-#deleteNoticeModal .close:hover {
-    color: #705845;
-    background-color: #C4D79D;
-    
-}
 
 #deleteNoticeModal input[type="text"] {
     width: 370px; /* 공지사항 입력란 너비 */
@@ -380,9 +345,19 @@ input{
     font-size:25px;
 }
 
-#deleteNoticeModal .confirm-button, 
-#deleteNoticeModal .delete-button {
+#deleteNoticeModal .confirm-button{
     width: 42%;
+    margin-top: 25px;
+    border-radius: 10px;
+    border: none;
+    color: #A98467;
+    font-size: 16px;
+    cursor: pointer;
+    padding:5px;
+}
+
+#deleteNoticeModal .noticedelete-button{
+	width: 42%;
     margin-top: 25px;
     border-radius: 10px;
     border: none;
@@ -397,17 +372,18 @@ input{
     background-color: #DDE5B6;
 }
 
-/* 삭제 버튼: 빨간색 배경 */
-#deleteNoticeModal .delete-button {
+#deleteNoticeModal .noticedelete-button {
     background-color: #E9AAAA;
 }
 
 #deleteNoticeModal .confirm-button:hover {
-    background-color: #DDE5B6;
+    background-color: #ADC178;
+    color:white;
 }
 
-#deleteNoticeModal .delete-button:hover {
-    background-color: #E9AAAA;
+#deleteNoticeModal .noticedelete-button:hover {
+    background-color: #D28383;
+    color:white;
 }
 
 
@@ -455,22 +431,7 @@ input{
     box-sizing: border-box;
 }
 
-/* 닫기 버튼 스타일 */
-#addMemoModal .close {
-    float: right;
-    font-size: 40px;
-    cursor: pointer;
-    color: #A98467;
-    background-color: #DDE5B6;
-    border-radius: 8px;
-    line-height:35px;
-}
 
-#addMemoModal .close:hover {
-    color: #705845;
-    background-color: #C4D79D;
-    
-}
 
 /* 메모 등록 버튼 스타일 */
 #addMemoModal button {
@@ -578,8 +539,8 @@ input{
 }
 
 #modifyMemoModal button:hover {
-    background-color: #C4D79D;
-    transform: translateY(-2px);
+    background-color: #ADC178;
+    color:white;
 }
 #chat_button{
     position: absolute;

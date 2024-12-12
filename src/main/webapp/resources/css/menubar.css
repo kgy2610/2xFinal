@@ -357,7 +357,7 @@ a {
 }
 
 .modal2 input {
-	width: 250px;
+	width: 230px;
 	height: 40px;
 	color: #A98467;
 	border-radius: 20px;
@@ -394,7 +394,7 @@ a {
 	color: white;
 }
 
-.close {
+.closemodal {
 	width: 40px;
 	height: 40px;
 	line-height: 38px;
@@ -406,9 +406,31 @@ a {
 	background-color: #DDE5B6;
 	border-radius: 10px;
 	padding: 5px;
+	    margin-top: -10px;
 }
 
-.close:hover, .close:focus {
+.closemodal:hover, .closemodal:focus {
+	color: #705845;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.stclosemodal {
+	width: 40px;
+	height: 40px;
+	line-height: 38px;
+	color: #A98467;
+	float: right;
+	font-size: 45px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #DDE5B6;
+	border-radius: 10px;
+	padding: 5px;
+	    margin-top: -40px;
+}
+
+.stclosemodal:hover, .stclosemodal:focus {
 	color: #705845;
 	text-decoration: none;
 	cursor: pointer;
@@ -532,6 +554,7 @@ a {
     text-align: right;
 }
 
+/*
 .close {
     width: 30px;
     height: 30px;
@@ -552,18 +575,25 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+*/
 
 /* 코드, 학년, 반 입력란 개별 스타일 */
+
+#updateForm{
+	width:80%;
+}
 #code {
     width: 80%;
     height: 10%;
     padding: 5px;
     font-size: 14px;
-    border: 1px solid #A98467;
-    border-radius: 15px;
+    border: 3px solid #A98467;
+    border-radius: 10px;
     margin-top: 15px;
+    margin-left: 25px;
     justify-content: 20px;
-    align-items: center;
+
+
     
 }
 
@@ -578,9 +608,9 @@ a {
     height: 10%;
     padding: 5px;
     font-size: 14px;
-    border: 1px solid #A98467;
-    border-radius: 15px;
-    margin-left: 10px; /* 학년 입력란의 왼쪽 여백 */
+    border: 3px solid #A98467;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
 #class {
@@ -588,9 +618,9 @@ a {
     height: 10%;
     padding: 5px;
     font-size: 14px;
-    border: 1px solid #A98467;
-    border-radius: 15px;
-    margin-left: 10px; /* 반 입력란의 왼쪽 여백 */
+    border: 3px solid #A98467;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
 
@@ -608,22 +638,22 @@ a {
 
 .update-button,
 .password-button {
-    padding: 8px 12px !important;
     font-size: 14px !important;
     color: #A98467 !important;
     background-color: #DDE5B6 !important; /* 버튼의 배경색 */
     border: none !important;
     border-radius: 15px !important;
     cursor: pointer !important;
-    width: 350px !important;
+    width: 300px !important;
     height: 30px !important;
-    margin-left: 20px !important; /* 간격 조정 */
+    margin-left: 30px !important; /* 간격 조정 */
   	margin-bottom:18px !important;
 }
 
 .update-button:hover,
 .password-button:hover {
-    background-color: #DDE5B6; /* 버튼 호버 시 색상 */
+    background-color: #ADC178; /* 버튼 호버 시 색상 */
+    color:white;
 }
 
 .delete-button {
@@ -633,14 +663,15 @@ a {
     border: none !important;
     border-radius: 15px !important;
     cursor: pointer !important;
-    width: 370px !important;
+    width: 300px !important;
     height: 30px !important;
-    margin-left: 20px !important;
+    margin-left: 30px !important;
     max-width: 350px !important;
 }
 
 .delete-button:hover {
-    background-color: #E9AAAA; /* 반 삭제 버튼 호버 시 색상 */
+    background-color: #D28383; /* 반 삭제 버튼 호버 시 색상 */
+    color:white;
 }
 
 .deleteOn {
@@ -663,17 +694,18 @@ a {
 
 .confirm-delete-button {
     font-size: 14px;
-    color: #A98467; /* 글자 색상 */
-    background-color: #E9AAAA; /* 배경색 */
-    border: none; /* 테두리 제거 */
-    border-radius: 12px; /* 테두리 반경 */
-    padding: 8px 12px; /* 버튼 내 여백 */
-    cursor: pointer; /* 커서 모양 변경 */
+    color: #A98467;
+    background-color: #E9AAAA; 
+    border: none; 
+    border-radius: 12px; 
+    padding: 8px 12px; 
+    cursor: pointer;
     width: 80px;
 }
 
 .confirm-delete-button:hover {
-    background-color: #D79C9C; /* 호버 시 색상 */
+    background-color: #D28383; /* 호버 시 색상 */
+    color:white;
 }
 
 #passwordModal {
@@ -700,6 +732,7 @@ a {
     cursor: pointer; /* 커서 모양 변경 */
     height: 35px;
     width: 150px;
+    margin-top:17px;
 }
 
 .confirm-password-button:hover {

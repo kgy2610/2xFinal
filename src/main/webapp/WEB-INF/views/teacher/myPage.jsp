@@ -30,7 +30,7 @@
    <jsp:include page="../common/teacher_menubar.jsp" />
 	<div class="whole_body">
 		<h1><%=grade%>학년
-			<%=teacher_class%>반(<%=classCode%>)
+			${classroom}반(<%=classCode%>)
 		</h1>
 
 		<div class="textbox1">
@@ -100,7 +100,7 @@
 		<!-- 공지사항 추가 모달 -->
 		<div id="addNoticeModal" class="modal">
 		    <div class="modal-content">
-		        <span class="close" onclick="closeAddNoticeModal()">&times;</span>
+		        <span class="closemodal" onclick="closeAddNoticeModal()">&times;</span>
 		        <h3>공지사항을 작성하세요.</h3>
 		        <form id="addNoticeForm" action="addNoticeForm" method="POST">
 		            <input type="text" id="noticeAddTitle" name="noticeTitle" class="announcementTextField" required>
@@ -113,7 +113,7 @@
         <!-- 공지사항 수정/삭제 모달 -->
         <div id="deleteNoticeModal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeDeleteNoticeModal()">&times;</span>  
+                <span class="closemodal" onclick="closeDeleteNoticeModal()">&times;</span>  
                  <h3>공지사항 수정&삭제</h3>      
 				<!-- 공지사항 제목 입력 -->
 				<input type="text" id="noticeTitle" name="noticeTitle" required>
@@ -122,7 +122,7 @@
 	         	<!-- 수정 버튼 -->
 	         	<button type="button" class="confirm-button" onclick="confirmNoticeEdit()">수정</button>
 	          	<!-- 삭제 버튼 -->
-	          	<button type="button" class="delete-button" onclick="confirmNoticeDelete()">삭제</button>
+	          	<button type="button" class="noticedelete-button" onclick="confirmNoticeDelete()">삭제</button>
 		 	</div>
          </div>
 
@@ -130,7 +130,7 @@
 		<!-- 메모 추가 모달 -->
 		<div id="addMemoModal" class="modal">
 		    <div class="modal-content">
-		        <span class="close" onclick="closeAddMemoModal()">&times;</span>
+		        <span class="closemodal" onclick="closeAddMemoModal()">&times;</span>
 		        <h3>메모 작성</h3>
 		        <form id="addMemoForm" action="addMemo" method="POST">
 		            <input type="text" id="memoText" name="memoContent" placeholder="메모 작성..." required>
@@ -143,7 +143,7 @@
 		<!-- 메모 수정 모달 -->
 		<div id="modifyMemoModal" class="modal">
 		    <div class="modal-content">
-		        <span class="close" onclick="closeModifyMemoModal()">&times;</span>
+		        <span class="closemodal" onclick="closeModifyMemoModal()">&times;</span>
 		        <h3>메모 수정</h3>
 		        <!-- 수정 데이터를 포함할 폼 -->
 		        <form id="modifyMemoForm" method="POST" action="updateMemo">

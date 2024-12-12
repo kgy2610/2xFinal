@@ -8,11 +8,11 @@ function findIdAjax(){
         			phone
         		},
         	    success: function(res){
+        	    	document.getElementById('searchInfo').innerText='';
 	    			let str = "";
-	    			console.log(res)
 	    			if(res === null || res === undefined || res === ""){
 	                    str= "<div id='findId-result-fail'>"+
-                        	"<b>"+user_name+"</b>님의 아이디는 <br>"+
+                        	"<b>"+prName+"</b>님의 아이디는 <br>"+
                         	"<b>존재하지 않습니다</b>"+
 	                    	"</div>"+
 	                    	"<div id='successbtn-area'>"+
@@ -31,7 +31,8 @@ function findIdAjax(){
 	                var element = document.getElementById('findId-form');  
 	            	element.innerHTML = str;
 		    	},error: function(){
-		    			console.log("ajax통신 실패")
+		    			alert("존재하지 않는 정보입니다.");
+		    			console.log("ajax통신 실패");
 	    		}
         	})
         }

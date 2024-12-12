@@ -33,7 +33,9 @@
             <label for="findPwd">비밀번호 찾기</label>
         
             <div class="conbox con1">
+            <div style="font-size:20px; color: #6C584C; font-weight: 700;" id="searchInfo">※학부모님이면 자녀정보를 입력해주세요※</div>
                 <form action="find_ID" id="findId-form" method="POST">
+                	
                     <div id="findId-name">
                         <p>이름</p>
                         <input type="text" placeholder="이름을 입력하세요" id="prName" required>

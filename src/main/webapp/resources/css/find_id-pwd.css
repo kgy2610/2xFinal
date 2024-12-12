@@ -89,7 +89,7 @@ input[type="radio"]:checked + label {
 	margin:0 auto;
 	display:none;
     margin-top: -9px;
-    padding-top: 50px;
+    padding-top: 40px;
 }
 input[id="findId"]:checked ~ .con1 {
     display:block;
@@ -165,7 +165,7 @@ input[id="findPwd"]:checked ~ .con2 {
     color: #fff;
     font-size: 25px;
     font-weight: 800;
-    margin-top: 65px;
+    margin-top: 45px;
 }
 #findId-btn > input[type="button"]:hover{
     color: #A98467;
