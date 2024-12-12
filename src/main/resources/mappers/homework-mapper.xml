@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="homeworkMapper">
 	<resultMap type="Homework" id="HomeworkResultSet">
-		<result column="BO_NO" property="bNO" />
+		<result column="BO_NO" property="boNo" />
 		<result column="TC_ID" property="tcId" />
 		<result column="CLASS_CODE" property="classCode" />
 		<result column="HM_TITLE" property="hmTitle" />
@@ -77,6 +77,13 @@
 		WHERE BO_NO = #{bNo} 
 	</select>
 	
+	<!-- 숙제 조회 리스트 -->
+	<select id="selectHomeworkList" resultMap="HomeworkResultSet">
+		SELECT BO_NO,  HM_TITLE, DEADLINE, HM_CONTENT, SUBJECT 
+		FROM HOMEWORK
+		WHERE BO_NO = #{bNo}
+	</select>
+	
 	<!-- 파일 삭제 -->
 	<delete id="deleteFile" parameterType="map">
 		DELETE FROM HOMEWORK_FILE
@@ -93,8 +100,8 @@
 	<!--  숙제 수정  -->
 	<update id="updateHomework" parameterType="map">
 		UPDATE HOMEWORK
-		SET SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent}
-		WHERE HM_TITLE = #{hmTitle} 
+		SET HM_TITLE = #{hmTitle}, SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent}
+		WHERE  BO_NO = #{boNo}
 	</update>
 	
 	<!-- 숙제 파일 수정 -->

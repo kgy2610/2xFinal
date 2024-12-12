@@ -37,6 +37,11 @@ public class TeacherDao {
 		return sqlSession.insert("memberMapper.updateAfterClass", as);
 	}
 	
+	// 숙제 페이지 이동
+	public ArrayList<Homework> selectHomeworkList(SqlSessionTemplate sqlSession, int boNo) {
+		return (ArrayList)sqlSession.selectList("homeworkMapper.selectHomeworkList", boNo);
+	}
+	
 	// 숙제 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("homeworkMapper.selectListCount");
@@ -95,9 +100,10 @@ public class TeacherDao {
 	}
 
 	// 숙제 수정
-	public int updateHomework(SqlSessionTemplate sqlSession, String hmTitle, String subject, String deadLine,
+	public int updateHomework(SqlSessionTemplate sqlSession, int boNo, String hmTitle, String subject, String deadLine,
 			String hmContent) {
 		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
 		params.put("hmTitle", hmTitle);
 		params.put("subject", subject);
 		params.put("deadLine", deadLine);
