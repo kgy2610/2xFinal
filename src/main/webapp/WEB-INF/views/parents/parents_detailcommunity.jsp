@@ -132,7 +132,10 @@
     	
     	document.getElementById("en_reply").oninput = function() {
     		if(document.getElementById("en_reply").value.split(' ')[0] !== RrepNickname){
-    			const divs = document.querySelectorAll('#enroll_reply div'); 
+    			const divs = document.querySelectorAll('#enroll_reply div');
+    			if (divs[0].style.backgroundColor === 'rgb(244, 218, 191)'){
+    				document.getElementById("en_reply").value='';
+    			}
         		divs.forEach(div => {
         	        div.style.backgroundColor = '#DDE5B6';
         	        document.getElementById('enroll_button').setAttribute('onclick',"insertReply()");
