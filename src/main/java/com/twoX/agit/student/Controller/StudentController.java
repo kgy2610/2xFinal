@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.twoX.agit.after.service.AfterSchoolBoardService;
 import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.after.vo.AfterSchoolStudent;
+import com.twoX.agit.board.service.BoardService;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
@@ -72,6 +73,8 @@ public class StudentController {
 	    PageInfo pi = Template.getPageInfo(homeworkCount, currentPage, 5, 4);
 	    
 	    ArrayList<Homework> list = studentService.selectStudentHomeworkList(loginStudent.getClassCode(), loginStudent.getStuId(), pi);
+	    ArrayList<Double> stuScoreList = studentService.selectStuScore(loginStudent.getStuId());
+	    session.setAttribute("stuScoreList", stuScoreList);
 	    session.setAttribute("homeworkList", list);
 	    model.addAttribute("bbsId", "homework");
 	    model.addAttribute("pi", pi);
