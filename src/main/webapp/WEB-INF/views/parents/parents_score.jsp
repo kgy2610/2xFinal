@@ -44,7 +44,7 @@
                         
         </table>
     </div>
-    <div id="subjectModal" class="modal">
+    <div id="subjectModal" class="modal" >
       <div class="modal-content">
       	<span id="modaltitle"></span>
          <span class="closemodal" onclick="closeModal()">&times;</span>
