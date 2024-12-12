@@ -276,6 +276,9 @@ public class BoardController {
 	        Document doc = Jsoup.parse(html);
 	        // 첫 번째 이미지의 src 추출
 	        String imgSrc = doc.select("img").attr("src");
+	        if(imgSrc.equals("")) {
+	        	imgSrc="/agit/resources/img/parents/picX.png";
+	        }
 	        eib.setThumbnail(imgSrc);
 		}
 		model.addAttribute("ImgList",list);
@@ -492,6 +495,9 @@ public class BoardController {
 	        Document doc = Jsoup.parse(html);
 	        // 첫 번째 이미지의 src 추출
 	        String imgSrc = doc.select("img").attr("src");
+	        if(imgSrc.equals("")) {
+	        	imgSrc="/agit/resources/img/parents/picX.png";
+	        }
 	        eib.setThumbnail(imgSrc);
 		}
 		model.addAttribute("ImgList",list);

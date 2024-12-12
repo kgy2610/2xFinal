@@ -1,11 +1,9 @@
-    let elements = document.getElementsByClassName('stu_score');
-    let scores = Array.from(elements).map(element => Number(element.innerText));
-    
+	let elements = document.getElementsByClassName('stuScore');
+	let scores = Array.from(elements).map(element => Number(element.value));
     document.addEventListener('DOMContentLoaded', () => {
 	    const canvas = document.getElementById('barCanvas');
 	    const ctx = canvas.getContext('2d');
-	    
-	    if (scores.every(score => score === 0 || isNaN(score))) {
+	    if (scores===null || scores===undefined || scores===[]) {
 	    	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	    	
 	    	ctx.font = '20px Arial'; // 글꼴과 크기 설정
@@ -71,6 +69,7 @@
         }
     });
         
+    
 function moveHomeworkDetail(boNo, status, currentPage) {
 	if (status === 'Y') {
 	// 이미 제출된 경우 확인 페이지로 이동
