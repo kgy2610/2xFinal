@@ -180,6 +180,7 @@
     font-size: 25px;
     color: #A98467;
     margin-bottom: 35px;
+    margin-right: 40px;
 }
 
 
@@ -208,7 +209,7 @@
 
 .foot-second{
     background-color: #DDE5B6;
-    margin-left: 170px;
+    margin-left: 40px;
     width: 170px;
     display: flex;
     justify-content: center;
@@ -224,7 +225,7 @@
 
 .foot-third{
     background-color: #E9AAAA;
-    margin-right: 30px;
+    margin-right: 440px;
     width: 170px;
     display: flex;
     justify-content: center;

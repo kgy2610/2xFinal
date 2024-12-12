@@ -59,7 +59,7 @@
 
             insertFile(fd, function(nameList) {
                 for(let name of nameList) {
-                    $("#en_content").summernote("insertImage", "/img/" + name)
+                    $("#en_content").summernote("insertImage", "/agit/resources/img/board/" + name)
                 }
             });
         }
