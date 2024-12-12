@@ -47,7 +47,7 @@
     <div id="subjectModal" class="modal">
       <div class="modal-content">
       	<span id="modaltitle"></span>
-         <span class="close" onclick="closeModal()">&times;</span>
+         <span class="closemodal" onclick="closeModal()">&times;</span>
 		<table id="modaltable">
 			<tr id="modaltableunderbar" >
 				<td>제목</td>
