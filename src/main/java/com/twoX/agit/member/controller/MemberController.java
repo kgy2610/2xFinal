@@ -105,7 +105,7 @@ public class MemberController {
 	public String logoutSt(HttpSession session) {
 		session.invalidate();
 
-		return "redirect:/";
+		return "member/login";
 	}
 	
 	// 관리자 로그아웃
@@ -124,13 +124,19 @@ public class MemberController {
 
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
-			
+			String classroom = "";
+			try{
+				classroom = String.valueOf(Integer.parseInt(classCode.substring(10,12)));
+			}catch(NumberFormatException e) {
+				classroom = classCode.substring(10,12);
+			}
 			// 학교명 조회
 			String schoolName = memberService.getSchoolNameByClassCode(classCode);
 			Teacher teacher = memberService.selectTeacher(loginUser);
 			session.setAttribute("schoolName", schoolName);
 			model.addAttribute("schoolName", schoolName);
 			model.addAttribute("loginUser", loginUser);
+			model.addAttribute("classroom", classroom);
 			session.setAttribute("teacherName", teacher);
 		}
 		
@@ -589,6 +595,13 @@ public class MemberController {
 	        	System.out.println("반 개설 후 선생님 로그인 성공");
 	        	ArrayList<Student> slist = memberService.selectStuList(classCode);
 	        	System.out.println(slist);
+				String classroom = "";
+				try{
+					classroom = String.valueOf(Integer.parseInt(classCode.substring(10,12)));
+				}catch(NumberFormatException e) {
+					classroom = classCode.substring(10,12);
+				}
+				session.setAttribute("classroom", classroom);
 	        	session.setAttribute("slist", slist);
 	            return "teacher/myPage";
 	        } else {

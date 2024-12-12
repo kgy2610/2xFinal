@@ -27,7 +27,7 @@
     	}
     </style>
     <div id="content_border">
-    	<form action="enroll_afterschool" method="POST" enctype="multipart/form-data">
+    	<form action="enroll_afterschool" method="POST" enctype="multipart/form-data" id="enroll_afterschool">
         <div id="enroll_title" ><input type="text" id="en_title" name="title" placeholder="제목을 입력해주세요" required></div>
         <div id="enroll_content">
             <textarea id="en_content" name="boContent" id="sub_content"></textarea>
