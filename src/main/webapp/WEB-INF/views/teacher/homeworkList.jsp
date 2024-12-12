@@ -52,7 +52,7 @@
         		   </c:forEach>
                 </tbody>
             </table>
-            <img src="<c:url value='/resources/img/teacher/homework.png'/>" class="homeworkplus" onclick="addHomeworkPage()">
+            <img src="<c:url value='/resources/img/teacher/homework.PNG'/>" class="homeworkplus" onclick="addHomeworkPage()">
         </div>
     </div>
 </body>

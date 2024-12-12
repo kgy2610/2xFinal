@@ -254,7 +254,7 @@ public class TeacherController {
 		
 		String tcId = teacher.getTcId();
 		
-		int result = teacherService.updateHomework(hmTitle, subject, deadLine, hmContent);
+		int result = teacherService.updateHomework(boNo, hmTitle, subject, deadLine, hmContent);
 		
 		// 파일이 새로 업로드된 경우 처리
 	    if (!fileupload.getOriginalFilename().equals("") && result > 0) {

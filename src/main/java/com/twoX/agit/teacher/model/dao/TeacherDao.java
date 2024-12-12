@@ -95,9 +95,10 @@ public class TeacherDao {
 	}
 
 	// 숙제 수정
-	public int updateHomework(SqlSessionTemplate sqlSession, String hmTitle, String subject, String deadLine,
+	public int updateHomework(SqlSessionTemplate sqlSession, int boNo, String hmTitle, String subject, String deadLine,
 			String hmContent) {
 		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("boNo", boNo);
 		params.put("hmTitle", hmTitle);
 		params.put("subject", subject);
 		params.put("deadLine", deadLine);

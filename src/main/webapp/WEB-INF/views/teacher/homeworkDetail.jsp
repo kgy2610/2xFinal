@@ -35,7 +35,7 @@
         	<form action="updateHomework" method="POST" enctype="multipart/form-data">
 
             <div class="use-body">
-                <div class="subject-name"> <input type="hidden" name="hmTitle" value="${hmTitle}">${hmTitle}</div>
+                <div class="subject-name"> <input type="text" name="hmTitle" value="${hmTitle}"></div>
 		        <select name="subject" class="subject-select">
 		            <option value="국어" ${subject eq '국어' ? 'selected' : ''}>국어</option>
 		            <option value="수학" ${subject eq '수학' ? 'selected' : ''}>수학</option>
@@ -82,10 +82,11 @@
             
             
             <div class="real-foot">
-                <button class="foot-first">목록으로</button>
+                
                 <input type="hidden" name="boNo" value="${boNo}" >
                 <button type="submit" class="foot-second">수정</button>
             </form>
+            
                 
 			<!-- 삭제 버튼을 포함한 폼 -->
 			<form method="POST" action="deleteHomework">
@@ -94,6 +95,8 @@
 			    <input type="hidden" name="changeName" value="${changeName}">
 			    <button type="submit" class="foot-third">삭제</button> 
 			</form>
+			
+			<button class="foot-first">목록으로</button>
             </div>
    </body>
 </html>

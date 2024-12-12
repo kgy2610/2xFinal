@@ -98,8 +98,8 @@ public class TeacherServiceImpl  implements TeacherService{
 
 	// 숙제 수정
 	@Override
-	public int updateHomework(String hmTitle, String subject, String deadLine, String hmContent) {
-		return teacherDao.updateHomework(sqlSession, hmTitle, subject, deadLine, hmContent);
+	public int updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent) {
+		return teacherDao.updateHomework(sqlSession, boNo, hmTitle, subject, deadLine, hmContent);
 	}
 	
 	// 숙제 파일 수정
