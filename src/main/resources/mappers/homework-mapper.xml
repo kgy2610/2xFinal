@@ -93,8 +93,8 @@
 	<!--  숙제 수정  -->
 	<update id="updateHomework" parameterType="map">
 		UPDATE HOMEWORK
-		SET SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent}
-		WHERE HM_TITLE = #{hmTitle} 
+		SET HM_TITLE = #{hmTitle}, SUBJECT = #{subject}, DEADLINE = #{deadLine}, HM_CONTENT = #{hmContent}
+		WHERE  BO_NO = #{boNo}
 	</update>
 	
 	<!-- 숙제 파일 수정 -->

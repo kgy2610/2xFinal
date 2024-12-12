@@ -50,7 +50,7 @@ public interface TeacherService {
 	int deleteHomework(String hmTitle);
 
 	// 숙제 수정
-	int updateHomework(String hmTitle, String subject, String deadLine, String hmContent);
+	int updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent);
 	
 	// 숙제 파일 수정
 	int updateHomeworkFile(int boNo, String originName, String newFileName, String changeName);
