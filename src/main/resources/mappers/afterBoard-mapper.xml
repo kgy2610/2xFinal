@@ -139,7 +139,7 @@
 
 
 	<!-- 학생 승인 리스트 조회 -->
-	<select id="acceptTeacherListbyScCode" parameterType="String"
+	<select id="acceptTeacherListbyScCode" 
 		resultMap="afterSchoolStudentResultSet">
 		SELECT
 		a.STU_ID,
