@@ -46,7 +46,13 @@ public class StudentController {
 	}
 	
 	@RequestMapping("homework")
-	public String homeworkList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, HttpSession session, Model model) {
+	public String homeworkList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, 
+							   @ModelAttribute HomeworkSubmit homeworkSubmit,
+							   HttpSession session, Model model) {
+		
+		session.setAttribute("stuId", homeworkSubmit.getStuId());
+		session.setAttribute("score", homeworkSubmit.getScore());
+		
 	    // 세션에서 로그인된 사용자 정보 가져오기
 	    Student loginStudent = (Student) session.getAttribute("loginUser");
 
