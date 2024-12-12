@@ -52,6 +52,9 @@ public interface TeacherService {
 	// 숙제 수정
 	int updateHomework(int boNo, String hmTitle, String subject, String deadLine, String hmContent);
 	
+	// 숙제 이동
+	ArrayList<Homework> selectHomeworkList(int boNo);
+	
 	// 숙제 파일 수정
 	int updateHomeworkFile(int boNo, String originName, String newFileName, String changeName);
 	

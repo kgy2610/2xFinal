@@ -201,16 +201,13 @@ public class TeacherController {
 
 	// 숙제 상세 페이지
 	@RequestMapping("detailHomework")
-	public String homeworkDatail(int boNo, String subject, String hmTitle, String hmContent, String deadLine, String originName, String changeName, Model model) {
+	public String homeworkDatail(int boNo, Model model) {
 		model.addAttribute("bbsId", "teacherHomework");
 		
-		model.addAttribute("boNo", boNo);
-		model.addAttribute("subject", subject);
-		model.addAttribute("hmTitle", hmTitle);
-		model.addAttribute("hmContent", hmContent);
-		model.addAttribute("deadLine", deadLine);
-		model.addAttribute("originName", originName);
-		model.addAttribute("changeName", changeName);
+		System.out.println(boNo);
+		
+		ArrayList<Homework> detailHomework = teacherService.selectHomeworkList(boNo);  
+		model.addAttribute("detailHomework", detailHomework);
 
 		return "teacher/homeworkDetail";
 	}
