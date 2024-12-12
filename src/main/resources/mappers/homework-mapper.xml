@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="homeworkMapper">
 	<resultMap type="Homework" id="HomeworkResultSet">
-		<result column="BO_NO" property="bNO" />
+		<result column="BO_NO" property="boNo" />
 		<result column="TC_ID" property="tcId" />
 		<result column="CLASS_CODE" property="classCode" />
 		<result column="HM_TITLE" property="hmTitle" />
@@ -75,6 +75,13 @@
 		SELECT BO_NO, TC_ID, CLASS_CODE, HM_TITLE, DEADLINE, HM_CONTENT, CREATE_DATE, SUBJECT 
 		FROM HOMEWORK 
 		WHERE BO_NO = #{bNo} 
+	</select>
+	
+	<!-- 숙제 조회 리스트 -->
+	<select id="selectHomeworkList" resultMap="HomeworkResultSet">
+		SELECT BO_NO,  HM_TITLE, DEADLINE, HM_CONTENT, SUBJECT 
+		FROM HOMEWORK
+		WHERE BO_NO = #{bNo}
 	</select>
 	
 	<!-- 파일 삭제 -->

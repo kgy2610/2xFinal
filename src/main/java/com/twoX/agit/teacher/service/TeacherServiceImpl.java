@@ -89,6 +89,12 @@ public class TeacherServiceImpl  implements TeacherService{
 	public int deleteFile(int boNo, String changeName) {
 		return teacherDao.deleteFile(sqlSession, boNo, changeName);
 	}
+	
+	// 해당 숙제로 이동
+	@Override
+	public ArrayList<Homework> selectHomeworkList(int boNo) {
+		return teacherDao.selectHomeworkList(sqlSession, boNo);
+	}
 
 	// 숙제 삭제
 	@Override
@@ -175,6 +181,7 @@ public class TeacherServiceImpl  implements TeacherService{
 	public int inStudentListbyStatus( String status, String scCode, String stuId) {
 		return teacherDao.inStudentListbyStatus(sqlSession,status , scCode, stuId);
 	}
+
 	
 	
 }

@@ -37,6 +37,11 @@ public class TeacherDao {
 		return sqlSession.insert("memberMapper.updateAfterClass", as);
 	}
 	
+	// 숙제 페이지 이동
+	public ArrayList<Homework> selectHomeworkList(SqlSessionTemplate sqlSession, int boNo) {
+		return (ArrayList)sqlSession.selectList("homeworkMapper.selectHomeworkList", boNo);
+	}
+	
 	// 숙제 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("homeworkMapper.selectListCount");
