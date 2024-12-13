@@ -7,13 +7,14 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>parents_Maincommunity</title>
+    <title>커뮤니티 인기글</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/parents/parents_Maincommunity.css'/>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous">
 </head>
 <body>
     <jsp:include page="parents_menubar.jsp" />
-    <div id="content_border">
+    <div class="wrap">
+    	<button id="create_button" onclick="location.href='enroll_community'">글 작성하기</button>  
         <div id="community_title"><h1>커뮤니티 인기글</h1></div>
         <div id="best_contents">
         	<c:forEach var="b" items="${HotBoard}">
@@ -27,7 +28,7 @@
 		                    <td colspan="2"><div class="best_content_pic">
 		                    					<c:choose>
 		                    						<c:when test="${empty b.thumbnail }">
-		                    							<img src="<c:url value='/resources/img/parents/free-sticker-science-12775329.png'/>" style="width:154px; height:140px; margin-top:10px">
+		                    							<img src="<c:url value='/resources/img/parents/free-sticker-science-12775329.png'/>" style="width:104px; height:90px; margin-top:10px">
 		                    							<h4>사진이없습니다.</h4>
 		                    							</c:when>
 		                    						<c:otherwise>
@@ -46,7 +47,6 @@
 	        </c:forEach>
         </div>
         <div id="community_table_border">
-            <a href="all_community">전체보기</a>
             <table id="community_table">
                 <thead>
                     <tr>
@@ -75,7 +75,7 @@
                             
             </table>
         </div>
-        <button id="create_button" onclick="location.href='enroll_community'">글 작성하기</button>  
+        <div id="showAll"><a href="all_community">게시글 전체보기</a></div>
     </div>
     <script>
         document.querySelectorAll(".text-limit").forEach(function (element) {

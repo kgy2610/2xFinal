@@ -120,7 +120,9 @@ public class MemberController {
 	// 학생 반 참가
 	   @RequestMapping("studentMyPage")
 	   public String studentMyPage(HttpSession session, Model model) {
+		      System.out.println("dkdkdkdk");
 	      Student loginUser = (Student) session.getAttribute("loginUser");
+	      System.out.println("sdbsdbsbd" + loginUser);
 
 		if (loginUser != null) {
 			String classCode = loginUser.getClassCode();
@@ -164,20 +166,18 @@ public class MemberController {
 	   // 학생 로그인
 	   @RequestMapping("login.student")
 	   public String login_student(Student s, HttpSession session, Model model) {
-
 	      Student loginStudent = memberService.loginStudent(s);
 
 	      if (loginStudent == null) {
-	         System.out.println("로그인 실패");
 	         model.addAttribute("errorMsg", "로그인 실패");
 	         return "member/login_student";
 	      } else {
 	         session.setAttribute("loginUser", loginStudent);
-	         System.out.println("로그인 성공");
 
 	         if(loginStudent.getClassCode() == null) {
 	        	 return "student/myPageStart";
 	         }else {
+	          
 	        	// classNum이 null이면 myPageStart로, 그렇지 않으면 myPage로 리다이렉트
 		         if (loginStudent.getStatus().equals("N")) {
 		            return "student/waitClassStatus";

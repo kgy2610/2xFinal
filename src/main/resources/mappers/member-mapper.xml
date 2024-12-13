@@ -31,8 +31,7 @@
 		STU_QUESTION,
 		STU_ANSWER
 		FROM STUDENT
-		WHERE STU_ID =
-		#{stuId}
+		WHERE STU_ID = #{stuId}
 		AND STU_PWD = #{stuPwd}
 	</select>
 

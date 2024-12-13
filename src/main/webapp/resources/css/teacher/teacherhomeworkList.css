@@ -12,6 +12,8 @@
 /* 댓글 섹션 스크롤바 스타일 */
 .whole_body::-webkit-scrollbar {
     width: 10px; /* 스크롤바 너비 */
+    border-radius: 30px;
+     max-height: 790px;
 }
 
 .whole_body::-webkit-scrollbar-track {
@@ -37,6 +39,26 @@
 .whole_body > .box > h1 {
     color: #A98467;
     font-size:30px;
+}
+
+
+/* 스크롤바 트랙(배경) 스타일 */
+.whole_body::-webkit-scrollbar-track {
+   background: #F2CEB2; 
+   border-radius: 10px;
+   margin-top: 30px;
+   margin-bottom: 30px;
+}
+
+/* 스크롤바 핸들 스타일 */
+.whole_body::-webkit-scrollbar-thumb {
+   background: #A98467; /* 핸들 색상 */
+   border-radius: 10px; /* 둥근 모서리 */
+}
+
+/* 스크롤바 핸들에 호버했을 때 스타일 */
+.whole_body::-webkit-scrollbar-thumb:hover {
+   background: #81644e; /* 호버 시 핸들 색상 */
 }
 
 .attendance-table {
