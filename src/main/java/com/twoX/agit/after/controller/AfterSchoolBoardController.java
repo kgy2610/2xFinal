@@ -117,7 +117,9 @@ public class AfterSchoolBoardController {
 				
 				//CODE가 로그인된 선생님과 같은 학생의 리스트 불러오기
 				ArrayList<Student> acceptList = afterSchoolBoardService.ajaxAcceptStudentListbyScCode(scCode);
-				
+				System.out.println("뭐에요?" + acceptList);
+				System.out.println("afCode: " + afCode);
+				System.out.println("scCode: " + scCode);
 				
 		        response.put("acceptStudents", acceptList);  // 데이터가 배열로 들어가야 합니다.
 		    } else {

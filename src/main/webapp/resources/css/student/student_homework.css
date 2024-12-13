@@ -51,7 +51,24 @@
 #community_table thead tr th {
 	padding-bottom: 10px;
 }
-
+#community_table thead tr th:nth-child(1){
+	width:110px;
+}
+#community_table thead tr th:nth-child(2){
+	width:110px;
+}
+#community_table thead tr th:nth-child(3){
+	width:272px;
+}
+#community_table thead tr th:nth-child(4){
+	width:288px;
+}
+#community_table thead tr th:nth-child(5){
+	width:110px;
+}
+#community_table thead tr th:nth-child(6){
+	width:110px;
+}
 #community_table tbody {
 	font-size: 22px;
 }

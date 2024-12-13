@@ -20,7 +20,10 @@
 </head>
 <body>
 	<jsp:include page="../common/student_menubar.jsp" />
-	
+	<c:forEach var="ss" items="${stuScoreList}">
+		<input type="hidden" value="${ss}" class="stuScore">
+	</c:forEach>
+	<input type="hidden" value="${loginUser.stuId}" id="stuId">
 	<div class="wrap">
 	<div id="content_border">
 		<div id="community_title">

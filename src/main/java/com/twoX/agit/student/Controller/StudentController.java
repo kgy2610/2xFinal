@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.twoX.agit.after.service.AfterSchoolBoardService;
 import com.twoX.agit.after.vo.AfterSchoolBoard;
 import com.twoX.agit.after.vo.AfterSchoolStudent;
+import com.twoX.agit.board.service.BoardService;
 import com.twoX.agit.common.template.Template;
 import com.twoX.agit.common.vo.PageInfo;
 import com.twoX.agit.member.model.vo.AfterSchool;
@@ -46,7 +47,13 @@ public class StudentController {
 	}
 	
 	@RequestMapping("homework")
-	public String homeworkList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, HttpSession session, Model model) {
+	public String homeworkList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, 
+							   @ModelAttribute HomeworkSubmit homeworkSubmit,
+							   HttpSession session, Model model) {
+		
+		session.setAttribute("stuId", homeworkSubmit.getStuId());
+		session.setAttribute("score", homeworkSubmit.getScore());
+		
 	    // 세션에서 로그인된 사용자 정보 가져오기
 	    Student loginStudent = (Student) session.getAttribute("loginUser");
 
@@ -66,6 +73,8 @@ public class StudentController {
 	    PageInfo pi = Template.getPageInfo(homeworkCount, currentPage, 5, 4);
 	    
 	    ArrayList<Homework> list = studentService.selectStudentHomeworkList(loginStudent.getClassCode(), loginStudent.getStuId(), pi);
+	    ArrayList<Double> stuScoreList = studentService.selectStuScore(loginStudent.getStuId());
+	    session.setAttribute("stuScoreList", stuScoreList);
 	    session.setAttribute("homeworkList", list);
 	    model.addAttribute("bbsId", "homework");
 	    model.addAttribute("pi", pi);
